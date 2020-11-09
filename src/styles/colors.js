@@ -1,15 +1,14 @@
 const colors = {
-  'primary-blue': '#347AF0',
-  'midnight-blue': '#0D1F3C',
-  'dark-gray': '#78839C',
-  gray: '#B5BBC9',
-  'light-gray': '#CFD2D8',
-  white: '#fff',
-  background: '#EDF1F9',
-  inactive: '#8BABB3',
-  tag: '#3783F5',
-  logo: '#002b31',
-  error: '#ED4A2B'
+  ea9864: '#EA9864',
+  aeb49a: '#AEB49A',
+  a9e0bf: '#A9E0BF',
+  ff6350: '#FF6350',
+  c8ecd8: '#C8ECD8',
+  ff8e67: '#FF8E67',
+  '3ac792': '#3AC792',
+  f5e3c8: '#F5E3C8',
+  '005d63': '#005D63',
+  fff6eb: '#FFF6EB'
 };
 
 module.exports = colors;
