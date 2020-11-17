@@ -1,12 +1,13 @@
 <template>
   <div class="w-full h-full bg-fff6eb grid grid-rows-3 place-items-center">
     <img src="../assets/logo-principle.png" />
-    <div>
-      <p>Welcome to</p>
-      <p>Siem Reap Mini Golf!</p>
+    <div class="text-white bg-78d03a">
+      <p class="text-2xl font-lg font-kalam">Welcome to</p>
+      <p class="text-2xl">Siem Reap Mini
+        <br />Golf!</p>
     </div>
-    <div class="space-y-4">
-      <p>How many players?</p>
+    <div class="space-y-4 flex flex-col justify-between">
+      <p class="text-xl uppercase text-005D63"> How many players ?</p>
       <InputRange
         :min="1"
         :max="10"
@@ -14,7 +15,13 @@
         @changed="selectedPlayers"
       />
       {{ noOfPlayers }}
+
+    <base-button
+    mode="confirm"
+    to="NamePlayers"
+    >Confirm</base-button>
     </div>
+
   </div>
 </template>
 
@@ -33,6 +40,6 @@ export default {
     selectedPlayers(value) {
       this.noOfPlayers = value;
     }
-  }
+  },
 };
 </script>
