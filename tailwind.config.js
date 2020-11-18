@@ -24,8 +24,18 @@ module.exports = {
       fontFamily: {
         kalam: ['Kalam'],
         capriola: ['Capriola']
-      }
+      },
+      spacing: {
+        'routerCourse': '6.7rem'
+      },
+      backgroundImage: theme => ({
+        'course-bg': "url('../assets/WAMG_Background@2x.png')",
+        'players-bg': "url('../assets/background-players@2x.png')",
+        'selection-bg': "url('../assets/background-selection@2x.png')",
+      })
+        
   },
+
   variants: {},
   plugins: [],
 }

@@ -1,13 +1,11 @@
 <template>
-  <div class="h-screen w-full flex flex-col items-center justify-between p-6">
+  <div class="h-screen w-full flex flex-col items-center justify-between p-6 bg-players-bg bg-cover bg-center">
     
-    <!-- Title -->
-    <div class="flex items-center justify-center h-16 bg-pink-900">
-    </div>
+    <div class="h-16"></div>
 
     <!-- Input Field -->
     <div class="">
-      <p class="uppercase text-aeb49a text-xl text-center font-semibold">Today's <br />dream team</p>
+      <p class="uppercase text-aeb49a text-xl text-center">Today's <br />dream team</p>
       <base-card
       class="my-10">
         <input-name

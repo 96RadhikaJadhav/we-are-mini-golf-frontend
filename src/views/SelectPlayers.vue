@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full bg-fff6eb grid grid-rows-3 place-items-center">
+  <div class="w-full h-full bg-fff6eb grid grid-rows-3 place-items-center bg-selection-bg bg-center bg-cover">
     <img src="../assets/logo-principle.png" />
-    <div class="text-white bg-78d03a">
+    <div class="text-white -mt-20 -ml-20">
       <p class="text-2xl font-lg font-kalam">Welcome to</p>
       <p class="text-2xl">Siem Reap Mini
         <br />Golf!</p>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-around items-center h-20 bg-f5e3c8">
     <router-link to="game-course">
-      <img src="../assets/map-active.png" class="text-black bg-black">
+      <img src="../assets/map-active.png">
     </router-link>
     <router-link to="">
     <img src="../assets/scores-inactive.png" alt="">

@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center p-4 w-full">
     <input type="text"
-        class="focus:outline-none"
+        class="focus:outline-none text-005D63 font-kalam text-xl"
         :value="value"
         :placeholder="placeholder"
         />

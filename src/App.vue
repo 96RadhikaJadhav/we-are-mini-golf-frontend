@@ -11,7 +11,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background-image: url('./assets/background-home.png');
+  /* background-image: url('./assets/background-home.png') no-repeat ; */
   font-family: capriola;
 }
 </style>
