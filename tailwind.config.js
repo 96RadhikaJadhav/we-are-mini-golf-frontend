@@ -1,62 +1,42 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-const boxShadow = require('./src/styles/boxShadow');
-const colors = require('./src/styles/colors');
-const opacity = require('./src/styles/opacity');
-
 module.exports = {
-  purge: {
-    content: ['./public/**/*.html', './src/**/*.vue'],
-    options: {
-      whitelist: ['w-32', 'w-56', 'w-64', 'h-32', 'h-56', 'h-64']
-    }
+  future: {
+    // removeDeprecatedGapUtilities: true,
+    // purgeLayersByDefault: true,
   },
+  purge: [],
   theme: {
     extend: {
-      boxShadow,
-      colors,
-      opacity,
-      screens: {
-        xl: '1280px',
-        xxl: '1920px'
-      },
-      borderRadius: {
-        sm: '0.1875rem',
-        xl: '0.75rem'
-      },
-      spacing: {
-        '0.5': '0.125rem',
-        '1.5': '0.375rem',
-        '14': '3.5rem',
-        '128': '32rem',
-        '160': '40rem'
+      colors: {
+        '005D63': '#005D63',
+        'ff6350': '#FF6350',
+        'acdb58': '#ACDB58',
+        '78d03a': '#78D03A',
+        '3b9d11': '#3B9D11',
+        'ffbb00': '#FFBB00',
+        'ea9864': '#EA9864',
+        'aeb49a': '#AEB49A',
+        'ff6350': '#FF6350',
+        'ff8e67': '#FF8E67',
+        'f5e3c8': '#F5E3C8',
+        '005d63': '#005D63',
+        'fff6eb': '#FFF6EB',        
       },
       fontFamily: {
-        sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
+        kalam: ['Kalam'],
+        capriola: ['Capriola']
       },
-      inset: {
-        '1/2': '50%'
+      spacing: {
+        'routerCourse': '6.7rem'
       },
-      zIndex: {
-        '-1': '-1',
-        '100': '100',
-        '110': '110'
-      }
-    }
+      backgroundImage: theme => ({
+        'course-bg': "url('../assets/WAMG_Background@2x.png')",
+        'players-bg': "url('../assets/background-players@2x.png')",
+        'selection-bg': "url('../assets/background-selection@2x.png')",
+      })
+        
   },
-  variants: [
-    'responsive',
-    'group-hover',
-    'group-focus',
-    'focus-within',
-    'first',
-    'last',
-    'odd',
-    'even',
-    'hover',
-    'focus',
-    'active',
-    'visited',
-    'disabled'
-  ],
-  plugins: []
-};
+
+  variants: {},
+  plugins: [],
+}
+}
