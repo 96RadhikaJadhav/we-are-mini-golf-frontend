@@ -9,16 +9,25 @@
       <p>How many players?</p>
       <InputRange
         :min="1"
-        :max="10"
+        :max="6"
         :value="noOfPlayers"
         @changed="selectedPlayers"
       />
       {{ noOfPlayers }}
     </div>
+    <div class="w-full text-center">
+      <button
+        class="cursor-pointer focus:outline-none"
+        @click="selectNumOfPlayers"
+      >
+        Confirm
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import InputRange from '@/components/InputRange.vue';
 
 export default {
@@ -30,8 +39,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions('common', ['setNumOfPlayers']),
     selectedPlayers(value) {
       this.noOfPlayers = value;
+    },
+    selectNumOfPlayers() {
+      this.setNumOfPlayers({ numOfPlayers: this.selectedPlayers });
     }
   }
 };
