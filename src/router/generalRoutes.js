@@ -14,5 +14,21 @@ export const generalRoutes = [
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }
-  }
+  },
+      {
+        path: '/player-names',
+        name: 'NamePlayers',
+        component: () => import('@/views/NamePlayers.vue'),
+        meta: {
+          layout: () => import('@/layouts/FullScreenLayout.vue')
+        }
+      },
+      {
+        path: '/game-course',
+        name: 'GameCourse',
+        component: () => import('@/views/GameCourse.vue'),
+        meta: {
+          layout: () => import('@/layouts/FullScreenLayout.vue')
+        }
+      }
 ];

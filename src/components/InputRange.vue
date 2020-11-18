@@ -85,9 +85,9 @@ input[type='range']::-ms-thumb {
 
 input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
-  height: 2px;
+  height: 4px;
   cursor: pointer;
-  background: #3071a9;
+  background: '#FSE3C8';
 }
 
 input[type='range']:focus::-webkit-slider-runnable-track {
