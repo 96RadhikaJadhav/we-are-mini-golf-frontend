@@ -34,15 +34,25 @@
 
 <script>
 import InputName from '../components/InputName';
+import { db } from '@/db.js';
+const commonRefs = db.ref('common');
+
 export default {
+  name: 'NamePlayers',
+  components: {
+    InputName
+  },
   data() {
     return {
       name: 'NamePlayers',
-      inputs: 5
+      inputs: 0
     };
   },
-  components: {
-    InputName
+  created() {
+    this.$store.dispatch('common/setCommonRef', commonRefs);
+    commonRefs.on('value', snapshot => {
+      this.inputs = snapshot.val().numOfPlayers;
+    });
   }
 };
 </script>
