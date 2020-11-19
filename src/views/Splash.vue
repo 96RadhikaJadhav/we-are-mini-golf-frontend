@@ -6,6 +6,12 @@
 
 <script>
 export default {
-  name: 'Splash'
+  name: 'Splash',
+
+  created() {
+    setTimeout(() => {
+      return this.$router.push('/select-players');
+    }, 2000);
+  }
 };
 </script>

@@ -53,10 +53,11 @@ input[type='range']::-ms-track {
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 3vh;
-  width: 3vh;
+  height: 5vh;
+  width: 5vh;
+  position: relative;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
   margin-top: -9px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
@@ -67,7 +68,7 @@ input[type='range']::-moz-range-thumb {
   height: 3vh;
   width: 3vh;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
 }
 
@@ -77,7 +78,7 @@ input[type='range']::-ms-thumb {
   height: 3vh;
   width: 3vh;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
 }
 
@@ -92,7 +93,7 @@ input[type='range']::-webkit-slider-runnable-track {
 
 input[type='range']:focus::-webkit-slider-runnable-track {
   height: 2px;
-  background: #f2e3cb;
+  background: '#FSE3C8';
 }
 
 input[type='range']::-moz-range-track {

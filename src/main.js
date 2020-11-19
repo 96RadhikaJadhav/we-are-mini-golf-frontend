@@ -5,15 +5,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 
-import BaseButton from './components/utilities/BaseButton'
-import BaseCard from './components/utilities/BaseCard'
-import NavMenu from './components/NavMenu'
-
 Vue.config.productionTip = false;
-
-Vue.component('base-button', BaseButton)
-Vue.component('base-card', BaseCard)
-Vue.component('nav-menu', NavMenu)
 
 new Vue({
   router,

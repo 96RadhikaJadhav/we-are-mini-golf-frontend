@@ -1,55 +1,51 @@
 <template>
-  <div class="h-screen w-full flex flex-col items-center justify-between p-6 bg-players-bg bg-cover bg-center">
-    
-    <div class="h-16"></div>
-
+  <div
+    class="container flex flex-col items-center justify-around bg-players-bg bg-cover bg-center py-4"
+  >
     <!-- Input Field -->
-    <div class="">
-      <p class="uppercase text-aeb49a text-xl text-center">Today's <br />dream team</p>
-      <base-card
-      class="my-10">
+    <div>
+      <p class="uppercase text-aeb49a text-xl text-center">
+        Today's <br />dream team
+      </p>
+    </div>
+
+    <div>
+      <base-card class="my-10">
         <input-name
-        v-for="input in inputs"
-        :key="input"
-        :placeholder="`Player ${input}`">
+          v-for="input in inputs"
+          :key="input"
+          :placeholder="`Player ${input}`"
+        >
         </input-name>
       </base-card>
     </div>
 
     <!-- Start and Back Buttons -->
-    <div class="flex flex-col justify-between h-32">
-        <base-button 
-        mode="confirm"
-        to=""
-        >
+    <div class="h-32 flex flex-col justify-between">
+      <base-button mode="confirm" to="/game-scores">
         Start the game!
-        </base-button>
+      </base-button>
 
-        <base-button 
-        mode="back"
-        to="SelectPlayers"
-        >
+      <base-button mode="back" to="/select-players">
         Change number of players
-        </base-button>
+      </base-button>
     </div>
   </div>
 </template>
 
 <script>
-import InputName from '../components/InputName'
+import BaseCard from '../components/utilities/BaseCard';
+import BaseButton from '../components/utilities/BaseButton';
+import InputName from '../components/InputName';
 export default {
   data() {
     return {
       name: 'NamePlayers',
-      inputs: 5
-    }
+      inputs: 1
+    };
   },
-  components: {
-    InputName
-  }
-}
+  components: { InputName, BaseCard, BaseButton }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
