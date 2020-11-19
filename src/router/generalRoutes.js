@@ -28,7 +28,7 @@ export const generalRoutes = [
     name: 'GameCourse',
     component: () => import('@/views/GameCourse.vue'),
     meta: {
-      layout: () => import('@/layouts/FullScreenLayout.vue')
+      layout: () => import('@/layouts/BottomNavLayout.vue')
     }
   },
   {
@@ -36,7 +36,7 @@ export const generalRoutes = [
     name: 'GameScores',
     component: () => import('@/views/GameScores.vue'),
     meta: {
-      layout: () => import('@/layouts/FullScreenLayout.vue')
+      layout: () => import('@/layouts/BottomNavLayout.vue')
     }
   }
 ];

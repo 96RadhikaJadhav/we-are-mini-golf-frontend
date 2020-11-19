@@ -1,20 +1,24 @@
 <template>
   <div class="container flex flex-col p-4 justify-around items-center">
+    <!-- HOLE AND PAR flex-item 1 -->
     <div
-      class="text-center text-kalam text-005D63 text-lg h-64 flex justify-center flex-col"
+      class="text-center text-kalam text-005D63 text-lg flex justify-center flex-col"
     >
       <p>Hole N°{{ holeNum }}</p>
       <p>PAR {{ par }}</p>
     </div>
 
-    <div class="px-8">
+    <!-- DIV FOR BASE CARD flex-item 2 -->
+    <div class="px-4">
       <base-card>
         <div
           v-for="player in players"
           :key="player.name"
           class="flex justify-between items-center my-4 flex-wrap"
         >
+          <!-- PLAYER NAMES -->
           <p class="text-005D63 font-kalam text-xl mr-16">{{ player.name }}</p>
+          <!-- SCORE INPUT -->
           <input
             type="number"
             class="h-8 w-8 rounded-full border-aeb49a border text-3b9d11 focus:outline-none text-center"
@@ -23,23 +27,17 @@
       </base-card>
     </div>
 
-<div>
-    <div class="flex items-center justify-center h-64">
-      <base-button mode="confirm" to="">Confirm</base-button>
-    </div>
-
-    <nav-menu position="absolute"></nav-menu>
-  </div>
+    <!-- CONFIRM BUTTON flex-item 3 -->
+    <base-button mode="confirm" to="">Confirm</base-button>
   </div>
 </template>
 
 <script>
 import BaseCard from '../components/utilities/BaseCard';
 import BaseButton from '../components/utilities/BaseButton';
-import NavMenu from '../components/NavMenu';
 
 export default {
-  components: { BaseCard, BaseButton, NavMenu },
+  components: { BaseCard, BaseButton },
   data() {
     return {
       holeNum: 3,
