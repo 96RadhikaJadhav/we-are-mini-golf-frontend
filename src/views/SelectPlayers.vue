@@ -27,8 +27,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import InputRange from '@/components/InputRange.vue';
+import { db } from '@/db.js';
+const commonRefs = db.ref('common');
 
 export default {
   name: 'SelectPlayers',
@@ -38,13 +40,18 @@ export default {
       noOfPlayers: 3
     };
   },
+  computed: {
+    ...mapState('common', ['info'])
+  },
+  created: function() {
+    this.$store.dispatch('common/setCommonRef', commonRefs);
+  },
   methods: {
-    ...mapActions('common', ['setNumOfPlayers']),
     selectedPlayers(value) {
       this.noOfPlayers = value;
     },
     selectNumOfPlayers() {
-      this.setNumOfPlayers({ numOfPlayers: this.selectedPlayers });
+      commonRefs.set({ numOfPlayers: this.noOfPlayers });
     }
   }
 };

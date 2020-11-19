@@ -1,31 +1,24 @@
-import { vuexfireMutations, firebaseAction } from 'vuexfire';
-import { db } from '../../db.js';
+import { firebaseAction } from 'vuexfire';
 
 const state = {
-  numOfPlayers: 0
+  info: {}
 };
 
 const getters = {
   getNumOfPlayers: state => {
-    return state.numOfPlayers;
+    return state.info.numOfPlayers;
   }
 };
 
 const actions = {
-  setNumOfPlayers: firebaseAction((context, { payload }) => {
-    console.log(context);
-    return db.ref('common').update({ numOfPlayers: payload.numOfPlayers });
+  setCommonRef: firebaseAction((context, ref) => {
+    context.bindFirebaseRef('info', ref);
   })
-};
-
-const mutations = {
-  ...vuexfireMutations
 };
 
 export default {
   namespaced: true,
   state,
   getters,
-  actions,
-  mutations
+  actions
 };
