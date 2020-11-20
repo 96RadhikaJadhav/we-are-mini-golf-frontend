@@ -28,7 +28,7 @@
     </div>
 
     <!-- CONFIRM BUTTON flex-item 3 -->
-    <base-button mode="confirm" to="">Confirm</base-button>
+    <base-button mode="confirm" to="/current-total">Confirm</base-button>
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
   components: { BaseCard, BaseButton },
   data() {
     return {
+      name: 'GameScore',
       holeNum: 3,
       par: 4,
       players: [

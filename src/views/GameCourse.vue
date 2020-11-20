@@ -41,6 +41,7 @@
 export default {
   data() {
     return {
+      name: 'GameCourse',
       holes: [
         null,
         30,

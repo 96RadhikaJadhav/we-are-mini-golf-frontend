@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex justify-around items-center h-16 w-full p-2 bg-f5e3c8 bottom-0 left-0"
-  >
+  <div class="flex justify-around items-center h-16 w-full p-2 bg-f5e3c8">
     <router-link to="game-course">
       <img src="../assets/map-active.png" class="h-6 w-6" />
     </router-link>
