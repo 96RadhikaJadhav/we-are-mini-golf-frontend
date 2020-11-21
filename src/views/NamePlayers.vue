@@ -37,14 +37,24 @@
 import BaseCard from '../components/utilities/BaseCard';
 import BaseButton from '../components/utilities/BaseButton';
 import InputName from '../components/InputName';
+import { db } from '@/db.js';
+const commonRefs = db.ref('common');
+
 export default {
+  name: 'NamePlayers',
+  components: { InputName, BaseCard, BaseButton },
   data() {
     return {
       name: 'NamePlayers',
       inputs: 1
     };
   },
-  components: { InputName, BaseCard, BaseButton }
+  created() {
+    this.$store.dispatch('common/setCommonRef', commonRefs);
+    commonRefs.on('value', snapshot => {
+      this.inputs = snapshot.val().numOfPlayers;
+    });
+  }
 };
 </script>
 

@@ -34,6 +34,7 @@
     </div>
 
     <!-- NAVBAR -->
+    <nav-menu class="sticky bottom-0 w-full overflow-visible"></nav-menu>
   </div>
 </template>
 

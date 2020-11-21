@@ -1,45 +1,31 @@
+const boxShadow = require('./src/styles/boxShadow');
+const colors = require('./src/styles/colors');
+
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-  },
-  purge: [],
+  purge: ['./public/**/*.html', './src/**/*.vue'],
   theme: {
     extend: {
-      colors: {
-        '005D63': '#005D63',
-        'ff6350': '#FF6350',
-        'acdb58': '#ACDB58',
-        '78d03a': '#78D03A',
-        '3b9d11': '#3B9D11',
-        'ffbb00': '#FFBB00',
-        'ea9864': '#EA9864',
-        'aeb49a': '#AEB49A',
-        'ff6350': '#FF6350',
-        'ff8e67': '#FF8E67',
-        'f5e3c8': '#F5E3C8',
-        '005d63': '#005D63',
-        'fff6eb': '#FFF6EB',        
-      },
+      boxShadow,
+      colors,
       fontFamily: {
         kalam: ['Kalam'],
         capriola: ['Capriola']
       },
       spacing: {
-        'routerCourse': '6.7rem',
+        routerCourse: '6.7rem',
         '125': '125px'
       },
-      backgroundImage: theme => ({
-        'course-bg': "url('../assets/background-course@2x.png')",
-        'players-bg': "url('../assets/background-players@2x.png')",
-        'selection-bg': "url('../assets/background-selection@2x.png')",
-      }),
+      // backgroundImage: theme => ({
+      //   'course-bg': "url('../assets/background-course@2x.png')",
+      //   'players-bg': "url('../assets/background-players@2x.png')",
+      //   'selection-bg': "url('../assets/background-selection@2x.png')",
+      // }),
       container: {
-        center: true,
-      },
-  },
+        center: true
+      }
+    },
 
-  variants: {},
-  plugins: [],
-}
-}
+    variants: {},
+    plugins: []
+  }
+};

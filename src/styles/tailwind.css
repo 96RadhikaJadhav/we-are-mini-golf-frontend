@@ -10,18 +10,10 @@
 @import './scrollbars.css';
 @import './animations.css';
 
-.clear-margin {
-  @apply mx-0 !important;
-}
-
-.clear-max-width {
-  @apply max-w-none !important;
-}
-
 .confirm {
-  @apply py-2 px-8 uppercase rounded-full shadow-md bg-ff6350 text-base
+  @apply py-2 px-8 uppercase rounded-full shadow-md bg-ff6350 text-base;
 }
 
 .back {
-  @apply p-1
+  @apply p-1;
 }
