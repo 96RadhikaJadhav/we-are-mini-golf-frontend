@@ -1,32 +1,23 @@
 <template>
-  <div
-    class="container flex flex-col items-center justify-around bg-selection-bg bg-cover"
-  >
-    <p class="uppercase text-005d63 text-xl">How many players?</p>
-    <div class="w-full h-full bg-fff6eb grid grid-rows-3 place-items-center">
-      <img src="../assets/logo-principle.png" />
-      <div>
-        <p>Welcome to</p>
-        <p>Siem Reap Mini Golf!</p>
-      </div>
-      <div class="space-y-4">
-        <p>How many players?</p>
-        <InputRange
-          :min="1"
-          :max="6"
-          :value="noOfPlayers"
-          @changed="selectedPlayers"
-        />
-        {{ noOfPlayers }}
-      </div>
-
-      <base-button
-        to="player-names"
-        mode="confirm"
-        @clicked="selectNumOfPlayers"
-        >Confirm</base-button
-      >
+  <div class="grid grid-rows-3 place-items-center bg-selection bg-cover">
+    <img src="../assets/logo-principle.png" />
+    <div>
+      <p>Welcome to</p>
+      <p>Siem Reap Mini Golf!</p>
     </div>
+    <div class="space-y-4">
+      <p>How many players?</p>
+      <InputRange
+        :min="1"
+        :max="6"
+        :value="noOfPlayers"
+        @changed="selectedPlayers"
+      />
+      {{ noOfPlayers }}
+    </div>
+    <base-button mode="confirm" @clicked="selectNumOfPlayers">
+      Confirm
+    </base-button>
   </div>
 </template>
 
@@ -56,7 +47,12 @@ export default {
       this.noOfPlayers = value;
     },
     selectNumOfPlayers() {
-      commonRefs.set({ numOfPlayers: this.noOfPlayers });
+      commonRefs
+        .set({ numOfPlayers: this.noOfPlayers })
+        .then(this.$router.push({ name: 'NamePlayers' }))
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

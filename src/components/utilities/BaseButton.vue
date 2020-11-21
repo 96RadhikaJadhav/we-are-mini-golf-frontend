@@ -1,16 +1,33 @@
 <template>
-  <router-link
-    :to="to"
+  <component
+    :is="type"
     class="text-white text-center focus:outline-none mx-auto block"
     :class="mode"
     @click="$emit('clicked')"
+    :to="to"
   >
     <slot></slot>
-  </router-link>
+  </component>
 </template>
 
 <script>
 export default {
-  props: ['mode', 'to']
+  props: {
+    mode: {
+      type: String
+    },
+    to: {
+      type: [String, Object]
+    }
+  },
+  computed: {
+    type() {
+      if (this.to) {
+        return 'router-link';
+      } else {
+        return 'button';
+      }
+    }
+  }
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center justify-between my-6">
+  <div class="flex items-center justify-between my-4 px-4">
     <!-- NAME INPUT -->
     <input
       type="text"
-      class="focus:outline-none text-005D63 font-kalam text-xl w-full mr-1"
+      class="focus:outline-none text-005D63 font-kalam text-xl mr-1"
       :value="value"
       :placeholder="placeholder"
     />
@@ -12,7 +12,7 @@
     <select
       name="age"
       id="age"
-      class="text-3b9d11 border py-1 border-f5e3c8 rounded-full focus:outline-none relative"
+      class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative"
       required
     >
       <option value="" disabled selected hidden>AGE</option>

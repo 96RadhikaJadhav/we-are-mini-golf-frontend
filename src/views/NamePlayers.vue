@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container flex flex-col items-center justify-around bg-players-bg bg-cover bg-center py-4"
+    class="flex flex-col items-center justify-around bg-players bg-cover bg-center"
   >
     <!-- Input Field -->
     <div>
@@ -10,14 +10,9 @@
     </div>
 
     <div>
-      <base-card class="my-10">
-        <input-name
-          v-for="input in inputs"
-          :key="input"
-          :placeholder="`Player ${input}`"
-        >
-        </input-name>
-      </base-card>
+      <div v-for="input in inputs" :key="input" class="px-8 py-2">
+        <BaseCard :placeholder="`Player ${input}`" />
+      </div>
     </div>
 
     <!-- Start and Back Buttons -->
@@ -36,17 +31,16 @@
 <script>
 import BaseCard from '../components/utilities/BaseCard';
 import BaseButton from '../components/utilities/BaseButton';
-import InputName from '../components/InputName';
 import { db } from '@/db.js';
 const commonRefs = db.ref('common');
 
 export default {
   name: 'NamePlayers',
-  components: { InputName, BaseCard, BaseButton },
+  components: { BaseCard, BaseButton },
   data() {
     return {
       name: 'NamePlayers',
-      inputs: 1
+      inputs: 0
     };
   },
   created() {

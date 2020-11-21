@@ -15,11 +15,13 @@ module.exports = {
         routerCourse: '6.7rem',
         '125': '125px'
       },
-      // backgroundImage: theme => ({
-      //   'course-bg': "url('../assets/background-course@2x.png')",
-      //   'players-bg': "url('../assets/background-players@2x.png')",
-      //   'selection-bg': "url('../assets/background-selection@2x.png')",
-      // }),
+      backgroundImage: () => ({
+        'course-bg': "url('../assets/background-course@2x.png')",
+        players:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605962212/we-are-mini-golf/WAMG_Background_-_Screen_3_x8oklr.png")',
+        selection:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605978641/we-are-mini-golf/WAMG_Background_-_Screen_2_ke1t04.png")'
+      }),
       container: {
         center: true
       }
