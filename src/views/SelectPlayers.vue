@@ -1,23 +1,26 @@
 <template>
-  <div class="grid grid-rows-3 place-items-center bg-selection bg-cover">
+  <div
+    class="h-full grid grid-rows-3 place-items-center  bg-selection bg-no-repeat bg-cover bg-center"
+  >
     <img src="../assets/logo-principle.png" />
-    <div>
-      <p>Welcome to</p>
-      <p>Siem Reap Mini Golf!</p>
+    <div class="text-fff6eb text-3xl self-stretch pt-8">
+      <p class="font-kalam">Welcome to</p>
+      <p class="font-capriola">Siem Reap Mini <br />Golf!</p>
     </div>
-    <div class="space-y-4">
-      <p>How many players?</p>
-      <InputRange
-        :min="1"
-        :max="6"
-        :value="noOfPlayers"
-        @changed="selectedPlayers"
-      />
-      {{ noOfPlayers }}
+    <div class="space-y-10 h-full mx-auto">
+      <p class="text-005d63 text-2xl font-semibold">How many players?</p>
+      <div>
+        <InputRange
+          :min="1"
+          :max="6"
+          :value="noOfPlayers"
+          @changed="selectedPlayers"
+        />
+      </div>
+      <base-button mode="confirm" @clicked="selectNumOfPlayers">
+        Confirm
+      </base-button>
     </div>
-    <base-button mode="confirm" @clicked="selectNumOfPlayers">
-      Confirm
-    </base-button>
   </div>
 </template>
 

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-white py-y shadow-md inline-flex justify-between py-6 px-2 rounded-3xl"
-  >
+  <div class="inline-flex justify-between py-4">
     <input
       type="text"
       class="focus:outline-none w-1/2 text-005D63 font-kalam text-xl mr-1"

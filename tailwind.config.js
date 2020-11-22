@@ -16,7 +16,9 @@ module.exports = {
         '125': '125px'
       },
       backgroundImage: () => ({
-        'course-bg': "url('../assets/background-course@2x.png')",
+        splash:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606030228/we-are-mini-golf/WAMG_Background_-_Screen_1_xyewsj.png")',
+        'course-bg': 'url("../assets/background-course@2x.png")',
         players:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605962212/we-are-mini-golf/WAMG_Background_-_Screen_3_x8oklr.png")',
         selection:

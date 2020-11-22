@@ -1,22 +1,19 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-around bg-players bg-cover bg-center"
-  >
+  <div class="grid grid-flow-row items-center bg-players bg-center">
     <!-- Input Field -->
-    <div>
-      <p class="uppercase text-aeb49a text-xl text-center">
+    <div class="self-end space-y-4">
+      <p class="uppercase text-aeb49a font-semibold text-xl text-center">
         Today's <br />dream team
       </p>
-    </div>
-
-    <div>
-      <div v-for="input in inputs" :key="input" class="px-8 py-2">
-        <BaseCard :placeholder="`Player ${input}`" />
+      <div class="bg-white shadow-md mx-6 rounded-3xl">
+        <div v-for="input in inputs" :key="input" class="px-8">
+          <BaseCard :placeholder="`Player ${input}`" />
+        </div>
       </div>
     </div>
-
     <!-- Start and Back Buttons -->
-    <div class="h-32 flex flex-col justify-between">
+
+    <div class="flex flex-col space-y-4">
       <base-button mode="confirm" to="/game-scores">
         Start the game!
       </base-button>
@@ -52,4 +49,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.title {
+  height: 40%;
+}
+
+.main-area {
+  height: 70%;
+}
+
+.footer {
+  max-height: 30%;
+}
+</style>
