@@ -1,27 +1,31 @@
 <template>
-  <div class="container flex flex-col p-4 justify-around items-center">
-    <!-- HOLE AND PAR flex-item 1 -->
+  <div class="container flex flex-col p-4 items-center bg-scores bg-no-repeat bg-center">
+    <div class="mt-32"></div>
+    <div class="mt-10"></div>
+    
+    <!-- HOLE AND PAR -->
     <div
-      class="text-center text-kalam text-005D63 text-lg flex justify-center flex-col"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mb-12"
     >
       <p>Hole N°{{ holeNum }}</p>
       <p>PAR {{ par }}</p>
     </div>
 
-    <!-- DIV FOR BASE CARD flex-item 2 -->
-    <div class="px-4">
+  <div class="flex flex-col justify-between h-full">
+    <!-- DIV FOR BASE CARD -->
+    <div class="px-4 text-2xl">
       <base-card>
         <div
           v-for="player in players"
           :key="player.name"
-          class="flex justify-between items-center my-4 flex-wrap"
+          class="flex justify-between items-center my-4 flex-wrap "
         >
           <!-- PLAYER NAMES -->
-          <p class="text-005D63 font-kalam text-xl mr-16">{{ player.name }}</p>
+          <p class="text-005D63 mr-16 font-kalam">{{ player.name }}</p>
           <!-- SCORE INPUT -->
           <input
             type="number"
-            class="h-8 w-8 rounded-full border-aeb49a border text-3b9d11 focus:outline-none text-center"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
           />
         </div>
       </base-card>
@@ -29,6 +33,7 @@
 
     <!-- CONFIRM BUTTON flex-item 3 -->
     <base-button mode="confirm" to="/current-total">Confirm</base-button>
+  </div>
   </div>
 </template>
 

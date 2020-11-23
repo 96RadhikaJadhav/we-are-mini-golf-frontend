@@ -22,7 +22,11 @@ module.exports = {
         players:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605962212/we-are-mini-golf/WAMG_Background_-_Screen_3_x8oklr.png")',
         selection:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605978641/we-are-mini-golf/WAMG_Background_-_Screen_2_ke1t04.png")'
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605978641/we-are-mini-golf/WAMG_Background_-_Screen_2_ke1t04.png")',
+        scores:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606110468/we-are-mini-golf/WAMG_Background_-_Screen_6_jqgyim.png")',
+        newHole:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606113279/we-are-mini-golf/WAMG_Background_-_Screen_5_par_omfrqj.png")',
       }),
       container: {
         center: true

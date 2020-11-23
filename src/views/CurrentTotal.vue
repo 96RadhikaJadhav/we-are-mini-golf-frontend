@@ -1,22 +1,22 @@
 <template>
-  <div class="flex flex-col items-center justify-between p-4">
+  <div
+    class="flex flex-col items-center justify-between p-4 bg-reward bg-no-repeat bg-cover"
+  >
     <div></div>
-    <div class="flex flex-col items-center">
-      <img src="@/assets/first-reef.png" class="h-auto w-20" />
-
-      <div
-        class="flex items-center justify-between font-kalam h-12 w-32 text-005d63 text-2xl"
-      >
-        <p class="font-lg mr-4">{{ players[5].playerName }}</p>
-        <div
-          class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white flex items-center justify-center"
-        >
-          <p>{{ players[5].totalScore }}</p>
-        </div>
-      </div>
-    </div>
 
     <div>
+      <div class="flex flex-col items-center mb-10">
+        <img src="@/assets/first-reef.png" class="h-auto w-20" />
+
+        <div
+          class="flex items-center justify-around font-kalam h-12 w-full text-005d63 text-3xl"
+        >
+          <p class="font-lg mr-4">{{ players[5].playerName }}</p>
+          <div class="h-10 w-10 rounded-full text-center bg-ff8e67 text-white">
+            <p class="mt-1">{{ players[5].totalScore }}</p>
+          </div>
+        </div>
+      </div>
       <base-card>
         <current-ranking
           v-for="player in players"

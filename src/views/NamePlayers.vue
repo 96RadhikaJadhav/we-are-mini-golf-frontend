@@ -1,5 +1,7 @@
 <template>
-  <div class="grid grid-flow-row items-center bg-players bg-center">
+  <div
+    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat"
+  >
     <!-- Input Field -->
     <div class="self-end space-y-4">
       <p class="uppercase text-aeb49a font-semibold text-xl text-center">
@@ -7,7 +9,7 @@
       </p>
       <div class="bg-white shadow-md mx-6 rounded-3xl">
         <div v-for="input in inputs" :key="input" class="px-8">
-          <BaseCard :placeholder="`Player ${input}`" />
+          <AgeCard :placeholder="`Player ${input}`" />
         </div>
       </div>
     </div>
@@ -26,14 +28,14 @@
 </template>
 
 <script>
-import BaseCard from '../components/utilities/BaseCard';
+import AgeCard from '../components/utilities/AgeCard';
 import BaseButton from '../components/utilities/BaseButton';
 import { db } from '@/db.js';
 const commonRefs = db.ref('common');
 
 export default {
   name: 'NamePlayers',
-  components: { BaseCard, BaseButton },
+  components: { AgeCard, BaseButton },
   data() {
     return {
       name: 'NamePlayers',
