@@ -1,31 +1,24 @@
 <template>
-  <div
-    class="h-screen w-full flex flex-col items-center justify-between p-6 bg-players-bg bg-cover bg-center"
-  >
-    <div class="h-16"></div>
-
+  <div class="grid grid-flow-row items-center bg-players bg-center">
     <!-- Input Field -->
-    <div class="">
-      <p class="uppercase text-aeb49a text-xl text-center">
+    <div class="self-end space-y-4">
+      <p class="uppercase text-aeb49a font-semibold text-xl text-center">
         Today's <br />dream team
       </p>
-      <base-card class="my-10">
-        <input-name
-          v-for="input in inputs"
-          :key="input"
-          :placeholder="`Player ${input}`"
-        >
-        </input-name>
-      </base-card>
+      <div class="bg-white shadow-md mx-6 rounded-3xl">
+        <div v-for="input in inputs" :key="input" class="px-8">
+          <BaseCard :placeholder="`Player ${input}`" />
+        </div>
+      </div>
     </div>
-
     <!-- Start and Back Buttons -->
-    <div class="flex flex-col justify-between h-32">
-      <base-button mode="confirm" to="">
+
+    <div class="flex flex-col space-y-4">
+      <base-button mode="confirm" to="/game-scores">
         Start the game!
       </base-button>
 
-      <base-button mode="back" to="SelectPlayers">
+      <base-button mode="back" to="/select-players">
         Change number of players
       </base-button>
     </div>
@@ -33,15 +26,14 @@
 </template>
 
 <script>
-import InputName from '../components/InputName';
+import BaseCard from '../components/utilities/BaseCard';
+import BaseButton from '../components/utilities/BaseButton';
 import { db } from '@/db.js';
 const commonRefs = db.ref('common');
 
 export default {
   name: 'NamePlayers',
-  components: {
-    InputName
-  },
+  components: { BaseCard, BaseButton },
   data() {
     return {
       name: 'NamePlayers',
@@ -57,4 +49,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.title {
+  height: 40%;
+}
+
+.main-area {
+  height: 70%;
+}
+
+.footer {
+  max-height: 30%;
+}
+</style>

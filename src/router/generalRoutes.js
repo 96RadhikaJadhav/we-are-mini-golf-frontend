@@ -28,6 +28,30 @@ export const generalRoutes = [
     name: 'GameCourse',
     component: () => import('@/views/GameCourse.vue'),
     meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/game-scores',
+    name: 'GameScores',
+    component: () => import('@/views/GameScores.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/current-total',
+    name: 'CurrentTotal',
+    component: () => import('@/views/CurrentTotal.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/new-hole',
+    name: 'NewHole',
+    component: () => import('@/views/NewHole.vue'),
+    meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }
   }

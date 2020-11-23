@@ -1,23 +1,30 @@
 <template>
-  <div class="relative bg-course-bg bg-cover h-full">
+  <div class="container relative">
+    <img
+      src="../assets/background-course@2x.png"
+      class="w-full absolute top-0 left-0"
+    />
+    <nav-menu position="sticky"></nav-menu>
+    <img
+      src="../assets/path.png"
+      class="absolute top-0 left-0 mt-32 w-full h-full"
+    />
     <img
       src="../assets/finish-line.png"
-      id="path"
-      class="mx-auto absolute top-0"
+      class="mx-auto absolute top-0 centered"
     />
-    <img src="../assets/path.png" class="absolute top-0 mt-32 px-2 w-full" />
 
-    <div class="flex flex-wrap p-2 relative">
+    <div class="flex flex-wrap p-2">
       <router-link
         v-for="hole in holes"
         :key="hole"
         :to="String(hole)"
-        class="flex w-1/3 items-center justify-center h-routerCourse"
+        class="flex w-1/3 items-center justify-center h-routerCourse hover:bg-ff6350"
       >
         <div
           :class="
             hole != null
-              ? 'h-6 w-6 rounded-full flex items-center justify-center bg-005D63'
+              ? 'h-6 w-6 rounded-full flex items-center justify-center bg-005D63 text'
               : ''
           "
         >
@@ -35,6 +42,7 @@
 export default {
   data() {
     return {
+      name: 'GameCourse',
       holes: [
         null,
         30,
@@ -78,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-#path {
+.centered {
   left: 50%;
   left: -50%;
   right: 50%;

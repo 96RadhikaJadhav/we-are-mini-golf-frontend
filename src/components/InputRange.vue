@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full">
     <input
       class="relative"
       type="range"
@@ -55,10 +55,11 @@ input[type='range']::-webkit-slider-thumb {
   border: none;
   height: 3vh;
   width: 3vh;
+  position: relative;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
-  margin-top: -9px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  margin-top: -8.55px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* All the same stuff for Firefox */
@@ -67,7 +68,7 @@ input[type='range']::-moz-range-thumb {
   height: 3vh;
   width: 3vh;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
 }
 
@@ -77,7 +78,7 @@ input[type='range']::-ms-thumb {
   height: 3vh;
   width: 3vh;
   border-radius: 50%;
-  background: #ff6350;
+  background: #ff8e67;
   cursor: pointer;
 }
 
@@ -87,19 +88,19 @@ input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
-  background: '#FSE3C8';
+  background: #f5e3c8;
 }
 
 input[type='range']:focus::-webkit-slider-runnable-track {
   height: 2px;
-  background: #f2e3cb;
+  background: #f5e3c8;
 }
 
 input[type='range']::-moz-range-track {
   width: 100%;
   height: 2px;
   cursor: pointer;
-  background: #3071a9;
+  background: #f5e3c8;
 }
 
 input[type='range']::-ms-track {
@@ -111,15 +112,15 @@ input[type='range']::-ms-track {
   color: transparent;
 }
 input[type='range']::-ms-fill-lower {
-  background: #f2e3cb;
+  background: #f5e3c8;
 }
 input[type='range']:focus::-ms-fill-lower {
-  background: #f2e3cb;
+  background: #f5e3c8;
 }
 input[type='range']::-ms-fill-upper {
-  background: #f2e3cb;
+  background: #f5e3c8;
 }
 input[type='range']:focus::-ms-fill-upper {
-  background: #f2e3cb;
+  background: #f5e3c8;
 }
 </style>
