@@ -11,7 +11,7 @@
 @import './animations.css';
 
 .confirm {
-  @apply py-2 px-8 uppercase rounded-full shadow-md bg-ff6350 text-base;
+  @apply py-2 px-8 uppercase rounded-full shadow-lg bg-ff6350 text-base;
 }
 
 .back {

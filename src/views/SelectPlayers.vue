@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full grid grid-rows-3 place-items-center  bg-selection bg-no-repeat bg-cover bg-center"
+    class="h-full grid grid-rows-3 place-items-center bg-selection bg-no-repeat bg-cover bg-center"
   >
     <img src="../assets/logo-principle.png" />
     <div class="text-fff6eb text-3xl self-stretch pt-8">
