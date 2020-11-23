@@ -5,6 +5,7 @@
       class="focus:outline-none w-1/2 text-005D63 font-kalam text-xl mr-1"
       :value="value"
       :placeholder="placeholder"
+      @input="$emit('input-value')"
     />
 
     <!-- AGE INPUT -->

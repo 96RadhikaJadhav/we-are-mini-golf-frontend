@@ -10,6 +10,7 @@
 <script>
 import NavMenu from '@/components/NavMenu';
 export default {
+  name: 'BottomNavLayout',
   components: { NavMenu }
 };
 </script>
