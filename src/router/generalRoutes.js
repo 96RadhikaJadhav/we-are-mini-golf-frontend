@@ -54,5 +54,21 @@ export const generalRoutes = [
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }
+  },
+  {
+    path: '/awards',
+    name: 'Awards',
+    component: () => import('@/views/Awards.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
+  },
+  {
+    path: '/current-totals',
+    name: 'CurrentTotals',
+    component: () => import('@/views/CurrentTotal.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
   }
 ];
