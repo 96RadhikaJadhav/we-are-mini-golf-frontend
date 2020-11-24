@@ -16,7 +16,7 @@
     <div class="flex flex-col justify-between h-full">
       <!-- DIV FOR BASE CARD -->
       <div class="card px-4 text-2xl">
-        <div 
+        <div
           v-for="player in players"
           :key="player.name"
           class="flex justify-between items-center my-4 flex-wrap "

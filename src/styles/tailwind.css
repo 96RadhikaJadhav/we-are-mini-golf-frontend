@@ -9,10 +9,3 @@
 @import './typography.css';
 @import './scrollbars.css';
 @import './animations.css';
-
-
-
-
-.card {
-  @apply px-6 py-2 bg-white shadow-lg rounded-3xl
-}

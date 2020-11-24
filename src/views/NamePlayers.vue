@@ -8,15 +8,21 @@
         Today's <br />dream team
       </p>
       <div class="bg-white shadow-md mx-6 rounded-3xl">
-        <div v-for="input in inputs" :key="input" class="px-8">
-          <AgeCard :placeholder="`Player ${input}`" />
+        <div v-for="(player, index) in playersInfo" :key="index">
+          <div class="inline-flex justify-between py-4 px-8">
+            <InputText
+              :placeholder="`Players ${index + 1}`"
+              v-model="player.name"
+            />
+            <InputSelect v-model="player.age" />
+          </div>
         </div>
       </div>
     </div>
     <!-- Start and Back Buttons -->
 
     <div class="flex flex-col space-y-4">
-      <base-button mode="confirm" to="/game-scores">
+      <base-button mode="confirm" @clicked="startGame">
         Start the game!
       </base-button>
 
@@ -28,39 +34,53 @@
 </template>
 
 <script>
-import AgeCard from '../components/utilities/AgeCard';
+import InputText from '../components/InputText';
+import InputSelect from '../components/InputSelect';
 import BaseButton from '../components/utilities/BaseButton';
 import { db } from '@/db.js';
 const commonRefs = db.ref('common');
+const playersInfoRefs = db.ref('players_info');
 
 export default {
   name: 'NamePlayers',
-  components: { AgeCard, BaseButton },
+  components: { InputText, BaseButton, InputSelect },
   data() {
     return {
       name: 'NamePlayers',
-      inputs: 0
+      inputs: 0,
+      playersInfo: []
     };
   },
   created() {
     this.$store.dispatch('common/setCommonRef', commonRefs);
+    this.$store.dispatch('players/setPlayersInfoRef', commonRefs);
     commonRefs.on('value', snapshot => {
       this.inputs = snapshot.val().numOfPlayers;
     });
+  },
+  watch: {
+    inputs: {
+      deep: true,
+      handler() {
+        for (var i = 1; i <= this.inputs; i++) {
+          this.playersInfo.push({ name: '', age: '' });
+        }
+      }
+    }
+  },
+  methods: {
+    startGame() {
+      playersInfoRefs
+        .set(this.playersInfo)
+        .then(this.$router.push({ name: 'GameCourse' }))
+        .catch(err => console.log(err));
+    }
+  },
+  beforeDestroy() {
+    this.inputs = 0;
+    this.playersInfo = [];
   }
 };
 </script>
 
-<style>
-.title {
-  height: 40%;
-}
-
-.main-area {
-  height: 70%;
-}
-
-.footer {
-  max-height: 30%;
-}
-</style>
+<style></style>

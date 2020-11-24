@@ -13,3 +13,9 @@
     </router-link>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'NavMenu'
+};
+</script>
