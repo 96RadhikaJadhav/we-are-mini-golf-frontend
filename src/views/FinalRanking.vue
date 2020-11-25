@@ -51,51 +51,54 @@
 
     <!-- Section B: Detailed Scores -->
     <div
-      class="bg-green-400 h-full w-full px-6 flex flex-col justify-between max-w-sm mx-auto"
+      class="bg-red-400 h-full w-full px-6 flex flex-col justify-between max-w-sm mx-auto"
     >
       <!-- Top 1/4 of Section B -->
       <div class="h-1/4 flex flex-col justify-around w-3/4 mx-auto">
+        <!-- Primary Stats -->
         <div class="flex justify-around">
-          <!-- Circle 1 -->
-          <div class="flex flex-col items-center">
-            <p class="title">Team Average</p>
-            <div class="circle-score-primary">
-              <p>59</p>
-            </div>
-          </div>
-          <!-- Circle 2 -->
-          <div class="flex flex-col items-center">
-            <p class="title">Holes in 1</p>
-            <div class="circle-score-primary">
-              <p>3</p>
-            </div>
-          </div>
+          <!-- Team Av -->
+          <result-circle type="primary">
+            <template v-slot:title>
+              Team Average
+            </template>
+            <template v-slot:result>
+              24%
+            </template>
+          </result-circle>
+
+          <!-- Hole in 1 -->
+          <result-circle type="primary">
+            <template v-slot:title>
+              Holes In 1
+            </template>
+            <template v-slot:result>
+              3
+            </template>
+          </result-circle>
         </div>
 
-        <!-- Circle 3 -->
+        <!-- Secondary Stats -->
         <div class="flex items-center justify-around">
-          <div class="text-3B9D11">
-            <p class="title text-sm">UNDER PAR</p>
-            <div class="circle-score-secondary">
-              <p>26%</p>
-            </div>
-          </div>
+          <!-- Under Par -->
+          <result-circle type="secondary">
+            <template v-slot:title>Under Par</template>
+            <template v-slot:result>26%</template>
+          </result-circle>
 
-          <!-- Circle 4 -->
-          <div class="text-3B9D11">
-            <p class="title text-sm">UNDER PAR</p>
-            <div class="circle-score-secondary">
-              <p>26%</p>
-            </div>
-          </div>
-
-          <!-- Circle 5 -->
-          <div class="text-3B9D11">
-            <p class="title text-sm">UNDER PAR</p>
-            <div class="circle-score-secondary">
-              <p>26%</p>
-            </div>
-          </div>
+          <!-- Par -->
+          <result-circle type="secondary">
+            <template v-slot:title>Par</template>
+            <template v-slot:result>27%</template>
+          </result-circle>
+          
+          <!-- Over Par -->
+          <result-circle type="secondary">
+            <template v-slot:title>Over Par</template>
+            <template v-slot:result>47%</template>
+          </result-circle>
+          
+          
         </div>
       </div>
 
@@ -103,7 +106,7 @@
       <div class="card my-4">
         <div class="grid grid-cols-8 text-005d63 font-kalam">
           <!-- Holes -->
-          <div class="mt-8">
+          <div class="mt-10">
             <br /><br />
             <p
               v-for="cHole in courseHoles"
@@ -123,19 +126,19 @@
             <p class="transform -rotate-45 my-4">{{ res.player }}</p>
             <!-- Overall Score -->
             <p
-              class="bg-f5e3c8 h-6 w-6 rounded-full flex items-center justify-center"
+              class="bg-f5e3c8 h-6 w-6 rounded-full flex items-center justify-center mb-2"
             >
-              {{ res.score }}
+              {{ res.overall }}
             </p>
             <!-- Individual Scores -->
-            <p v-for="hole in res.holes" :key="hole">{{ hole }}</p>
+            <p v-for="score in res.scores" :key="score">{{ score }}</p>
           </div>
 
           <!-- Par -->
           <div>
             <p class="transform -rotate-45 my-4 text-ff8e67">PAR</p>
             <p
-              class="bg-ff8e67 text-f5e3c8 h-6 w-6 rounded-full flex items-center justify-center text-center"
+              class="bg-ff8e67 text-f5e3c8 h-6 w-6 rounded-full flex items-center justify-center text-center mb-2"
             >
               43
             </p>
@@ -155,7 +158,7 @@
         <router-link class="text-white text-lg font-capriola" to=""
           >SHARE</router-link
         >
-        <router-link class="link" to="">f</router-link>
+        <router-link class="link" to="FB">f</router-link>
         <router-link class="link" to="">@</router-link>
       </div>
 
@@ -169,46 +172,48 @@
 
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
+import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
 export default {
+  components: { BaseButton, ResultCircle },
+
   data() {
     return {
       courseHoles: 14,
       results: [
         {
+          player: 'De Gaulle',
+          overall: 48,
+          scores: [1, 3, 5, 4, 1, 3, 5]
+        },
+        {
           player: 'Churchill',
-          score: 59,
-          holes: [1, 3, 5, 4, 1, 3, 5]
+          overall: 59,
+          scores: [2, 3, 5, 4, 1, 3, 5]
         },
         {
-          player: 'f',
-          score: 48,
-          holes: [1, 3, 5, 4, 1, 3, 5]
+          player: 'Roosevelt',
+          overall: 48,
+          scores: [3, 3, 2, 4, 3, 3, 5]
         },
         {
-          player: 'Winthrop',
-          score: 48,
-          holes: [1, 3, 5, 4, 1, 3, 5]
+          player: 'Staline',
+          overall: 48,
+          scores: [1, 3, 5, 6, 1, 7, 4]
         },
         {
-          player: 'Steve',
-          score: 48,
-          holes: [1, 3, 5, 4, 1, 3, 5]
-        },
-        {
-          player: 'Peterson',
-          score: 48,
-          holes: [1, 3, 5, 4, 1, 3, 5]
+          player: 'Player5',
+          overall: 48,
+          scores: [3, 5, 5, 4, 1, 3, 2]
         },
         {
           player: 'Player6',
-          score: '-',
-          holes: ['-', '-', '-', '-', '-', '-', '-']
+          overall: '-',
+          scores: ['-', '-', '-', '-', '-', '-', '-']
         }
       ],
       par: [4, 3, 6, 2, 3, 2, 4, 4, 5, 3, 2]
     };
-  },
-  components: { BaseButton }
+  }
 };
 </script>
 
