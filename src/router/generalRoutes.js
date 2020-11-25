@@ -70,5 +70,13 @@ export const generalRoutes = [
     meta: {
       layout: () => import('@/layouts/BottomNavLayout.vue')
     }
+  },
+  {
+    path: '/final-ranking',
+    name: 'FinalRanking',
+    component: () => import('@/views/FinalRanking.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
   }
 ];
