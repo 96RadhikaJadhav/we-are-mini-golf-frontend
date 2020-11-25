@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat lg:w-1/2"
+    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat md:w-1/2"
   >
     <!-- Input Field -->
     <div class="self-end space-y-4">

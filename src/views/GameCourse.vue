@@ -9,7 +9,9 @@
         <img
           :src="col.notPlayedHoleImg"
           class="w-full h-full object-fill"
+          :class="{ 'cursor-pointer': col.playedHoleImg }"
           v-if="!col.isHoleVisited"
+          @click="gotoNewHole(col, row['.key'])"
         />
         <img
           :src="col.playedHoleImg"
@@ -22,7 +24,8 @@
 </template>
 
 <script>
-import { courseGrid } from '../assets/courses/14-hole-course.json';
+import { db } from '@/db.js';
+const courseGridRef = db.ref('course_grid');
 export default {
   name: 'GameCourse',
   data() {
@@ -30,17 +33,14 @@ export default {
       courseGrid: []
     };
   },
-  mounted() {
-    this.courseGrid = courseGrid;
+  firebase: {
+    courseGrid: courseGridRef
+  },
+  methods: {
+    gotoNewHole(value, key) {
+      console.log(key);
+      this.$router.push({ name: 'NewHole', params: { holeNo: value.holeNo } });
+    }
   }
 };
 </script>
-
-<style scoped>
-.centered {
-  left: 50%;
-  left: -50%;
-  right: 50%;
-  right: -50%;
-}
-</style>
