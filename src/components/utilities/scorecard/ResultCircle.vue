@@ -27,7 +27,7 @@ export default {
 .secondary {
   background: #f5e3c8;
   color: #3b9d11;
-  @apply h-14 w-14;
+  @apply h-14 w-14 text-lg;
 }
 .green {
   color: #3b9d11;

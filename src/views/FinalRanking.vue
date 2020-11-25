@@ -1,6 +1,14 @@
 <template>
-  <!-- Section A: Final Ranking -->
+  <!-- ======== Section A: Final Ranking ======== -->
+
   <div class="h-full bg-005d63">
+    <!-- REVIEW MODAL -->
+    <review-modal
+      v-if="reviewUs"
+      @clicked="reviewUs = !reviewUs"
+      @submit="submitReview"
+    ></review-modal>
+
     <div class="h-screen">
       <!-- Top 1/4 Header -->
       <div class="h-1/4 flex flex-col items-center justify-center">
@@ -39,8 +47,14 @@
             </div>
           </div>
 
+          <!-- REVIEW US BUTTON -->
           <div class="flex flex-col justify-around h-full">
-            <base-button to="" class="confirm">REVIEW US</base-button>
+            <base-button
+              type="button"
+              class="confirm"
+              @clicked="reviewUs = !reviewUs"
+              >REVIEW US</base-button
+            >
             <base-button to="" class="back text-xl"
               >Detailed Scores</base-button
             >
@@ -49,36 +63,28 @@
       </div>
     </div>
 
-    <!-- Section B: Detailed Scores -->
+    <!-- ======== SECTION B: Detailed Scores ======== -->
     <div
-      class="bg-red-400 h-full w-full px-6 flex flex-col justify-between max-w-sm mx-auto"
+      class="bg-red-400 h-full w-full px-6 flex flex-col justify-between mx-auto"
     >
       <!-- Top 1/4 of Section B -->
-      <div class="h-1/4 flex flex-col justify-around w-3/4 mx-auto">
-        <!-- Primary Stats -->
+      <div class="h-1/4 flex flex-col justify-around w-3/4 mx-auto max-w-sm">
+        <!-- PRIMARY STATS -->
         <div class="flex justify-around">
           <!-- Team Av -->
           <result-circle type="primary">
-            <template v-slot:title>
-              Team Average
-            </template>
-            <template v-slot:result>
-              24%
-            </template>
+            <template v-slot:title>Team Average</template>
+            <template v-slot:result>24%</template>
           </result-circle>
 
           <!-- Hole in 1 -->
           <result-circle type="primary">
-            <template v-slot:title>
-              Holes In 1
-            </template>
-            <template v-slot:result>
-              3
-            </template>
+            <template v-slot:title>Holes In 1</template>
+            <template v-slot:result>3</template>
           </result-circle>
         </div>
 
-        <!-- Secondary Stats -->
+        <!-- SECONDARY STATS -->
         <div class="flex items-center justify-around">
           <!-- Under Par -->
           <result-circle type="secondary">
@@ -91,23 +97,21 @@
             <template v-slot:title>Par</template>
             <template v-slot:result>27%</template>
           </result-circle>
-          
+
           <!-- Over Par -->
           <result-circle type="secondary">
             <template v-slot:title>Over Par</template>
             <template v-slot:result>47%</template>
           </result-circle>
-          
-          
         </div>
       </div>
 
       <!-- RESULTS CARD -->
-      <div class="card my-4">
+      <div class="card max-w-sm mx-auto">
         <div class="grid grid-cols-8 text-005d63 font-kalam">
           <!-- Holes -->
           <div class="mt-10">
-            <br /><br />
+            <br /><br /> <!-- this needs some work -->
             <p
               v-for="cHole in courseHoles"
               :key="cHole"
@@ -154,16 +158,19 @@
       </div>
 
       <!-- Buttons -->
-      <div class="flex items-center justify-around mt-10 w-3/5 mx-auto mb-20">
+      <div class="flex items-center justify-around mt-10 w-3/5 mx-auto mb-20 max-w-sm">
         <router-link class="text-white text-lg font-capriola" to=""
           >SHARE</router-link
         >
-        <router-link class="link" to="FB">f</router-link>
+        <router-link class="link" to="">f</router-link>
         <router-link class="link" to="">@</router-link>
       </div>
 
       <!-- REVIEW US Button Abs -->
-      <base-button to="" mode="confirm" class="sticky bottom-10"
+      <base-button
+        mode="confirm"
+        class="sticky bottom-10"
+        @clicked="reviewUs = !reviewUs"
         >Review Us</base-button
       >
     </div>
@@ -173,15 +180,18 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
+import ReviewModal from '@/components/ReviewModal';
 export default {
-  components: { BaseButton, ResultCircle },
+  components: { BaseButton, ResultCircle, ReviewModal },
 
   data() {
     return {
+      name: 'FinalRanking',
+      reviewUs: false,
       courseHoles: 14,
       results: [
         {
-          player: 'De Gaulle',
+          player: 'DeGaulle',
           overall: 48,
           scores: [1, 3, 5, 4, 1, 3, 5]
         },
@@ -213,6 +223,13 @@ export default {
       ],
       par: [4, 3, 6, 2, 3, 2, 4, 4, 5, 3, 2]
     };
+  },
+  methods: {
+    submitReview(msg, name) {
+      console.log(msg);
+      console.log(name);
+      this.reviewUs = false;
+    }
   }
 };
 </script>
@@ -231,7 +248,7 @@ export default {
   @apply uppercase font-capriola text-3B9D11 text-xs;
 }
 .card {
-  @apply bg-white rounded-3xl flex flex-col items-center justify-center p-4 w-full;
+  @apply bg-white rounded-3xl flex flex-col items-center justify-center p-4 w-full my-4;
 }
 .link {
   @apply h-12 w-12 bg-gray-500 rounded-full flex items-center justify-center text-3xl text-white;
