@@ -3,7 +3,7 @@
     class="absolute w-full h-full flex flex-col items-center justify-center px-6 bg-005d63"
   >
     <!-- Main Card -->
-    <div class="relative card cream w-full">
+    <div class="relative card bg-fff6eb w-full">
       <div class="flex justify-end">
         <button
           class="text-aeb49a focus:outline-none cursor-pointer"
@@ -51,6 +51,7 @@ export default {
   components: { BaseButton },
   data() {
     return {
+      name: 'ReviewModal',
       reviewerName: '',
       reviewerMessage: ''
     };
@@ -59,7 +60,5 @@ export default {
 </script>
 
 <style>
-.cream {
-  background: #fff6eb;
-}
+
 </style>

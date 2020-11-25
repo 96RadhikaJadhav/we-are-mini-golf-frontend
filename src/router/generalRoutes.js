@@ -78,5 +78,13 @@ export const generalRoutes = [
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }
+  },
+  {
+  path: '/thank-you',
+  name: 'ThankYou',
+  component: () => import('@/views/ThankYou.vue'),
+  meta: {
+    layout: () => import('@/layouts/FullScreenLayout.vue')
   }
+}
 ];

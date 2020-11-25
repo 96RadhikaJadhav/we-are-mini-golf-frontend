@@ -5,9 +5,11 @@
     <!-- REVIEW MODAL -->
     <review-modal
       v-if="reviewUs"
-      @clicked="reviewUs = !reviewUs"
+      @clicked="reviewUs = false"
       @submit="submitReview"
     ></review-modal>
+
+    <help-us></help-us>
 
     <div class="h-screen">
       <!-- Top 1/4 Header -->
@@ -33,8 +35,8 @@
         <div class="h-full flex flex-col justify-between">
           <div class="mb-6">
             <div
-              v-for="n in 6"
-              :key="n"
+              v-for="(n, index) in 6"
+              :key="index"
               class="flex justify-between mb-1 font-kalam text-2xl"
             >
               <div class="flex">
@@ -111,10 +113,11 @@
         <div class="grid grid-cols-8 text-005d63 font-kalam">
           <!-- Holes -->
           <div class="mt-10">
-            <br /><br /> <!-- this needs some work -->
+            <br /><br />
+            <!-- this needs some work -->
             <p
-              v-for="cHole in courseHoles"
-              :key="cHole"
+              v-for="(cHole, index) in courseHoles"
+              :key="index"
               class="border h-5 w-5 flex items-center justify-center rounded-full border-f5e3c8 text-005d63 mb-1"
             >
               {{ cHole }}
@@ -122,8 +125,8 @@
           </div>
 
           <div
-            v-for="res in results"
-            :key="res"
+            v-for="(res, index) in results"
+            :key="index"
             class="flex flex-col text-center"
           >
             <!-- Player Name -->
@@ -135,7 +138,9 @@
               {{ res.overall }}
             </p>
             <!-- Individual Scores -->
-            <p v-for="score in res.scores" :key="score">{{ score }}</p>
+            <p v-for="(score, index) in res.scores" :key="index">
+              {{ score }}
+            </p>
           </div>
 
           <!-- Par -->
@@ -147,8 +152,8 @@
               43
             </p>
             <div
-              v-for="p in par"
-              :key="p"
+              v-for="(p, index) in par"
+              :key="index"
               class="flex justify-center items-center bg-005d63 text-f5e3c8 h-5 w-5 rounded-full mb-1"
             >
               <p>{{ p }}</p>
@@ -158,7 +163,9 @@
       </div>
 
       <!-- Buttons -->
-      <div class="flex items-center justify-around mt-10 w-3/5 mx-auto mb-20 max-w-sm">
+      <div
+        class="flex items-center justify-around mt-10 w-3/5 mx-auto mb-20 max-w-sm"
+      >
         <router-link class="text-white text-lg font-capriola" to=""
           >SHARE</router-link
         >
@@ -180,14 +187,15 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
-import ReviewModal from '@/components/ReviewModal';
+import ReviewModal from '@/components/reviews/ReviewModal';
+import HelpUs from '@/components/reviews/HelpUsModal'
 export default {
-  components: { BaseButton, ResultCircle, ReviewModal },
+  components: { BaseButton, ResultCircle, ReviewModal, HelpUs },
 
   data() {
     return {
       name: 'FinalRanking',
-      reviewUs: false,
+      reviewUs: 'review-modal',
       courseHoles: 14,
       results: [
         {
