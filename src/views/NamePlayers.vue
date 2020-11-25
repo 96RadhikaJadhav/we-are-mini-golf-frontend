@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat"
+    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat lg:w-1/2"
   >
     <!-- Input Field -->
     <div class="self-end space-y-4">
@@ -9,7 +9,7 @@
       </p>
       <div class="bg-white shadow-md mx-6 rounded-3xl">
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="inline-flex justify-between py-4 px-8">
+          <div class="flex justify-between py-4 px-8">
             <InputText
               :placeholder="`Players ${index + 1}`"
               v-model="player.name"
