@@ -17,7 +17,7 @@
       <!-- DIV FOR BASE CARD -->
       <div class="card px-4 text-2xl">
         <div
-          v-for="player in players"
+          v-for="player in playersInfo"
           :key="player.name"
           class="flex justify-between items-center my-4 flex-wrap "
         >
@@ -39,23 +39,27 @@
 
 <script>
 import BaseButton from '../components/utilities/BaseButton';
+import { db } from '@/db.js';
+const gameInfoRefs = db.ref('game_info');
 
 export default {
   components: { BaseButton },
+  props: {
+    holeNo: {
+      type: Number
+    }
+  },
   data() {
     return {
       name: 'GameScore',
-      holeNum: 3,
-      par: 4,
-      players: [
-        { name: 'Churchill' },
-        { name: 'De Gaulle' },
-        { name: 'Roosevelt' },
-        { name: 'Staline' },
-        { name: 'Player 5' },
-        { name: 'Player 6' }
-      ]
+      playersInfo: [],
+      par: 4
     };
+  },
+  created() {
+    gameInfoRefs.on('value', snapshot => {
+      this.playersInfo = snapshot.val().players_info;
+    });
   }
 };
 </script>

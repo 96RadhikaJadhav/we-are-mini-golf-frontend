@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full grid grid-rows-3 place-items-center bg-selection bg-no-repeat bg-cover bg-center"
+    class="h-full md:w-1/2 grid grid-rows-3 place-items-center bg-selection bg-no-repeat bg-cover bg-center"
   >
     <img src="../assets/logo-principle.png" />
     <div class="text-fff6eb text-3xl self-stretch pt-8">
@@ -28,34 +28,46 @@
 import { mapState } from 'vuex';
 import InputRange from '@/components/InputRange.vue';
 import BaseButton from '../components/utilities/BaseButton';
+import firebase from 'firebase';
+import 'firebase/auth';
 import { db } from '@/db.js';
-const commonRefs = db.ref('common');
+const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'SelectPlayers',
   components: { InputRange, BaseButton },
   data() {
     return {
-      noOfPlayers: 1
+      userUid: '',
+      noOfPlayers: 0
     };
   },
   computed: {
-    ...mapState('common', ['info'])
+    ...mapState('gameInfo', ['gameInfo'])
   },
   created: function() {
-    this.$store.dispatch('common/setCommonRef', commonRefs);
+    this.$store.dispatch('gameInfo/setGameInfoRef', gameInfoRefs);
+    let self = this;
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        let uid = user.uid;
+        self.userUid = uid;
+      }
+    });
   },
   methods: {
     selectedPlayers(value) {
       this.noOfPlayers = value;
     },
     selectNumOfPlayers() {
-      commonRefs
-        .set({ numOfPlayers: this.noOfPlayers })
-        .then(this.$router.push({ name: 'NamePlayers' }))
-        .catch(error => {
-          console.log(error);
-        });
+      if (this.userUid) {
+        gameInfoRefs
+          .set({ numOfPlayers: this.noOfPlayers, userUid: this.userUid })
+          .then(this.$router.push({ name: 'NamePlayers' }))
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
   }
 };

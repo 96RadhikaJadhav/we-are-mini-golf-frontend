@@ -13,13 +13,18 @@ export default {
   name: 'NewHole',
   props: {
     holeNo: {
-      type: String
+      type: Number
     }
   },
   data() {
     return {
       name: 'NewHoleIntro'
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$router.push({ name: 'GameScores' });
+    }, 1000);
   }
 };
 </script>
