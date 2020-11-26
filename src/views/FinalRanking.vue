@@ -2,14 +2,11 @@
   <!-- ======== Section A: Final Ranking ======== -->
 
   <div class="h-full bg-005d63">
-    <!-- REVIEW MODAL -->
-    <review-modal
-      v-if="reviewUs"
-      @clicked="reviewUs = false"
+    <component
+      :is="componentId"
+      @close="componentId = ''"
       @submit="submitReview"
-    ></review-modal>
-
-    <help-us></help-us>
+    ></component>
 
     <div class="h-screen">
       <!-- Top 1/4 Header -->
@@ -54,7 +51,7 @@
             <base-button
               type="button"
               class="confirm"
-              @clicked="reviewUs = !reviewUs"
+              @clicked="componentId = 'ReviewModal'"
               >REVIEW US</base-button
             >
             <base-button to="" class="back text-xl"
@@ -177,7 +174,7 @@
       <base-button
         mode="confirm"
         class="sticky bottom-10"
-        @clicked="reviewUs = !reviewUs"
+        @clicked="componentId = 'ReviewModal'"
         >Review Us</base-button
       >
     </div>
@@ -188,14 +185,15 @@
 import BaseButton from '@/components/utilities/BaseButton';
 import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
 import ReviewModal from '@/components/reviews/ReviewModal';
-import HelpUs from '@/components/reviews/HelpUsModal'
+import HelpUs from '@/components/reviews/HelpUsModal';
+import ThankYou from '@/components/reviews/ThankYouModal';
 export default {
-  components: { BaseButton, ResultCircle, ReviewModal, HelpUs },
+  components: { BaseButton, ResultCircle, ReviewModal, HelpUs, ThankYou },
 
   data() {
     return {
       name: 'FinalRanking',
-      reviewUs: 'review-modal',
+      componentId: '',
       courseHoles: 14,
       results: [
         {
@@ -233,10 +231,16 @@ export default {
     };
   },
   methods: {
-    submitReview(msg, name) {
+    submitReview(msg, name, rating) {
       console.log(msg);
       console.log(name);
-      this.reviewUs = false;
+      console.log(rating);
+      if (rating <= 4) {
+        this.componentId = 'ThankYou';
+        return;
+      } else {
+        this.componentId = 'HelpUs';
+      }
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container flex flex-col p-4 items-center bg-scores bg-no-repeat bg-center"
+    class="container flex flex-col p-4 items-center bg-scores bg-no-repeat bg-cover"
   >
     <div class="mt-32"></div>
     <div class="mt-10"></div>
@@ -16,7 +16,7 @@
     <div class="flex flex-col justify-between h-full">
       <!-- DIV FOR BASE CARD -->
       <div class="card px-4 text-2xl">
-        <div 
+        <div
           v-for="player in players"
           :key="player.name"
           class="flex justify-between items-center my-4 flex-wrap "

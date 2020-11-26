@@ -1,64 +1,90 @@
 <template>
-  <div
-    class="absolute w-full h-full flex flex-col items-center justify-center px-6 bg-005d63"
-  >
-    <!-- Main Card -->
-    <div class="relative card bg-fff6eb w-full">
-      <div class="flex justify-end">
-        <button
-          class="text-aeb49a focus:outline-none cursor-pointer"
-          @click="$emit('clicked')"
-        >
-          X
-        </button>
+  <modal-layout @close="$emit('close')" :invalid="invalid">
+
+    <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
+      <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
+
+      <!-- Stars for development -->
+      <div class="flex items-center">
+        <button class="mb-8 text-3xl" @click="reviewerRating = 1">☆</button>
+        <p class="mb-8 text-3xl text-aeb49a">☆ ☆ ☆</p>
+        <button class="mb-8 text-3xl" @click="reviewerRating = 5">☆</button>
       </div>
 
-      <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
-        <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
-        <p class="mb-8 text-3xl text-aeb49a">☆ ☆ ☆ ☆ ☆</p>
+      <p class="p-2">Tell me everything!<span class="text-ff8e67">*</span></p>
+      <textarea
+        rows="7"
+        minlength="10"
+        class="card focus:outline-none w-full mb-12 border-transparent border-2"
+        :class="{ warning: invalid }"
+        v-model="reviewerMessage"
+      ></textarea>
 
-        <p class="p-2">Tell me everything!<span class="text-ff8e67">*</span></p>
-        <textarea
-          rows="7"
-          minlength="10"
-          class="card focus:outline-none w-full mb-12"
-          v-model="reviewerMessage"
-        ></textarea>
+      <p class="mb-2">
+        What's your pretty name<span class="text-ff8e67">*</span>
+      </p>
+      <input
+        @blur="inputValidation(reviewerName)"
+        type="text"
+        class="card w-3/4 focus:outline-none text-center mb-8 border-transparent border-2"
+        :class="{ warning: invalid }"
+        v-model="reviewerName"
+      />
 
-        <p class="mb-2">
-          What's your pretty name<span class="text-ff8e67">*</span>
-        </p>
-        <input
-          type="text"
-          class="card w-3/4 focus:outline-none text-center mb-8"
-          v-model="reviewerName"
-        />
+   
 
-        <base-button
-          @clicked="$emit('submit', reviewerName, reviewerMessage)"
-          type="button"
-          class="confirm absolute -bottom-5"
-          >Tell the world</base-button
-        >
-      </div>
+      <base-button
+        @clicked="submitReview"
+        type="button"
+        class="confirm absolute -bottom-5"
+        >Tell the world</base-button
+      >
     </div>
-  </div>
+   
+  </modal-layout>
 </template>
 
 <script>
+import ModalLayout from '@/layouts/ModalLayout.vue';
 import BaseButton from '@/components/utilities/BaseButton';
 export default {
-  components: { BaseButton },
+  components: { BaseButton, ModalLayout },
   data() {
     return {
       name: 'ReviewModal',
       reviewerName: '',
-      reviewerMessage: ''
+      reviewerMessage: '',
+      reviewerRating: '',
+      invalid: false
     };
+  },
+  methods: {
+    inputValidation(input) {
+      if (input === '') {
+        return {
+          class: 'warning'
+        };
+      }
+    },
+    submitReview() {
+      const name = this.reviewerName,
+        msg = this.reviewerMessage,
+        rate = this.reviewerRating;
+
+      if (name === '' || msg.length < 10 || rate == null) {
+        this.invalid = true;
+        return;
+      } else {
+        this.invalid = false;
+        this.$emit('submit', name, msg, rate);
+      }
+    }
   }
 };
 </script>
 
-<style>
-
+<style scoped>
+.warning {
+  @apply border-ea9864 border-2;
+}
 </style>
