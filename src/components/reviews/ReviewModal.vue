@@ -1,6 +1,5 @@
 <template>
   <modal-layout @close="$emit('close')" :invalid="invalid">
-
     <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
       <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
 
@@ -24,14 +23,11 @@
         What's your pretty name<span class="text-ff8e67">*</span>
       </p>
       <input
-        @blur="inputValidation(reviewerName)"
         type="text"
         class="card w-3/4 focus:outline-none text-center mb-8 border-transparent border-2"
         :class="{ warning: invalid }"
         v-model="reviewerName"
       />
-
-   
 
       <base-button
         @clicked="submitReview"
@@ -40,7 +36,6 @@
         >Tell the world</base-button
       >
     </div>
-   
   </modal-layout>
 </template>
 
@@ -59,13 +54,6 @@ export default {
     };
   },
   methods: {
-    inputValidation(input) {
-      if (input === '') {
-        return {
-          class: 'warning'
-        };
-      }
-    },
     submitReview() {
       const name = this.reviewerName,
         msg = this.reviewerMessage,

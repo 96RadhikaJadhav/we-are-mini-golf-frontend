@@ -5,9 +5,7 @@
     <ErrorMessage v-if="invalid" />
 
     <!-- Main Card -->
-    <div
-      class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm"
-    >
+    <div class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm">
       <!-- Closing Button -->
       <div class="flex justify-end p-6">
         <button
@@ -22,13 +20,11 @@
       <div class="px-6">
         <slot></slot>
       </div>
-      
+
       <div
         class="bg-ea9864 text-white font-kalam rounded-3xl text-center text-xl leading-tight"
       >
-      <slot name="message">
-        
-      </slot>
+        <slot name="message"> </slot>
       </div>
     </div>
   </div>

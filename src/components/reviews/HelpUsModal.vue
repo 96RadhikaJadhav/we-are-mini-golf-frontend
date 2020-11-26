@@ -32,9 +32,11 @@
 
     <!-- Orange bottom of Card -->
     <template v-slot:message>
-       <p class="px-6 py-4">To make your life easier, we've already copied your review so you only have to paste it!</p>
+      <p class="px-6 py-4">
+        To make your life easier, we've already copied your review so you only
+        have to paste it!
+      </p>
     </template>
-   
   </modal-layout>
 </template>
 

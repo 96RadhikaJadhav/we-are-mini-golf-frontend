@@ -76,7 +76,12 @@ export const generalRoutes = [
     name: 'FinalRanking',
     component: () => import('@/views/FinalRanking.vue'),
     meta: {
-      layout: () => import('@/layouts/FullScreenLayout.vue')
+      // layout: () => import('@/layouts/FullScreenLayout.vue')
     }
+  },
+  {
+    path: '/rules',
+    name: 'RulesScreen',
+    component: () => import('@/components/rules/RulesScreen.vue'),
   }
 ];

@@ -1,7 +1,7 @@
 <template>
   <!-- ======== Section A: Final Ranking ======== -->
 
-  <div class="h-full bg-005d63">
+  <div class="h-full w-full bg-rankings bg-no-repeat bg-cover">
     <component
       :is="componentId"
       @close="componentId = ''"
@@ -28,7 +28,7 @@
       </div>
 
       <!-- Player Ranking Table | Lower 1/2 -->
-      <div class="h-1/2 w-full px-16 max-w-sm mx-auto">
+      <div class="h-1/2 w-full px-6 max-w-sm mx-auto">
         <div class="h-full flex flex-col justify-between">
           <div class="mb-6">
             <div
@@ -64,7 +64,7 @@
 
     <!-- ======== SECTION B: Detailed Scores ======== -->
     <div
-      class="bg-red-400 h-full w-full px-6 flex flex-col justify-between mx-auto"
+      class="h-full w-full px-6 flex flex-col justify-between mx-auto"
     >
       <!-- Top 1/4 of Section B -->
       <div class="h-1/4 flex flex-col justify-around w-3/4 mx-auto max-w-sm">
