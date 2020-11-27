@@ -1,5 +1,5 @@
 <template>
-  <modal-layout @close="$emit('close')">
+  <ModalLayout @close="$emit('close')">
     <p class="uppercase text-aeb49a text-2xl mb-10 text-center">
       We love that <br />
       you loved it!
@@ -37,7 +37,7 @@
         have to paste it!
       </p>
     </template>
-  </modal-layout>
+  </ModalLayout>
 </template>
 
 <script>

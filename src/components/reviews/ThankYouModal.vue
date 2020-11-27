@@ -1,5 +1,5 @@
 <template>
-  <modal-layout @close="$emit('close')">
+  <ModalLayout @close="$emit('close')">
     <!-- Thank You Texts -->
     <div
       class="flex flex-col items-center justify-center text-2xl text-center leading-relaxed font-capriola"
@@ -17,7 +17,7 @@
 
       <img src="@/assets/logo.png" alt="logo" class="mb-20" />
     </div>
-  </modal-layout>
+  </ModalLayout>
 </template>
 
 <script>

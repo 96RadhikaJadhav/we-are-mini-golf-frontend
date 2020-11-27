@@ -32,6 +32,6 @@ export default {
   @apply font-capriola text-sm pb-4 ml-4;
 }
 .quote {
-  @apply self-end pb-4;
+  @apply self-end pb-4 text-right w-4/5;
 }
 </style>
