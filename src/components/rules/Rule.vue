@@ -8,11 +8,9 @@
 
     <div class=" flex flex-col px-4">
       <p class="title">{{ rule.title }}</p>
-      <p class="body">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae aperiam
-        magni reprehenderit fuga quasi dolore vero saepe quod beatae illum.
+      <p v-for="(text, index) in rule.content" :key="index" :class="text.class">
+        {{ text.para }}
       </p>
-      <p class="quote">{{ rule.cmp }}</p>
     </div>
   </div>
 </template>
@@ -25,10 +23,13 @@ export default {
 
 <style scoped>
 .title {
-  @apply text-3xl self-start uppercase pb-6;
+  @apply text-2xl self-start uppercase pb-6;
 }
 .body {
   @apply font-capriola text-sm pb-4;
+}
+.body-indent {
+  @apply font-capriola text-sm pb-4 ml-4;
 }
 .quote {
   @apply self-end pb-4;
