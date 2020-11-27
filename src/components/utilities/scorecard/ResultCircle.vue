@@ -22,10 +22,10 @@ export default {
 }
 .primary {
   background: #3b9d11;
-  @apply h-16 w-16 rounded-full  text-f5e3c8 text-2xl;
+  @apply h-16 w-16 rounded-full  text-fff6eb text-2xl;
 }
 .secondary {
-  background: #f5e3c8;
+  background: #fff6eb;
   color: #3b9d11;
   @apply h-14 w-14 text-lg;
 }
