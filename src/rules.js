@@ -1,5 +1,10 @@
 export default [
-  { title: 'How to play?', cmp: 'how-to-play', bg: 'rules-01.png' },
+  {
+    title: 'How to play?',
+    cmp: 'how-to-play',
+    bg: 'rules-01.png',
+    body: 'This is the place that the body will go to'
+  },
   { title: 'Stroke Definition', cmp: 'stroke-def', bg: 'rules-02.png' },
   { title: 'Score Count', cmp: 'score-count', bg: 'rules-03.png' },
   { title: 'Who Plays First?', cmp: 'first', bg: 'rules-04.png' },
@@ -10,4 +15,4 @@ export default [
     bg: 'rules-06.png'
   },
   { title: 'Slow/fast play?', cmp: 'slow-fast-play', bg: 'rules-07.png' }
-]
+];
