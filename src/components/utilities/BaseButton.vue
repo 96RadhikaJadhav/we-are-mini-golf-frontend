@@ -1,7 +1,7 @@
 <template>
   <component
     :is="type"
-    class="text-white text-center focus:outline-none mx-auto block"
+    class="font-capriola text-white text-center focus:outline-none mx-auto block"
     :class="mode"
     @click="$emit('clicked')"
     :to="to"
