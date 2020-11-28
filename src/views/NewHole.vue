@@ -23,7 +23,10 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.$router.push({ name: 'GameScores' });
+      this.$router.push({
+        name: 'GameScores',
+        params: { holeNo: this.holeNo }
+      });
     }, 1000);
   }
 };

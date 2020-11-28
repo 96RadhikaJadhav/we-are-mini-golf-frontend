@@ -9,7 +9,7 @@
     <div
       class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mb-12"
     >
-      <p>Hole N°{{ holeNum }}</p>
+      <p>Hole N°{{ holeNo }}</p>
       <p>PAR {{ par }}</p>
     </div>
 
@@ -27,12 +27,15 @@
           <input
             type="number"
             class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            v-model="player.score"
           />
         </div>
       </div>
 
       <!-- CONFIRM BUTTON flex-item 3 -->
-      <base-button mode="confirm" to="/current-total">Confirm</base-button>
+      <base-button mode="confirm" @clicked="updatePlayerScore"
+        >Confirm</base-button
+      >
     </div>
   </div>
 </template>
@@ -43,6 +46,7 @@ import { db } from '@/db.js';
 const gameInfoRefs = db.ref('game_info');
 
 export default {
+  name: 'GameScores',
   components: { BaseButton },
   props: {
     holeNo: {
@@ -60,6 +64,11 @@ export default {
     gameInfoRefs.on('value', snapshot => {
       this.playersInfo = snapshot.val().players_info;
     });
+  },
+  methods: {
+    updatePlayerScore() {
+      db.ref('game_info/players_info').set(this.playersInfo);
+    }
   }
 };
 </script>
