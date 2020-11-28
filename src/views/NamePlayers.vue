@@ -61,7 +61,7 @@ export default {
       deep: true,
       handler() {
         for (var i = 1; i <= this.inputs; i++) {
-          this.playersInfo.push({ name: '', age: '', score: 0 });
+          this.playersInfo.push({ id: i, name: '', age: '', score: 0 });
         }
       }
     }

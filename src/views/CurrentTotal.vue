@@ -14,9 +14,13 @@
       <div
         class="flex items-center justify-around font-kalam h-12 w-full text-white text-2xl"
       >
-        <p class="font-lg mr-4">{{ players[4].playerName }}</p>
+        <p class="font-lg mr-4" v-if="playersInfo.length > 0">
+          {{ playersInfo[0].name }}
+        </p>
         <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
-          <p class="mt-1 text-2xl">{{ players[4].totalScore }}</p>
+          <p class="mt-1 text-2xl" v-if="playersInfo.length > 0">
+            {{ playersInfo[0].score }}
+          </p>
         </div>
       </div>
     </div>
@@ -26,7 +30,7 @@
     <div class="flex flex-col h-full justify-between mt-4">
       <div>
         <current-ranking
-          v-for="player in players"
+          v-for="player in playersInfo"
           :key="player.id"
           :player="player"
         >
@@ -43,20 +47,21 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
+import { db } from '@/db.js';
+const gameInfoRefs = db.ref('game_info');
 
 export default {
   components: { BaseButton, CurrentRanking },
 
   data() {
     return {
-      players: [
-        { id: 1, playerName: 'Churchill', totalScore: 10, rank: '2nd' },
-        { id: 2, playerName: 'De Gaulle', totalScore: 11, rank: '3rd' },
-        { id: 3, playerName: 'Roosevelt', totalScore: 12, rank: '4th' },
-        { id: 5, playerName: 'Staline', totalScore: 14, rank: '5th' },
-        { id: 4, playerName: 'Batman', totalScore: 9, rank: '1st' }
-      ]
+      playersInfo: []
     };
+  },
+  created() {
+    gameInfoRefs.on('value', snapshot => {
+      this.playersInfo = snapshot.val().players_info;
+    });
   }
 };
 </script>
