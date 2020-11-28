@@ -1,7 +1,7 @@
 import { firebaseAction } from 'vuexfire';
 
 const state = {
-  info: {}
+  ganeInfo: {}
 };
 
 const getters = {
@@ -11,8 +11,8 @@ const getters = {
 };
 
 const actions = {
-  setCommonRef: firebaseAction((context, ref) => {
-    context.bindFirebaseRef('info', ref);
+  setGameInfoRef: firebaseAction((context, ref) => {
+    context.bindFirebaseRef('gameInfo', ref);
   })
 };
 

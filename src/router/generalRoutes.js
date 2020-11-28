@@ -50,6 +50,7 @@ export const generalRoutes = [
   {
     path: '/new-hole',
     name: 'NewHole',
+    props: true,
     component: () => import('@/views/NewHole.vue'),
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')

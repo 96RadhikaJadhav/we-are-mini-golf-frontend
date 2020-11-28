@@ -9,7 +9,7 @@
 <style>
 html,
 body {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   /* background-image: url('./assets/background-home.png') no-repeat ; */
   font-family: capriola;

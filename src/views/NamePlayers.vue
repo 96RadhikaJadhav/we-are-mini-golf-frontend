@@ -1,15 +1,15 @@
 <template>
   <div
-    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat"
+    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat md:w-1/2"
   >
     <!-- Input Field -->
-    <div class="self-end space-y-4">
+    <div class="self-end space-y-4 px-8">
       <p class="uppercase text-aeb49a font-semibold text-xl text-center">
         Today's <br />dream team
       </p>
-      <div class="bg-white shadow-md mx-6 rounded-3xl">
+      <div class="bg-white shadow-md mx-6 rounded-3xl md:w-1/2 md:mx-auto">
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="inline-flex justify-between py-4 px-8">
+          <div class="flex justify-between py-4 px-4">
             <InputText
               :placeholder="`Players ${index + 1}`"
               v-model="player.name"
@@ -38,8 +38,7 @@ import InputText from '../components/InputText';
 import InputSelect from '../components/InputSelect';
 import BaseButton from '../components/utilities/BaseButton';
 import { db } from '@/db.js';
-const commonRefs = db.ref('common');
-const playersInfoRefs = db.ref('players_info');
+const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'NamePlayers',
@@ -52,9 +51,8 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch('common/setCommonRef', commonRefs);
-    this.$store.dispatch('players/setPlayersInfoRef', commonRefs);
-    commonRefs.on('value', snapshot => {
+    this.$store.dispatch('gameInfo/setGameInfoRef', gameInfoRefs);
+    gameInfoRefs.on('value', snapshot => {
       this.inputs = snapshot.val().numOfPlayers;
     });
   },
@@ -63,15 +61,15 @@ export default {
       deep: true,
       handler() {
         for (var i = 1; i <= this.inputs; i++) {
-          this.playersInfo.push({ name: '', age: '' });
+          this.playersInfo.push({ id: i, name: '', age: '', score: 0 });
         }
       }
     }
   },
   methods: {
     startGame() {
-      playersInfoRefs
-        .set(this.playersInfo)
+      gameInfoRefs
+        .update({ players_info: this.playersInfo })
         .then(this.$router.push({ name: 'GameCourse' }))
         .catch(err => console.log(err));
     }

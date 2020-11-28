@@ -2,7 +2,7 @@
   <!-- NAME INPUT -->
   <input
     type="text"
-    class="focus:outline-none text-005D63 font-kalam text-xl mr-1 w-1/2"
+    class="focus:outline-none text-005D63 font-kalam text-xl mr-1 w-1/2 lg:w-full"
     :value="value"
     @input="$emit('input', $event.target.value)"
     :placeholder="placeholder"

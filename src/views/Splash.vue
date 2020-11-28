@@ -7,13 +7,22 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+
 export default {
   name: 'Splash',
-
   created() {
-    setTimeout(() => {
-      return this.$router.push('/select-players');
-    }, 2000);
+    firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        setTimeout(() => {
+          return this.$router.push({ name: 'SelectPlayers' });
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>
