@@ -1,24 +1,41 @@
 <template>
   <div
-    class=" bg-awards bg-no-repeat bg-center flex flex-col items-center justify-between w-full h-1/2 bg-3ac792"
+    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb background-gif"
   >
     <!-- Top 1/2 Screen -->
     <div class="h-1/2">
       <div
-        class="text-center mt-32 font-capriola flex flex-col justify-between"
+        class="text-center mt-32 font-capriola flex flex-col justify-between items-center"
       >
         <p class="text-005d63 text-2xl">THE AWARD OF</p>
-        <p class="text-white uppercase w-20 mx-auto mt-10">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <div class="flex flex-col items-center relative">
+          <img src="../assets/ribbon.png" class="w-48" />
+          <div class="h-32 w-32 absolute top-8 flex flex-col items-center justify-center p-2">
+            <p class="text-white uppercase text-xl mx-auto">
+              {{ awardType }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Bottom 1/2 Screen -->
     <div class="h-1/2 flex flex-col justify-between">
       <div>
-        <p class="text-005d63 text-2xl font-capriola my-20">GOES TO...</p>
-        <p class="text-white text-3xl font-kalam">{{ playerName }}</p>
+        <p class="text-005d63 text-2xl font-capriola mt-32 mb-8 text-center">
+          GOES TO...
+        </p>
+
+        <div class="mx-6 flex flex-col justify-center items-center relative max-w-sm">
+          <img :src="img" />
+          <p
+            :class="
+              `text-white text-3xl font-kalam absolute transform ${deg} mb-2`
+            "
+          >
+            {{ playerName }}
+          </p>
+        </div>
       </div>
       <base-button
         to="/new-hole"
@@ -37,11 +54,18 @@ export default {
   data() {
     return {
       name: 'Awards',
-      playerName: 'Churchill'
+      playerName: 'Churchill',
+      awardType: 'lorom ipsum dolor sit amet',
+      deg: '-rotate-6',
+      img: require('../assets/green-banner.png')
     };
   },
   components: { BaseButton }
 };
 </script>
 
-<style></style>
+<style scoped>
+.background-gif {
+  background-image: url('../assets/Confettis-gif.gif');
+}
+</style>
