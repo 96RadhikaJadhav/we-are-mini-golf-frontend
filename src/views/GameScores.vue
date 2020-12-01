@@ -33,9 +33,9 @@
       </div>
 
       <!-- CONFIRM BUTTON flex-item 3 -->
-      <base-button mode="confirm" @clicked="updatePlayerScore"
-        >Confirm</base-button
-      >
+      <base-button mode="confirm" @clicked="updatePlayerScore">
+        Confirm
+      </base-button>
     </div>
   </div>
 </template>
@@ -67,11 +67,23 @@ export default {
   },
   methods: {
     updatePlayerScore() {
+      this.calculateTotal();
       db.ref('game_info/players_info')
         .set(this.playersInfo)
         .then(() => {
-          this.$router.push({ name: 'CurrentTotal' });
+          this.$router.push({
+            name: 'CurrentTotal',
+            params: { holeNo: this.holeNo }
+          });
         });
+    },
+    calculateTotal() {
+      this.playersInfo.forEach(val => {
+        let score = parseInt(val.score);
+        val.holeScore.push(score);
+        val.totalScore = parseInt(score) + val.totalScore;
+        delete val.score;
+      });
     }
   }
 };

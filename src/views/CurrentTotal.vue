@@ -15,11 +15,11 @@
         class="flex items-center justify-around font-kalam h-12 w-full text-white text-2xl"
       >
         <p class="font-lg mr-4" v-if="playersInfo.length > 0">
-          {{ playersInfo[0].name }}
+          {{ getHighestTotalPlayer.name }}
         </p>
         <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
           <p class="mt-1 text-2xl" v-if="playersInfo.length > 0">
-            {{ playersInfo[0].score }}
+            {{ getHighestTotalPlayer.totalScore }}
           </p>
         </div>
       </div>
@@ -37,9 +37,12 @@
         </current-ranking>
       </div>
       <!-- Button -->
-      <base-button to="/new-hole" mode="confirm"
-        >on to the next hole!</base-button
+      <base-button
+        :to="{ name: 'NewHole', params: { holeNo: holeNo + 1 } }"
+        mode="confirm"
       >
+        on to the next hole!
+      </base-button>
     </div>
   </div>
 </template>
@@ -48,11 +51,17 @@
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
 import { db } from '@/db.js';
+import { orderBy } from 'lodash';
 const gameInfoRefs = db.ref('game_info');
 
 export default {
+  name: 'CurrentTotal',
   components: { BaseButton, CurrentRanking },
-
+  props: {
+    holeNo: {
+      type: Number
+    }
+  },
   data() {
     return {
       playersInfo: []
@@ -62,6 +71,17 @@ export default {
     gameInfoRefs.on('value', snapshot => {
       this.playersInfo = snapshot.val().players_info;
     });
+  },
+  computed: {
+    getHighestTotalPlayer() {
+      return orderBy(this.playersInfo, ['totalScore'], ['desc'])[0];
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.params.holeNo === 14) {
+      next({ name: 'FinalRanking' });
+    }
+    next();
   }
 };
 </script>

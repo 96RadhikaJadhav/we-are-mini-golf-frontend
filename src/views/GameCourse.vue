@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     gotoNewHole(value, key) {
-      console.log(key);
+      console.log(value, key);
       this.$router.push({ name: 'NewHole', params: { holeNo: value.holeNo } });
     }
   }
