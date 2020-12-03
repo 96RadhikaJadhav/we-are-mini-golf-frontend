@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col p-4 items-center bg-scores bg-no-repeat bg-center"
-  >
+  <div class="flex flex-col p-4 items-center bg-scores bg-no-repeat bg-center">
     <div class="mt-32"></div>
     <div class="mt-10"></div>
 
