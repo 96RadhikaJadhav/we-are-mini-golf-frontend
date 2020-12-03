@@ -7,7 +7,7 @@
     <div
       class="flex items-center justify-center h-8 w-8 bg-005d63 rounded-full text-white"
     >
-      <p class="mt-1">{{ player.score }}</p>
+      <p class="mt-1">{{ player.totalScore }}</p>
     </div>
   </div>
 </template>
@@ -17,5 +17,3 @@ export default {
   props: ['player']
 };
 </script>
-
-<style></style>

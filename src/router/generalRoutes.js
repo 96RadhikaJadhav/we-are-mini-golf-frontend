@@ -34,6 +34,7 @@ export const generalRoutes = [
   {
     path: '/game-scores',
     name: 'GameScores',
+    props: true,
     component: () => import('@/views/GameScores.vue'),
     meta: {
       layout: () => import('@/layouts/BottomNavLayout.vue')
@@ -42,13 +43,14 @@ export const generalRoutes = [
   {
     path: '/current-total',
     name: 'CurrentTotal',
+    props: true,
     component: () => import('@/views/CurrentTotal.vue'),
     meta: {
       layout: () => import('@/layouts/BottomNavLayout.vue')
     }
   },
   {
-    path: '/new-hole',
+    path: '/hole/:holeNo',
     name: 'NewHole',
     props: true,
     component: () => import('@/views/NewHole.vue'),
@@ -83,6 +85,6 @@ export const generalRoutes = [
   {
     path: '/rules',
     name: 'RulesScreen',
-    component: () => import('@/components/rules/RulesScreen.vue'),
+    component: () => import('@/components/rules/RulesScreen.vue')
   }
 ];

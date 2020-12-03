@@ -12,22 +12,22 @@
 <script>
 export default {
   name: 'NewHole',
-  props: {
-    holeNo: {
-      type: Number
-    }
-  },
   data() {
     return {
       name: 'NewHoleIntro',
       hole: false,
     };
   },
+  computed: {
+    getHoleNo() {
+      return parseInt(this.$route.params.holeNo);
+    }
+  },
   mounted() {
     setTimeout(() => {
       this.$router.push({
         name: 'GameScores',
-        params: { holeNo: this.holeNo }
+        params: { holeNo: this.getHoleNo }
       });
     }, 2000);
   },
