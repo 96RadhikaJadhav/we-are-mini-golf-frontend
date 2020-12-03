@@ -1,9 +1,12 @@
 <template>
   <div
     to="/game-scores"
-    class="flex flex-col justify-around items-center bg-newHole bg-no-repeat bg-cover"
+    class="flex flex-col justify-around items-center bg-no-repeat bg-cover"
+    :class="holeBg"
   >
-    <p class="text-white font-kalam text-3xl mt-10 ml-8 ">{{ getHoleNo }}</p>
+    <p class="text-white font-kalam text-3xl mt-10 ml-8 ">
+      {{ holeNo !== 14 ? holeNo : '' }}
+    </p>
     <p class="-mt-20 text-005d63 font-kalam text-3xl">Par 4</p>
   </div>
 </template>
@@ -13,12 +16,20 @@ export default {
   name: 'NewHole',
   data() {
     return {
-      name: 'NewHoleIntro'
+      name: 'NewHoleIntro',
+      hole: false
     };
   },
   computed: {
     getHoleNo() {
       return parseInt(this.$route.params.holeNo);
+    },
+    holeBg: function() {
+      if (this.holeNo !== 14) {
+        return 'bg-newHole';
+      } else {
+        return 'bg-lastHole';
+      }
     }
   },
   mounted() {
@@ -27,7 +38,7 @@ export default {
         name: 'GameScores',
         params: { holeNo: this.getHoleNo }
       });
-    }, 1000);
+    }, 2000);
   }
 };
 </script>

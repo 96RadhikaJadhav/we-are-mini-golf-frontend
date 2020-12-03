@@ -2,16 +2,19 @@
   <div
     class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat md:w-1/2"
   >
-    <!-- Input Field -->
     <div class="self-end space-y-4 px-8">
       <p class="uppercase text-aeb49a font-semibold text-xl text-center">
         Today's <br />dream team
       </p>
-      <div class="bg-white shadow-md mx-6 rounded-3xl md:w-1/2 md:mx-auto">
+
+      <!-- Card -->
+      <div
+        class="bg-white shadow-md mx-6 rounded-3xl md:w-full md:mx-auto xl:w-1/2"
+      >
         <div v-for="(player, index) in playersInfo" :key="index">
           <div class="flex justify-between py-4 px-4">
             <InputText
-              :placeholder="`Players ${index + 1}`"
+              :placeholder="`Player ${index + 1}`"
               v-model="player.name"
             />
             <InputSelect v-model="player.age" />
