@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container flex flex-col p-4 items-center bg-scores bg-no-repeat bg-cover"
+    class="flex flex-col p-4 items-center bg-scores bg-no-repeat bg-center"
   >
     <div class="mt-32"></div>
     <div class="mt-10"></div>
