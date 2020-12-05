@@ -7,7 +7,7 @@
           class="w-full h-full object-fill"
           :class="{ 'cursor-pointer': col.activeImg }"
           v-if="!col.isHoleVisited"
-          @click="gotoNewHole(col, row['.key'])"
+          @click="gotoNewHole(col, row['.key'], index)"
         />
         <img :src="col.activeImg" class="w-full h-full object-fill" v-else />
       </div>
@@ -18,6 +18,7 @@
 <script>
 import { db } from '@/db.js';
 const courseGridRef = db.ref('course_grid');
+
 export default {
   name: 'GameCourse',
   data() {
@@ -28,10 +29,22 @@ export default {
   firebase: {
     courseGrid: courseGridRef
   },
+  computed: {},
   methods: {
-    gotoNewHole(value, key) {
-      console.log(value, key);
-      this.$router.push({ name: 'NewHole', params: { holeNo: value.holeNo } });
+    gotoNewHole(value, key, index) {
+      let updates = value;
+      updates[`${key}/${key}/${index}/isHoleVisited`] = true;
+      courseGridRef
+        .update(updates)
+        .then(
+          this.$router.push({
+            name: 'NewHole',
+            params: { holeNo: value.holeNo }
+          })
+        )
+        .catch(e => {
+          console.log(e);
+        });
     }
   }
 };
