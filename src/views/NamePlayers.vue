@@ -68,7 +68,6 @@ export default {
             id: i,
             name: '',
             age: '',
-            holeScore: [0],
             totalScore: 0
           });
         }

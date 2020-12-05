@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center p-4 bg-scores bg-no-repeat bg-cover">
+  <div class="flex flex-col items-center p-4 bg-total bg-no-repeat bg-cover">
     <!-- Top of page quote -->
     <div class="p-6 font-capriola text-lg mt-4 mb-16">
       <p class="text-center text-white">
@@ -12,7 +12,7 @@
       <img src="@/assets/first-reef.png" class="h-auto w-32" />
 
       <div
-        class="flex items-center justify-around font-kalam h-12 w-full text-white text-2xl"
+        class="flex items-center justify-evenly font-kalam h-12 w-full text-white text-2xl"
       >
         <p class="font-lg mr-4" v-if="playersInfo.length > 0">
           {{ getHighestTotalPlayer.name }}
@@ -30,13 +30,15 @@
     <div class="flex flex-col h-full justify-between mt-4">
       <div>
         <current-ranking
-          v-for="player in playersInfo"
+          v-for="player in otherPlayerRankings"
           :key="player.id"
           :player="player"
         >
         </current-ranking>
       </div>
       <!-- Button -->
+    </div>
+    <div class="flex-1 flex items-center">
       <base-button
         :to="{ name: 'NewHole', params: { holeNo: holeNo + 1 } }"
         mode="confirm"
@@ -74,7 +76,10 @@ export default {
   },
   computed: {
     getHighestTotalPlayer() {
-      return orderBy(this.playersInfo, ['totalScore'], ['desc'])[0];
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
+    },
+    otherPlayerRankings() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     }
   },
   beforeRouteLeave(to, from, next) {

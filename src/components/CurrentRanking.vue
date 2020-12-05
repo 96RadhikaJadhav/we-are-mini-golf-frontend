@@ -1,5 +1,5 @@
 <template>
-  <div class="flex my-2 font-kalam justify-between">
+  <div class="flex my-2 font-kalam justify-around">
     <div class="flex">
       <!-- <p class="font-kalam text-ea9864 mr-4 text-2xl">{{ player.rank }}</p> -->
       <p class="text-2xl mr-4">{{ player.name }}</p>

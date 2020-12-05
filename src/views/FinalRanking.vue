@@ -22,10 +22,14 @@
           <img src="@/assets/first-reef.png" class="h-auto w-full" />
           <!-- logo looks rough -->
         </div>
-        <div class="flex items-center">
-          <p class="text-2xl text-white font-kalam mr-4">Churchill</p>
+        <div class="flex items-center" v-if="playersInfo.length > 0">
+          <p class="text-2xl text-white font-kalam mr-4">
+            {{ getWinner.name }}
+          </p>
           <div class="circle orange">
-            <p class="font-kalam text-xl">10</p>
+            <p class="font-kalam text-xl">
+              {{ getWinner.totalScore }}
+            </p>
           </div>
         </div>
       </div>
@@ -35,13 +39,13 @@
         <div class="h-full flex flex-col justify-between">
           <div class="mb-6">
             <div
-              v-for="(n, index) in 6"
+              v-for="(player, index) in otherPlayerRankings"
               :key="index"
               class="flex justify-between mb-1 font-kalam text-2xl"
             >
               <div class="flex">
-                <p class="mr-4 text-ea9864">2nd</p>
-                <p class="text-white">De Gaulle</p>
+                <p class="mr-4 text-ea9864">{{ index + 1 }}</p>
+                <p class="text-white">{{ player.name }}</p>
               </div>
               <div class="circle beige">
                 <p>12</p>
@@ -55,11 +59,12 @@
               type="button"
               class="confirm mb-4"
               @clicked="componentId = 'ReviewModal'"
-              >REVIEW US</base-button
             >
-            <base-button to="" class="back text-xl"
-              >Detailed Scores</base-button
-            >
+              REVIEW US
+            </base-button>
+            <base-button to="" class="back text-xl">
+              Detailed Scores
+            </base-button>
           </div>
         </div>
       </div>
@@ -70,52 +75,49 @@
       v-if="!componentId"
       class="h-full w-11/12 flex flex-col justify-between mx-auto mt-10"
     >
-      <!-- Top 1/4 of Section B -->
+      <!-- Top 1/4 of Section B 
       <div class="h-1/4 flex flex-col justify-around w-full mx-auto max-w-sm">
-        <!-- PRIMARY STATS -->
+         PRIMARY STATS 
         <div class="flex justify-around px-10">
-          <!-- Team Av -->
+           Team Av 
           <result-circle type="primary">
             <template v-slot:title>Team Average</template>
             <template v-slot:result>59</template>
           </result-circle>
 
-          <!-- Hole in 1 -->
+           Hole in 1 
           <result-circle type="primary">
             <template v-slot:title>Holes In 1</template>
             <template v-slot:result>3</template>
           </result-circle>
         </div>
 
-        <!-- SECONDARY STATS -->
+         SECONDARY STATS 
         <div class="flex items-center justify-around px-4 mb-4">
-          <!-- Under Par -->
+           Under Par 
           <result-circle type="secondary">
             <template v-slot:title>Under Par</template>
             <template v-slot:result>26%</template>
           </result-circle>
 
-          <!-- Par -->
+           Par 
           <result-circle type="secondary">
             <template v-slot:title>Par</template>
             <template v-slot:result>27%</template>
           </result-circle>
 
-          <!-- Over Par -->
+           Over Par
           <result-circle type="secondary">
             <template v-slot:title>Over Par</template>
             <template v-slot:result>47%</template>
           </result-circle>
         </div>
-      </div>
+      </div>-->
 
       <!-- RESULTS CARD -->
-      <div class="card max-w-sm mx-auto">
+      <div class="card w-full md:max-w-1/2 mx-auto">
         <div
-          :class="
-            `grid grid-cols-${results.length + 2}
-             text-005d63 font-kalam pt-6 text-center`
-          "
+          class="w-full grid grid-flow-col auto-cols-fr text-005d63 font-kalam pt-6 text-center"
         >
           <!-- Holes -->
           <div>
@@ -127,14 +129,14 @@
             </p>
           </div>
 
-          <div v-for="(res, index) in results" :key="index">
+          <div v-for="(res, index) in playersInfo" :key="index">
             <!-- Player Names -->
-            <p class="transform -rotate-45 mb-4">{{ res.player }}</p>
+            <p class="transform -rotate-45 mb-4">{{ res.name }}</p>
             <!-- Overall Scores -->
-            <p class="circle-score-total">{{ res.overall }}</p>
+            <p class="circle-score-total">{{ res.totalScore }}</p>
             <!-- Individual Scores in columns -->
             <p
-              v-for="(score, index) in res.scores"
+              v-for="(score, index) in res.holeScore"
               :key="index"
               class="border-r border-f5e3c8 pb-1"
             >
@@ -163,9 +165,9 @@
       <div
         class="flex items-center justify-around mt-6 w-4/6 mx-auto mb-20 max-w-sm"
       >
-        <router-link class="text-white text-xl font-capriola" to=""
-          >SHARE</router-link
-        >
+        <router-link class="text-white text-xl font-capriola" to="">
+          SHARE
+        </router-link>
         <router-link class="link" to="">f</router-link>
         <router-link class="link pb-1" to="">@</router-link>
       </div>
@@ -175,8 +177,9 @@
         mode="confirm"
         class="sticky bottom-10"
         @clicked="componentId = 'ReviewModal'"
-        >Review Us</base-button
       >
+        Review Us
+      </base-button>
     </div>
   </div>
 </template>
@@ -187,43 +190,25 @@ import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
 import ReviewModal from '@/components/reviews/ReviewModal';
 import HelpUs from '@/components/reviews/HelpUsModal';
 import ThankYou from '@/components/reviews/ThankYouModal';
-export default {
-  components: { BaseButton, ResultCircle, ReviewModal, HelpUs, ThankYou },
+import { db } from '@/db.js';
+import { orderBy } from 'lodash';
+const gameInfoRefs = db.ref('game_info');
 
+export default {
+  name: 'FinalRanking',
+  components: { BaseButton, ResultCircle, ReviewModal, HelpUs, ThankYou },
   data() {
     return {
-      name: 'FinalRanking',
       componentId: '',
       courseHoles: 14,
-      results: [
-        {
-          player: 'DeGaulle',
-          overall: 48,
-          scores: [1, 3, 5, 4, 1, 3, 5, 5, 3, 4, 2, 3]
-        },
-        {
-          player: 'Churchill',
-          overall: 59,
-          scores: [2, 3, 5, 4, 1, 3, 5, 4, 6, 8, 5, 1]
-        },
-        {
-          player: 'Roosevelt',
-          overall: 48,
-          scores: [3, 3, 2, 4, 3, 3, 5, 2, 4, 5, 6, 2]
-        },
-        {
-          player: 'Staline',
-          overall: 48,
-          scores: [1, 3, 5, 6, 1, 7, 4, 2, 3, 1, 2, 1]
-        },
-        {
-          player: 'Player5',
-          overall: 48,
-          scores: [3, 5, 5, 4, 1, 3, 2, 4, 2, 3, 1, 2]
-        }
-      ],
+      playersInfo: [],
       par: [50, 4, 3, 6, 2, 3, 2, 4, 4, 5, 3, 2, 3]
     };
+  },
+  created() {
+    gameInfoRefs.on('value', snapshot => {
+      this.playersInfo = snapshot.val().players_info;
+    });
   },
   methods: {
     submitReview(msg, name, rating) {
@@ -253,8 +238,11 @@ export default {
     }
   },
   computed: {
-    overallTotal: () => {
-      return 12;
+    getWinner() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
+    },
+    otherPlayerRankings() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     }
   }
 };

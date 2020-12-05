@@ -24,6 +24,8 @@ module.exports = {
         selection:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1605978641/we-are-mini-golf/WAMG_Background_-_Screen_2_ke1t04.png")',
         scores:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606110468/we-are-mini-golf/WAMG_Background_-_Screen_6_jqgyim.png")',
+        total:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606112261/we-are-mini-golf/WAMG_Background_-_Screen_7_rhoglp.png")',
         newHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606113279/we-are-mini-golf/WAMG_Background_-_Screen_5_par_omfrqj.png")',
@@ -31,7 +33,7 @@ module.exports = {
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606112261/we-are-mini-golf/08_-_Reward_animation_-_green_banner_mwfaew.png")',
         rankings:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606373226/we-are-mini-golf/WAMG_Background_-_Screen_9_rxkepj.png")',
-          lastHole:
+        lastHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1606716810/we-are-mini-golf/WAMG_Background_-_Screen_6_last_hole_par_uu6mq2.png")'
       }),
       container: {
