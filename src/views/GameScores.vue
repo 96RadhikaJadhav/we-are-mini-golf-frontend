@@ -1,10 +1,7 @@
 <template>
   <div
-    class="container flex flex-col p-4 items-center bg-scores bg-no-repeat bg-cover"
+    class="flex flex-col justify-center p-4 items-center bg-scores bg-no-repeat bg-cover"
   >
-    <div class="mt-32"></div>
-    <div class="mt-10"></div>
-
     <!-- HOLE AND PAR -->
     <div
       class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mb-12"
@@ -13,22 +10,29 @@
       <p>PAR {{ par }}</p>
     </div>
 
-    <div class="flex flex-col justify-between h-full">
-      <!-- DIV FOR BASE CARD -->
-      <div class="card px-4 text-2xl">
+    <div class="w-full px-6">
+      <div class="w-full flex flex-col justify-between">
+        <!-- DIV FOR BASE CARD -->
         <div
-          v-for="player in playersInfo"
-          :key="player.name"
-          class="flex justify-between items-center my-4 flex-wrap "
+          class="bg-white rounded-3xl items-center justify-center px-4 my-4 text-2xl"
         >
-          <!-- PLAYER NAMES -->
-          <p class="text-005D63 mr-16 font-kalam">{{ player.name }}</p>
-          <!-- SCORE INPUT -->
-          <input
-            type="number"
-            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-            v-model="player.score"
-          />
+          <div
+            v-for="player in playersInfo"
+            :key="player.name"
+            class="flex justify-between items-center my-4 px-4"
+          >
+            <!-- PLAYER NAMES -->
+            <p class="text-005D63 font-kalam text-005d63">
+              {{ player.name }}
+            </p>
+            <!-- SCORE INPUT -->
+            <input
+              type="number"
+              inputmode="numeric"
+              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+              v-model="player.score"
+            />
+          </div>
         </div>
       </div>
 
@@ -92,4 +96,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+</style>

@@ -75,52 +75,49 @@
       v-if="!componentId"
       class="h-full w-11/12 flex flex-col justify-between mx-auto mt-10"
     >
-      <!-- Top 1/4 of Section B -->
+      <!-- Top 1/4 of Section B 
       <div class="h-1/4 flex flex-col justify-around w-full mx-auto max-w-sm">
-        <!-- PRIMARY STATS -->
+         PRIMARY STATS 
         <div class="flex justify-around px-10">
-          <!-- Team Av -->
+           Team Av 
           <result-circle type="primary">
             <template v-slot:title>Team Average</template>
             <template v-slot:result>59</template>
           </result-circle>
 
-          <!-- Hole in 1 -->
+           Hole in 1 
           <result-circle type="primary">
             <template v-slot:title>Holes In 1</template>
             <template v-slot:result>3</template>
           </result-circle>
         </div>
 
-        <!-- SECONDARY STATS -->
+         SECONDARY STATS 
         <div class="flex items-center justify-around px-4 mb-4">
-          <!-- Under Par -->
+           Under Par 
           <result-circle type="secondary">
             <template v-slot:title>Under Par</template>
             <template v-slot:result>26%</template>
           </result-circle>
 
-          <!-- Par -->
+           Par 
           <result-circle type="secondary">
             <template v-slot:title>Par</template>
             <template v-slot:result>27%</template>
           </result-circle>
 
-          <!-- Over Par -->
+           Over Par
           <result-circle type="secondary">
             <template v-slot:title>Over Par</template>
             <template v-slot:result>47%</template>
           </result-circle>
         </div>
-      </div>
+      </div>-->
 
       <!-- RESULTS CARD -->
-      <div class="card max-w-sm mx-auto">
+      <div class="card w-full md:max-w-1/2 mx-auto">
         <div
-          :class="
-            `grid grid-cols-${playersInfo.length + 2}
-             text-005d63 font-kalam pt-6 text-center`
-          "
+          class="w-full grid grid-flow-col auto-cols-fr text-005d63 font-kalam pt-6 text-center"
         >
           <!-- Holes -->
           <div>
