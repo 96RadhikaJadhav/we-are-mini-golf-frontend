@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     getHighestTotalPlayer() {
-      return orderBy(this.playersInfo, ['totalScore'], ['desc'])[0];
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     }
   },
   beforeRouteLeave(to, from, next) {

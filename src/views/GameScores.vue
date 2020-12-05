@@ -79,6 +79,9 @@ export default {
     },
     calculateTotal() {
       this.playersInfo.forEach(val => {
+        if (!val.holeScore) {
+          val.holeScore = [];
+        }
         let score = parseInt(val.score);
         val.holeScore.push(score);
         val.totalScore = parseInt(score) + val.totalScore;
