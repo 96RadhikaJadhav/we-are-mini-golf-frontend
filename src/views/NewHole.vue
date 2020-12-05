@@ -21,12 +21,12 @@ export default {
     }
   },
   mounted() {
-    // setTimeout(() => {
-    //   this.$router.push({
-    //     name: 'GameScores',
-    //     params: { holeNo: this.getHoleNo }
-    //   });
-    // }, 1000);
+    setTimeout(() => {
+      this.$router.push({
+        name: 'GameScores',
+        params: { holeNo: this.getHoleNo }
+      });
+    }, 1000);
   }
 };
 </script>
