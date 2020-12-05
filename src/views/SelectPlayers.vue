@@ -9,6 +9,7 @@
     </div>
     <div class="space-y-10 h-full mx-auto">
       <p class="text-005d63 text-2xl font-semibold">How many players?</p>
+      <p class="text-center text-lg font-capriola">{{ noOfPlayers }}</p>
       <div>
         <InputRange
           :min="1"
@@ -39,7 +40,7 @@ export default {
   data() {
     return {
       userUid: '',
-      noOfPlayers: 0
+      noOfPlayers: 1
     };
   },
   computed: {

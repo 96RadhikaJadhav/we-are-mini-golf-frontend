@@ -12,12 +12,20 @@ export default {
   name: 'NewHole',
   data() {
     return {
-      name: 'NewHoleIntro'
+      name: 'NewHoleIntro',
+      hole: false
     };
   },
   computed: {
     getHoleNo() {
       return parseInt(this.$route.params.holeNo);
+    },
+    holeBg: function() {
+      if (this.holeNo !== 14) {
+        return 'bg-newHole';
+      } else {
+        return 'bg-lastHole';
+      }
     }
   },
   mounted() {
@@ -26,7 +34,7 @@ export default {
         name: 'GameScores',
         params: { holeNo: this.getHoleNo }
       });
-    }, 1000);
+    }, 2000);
   }
 };
 </script>
