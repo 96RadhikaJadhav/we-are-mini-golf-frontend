@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full bg-fff6eb grid place-items-center bg-splash bg-no-repeat bg-center"
+    class="w-full h-full bg-fff6eb grid place-items-center bg-splash bg-cover bg-center bg-no-repeat"
   >
     <img src="../assets/logo.png" class="-mt-32" />
   </div>

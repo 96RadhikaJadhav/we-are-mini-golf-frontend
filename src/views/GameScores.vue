@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex flex-col justify-center p-4 items-center bg-scores bg-no-repeat bg-cover"
+    class="flex flex-col justify-evenly p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2"
   >
     <!-- HOLE AND PAR -->
     <div
-      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mb-12"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col"
     >
       <p>Hole N°{{ holeNo }}</p>
       <p>PAR {{ par }}</p>
@@ -31,13 +31,33 @@
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model="player.score"
+              v-if="!editscore && !showTotal"
+            />
+            <input
+              type="number"
+              inputmode="numeric"
+              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+              v-model="player.holeScore[holeNo - 1]"
+              v-else-if="editscore && !showTotal"
+            />
+            <input
+              type="number"
+              inputmode="numeric"
+              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+              :value="player.totalScore"
+              disabled
+              v-else
             />
           </div>
         </div>
       </div>
 
       <!-- CONFIRM BUTTON flex-item 3 -->
-      <base-button mode="confirm" @clicked="updatePlayerScore">
+      <base-button
+        mode="confirm"
+        @clicked="updatePlayerScore"
+        v-if="!showTotal"
+      >
         Confirm
       </base-button>
     </div>
@@ -55,6 +75,14 @@ export default {
   props: {
     holeNo: {
       type: Number
+    },
+    editscore: {
+      type: Boolean,
+      default: false
+    },
+    showTotal: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -71,15 +99,18 @@ export default {
   },
   methods: {
     updatePlayerScore() {
-      this.calculateTotal();
+      if (!this.editscore) {
+        this.calculateTotal();
+      }
       db.ref('game_info/players_info')
         .set(this.playersInfo)
-        .then(() => {
-          this.$router.push({
-            name: 'CurrentTotal',
-            params: { holeNo: this.holeNo }
-          });
-        });
+        .then(this.navigateTo);
+    },
+    navigateTo() {
+      this.$router.push({
+        name: this.editscore ? 'GameCourse' : 'CurrentTotal',
+        params: { holeNo: this.holeNo }
+      });
     },
     calculateTotal() {
       this.playersInfo.forEach(val => {
@@ -91,7 +122,8 @@ export default {
         val.totalScore = parseInt(score) + val.totalScore;
         delete val.score;
       });
-    }
+    },
+    updateHoleScore() {}
   }
 };
 </script>

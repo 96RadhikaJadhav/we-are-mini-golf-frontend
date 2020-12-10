@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-flow-row items-center bg-players bg-center bg-no-repeat md:w-1/2"
+    class="grid grid-flow-row items-center bg-players bg-cover bg-center bg-no-repeat md:w-1/2"
   >
     <div class="self-end space-y-4 px-8">
       <p class="uppercase text-aeb49a font-semibold text-xl text-center">

@@ -10,7 +10,9 @@
         <p class="text-005d63 text-2xl">THE AWARD OF</p>
         <div class="flex flex-col items-center relative">
           <img src="../assets/ribbon.png" class="w-48" />
-          <div class="h-32 w-32 absolute top-8 flex flex-col items-center justify-center p-2">
+          <div
+            class="h-32 w-32 absolute top-8 flex flex-col items-center justify-center p-2"
+          >
             <p class="text-white uppercase text-xl mx-auto">
               {{ awardType }}
             </p>
@@ -26,7 +28,9 @@
           GOES TO...
         </p>
 
-        <div class="mx-6 flex flex-col justify-center items-center relative max-w-sm">
+        <div
+          class="mx-6 flex flex-col justify-center items-center relative max-w-sm"
+        >
           <img :src="img" />
           <p
             :class="

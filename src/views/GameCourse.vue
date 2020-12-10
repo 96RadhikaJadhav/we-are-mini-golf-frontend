@@ -9,7 +9,12 @@
           v-if="!col.isHoleVisited"
           @click="gotoNewHole(col, row['.key'], index)"
         />
-        <img :src="col.activeImg" class="w-full h-full object-fill" v-else />
+        <img
+          :src="col.activeImg"
+          class="w-full h-full object-fill"
+          v-else
+          @click="editHoleDetails(col, row['.key'], index)"
+        />
       </div>
     </div>
   </div>
@@ -29,7 +34,6 @@ export default {
   firebase: {
     courseGrid: courseGridRef
   },
-  computed: {},
   methods: {
     gotoNewHole(value, key, index) {
       let updates = value;
@@ -45,6 +49,12 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    editHoleDetails(value) {
+      this.$router.push({
+        name: 'NewHole',
+        params: { holeNo: value.holeNo, editscore: true }
+      });
     }
   }
 };
