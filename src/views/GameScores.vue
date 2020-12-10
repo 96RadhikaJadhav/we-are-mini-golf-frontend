@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex flex-col justify-center p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2"
+    class="flex flex-col justify-evenly p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2"
   >
     <!-- HOLE AND PAR -->
     <div
-      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mb-12"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col"
     >
       <p>Hole N°{{ holeNo }}</p>
       <p>PAR {{ par }}</p>
@@ -31,13 +31,21 @@
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model="player.score"
-              v-if="!editscore"
+              v-if="!editscore && !showTotal"
             />
             <input
               type="number"
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model="player.holeScore[holeNo - 1]"
+              v-else-if="editscore && !showTotal"
+            />
+            <input
+              type="number"
+              inputmode="numeric"
+              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+              :value="player.totalScore"
+              disabled
               v-else
             />
           </div>
@@ -45,7 +53,11 @@
       </div>
 
       <!-- CONFIRM BUTTON flex-item 3 -->
-      <base-button mode="confirm" @clicked="updatePlayerScore">
+      <base-button
+        mode="confirm"
+        @clicked="updatePlayerScore"
+        v-if="!showTotal"
+      >
         Confirm
       </base-button>
     </div>
@@ -65,6 +77,10 @@ export default {
       type: Number
     },
     editscore: {
+      type: Boolean,
+      default: false
+    },
+    showTotal: {
       type: Boolean,
       default: false
     }

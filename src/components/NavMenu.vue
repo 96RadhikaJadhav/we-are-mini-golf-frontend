@@ -4,7 +4,7 @@
       <img src="../assets/map-inactive.png" class="h-6 w-6" />
     </router-link>
 
-    <router-link to="game-scores">
+    <router-link :to="{ name: 'GameScores', params: { showTotal: true } }">
       <img src="../assets/scores-inactive.png" class="h-6 w-6" />
     </router-link>
 
