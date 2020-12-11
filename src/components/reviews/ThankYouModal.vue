@@ -32,6 +32,7 @@ a {
   @apply text-ff8e67;
 }
 .lead {
-  @apply font-kalam text-005d63;
+  @apply font-kalam;
+  @apply text-005d63;
 }
 </style>

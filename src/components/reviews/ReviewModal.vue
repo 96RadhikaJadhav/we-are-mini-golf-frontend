@@ -5,9 +5,12 @@
 
       <!-- Stars for development -->
       <div class="flex items-center">
-        <button class="mb-8 text-3xl" @click="reviewerRating = 1">☆</button>
-        <p class="mb-8 text-3xl text-aeb49a">☆ ☆ ☆</p>
-        <button class="mb-8 text-3xl" @click="reviewerRating = 5">☆</button>
+        <star-rating
+          v-model="reviewerRating"
+          :increment="0.5"
+          :show-rating="false"
+          :star-size="40"
+        />
       </div>
 
       <p class="p-2">Tell me everything!<span class="text-ff8e67">*</span></p>
@@ -33,8 +36,9 @@
         @clicked="submitReview"
         type="button"
         class="confirm absolute -bottom-5"
-        >Tell the world</base-button
       >
+        Tell the world
+      </base-button>
     </div>
   </ModalLayout>
 </template>
@@ -42,29 +46,35 @@
 <script>
 import ModalLayout from '@/layouts/ModalLayout.vue';
 import BaseButton from '@/components/utilities/BaseButton';
+import StarRating from 'vue-star-rating';
 export default {
-  components: { BaseButton, ModalLayout },
+  components: { BaseButton, ModalLayout, StarRating },
   data() {
     return {
       name: 'ReviewModal',
       reviewerName: '',
       reviewerMessage: '',
-      reviewerRating: '',
+      reviewerRating: 0,
       invalid: false
     };
   },
   methods: {
     submitReview() {
-      const name = this.reviewerName,
-        msg = this.reviewerMessage,
-        rate = this.reviewerRating;
-
-      if (name === '' || msg.length < 10 || rate == null) {
+      if (
+        this.reviewerName === '' ||
+        this.reviewerMessage.length < 10 ||
+        this.reviewerRating === null
+      ) {
         this.invalid = true;
         return;
       } else {
         this.invalid = false;
-        this.$emit('submit', name, msg, rate);
+        this.$emit(
+          'submit',
+          this.reviewerName,
+          this.reviewerMessage,
+          this.reviewerRating
+        );
       }
     }
   }
@@ -73,6 +83,7 @@ export default {
 
 <style scoped>
 .warning {
-  @apply border-ea9864 border-2;
+  @apply border-ea9864;
+  @apply border-2;
 }
 </style>

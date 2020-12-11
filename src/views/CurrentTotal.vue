@@ -86,7 +86,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (to.params.holeNo === 14) {
-      next({ name: 'FinalRanking' });
+      next({ name: 'Awards' });
     }
     next();
   }

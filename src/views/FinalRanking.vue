@@ -190,13 +190,20 @@ import ResultCircle from '@/components/utilities/scorecard/ResultCircle';
 import ReviewModal from '@/components/reviews/ReviewModal';
 import HelpUs from '@/components/reviews/HelpUsModal';
 import ThankYou from '@/components/reviews/ThankYouModal';
+
 import { db } from '@/db.js';
 import { orderBy } from 'lodash';
 const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'FinalRanking',
-  components: { BaseButton, ResultCircle, ReviewModal, HelpUs, ThankYou },
+  components: {
+    BaseButton,
+    ResultCircle,
+    ReviewModal,
+    HelpUs,
+    ThankYou
+  },
   data() {
     return {
       componentId: '',
@@ -212,15 +219,23 @@ export default {
   },
   methods: {
     submitReview(msg, name, rating) {
-      console.log(msg);
-      console.log(name);
-      console.log(rating);
-      if (rating <= 4) {
-        this.componentId = 'ThankYou';
-        return;
-      } else {
-        this.componentId = 'HelpUs';
-      }
+      db.ref('game_info/game_review')
+        .set({
+          name: name,
+          message: msg,
+          rating: rating
+        })
+        .then(() => {
+          if (rating <= 4) {
+            this.componentId = 'ThankYou';
+            return;
+          } else {
+            this.componentId = 'HelpUs';
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     resultColor(score, i) {
       if (score <= this.par[i] && score !== 1) {
