@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full">
-    <transition name="fade" appear>
+    <transition name="fade" mode="out-in">
       <router-view class="mx-auto box-border min-h-screen" />
     </transition>
     <div class="sticky bottom-0">
