@@ -36,13 +36,14 @@
             :class="
               `text-white text-3xl font-kalam absolute transform ${deg} mb-2`
             "
+            v-if="playersInfo.length > 0"
           >
-            {{ playerName }}
+            {{ getHighestTotalPlayer.name }}
           </p>
         </div>
       </div>
       <base-button
-        to="/new-hole"
+        :to="{ name: 'FinalRanking' }"
         mode="back"
         class="text-aeb49a font-capriola mb-4"
       >
@@ -54,17 +55,31 @@
 
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
+import { db } from '@/db.js';
+import { orderBy } from 'lodash';
+const gameInfoRefs = db.ref('game_info');
+
 export default {
+  components: { BaseButton },
   data() {
     return {
       name: 'Awards',
-      playerName: 'Churchill',
       awardType: 'lorom ipsum dolor sit amet',
       deg: '-rotate-6',
-      img: require('../assets/green-banner.png')
+      img: require('../assets/green-banner.png'),
+      playersInfo: []
     };
   },
-  components: { BaseButton }
+  created() {
+    gameInfoRefs.on('value', snapshot => {
+      this.playersInfo = snapshot.val().players_info;
+    });
+  },
+  computed: {
+    getHighestTotalPlayer() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
+    }
+  }
 };
 </script>
 
