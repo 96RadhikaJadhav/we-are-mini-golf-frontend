@@ -66,8 +66,6 @@
 
 <script>
 import BaseButton from '../components/utilities/BaseButton';
-import { db } from '@/db.js';
-const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'GameScores',
@@ -93,18 +91,18 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    // gameInfoRefs.on('value', snapshot => {
+    //   this.playersInfo = snapshot.val().players_info;
+    // });
   },
   methods: {
     updatePlayerScore() {
       if (!this.editscore) {
         this.calculateTotal();
       }
-      db.ref('game_info/players_info')
-        .set(this.playersInfo)
-        .then(this.navigateTo);
+      // db.ref('game_info/players_info')
+      //   .set(this.playersInfo)
+      //   .then(this.navigateTo);
     },
     navigateTo() {
       this.$router.push({

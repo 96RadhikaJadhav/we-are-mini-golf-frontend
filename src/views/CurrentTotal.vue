@@ -54,9 +54,7 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
-import { db } from '@/db.js';
 import { orderBy } from 'lodash';
-const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'CurrentTotal',
@@ -72,9 +70,9 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    // gameInfoRefs.on('value', snapshot => {
+    //   this.playersInfo = snapshot.val().players_info;
+    // });
   },
   computed: {
     getHighestTotalPlayer() {

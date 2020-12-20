@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="antialiased h-screen">
     <transition name="fade" mode="out-in">
-    <component :is="this.$route.meta.layout || 'div'">
-      <router-view />
-    </component>
+      <component :is="this.$route.meta.layout || 'div'">
+        <router-view />
+      </component>
     </transition>
   </div>
 </template>

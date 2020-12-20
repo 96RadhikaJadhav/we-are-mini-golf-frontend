@@ -191,9 +191,7 @@ import ReviewModal from '@/components/reviews/ReviewModal';
 import HelpUs from '@/components/reviews/HelpUsModal';
 import ThankYou from '@/components/reviews/ThankYouModal';
 
-import { db } from '@/db.js';
 import { orderBy } from 'lodash';
-const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'FinalRanking',
@@ -213,30 +211,30 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    // gameInfoRefs.on('value', snapshot => {
+    //   this.playersInfo = snapshot.val().players_info;
+    // });
   },
   methods: {
-    submitReview(msg, name, rating) {
-      db.ref('game_info/game_review')
-        .set({
-          name: name,
-          message: msg,
-          rating: rating
-        })
-        .then(() => {
-          if (rating <= 4) {
-            this.componentId = 'ThankYou';
-            return;
-          } else {
-            this.componentId = 'HelpUs';
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
+    // submitReview(msg, name, rating) {
+    //   // db.ref('game_info/game_review')
+    //   //   .set({
+    //   //     name: name,
+    //   //     message: msg,
+    //   //     rating: rating
+    //   //   })
+    //   //   .then(() => {
+    //   //     if (rating <= 4) {
+    //   //       this.componentId = 'ThankYou';
+    //   //       return;
+    //   //     } else {
+    //   //       this.componentId = 'HelpUs';
+    //   //     }
+    //   //   })
+    //   //   .catch(err => {
+    //   //     console.log(err);
+    //   //   });
+    // },
     resultColor(score, i) {
       if (score <= this.par[i] && score !== 1) {
         // ADD CLASS COLOUR OF GREEN
