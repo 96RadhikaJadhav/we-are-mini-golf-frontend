@@ -55,6 +55,7 @@
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
 import { orderBy } from 'lodash';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'CurrentTotal',
@@ -70,17 +71,23 @@ export default {
     };
   },
   created() {
-    // gameInfoRefs.on('value', snapshot => {
-    //   this.playersInfo = snapshot.val().players_info;
-    // });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+      })
+      .catch(e => console.log(e));
   },
   computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     }
+  },
+  methods: {
+    ...mapActions('gameInfo', ['getGameDetails'])
   },
   beforeRouteLeave(to, from, next) {
     if (to.params.holeNo === 14) {

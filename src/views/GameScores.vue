@@ -30,14 +30,14 @@
               type="number"
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model="player.score"
+              v-model.number="player.score"
               v-if="!editscore && !showTotal"
             />
             <input
               type="number"
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model="player.holeScore[holeNo - 1]"
+              v-model.number="player.holeScore[holeNo - 1]"
               v-else-if="editscore && !showTotal"
             />
             <input
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import BaseButton from '../components/utilities/BaseButton';
 
 export default {
@@ -90,19 +91,28 @@ export default {
       par: 4
     };
   },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo'])
+  },
   created() {
-    // gameInfoRefs.on('value', snapshot => {
-    //   this.playersInfo = snapshot.val().players_info;
-    // });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+        this.playersInfo.forEach(el => {
+          el.score = 0;
+        });
+      })
+      .catch(e => console.log(e));
   },
   methods: {
+    ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     updatePlayerScore() {
       if (!this.editscore) {
         this.calculateTotal();
+        this.updateGameDetails({ playersInfo: this.playersInfo })
+          .then(this.navigateTo())
+          .catch(e => console.log(e));
       }
-      // db.ref('game_info/players_info')
-      //   .set(this.playersInfo)
-      //   .then(this.navigateTo);
     },
     navigateTo() {
       this.$router.push({
@@ -112,16 +122,12 @@ export default {
     },
     calculateTotal() {
       this.playersInfo.forEach(val => {
-        if (!val.holeScore) {
-          val.holeScore = [];
-        }
-        let score = parseInt(val.score);
+        let score = val.score;
         val.holeScore.push(score);
-        val.totalScore = parseInt(score) + val.totalScore;
+        val.totalScore = score + val.totalScore;
         delete val.score;
       });
-    },
-    updateHoleScore() {}
+    }
   }
 };
 </script>

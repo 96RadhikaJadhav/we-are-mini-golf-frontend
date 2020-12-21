@@ -192,6 +192,7 @@ import HelpUs from '@/components/reviews/HelpUsModal';
 import ThankYou from '@/components/reviews/ThankYouModal';
 
 import { orderBy } from 'lodash';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FinalRanking',
@@ -211,30 +212,30 @@ export default {
     };
   },
   created() {
-    // gameInfoRefs.on('value', snapshot => {
-    //   this.playersInfo = snapshot.val().players_info;
-    // });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+      })
+      .catch(e => console.log(e));
   },
   methods: {
-    // submitReview(msg, name, rating) {
-    //   // db.ref('game_info/game_review')
-    //   //   .set({
-    //   //     name: name,
-    //   //     message: msg,
-    //   //     rating: rating
-    //   //   })
-    //   //   .then(() => {
-    //   //     if (rating <= 4) {
-    //   //       this.componentId = 'ThankYou';
-    //   //       return;
-    //   //     } else {
-    //   //       this.componentId = 'HelpUs';
-    //   //     }
-    //   //   })
-    //   //   .catch(err => {
-    //   //     console.log(err);
-    //   //   });
-    // },
+    ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
+    submitReview(msg, name, rating) {
+      let payload = {};
+      payload.gameReview = { reviewerName: name, review: msg, rating: rating };
+      this.updateGameDetails(payload)
+        .then(() => {
+          if (rating <= 4) {
+            this.componentId = 'ThankYou';
+            return;
+          } else {
+            this.componentId = 'HelpUs';
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     resultColor(score, i) {
       if (score <= this.par[i] && score !== 1) {
         // ADD CLASS COLOUR OF GREEN
@@ -251,6 +252,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
     getWinner() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
