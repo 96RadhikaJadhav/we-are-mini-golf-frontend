@@ -33,7 +33,6 @@ export default {
       .get(`${process.env.VUE_APP_API_URL}/courses/1`)
       .then(response => {
         this.courseGrid = response.data;
-        this.courseGrid.squareInfo = this.courseGrid.squareInfo.reverse();
       })
       .catch(e => console.log(e));
   },
