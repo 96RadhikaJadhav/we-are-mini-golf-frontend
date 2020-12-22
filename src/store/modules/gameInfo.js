@@ -19,7 +19,6 @@ const actions = {
           `${process.env.VUE_APP_API_URL}/game-informations/${gameDetails.id}`
         )
         .then(response => {
-          console.log(response);
           commit('updateGameInfo', response.data);
           resolve(response.data);
         })

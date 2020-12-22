@@ -111,6 +111,7 @@ export default {
         this.calculateTotal();
         this.updateGameDetails({ playersInfo: this.playersInfo })
           .then(this.navigateTo())
+
           .catch(e => console.log(e));
       }
     },
@@ -122,6 +123,9 @@ export default {
     },
     calculateTotal() {
       this.playersInfo.forEach(val => {
+        if (val.holeScore === null) {
+          val.holeScore = [];
+        }
         let score = val.score;
         val.holeScore.push(score);
         val.totalScore = score + val.totalScore;
