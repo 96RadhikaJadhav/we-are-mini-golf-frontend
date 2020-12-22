@@ -111,7 +111,6 @@ export default {
         this.calculateTotal();
         this.updateGameDetails({ playersInfo: this.playersInfo })
           .then(this.navigateTo())
-
           .catch(e => console.log(e));
       }
     },

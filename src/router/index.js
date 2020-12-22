@@ -18,4 +18,12 @@ const router = new VueRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  let gameDetails = localStorage.getItem('game-details');
+  if ((gameDetails === null || gameDetails === undefined) && to.path !== '/') {
+    return next({ name: 'Splash' });
+  }
+  next();
+});
+
 export default router;

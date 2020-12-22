@@ -3,16 +3,16 @@
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
       <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
         <img
+          v-if="!square.isHoleActive || square.holeNo === 14"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
-          v-if="!square.isHoleActive"
           :alt="square.id"
           @click="gotoNewHole(square.holeNo, index)"
         />
         <img
+          v-else
           :src="square.active.url"
           class="w-full h-full object-fill"
-          v-else
           @click="editHoleDetails(square.holeNo)"
         />
       </div>
@@ -39,20 +39,11 @@ export default {
       .catch(e => console.log(e));
   },
   methods: {
-    gotoNewHole(holeNo, index) {
-      this.courseGrid.squareInfo[
-        index
-      ].isHoleActive = this.courseGrid.squareInfo[index].isHoleActive = true;
-      axios
-        .put(`${process.env.VUE_APP_API_URL}/courses/1`, this.courseGrid)
-        .then(response => {
-          this.courseGrid = response.data;
-          this.$router.push({
-            name: 'NewHole',
-            params: { holeNo: holeNo }
-          });
-        })
-        .catch(e => console.log(e));
+    gotoNewHole(holeNo) {
+      this.$router.push({
+        name: 'NewHole',
+        params: { holeNo: holeNo }
+      });
     },
     editHoleDetails(holeNo) {
       this.$router.push({
