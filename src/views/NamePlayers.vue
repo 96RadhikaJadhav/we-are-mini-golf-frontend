@@ -40,24 +40,34 @@
 import InputText from '../components/InputText';
 import InputSelect from '../components/InputSelect';
 import BaseButton from '../components/utilities/BaseButton';
-import { db } from '@/db.js';
-const gameInfoRefs = db.ref('game_info');
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'NamePlayers',
   components: { InputText, BaseButton, InputSelect },
   data() {
     return {
-      name: 'NamePlayers',
       inputs: 0,
       playersInfo: []
     };
   },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo'])
+  },
   created() {
-    this.$store.dispatch('gameInfo/setGameInfoRef', gameInfoRefs);
-    gameInfoRefs.on('value', snapshot => {
-      this.inputs = snapshot.val().numOfPlayers;
-    });
+    this.getGameDetails()
+      .then(() => {
+        this.inputs = this.getGameInfo.noOfPlayers;
+      })
+      .catch(e => console.log(e));
+  },
+  methods: {
+    ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
+    startGame() {
+      this.updateGameDetails({ playersInfo: this.playersInfo })
+        .then(this.$router.push({ name: 'GameCourse' }))
+        .catch(e => console.log(e));
+    }
   },
   watch: {
     inputs: {
@@ -65,21 +75,11 @@ export default {
       handler() {
         for (var i = 1; i <= this.inputs; i++) {
           this.playersInfo.push({
-            id: i,
             name: '',
-            age: '',
-            totalScore: 0
+            age: ''
           });
         }
       }
-    }
-  },
-  methods: {
-    startGame() {
-      gameInfoRefs
-        .update({ players_info: this.playersInfo })
-        .then(this.$router.push({ name: 'GameCourse' }))
-        .catch(err => console.log(err));
     }
   },
   beforeDestroy() {
@@ -88,5 +88,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

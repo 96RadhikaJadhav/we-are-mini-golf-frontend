@@ -7,22 +7,35 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 export default {
   name: 'Splash',
   created() {
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(() => {
-        setTimeout(() => {
-          return this.$router.push({ name: 'SelectPlayers' });
-        }, 2000);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    let gameId = '';
+    if (localStorage.getItem('game-details')) {
+      gameId = localStorage.getItem('game-details').gameID;
+    } else {
+      gameId = uuidv4();
+      axios
+        .post(`${process.env.VUE_APP_API_URL}/game-informations`, {
+          gameID: gameId
+        })
+        .then(response => {
+          localStorage.setItem(
+            'game-details',
+            JSON.stringify({
+              id: response.data.id,
+              gameID: response.data.gameID
+            })
+          );
+        })
+        .catch(e => console.log(e));
+    }
+    setTimeout(() => {
+      return this.$router.push({ name: 'SelectPlayers' });
+    }, 2000);
   }
 };
 </script>

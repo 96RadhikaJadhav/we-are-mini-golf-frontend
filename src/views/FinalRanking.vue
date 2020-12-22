@@ -191,9 +191,8 @@ import ReviewModal from '@/components/reviews/ReviewModal';
 import HelpUs from '@/components/reviews/HelpUsModal';
 import ThankYou from '@/components/reviews/ThankYouModal';
 
-import { db } from '@/db.js';
 import { orderBy } from 'lodash';
-const gameInfoRefs = db.ref('game_info');
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FinalRanking',
@@ -213,18 +212,18 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+      })
+      .catch(e => console.log(e));
   },
   methods: {
+    ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     submitReview(msg, name, rating) {
-      db.ref('game_info/game_review')
-        .set({
-          name: name,
-          message: msg,
-          rating: rating
-        })
+      let payload = {};
+      payload.gameReview = { reviewerName: name, review: msg, rating: rating };
+      this.updateGameDetails(payload)
         .then(() => {
           if (rating <= 4) {
             this.componentId = 'ThankYou';
@@ -253,6 +252,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
     getWinner() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },

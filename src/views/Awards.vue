@@ -55,9 +55,8 @@
 
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
-import { db } from '@/db.js';
 import { orderBy } from 'lodash';
-const gameInfoRefs = db.ref('game_info');
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: { BaseButton },
@@ -71,14 +70,20 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+      })
+      .catch(e => console.log(e));
   },
   computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     }
+  },
+  methods: {
+    ...mapActions('gameInfo', ['getGameDetails'])
   }
 };
 </script>

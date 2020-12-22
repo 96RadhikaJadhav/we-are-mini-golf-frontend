@@ -26,49 +26,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import InputRange from '@/components/InputRange.vue';
 import BaseButton from '../components/utilities/BaseButton';
-import firebase from 'firebase';
-import 'firebase/auth';
-import { db } from '@/db.js';
-const gameInfoRefs = db.ref('game_info');
 
 export default {
   name: 'SelectPlayers',
   components: { InputRange, BaseButton },
   data() {
     return {
-      userUid: '',
-      noOfPlayers: 1
+      noOfPlayers: 0
     };
   },
-  computed: {
-    ...mapState('gameInfo', ['gameInfo'])
-  },
-  created: function() {
-    this.$store.dispatch('gameInfo/setGameInfoRef', gameInfoRefs);
-    let self = this;
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        let uid = user.uid;
-        self.userUid = uid;
-      }
-    });
-  },
   methods: {
+    ...mapActions('gameInfo', ['updateGameDetails']),
     selectedPlayers(value) {
       this.noOfPlayers = value;
     },
     selectNumOfPlayers() {
-      if (this.userUid) {
-        gameInfoRefs
-          .set({ numOfPlayers: this.noOfPlayers, userUid: this.userUid })
-          .then(this.$router.push({ name: 'NamePlayers' }))
-          .catch(error => {
-            console.log(error);
-          });
-      }
+      let payload = {
+        noOfPlayers: this.noOfPlayers
+      };
+      this.updateGameDetails(payload)
+        .then(this.$router.push({ name: 'NamePlayers' }))
+        .catch(e => console.log(e));
     }
   }
 };

@@ -42,7 +42,7 @@
     </div>
     <div class="flex-1 flex items-center">
       <base-button
-        :to="{ name: 'NewHole', params: { holeNo: holeNo + 1 } }"
+        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
         mode="confirm"
       >
         on to the next hole!
@@ -54,9 +54,8 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
-import { db } from '@/db.js';
 import { orderBy } from 'lodash';
-const gameInfoRefs = db.ref('game_info');
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'CurrentTotal',
@@ -72,11 +71,14 @@ export default {
     };
   },
   created() {
-    gameInfoRefs.on('value', snapshot => {
-      this.playersInfo = snapshot.val().players_info;
-    });
+    this.getGameDetails()
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
+      })
+      .catch(e => console.log(e));
   },
   computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
@@ -84,10 +86,14 @@ export default {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     }
   },
+  methods: {
+    ...mapActions('gameInfo', ['getGameDetails'])
+  },
   beforeRouteLeave(to, from, next) {
     if (to.params.holeNo === 14) {
-      next({ name: 'Awards' });
+      return next({ name: 'Awards' });
     }
+    to.params.holeNo = to.params.holeNo + 1;
     next();
   }
 };
