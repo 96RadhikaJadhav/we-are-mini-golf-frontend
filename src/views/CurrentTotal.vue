@@ -42,7 +42,7 @@
     </div>
     <div class="flex-1 flex items-center">
       <base-button
-        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
+        :to="{ name: 'NewHole', params: { holeNo: holeNo + 1 } }"
         mode="confirm"
       >
         on to the next hole!
@@ -90,10 +90,9 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails'])
   },
   beforeRouteLeave(to, from, next) {
-    if (to.params.holeNo === 14) {
+    if (this.holeNo === 14) {
       return next({ name: 'Awards' });
     }
-    to.params.holeNo = to.params.holeNo + 1;
     next();
   }
 };

@@ -3,7 +3,13 @@
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
       <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
         <img
-          v-if="!square.isHoleActive || square.holeNo === 14"
+          v-if="!square.active"
+          :src="square.inactive.url"
+          class="w-full h-full object-fill"
+          :alt="square.id"
+        />
+        <img
+          v-else-if="!square.isHoleActive || square.holeNo === 14"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"
