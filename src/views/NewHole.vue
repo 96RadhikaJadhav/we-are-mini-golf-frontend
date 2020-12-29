@@ -42,6 +42,7 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    this.updateHoleStatus();
   },
   methods: {
     updateHoleStatus() {
@@ -50,6 +51,7 @@ export default {
           el.isHoleActive = true;
         }
       });
+      console.log(this.courseGrid.squareInfo);
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
       this.$router.push({
         name: 'GameScores',

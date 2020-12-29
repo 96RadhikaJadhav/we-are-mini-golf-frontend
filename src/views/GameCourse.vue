@@ -37,13 +37,17 @@ export default {
     };
   },
   created() {
-    axios
-      .get(`${process.env.VUE_APP_API_URL}/courses/1`)
-      .then(response => {
-        this.courseGrid = JSON.stringify(response.data);
-        localStorage.setItem('course-grid', JSON.parse(this.courseGrid));
-      })
-      .catch(e => console.log(e));
+    if (!localStorage.getItem('course-grid')) {
+      axios
+        .get(`${process.env.VUE_APP_API_URL}/courses/1`)
+        .then(response => {
+          this.courseGrid = response.data;
+          localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
+        })
+        .catch(e => console.log(e));
+    } else {
+      this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    }
   },
   methods: {
     gotoNewHole(holeNo) {
