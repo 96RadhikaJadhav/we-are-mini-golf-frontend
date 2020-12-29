@@ -10,6 +10,7 @@
       <!-- Card -->
       <div
         class="bg-white shadow-md mx-6 rounded-3xl md:w-full md:mx-auto xl:w-1/2"
+        v-if="inputs"
       >
         <div v-for="(player, index) in playersInfo" :key="index">
           <div class="flex justify-between py-4 px-4">
@@ -76,7 +77,8 @@ export default {
         for (var i = 1; i <= this.inputs; i++) {
           this.playersInfo.push({
             name: '',
-            age: ''
+            age: '',
+            score: 0
           });
         }
       }

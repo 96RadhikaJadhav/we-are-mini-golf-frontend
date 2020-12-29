@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'NewHole',
   props: {
@@ -43,30 +41,19 @@ export default {
     }
   },
   created() {
-    axios
-      .get(`${process.env.VUE_APP_API_URL}/courses/1`)
-      .then(response => {
-        this.courseGrid = response.data;
-        this.updateHoleStatus();
-      })
-      .catch(e => console.log(e));
+    this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
   },
   methods: {
     updateHoleStatus() {
       this.courseGrid.squareInfo.forEach(el => {
         if (el.holeNo === this.holeNo) {
           el.isHoleActive = true;
-          axios
-            .put(`${process.env.VUE_APP_API_URL}/courses/1`, this.courseGrid)
-            .then(response => {
-              this.courseGrid = response.data;
-              this.$router.push({
-                name: 'GameScores',
-                params: { holeNo: this.holeNo, editscore: this.editscore }
-              });
-            })
-            .catch(e => console.log(e));
         }
+      });
+      localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
+      this.$router.push({
+        name: 'GameScores',
+        params: { holeNo: this.holeNo, editscore: this.editscore }
       });
     }
   }

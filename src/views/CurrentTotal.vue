@@ -42,7 +42,7 @@
     </div>
     <div class="flex-1 flex items-center">
       <base-button
-        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
+        :to="{ name: getRouteName, params: { holeNo: holeNo + 1 } }"
         mode="confirm"
       >
         on to the next hole!
@@ -62,7 +62,8 @@ export default {
   components: { BaseButton, CurrentRanking },
   props: {
     holeNo: {
-      type: Number
+      type: Number,
+      default: 14
     }
   },
   data() {
@@ -84,17 +85,13 @@ export default {
     },
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
+    },
+    getRouteName() {
+      return this.holeNo === 14 ? 'Awards' : 'NewHole';
     }
   },
   methods: {
     ...mapActions('gameInfo', ['getGameDetails'])
-  },
-  beforeRouteLeave(to, from, next) {
-    if (to.params.holeNo === 14) {
-      return next({ name: 'Awards' });
-    }
-    to.params.holeNo = to.params.holeNo + 1;
-    next();
   }
 };
 </script>
