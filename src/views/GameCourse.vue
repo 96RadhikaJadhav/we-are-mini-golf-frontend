@@ -40,7 +40,8 @@ export default {
     axios
       .get(`${process.env.VUE_APP_API_URL}/courses/1`)
       .then(response => {
-        this.courseGrid = response.data;
+        this.courseGrid = JSON.stringify(response.data);
+        localStorage.setItem('course-grid', JSON.parse(this.courseGrid));
       })
       .catch(e => console.log(e));
   },
