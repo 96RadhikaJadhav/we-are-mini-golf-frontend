@@ -4,10 +4,11 @@
   >
     <!-- Top of page quote -->
     <div class="p-6 font-capriola text-lg mt-4 mb-16">
-      <p class="text-center text-white">
-        Player 6, Lorem ipsum dolor sit amet consectetur, adipisicing...
-      </p>
+      <div v-for="player in playersInfo" :key="player.id">
+        {{ quoteGen(player) }}
+      </div>
     </div>
+    <p class="text-center text-white">{{ playersInfo }}, {{}}</p>
 
     <!-- 1st Place -->
     <div class="flex flex-col items-center mb-10">
@@ -42,7 +43,7 @@
     </div>
     <div class="flex-1 flex items-center">
       <base-button
-        :to="{ name: getRouteName, params: { holeNo: holeNo + 1 } }"
+        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
         mode="confirm"
       >
         on to the next hole!
@@ -56,19 +57,22 @@ import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
 import { orderBy } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
+import quote from '@/quotes.js';
 
 export default {
   name: 'CurrentTotal',
   components: { BaseButton, CurrentRanking },
   props: {
     holeNo: {
-      type: Number,
-      default: 14
+      type: Number
     }
   },
   data() {
     return {
-      playersInfo: []
+      playersInfo: [],
+      counter: 1,
+      par: 4,
+      quote
     };
   },
   created() {
@@ -85,13 +89,46 @@ export default {
     },
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
-    },
-    getRouteName() {
-      return this.holeNo === 14 ? 'Awards' : 'NewHole';
     }
   },
   methods: {
+    quoteGen(player) {
+      // const par = localStorage.getItem('course-details');
+      const score = player.holeScore;
+      const lastScore = player.holeScore.length - 1;
+      const quote = this.quote;
+      const random = Math.floor(Math.random() * quote.holeInOne.length);
+
+      // Hole in One
+      if (score[lastScore] === 1) {
+        const newQuote = quote.holeInOne[random];
+        return `${player.name}${newQuote}`;
+      } else if (score[lastScore] > 1 && score[lastScore] < this.par) {
+        const newQuote = quote.parBestUnder[random];
+        return `${player.name}${newQuote}`;
+      } else if (score[lastScore] === this.par) {
+        const newQuote = quote.parExact[random];
+        return `${player.name}${newQuote}`;
+      } else if (
+        score[lastScore] >= this.par + 1 &&
+        score[lastScore] <= this.par + 2
+      ) {
+        const newQuote = quote.parOverByOne[random];
+        return `${player.name}${newQuote}`;
+      } else if (score[lastScore] >= this.par + 3) {
+        const newQuote = quote.parOverByThree[random];
+        return `${player.name}${newQuote}`;
+      } else return;
+    },
+
     ...mapActions('gameInfo', ['getGameDetails'])
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.params.holeNo === 14) {
+      return next({ name: 'Awards' });
+    }
+    to.params.holeNo = to.params.holeNo + 1;
+    next();
   }
 };
 </script>
