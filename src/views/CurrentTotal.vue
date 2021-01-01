@@ -43,7 +43,7 @@
     <div class="flex-1 flex items-center">
       <base-button
         :to="{ name: getRouteName, params: { holeNo: holeNo + 1 } }"
-        mode="confirm"
+        mode="btn confirm"
       >
         on to the next hole!
       </base-button>

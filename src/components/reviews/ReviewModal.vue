@@ -35,7 +35,7 @@
       <base-button
         @clicked="submitReview"
         type="button"
-        class="confirm absolute -bottom-5"
+        class="btn confirm absolute -bottom-5"
       >
         Tell the world
       </base-button>

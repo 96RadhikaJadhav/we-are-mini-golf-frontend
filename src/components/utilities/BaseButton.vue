@@ -33,11 +33,19 @@ export default {
 </script>
 
 <style scoped>
-.confirm {
-  @apply py-2 px-8 uppercase rounded-full shadow-lg bg-ff6350 text-base;
+.btn {
+  @apply py-2 px-8 uppercase rounded-full shadow-lg;
 }
-
+.confirm {
+  @apply bg-ff6350;
+}
 .back {
   @apply p-1;
+}
+.resume {
+  @apply bg-005d63 px-1;
+}
+.restart {
+  @apply border border-005d63 text-005d63 px-1;
 }
 </style>

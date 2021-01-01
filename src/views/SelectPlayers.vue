@@ -18,7 +18,7 @@
           @changed="selectedPlayers"
         />
       </div>
-      <base-button mode="confirm" @clicked="selectNumOfPlayers">
+      <base-button mode="btn confirm" @clicked="selectNumOfPlayers">
         Confirm
       </base-button>
     </div>

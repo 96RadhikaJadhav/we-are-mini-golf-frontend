@@ -54,7 +54,7 @@
 
       <!-- CONFIRM BUTTON flex-item 3 -->
       <base-button
-        mode="confirm"
+        mode="btn confirm"
         @clicked="updatePlayerScore"
         v-if="!showTotal"
       >
@@ -94,6 +94,7 @@ export default {
   computed: {
     ...mapGetters('gameInfo', ['getGameInfo'])
   },
+
   created() {
     this.getGameDetails()
       .then(() => {
