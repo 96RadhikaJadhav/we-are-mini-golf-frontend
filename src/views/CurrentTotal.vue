@@ -3,12 +3,11 @@
     class="flex flex-col items-center p-4 bg-total bg-no-repeat bg-cover bg-center md:w-1/2"
   >
     <!-- Top of page quote -->
-    <div class="p-6 font-capriola text-lg mt-4 mb-16">
-      <div v-for="player in playersInfo" :key="player.id">
+    <div class="p-6 font-capriola mt-4 mb-16 text-center text-white">
+      <p v-for="player in playersInfo" :key="player.id">
         {{ quoteGen(player) }}
-      </div>
+      </p>
     </div>
-    <p class="text-center text-white">{{ playersInfo }}, {{}}</p>
 
     <!-- 1st Place -->
     <div class="flex flex-col items-center mb-10">
