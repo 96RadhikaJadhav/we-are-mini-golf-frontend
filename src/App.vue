@@ -20,17 +20,17 @@ export default {
       isTimeout: ''
     };
   },
-  created() {
-    setTimeout(() => {
-      this.isTimeout = Timeout;
-    }, 5000);
+  provide() {
+    return {
+      timeout: this.clearTimeout
+    };
   },
   methods: {
     clearTimeout() {
       this.isTimeout = '';
       setTimeout(() => {
         this.isTimeout = Timeout;
-      }, 5000);
+      }, 600000); // 10 minutes
     }
   }
 };
