@@ -1,5 +1,8 @@
 <template>
   <div id="app" class="antialiased h-screen">
+    <div v-if="rules">
+      <rules></rules>
+    </div>
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
@@ -7,6 +10,28 @@
     </transition>
   </div>
 </template>
+
+<script>
+import rules from '@/components/rules/RulesScreen.vue';
+export default {
+  data() {
+    return {
+      rules: false
+    };
+  },
+  provide() {
+    return {
+      rulesActive: this.showRules
+    };
+  },
+  methods: {
+    showRules() {
+      return (this.rules = !this.rules);
+    }
+  },
+  components: { rules }
+};
+</script>
 
 <style>
 html,

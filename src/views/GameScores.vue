@@ -28,6 +28,7 @@
             <!-- SCORE INPUT -->
             <input
               type="number"
+              placeholder="0"
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model.number="player.score"
@@ -99,7 +100,7 @@ export default {
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
         this.playersInfo.forEach(el => {
-          el.score = 0;
+          el.score = null;
         });
       })
       .catch(e => console.log(e));
