@@ -39,6 +39,7 @@
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model.number="player.holeScore[holeNo - 1]"
               v-else-if="editscore && !showTotal"
+              maxlength="2"
             />
             <input
               type="number"
