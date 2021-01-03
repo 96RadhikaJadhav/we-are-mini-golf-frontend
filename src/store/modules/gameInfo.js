@@ -1,12 +1,16 @@
 import axios from 'axios';
 
 const state = {
-  gameInfo: {}
+  gameInfo: {},
+  counter: 0
 };
 
 const getters = {
   getGameInfo: state => {
     return state.gameInfo;
+  },
+  counter: state => {
+    return state.counter;
   }
 };
 
@@ -40,12 +44,24 @@ const actions = {
         })
         .catch(e => reject(e));
     });
+  },
+  increaseCounter: ({ commit }) => {
+    commit('increaseCounter');
   }
 };
 
 const mutations = {
   updateGameInfo(state, payload) {
     state.gameInfo = payload;
+  },
+  increaseCounter(state) {
+    if (state.counter < state.gameInfo.playersInfo.length - 1) {
+      console.log(state.counter);
+      return state.counter++;
+    } else {
+      console.log(state.counter);
+      return (state.counter = 0);
+    }
   }
 };
 

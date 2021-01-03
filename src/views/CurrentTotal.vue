@@ -4,8 +4,8 @@
   >
     <!-- Top of page quote -->
     <div class="p-6 font-capriola mt-4 mb-16 text-center text-white">
-      <p v-for="player in playersInfo" :key="player.id">
-        {{ quoteGen(player) }}
+      <p v-for="(player, index) in playersInfo" :key="player.id">
+        {{ quoteGen(player, index) }}
       </p>
     </div>
 
@@ -43,7 +43,7 @@
     <div class="flex-1 flex items-center">
       <base-button
         :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
-        mode="confirm"
+        mode="btn confirm"
       >
         on to the next hole!
       </base-button>
@@ -69,12 +69,12 @@ export default {
   data() {
     return {
       playersInfo: [],
-      counter: 1,
       par: 4,
       quote
     };
   },
   created() {
+    this.increaseCounter();
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
@@ -82,7 +82,7 @@ export default {
       .catch(e => console.log(e));
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'counter']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    quoteGen(player) {
+    quoteGen(player, i) {
       // const par = localStorage.getItem('course-details');
       const score = player.holeScore;
       const lastScore = player.holeScore.length - 1;
@@ -102,25 +102,30 @@ export default {
       if (score[lastScore] === 1) {
         const newQuote = quote.holeInOne[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] > 1 && score[lastScore] < this.par) {
+      } else if (
+        score[lastScore] > 1 &&
+        score[lastScore] < this.par &&
+        i === this.counter
+      ) {
         const newQuote = quote.parBestUnder[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] === this.par) {
+      } else if (score[lastScore] === this.par && i === this.counter) {
         const newQuote = quote.parExact[random];
         return `${player.name}${newQuote}`;
       } else if (
         score[lastScore] >= this.par + 1 &&
-        score[lastScore] <= this.par + 2
+        score[lastScore] <= this.par + 2 &&
+        i === this.counter
       ) {
         const newQuote = quote.parOverByOne[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] >= this.par + 3) {
+      } else if (score[lastScore] >= this.par + 3 && i === this.counter) {
         const newQuote = quote.parOverByThree[random];
         return `${player.name}${newQuote}`;
       } else return;
     },
 
-    ...mapActions('gameInfo', ['getGameDetails'])
+    ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
     if (to.params.holeNo === 14) {
