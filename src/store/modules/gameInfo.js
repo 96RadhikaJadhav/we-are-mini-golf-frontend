@@ -46,7 +46,11 @@ const actions = {
     });
   },
   increaseCounter: ({ commit }) => {
-    commit('increaseCounter');
+    if (state.counter < state.gameInfo.playersInfo.length - 1) {
+      commit('increaseCounter');
+    } else {
+      commit('resetCounter');
+    }
   }
 };
 
@@ -55,13 +59,10 @@ const mutations = {
     state.gameInfo = payload;
   },
   increaseCounter(state) {
-    if (state.counter < state.gameInfo.playersInfo.length - 1) {
-      console.log(state.counter);
-      return state.counter++;
-    } else {
-      console.log(state.counter);
-      return (state.counter = 0);
-    }
+    state.counter += 1;
+  },
+  resetCounter(state) {
+    state.counter = 0;
   }
 };
 

@@ -74,10 +74,10 @@ export default {
     };
   },
   created() {
-    this.increaseCounter();
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
+        this.increaseCounter();
       })
       .catch(e => console.log(e));
   },
