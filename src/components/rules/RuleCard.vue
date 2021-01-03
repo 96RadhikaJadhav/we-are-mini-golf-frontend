@@ -1,9 +1,13 @@
 <template>
   <button
-    class="flex flex-col justify-center pl-3 pr-6 h-24 w-full rounded-lg text-white uppercase flex-wrap py-4 text-lg text-left leading-snug font-capriola shadow-md bg-pink-500 focus:outline-none"
+    class="flex flex-col justify-center h-24 w-full text-white rounded-xl uppercase flex-wrap text-lg text-left leading-snug font-capriola shadow-md focus:outline-none relative"
     @click="$emit('clicked', ruleData.cmp)"
   >
-    <p>{{ ruleData.title }}</p>
+    <p class="absolute pl-3">{{ ruleData.title }}</p>
+    <img
+      :src="require(`@/assets/rules/${ruleData.bg}`)"
+      class="w-full h-full rounded-lg"
+    />
   </button>
 </template>
 
