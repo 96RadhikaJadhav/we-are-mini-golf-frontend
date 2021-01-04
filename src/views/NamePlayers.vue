@@ -1,5 +1,6 @@
 <template>
-  <div
+  <form
+    @submit.prevent="startGame"
     class="grid grid-flow-row items-center bg-players bg-cover bg-center bg-no-repeat md:w-1/2"
   >
     <div class="self-end space-y-4 px-8">
@@ -26,7 +27,7 @@
     <!-- Start and Back Buttons -->
 
     <div class="flex flex-col space-y-4">
-      <base-button mode="confirm" @clicked="startGame">
+      <base-button mode="confirm" type="submit">
         Start the game!
       </base-button>
 
@@ -34,7 +35,7 @@
         Change number of players
       </base-button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
