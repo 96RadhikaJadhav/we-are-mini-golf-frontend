@@ -83,7 +83,6 @@ export default {
 
 <style scoped>
 .warning {
-  @apply border-ea9864;
-  @apply border-2;
+  @apply border-ea9864 border-2;
 }
 </style>

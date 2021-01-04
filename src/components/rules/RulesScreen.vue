@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-screen w-full flex justify-center">
+  <div class="relative w-full flex justify-center">
     <rule
       v-if="displayRule"
       @close="displayRule = false"

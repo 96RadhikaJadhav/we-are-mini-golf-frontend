@@ -8,9 +8,9 @@
       <img src="../assets/scores-inactive.png" class="h-6 w-6" />
     </router-link>
 
-    <router-link to="">
+    <button @click="$emit('display-rules')">
       <img src="../assets/rules-inactive.png" class="h-6 w-6" />
-    </router-link>
+    </button>
   </div>
 </template>
 
