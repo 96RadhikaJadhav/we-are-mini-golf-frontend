@@ -1,9 +1,9 @@
 export default {
   holeInOne: [
-    ': What. A Shot!',
-    ", that was a sniper's shot",
+    ': What. A. Shot!!',
+    ", that was a sniper's shot!",
     ', is your real name Tiger Woods?',
-    ', is that game too easy for you?',
+    ', is this game too easy for you?',
     ', did you play all your life?',
     ", don't make everyone else look ridiculous!",
     ', make it fair, play with one hand!',
@@ -13,7 +13,7 @@ export default {
   ],
   parBestUnder: [
     ', good one!',
-    ", that's pretty good, congrats!",
+    ', that was pretty good, congrats!',
     ', oh yeah! ',
     ', well done!',
     ', you are a winner!',
@@ -21,14 +21,14 @@ export default {
     ', you are here to win, right?',
     ", it's like this hole was made for you!",
     ", I'm sure you play in secret!",
-    ', impresseive',
+    ', impressive',
     ', would have won playing with one hand'
   ],
   parExact: [
-    ', that was good, can you do great?',
-    ', on the PAR, good!',
-    ", i'm sure you can get under PAR!",
-    ", good shot! But I'm sure you can do even better!",
+    ', that was good, but can you do great?',
+    ', on PAR, good!',
+    ", I'm sure you can get under PAR!",
+    ", good shot! I'm sure you can to even better!",
     ', hitting the PAR is always good!',
     ", you're on the average, let's beat that!",
     ', next hole target is under PAR!',
@@ -45,18 +45,18 @@ export default {
     ', I swear I saw them moving the hole!',
     ", for sure your ball isn't round!",
     ", you played well, the putter didn't!",
-    ', sure it was because of the wind!',
+    ", I'm sure it was because of the wind!",
     ', with a better ball, that was a hole in one!'
   ],
   parOverByThree: [
     ': "oooooh, that hole!? I confused!"',
     ', did you think the higher score, the better?',
     ', did you play backwards?',
-    ", hum, I swear, I didn't see anything",
+    ", hmm, I swear, I didn't see anything",
     ", let's just pretend like that never happened...",
-    ': "ohhhh, mini golf! I thought it was marbles!"',
+    ': "ohhhh, mini golf! I thought this was marbles!"',
     ', like Tiger Woods. But blind and armless.',
-    ', maybe stop aiming, you never know!',
+    ", maybe, don't aim? You never know...",
     ': "that putter... I usually play with pro stuff..."',
     ', please, never try archery'
   ]

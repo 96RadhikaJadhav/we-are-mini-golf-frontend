@@ -35,7 +35,7 @@ export default {
   components: { InputRange, BaseButton },
   data() {
     return {
-      noOfPlayers: 0
+      noOfPlayers: 1
     };
   },
   methods: {
