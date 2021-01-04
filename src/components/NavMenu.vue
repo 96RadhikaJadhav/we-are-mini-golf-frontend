@@ -22,6 +22,7 @@
 
     <button @click="rulesActive">
       <img :src="images.rulesInactive" class="h-8 w-8" />
+
     </button>
   </div>
 </template>

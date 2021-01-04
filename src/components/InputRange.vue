@@ -2,6 +2,7 @@
   <div class="w-full">
     <input
       class="relative"
+      required
       type="range"
       :min="min"
       :max="max"
