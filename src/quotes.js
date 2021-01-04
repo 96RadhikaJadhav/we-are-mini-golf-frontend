@@ -52,11 +52,11 @@ export default {
     ': "oooooh, that hole!? I confused!"',
     ', did you think the higher score, the better?',
     ', did you play backwards?',
-    ", hum, I swear, I didn't see anything",
-    ", let's just pretend it never happened",
+    ", hmm, I swear, I didn't see anything",
+    ", let's just pretend like that never happened...",
     ': "ohhhh, mini golf! I thought this was marbles!"',
     ', like Tiger Woods. But blind and armless.',
-    ", maybe don't aim. You never know...",
+    ", maybe, don't aim? You never know...",
     ': "that putter... I usually play with pro stuff..."',
     ', please, never try archery'
   ]
