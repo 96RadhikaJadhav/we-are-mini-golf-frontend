@@ -39,10 +39,20 @@
 
     <!-- Ranking Table -->
     <div class="px-8">
-      <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4">
+      <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
         <div class="col-span-4"></div>
-        <div class="col-span-1"><p class="text-005d63">Last hole</p></div>
-        <div class="col-span-1"><p class="text-ff8e67">Total score</p></div>
+        <div class="col-span-1">
+          <p class="text-005d63">
+            Last<br />
+            hole
+          </p>
+        </div>
+        <div class="col-span-1">
+          <p class="text-ff8e67">
+            Total<br />
+            score
+          </p>
+        </div>
       </div>
 
       <div class="flex flex-col justify-between h-full">
