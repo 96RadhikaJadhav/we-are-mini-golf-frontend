@@ -20,9 +20,8 @@
       />
     </router-link>
 
-    <button @click="rulesActive">
+    <button @click="$emit('display-rules')" class="focus:outline-none">
       <img :src="images.rulesInactive" class="h-8 w-8" />
-
     </button>
   </div>
 </template>
