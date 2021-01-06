@@ -27,8 +27,7 @@
     <!-- Start and Back Buttons -->
 
     <div class="flex flex-col space-y-4">
-
-      <base-button mode="confirm" type="submit">
+      <base-button mode="btn confirm" type="submit">
         Start the game!
       </base-button>
 

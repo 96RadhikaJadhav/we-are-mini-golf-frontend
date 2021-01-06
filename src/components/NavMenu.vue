@@ -29,7 +29,6 @@
 <script>
 export default {
   name: 'NavMenu',
-  inject: ['rulesActive'],
   data() {
     return {
       isActive: '',
