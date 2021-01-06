@@ -1,5 +1,8 @@
 <template>
   <div id="app" class="antialiased h-screen">
+    <div v-if="rules">
+      <rules></rules>
+    </div>
     <transition name="fade" mode="out-in">
       <component :is="isTimeout" @clear="clearTimeout"></component>
     </transition>
