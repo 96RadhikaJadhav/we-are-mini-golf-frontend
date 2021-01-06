@@ -57,12 +57,12 @@
           <div class="mb-2">
             <base-button
               type="button"
-              class="confirm mb-4"
+              class="btn confirm mb-4"
               @clicked="componentId = 'ReviewModal'"
             >
               REVIEW US
             </base-button>
-            <base-button to="" class="back text-xl">
+            <base-button class="back text-xl">
               Detailed Scores
             </base-button>
           </div>
@@ -174,7 +174,7 @@
 
       <!-- REVIEW US Button Abs -->
       <base-button
-        mode="confirm"
+        mode="btn confirm"
         class="sticky bottom-10"
         @clicked="componentId = 'ReviewModal'"
       >
@@ -212,6 +212,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.params.componentId) {
+      this.componentId = this.$route.params.componentId;
+    }
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
