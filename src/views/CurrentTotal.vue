@@ -14,6 +14,7 @@
       <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
 
       <div
+        v-if="getHighestTotalPlayer"
         class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
       >
         <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
@@ -21,6 +22,7 @@
         </p>
         <div class="flex">
           <div
+            v-if="getHighestTotalPlayer.totalScore"
             class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
           >
             <p class="mt-1">
@@ -38,7 +40,7 @@
     <!-- End of 1st Place -->
 
     <!-- Ranking Table -->
-    <div class="px-8">
+    <div class="px-8" v-if="playersInfo.length > 1">
       <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
         <div class="col-span-4"></div>
         <div class="col-span-1">
@@ -73,7 +75,7 @@
         :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
         mode="btn confirm"
       >
-        on to the next hole!
+        {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
       </base-button>
     </div>
   </div>
@@ -92,12 +94,14 @@ export default {
   props: {
     holeNo: {
       type: Number
+    },
+    par: {
+      type: Number
     }
   },
   data() {
     return {
       playersInfo: [],
-      par: 4,
       quote
     };
   },
@@ -120,11 +124,11 @@ export default {
   },
   methods: {
     quoteGen(player, i) {
-      // const par = localStorage.getItem('course-details');
       const score = player.holeScore;
       const lastScore = player.holeScore.length - 1;
       const quote = this.quote;
       const random = Math.floor(Math.random() * quote.holeInOne.length);
+      const par = this.$route.params.par;
 
       // Hole in One
       if (score[lastScore] === 1) {
@@ -132,22 +136,22 @@ export default {
         return `${player.name}${newQuote}`;
       } else if (
         score[lastScore] > 1 &&
-        score[lastScore] < this.par &&
+        score[lastScore] < par &&
         i === this.counter
       ) {
         const newQuote = quote.parBestUnder[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] === this.par && i === this.counter) {
+      } else if (score[lastScore] === par && i === this.counter) {
         const newQuote = quote.parExact[random];
         return `${player.name}${newQuote}`;
       } else if (
-        score[lastScore] >= this.par + 1 &&
-        score[lastScore] <= this.par + 2 &&
+        score[lastScore] >= par + 1 &&
+        score[lastScore] <= par + 2 &&
         i === this.counter
       ) {
         const newQuote = quote.parOverByOne[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] >= this.par + 3 && i === this.counter) {
+      } else if (score[lastScore] >= par + 3 && i === this.counter) {
         const newQuote = quote.parOverByThree[random];
         return `${player.name}${newQuote}`;
       } else return;

@@ -4,7 +4,7 @@
   >
     <!-- HOLE AND PAR -->
     <div
-      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mt-6"
     >
       <p>Hole N°{{ holeNo }}</p>
       <p>PAR {{ par }}</p>
@@ -77,6 +77,9 @@ export default {
     holeNo: {
       type: Number
     },
+    par: {
+      type: Number
+    },
     editscore: {
       type: Boolean,
       default: false
@@ -89,8 +92,7 @@ export default {
   data() {
     return {
       name: 'GameScore',
-      playersInfo: [],
-      par: 4
+      playersInfo: []
     };
   },
   computed: {
@@ -119,7 +121,7 @@ export default {
     navigateTo() {
       this.$router.push({
         name: this.editscore ? 'GameCourse' : 'CurrentTotal',
-        params: { holeNo: this.holeNo }
+        params: { holeNo: this.holeNo, par: this.par }
       });
     },
     calculateTotal() {

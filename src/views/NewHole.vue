@@ -7,7 +7,7 @@
     <p class="font-kalam holeno text-white">
       {{ holeNo }}
     </p>
-    <p class="font-kalam text-005d63 par">Par 4</p>
+    <p class="font-kalam text-005d63 par">Par {{ par }}</p>
   </div>
 </template>
 
@@ -28,10 +28,14 @@ export default {
     return {
       name: 'NewHoleIntro',
       hole: false,
-      courseGrid: {}
+      courseGrid: {},
+      coursePar: null
     };
   },
   computed: {
+    par() {
+      return this.coursePar[this.holeNo - 1];
+    },
     holeBg() {
       if (this.holeNo !== 14) {
         return 'bg-newHole';
@@ -42,6 +46,12 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    this.coursePar = this.courseGrid.squareInfo
+      .filter(el => el.par != null)
+      .sort((a, b) => {
+        return a.holeNo - b.holeNo;
+      })
+      .map(el => el.par);
     this.updateHoleStatus();
   },
   methods: {
@@ -53,10 +63,16 @@ export default {
       });
       console.log(this.courseGrid.squareInfo);
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
-      this.$router.push({
-        name: 'GameScores',
-        params: { holeNo: this.holeNo, editscore: this.editscore }
-      });
+      setTimeout(() => {
+        this.$router.push({
+          name: 'GameScores',
+          params: {
+            holeNo: this.holeNo,
+            editscore: this.editscore,
+            par: this.par
+          }
+        });
+      }, 3000);
     }
   }
 };

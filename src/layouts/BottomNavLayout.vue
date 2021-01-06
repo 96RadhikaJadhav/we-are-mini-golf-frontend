@@ -3,12 +3,12 @@
     <transition name="fade" mode="out-in">
       <router-view class="mx-auto box-border min-h-screen" />
     </transition>
-    <div class="sticky bottom-0">
-      <NavMenu @display-rules="isDrawerOpen = true" />
+    <div class="fixed left-0 right-0 bottom-0">
+      <NavMenu @display-rules="isDrawerOpen = !isDrawerOpen" />
     </div>
     <transition name="slide-in">
       <div
-        class="sticky bottom-0 w-full shadow-2dp rounded-t-2xl"
+        class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
         v-if="isDrawerOpen"
       >
         <RulesScreen />
