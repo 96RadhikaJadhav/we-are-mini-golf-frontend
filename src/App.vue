@@ -1,8 +1,9 @@
 <template>
   <div id="app" class="antialiased h-screen">
-    <div v-if="rules">
-      <rules></rules>
-    </div>
+    <div></div>
+    <transition name="fade" mode="out-in">
+      <component :is="isTimeout" @clear="clearTimeout"></component>
+    </transition>
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
@@ -12,24 +13,27 @@
 </template>
 
 <script>
-import rules from '@/components/rules/RulesScreen.vue';
+import Timeout from '@/components/Timeout.vue';
 export default {
+  components: { Timeout },
   data() {
     return {
-      rules: false
+      isTimeout: ''
     };
   },
   provide() {
     return {
-      rulesActive: this.showRules
+      timeout: this.clearTimeout
     };
   },
   methods: {
-    showRules() {
-      return (this.rules = !this.rules);
+    clearTimeout() {
+      this.isTimeout = '';
+      setTimeout(() => {
+        this.isTimeout = Timeout;
+      }, 600000); // 10 minutes
     }
-  },
-  components: { rules }
+  }
 };
 </script>
 
