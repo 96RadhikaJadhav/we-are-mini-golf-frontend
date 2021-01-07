@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb "
+    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb bg-background.gif"
   >
     <!-- Top 1/2 Screen -->
     <div class="h-1/2">
       <div
-        class="text-center mt-32 font-capriola flex flex-col justify-between items-center"
+        class="text-center mt-32 font-capriola flex flex-col justify-between items-center relative"
       >
         <p class="text-005d63 text-2xl mb-4">THE AWARD OF</p>
         <div class="flex flex-col items-center relative">
@@ -47,8 +47,9 @@ export default {
     return {
       award: {
         name: '',
-        deg: '',
-        img: require('../assets/ribbons/green-ribbon.png'),
+        deg: '-rotate-6',
+        img: '',
+        desc: '',
         type: ''
       },
 
@@ -62,7 +63,8 @@ export default {
         this.playersInfo = this.getGameInfo.playersInfo;
         let courseGrid = (this.courseGrid = JSON.parse(
           localStorage.getItem('course-grid'),
-          this.theSniper()
+          this.theSniper(),
+          this.awardRotation()
         ));
         this.coursePar = courseGrid.squareInfo
           .filter(el => el.par != null)
@@ -76,10 +78,33 @@ export default {
   methods: {
     ...mapActions('gameInfo', ['getGameDetails']),
 
-    updateAward(winner, type) {
+    awardRotation() {
+      setInterval(() => {
+        if (this.award.type === 'The Sniper') {
+          return this.theDreamer();
+        } else if (this.award.type === 'The Dreamer') {
+          return this.theClockwork();
+        } else if (this.award.type === 'The Clockwork') {
+          return this.theUnlucky();
+        } else if (this.award.type === 'The Unlucky') {
+          return this.playerOfTheDay();
+        } else if (this.award.type === 'Player Of The Day') {
+          return this.theSniper();
+        }
+      }, 5000);
+    },
+
+    updateAward(winner, type, desc, total) {
       let a = this.award;
-      a.name = winner;
+      if (total === null) {
+        total = '0';
+      }
+      if (winner === '') {
+        winner = 'Nobody!';
+      }
       a.type = type;
+      a.name = winner;
+      a.desc = desc + ' - ' + total;
       if (a.deg === 'rotate-6') {
         a.deg = '-rotate-6';
       } else {
@@ -91,12 +116,15 @@ export default {
         a.img = require('../assets/ribbons/yellow-ribbon.png');
       } else if (a.img === require('../assets/ribbons/yellow-ribbon.png')) {
         a.img = require('../assets/ribbons/green-ribbon.png');
+      } else if (a.img === '') {
+        a.img = require('../assets/ribbons/green-ribbon.png');
       }
     },
 
     theSniper() {
       // Most holes in one
       let type = 'The Sniper';
+      let desc = 'Most Holes In One';
       let winner = '';
       let highest = null;
       let scores = this.playersInfo;
@@ -106,17 +134,13 @@ export default {
           winner = player.name;
         }
       });
-      this.updateAward(winner, type);
-    }
-  },
-  computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
-    getHighestTotalPlayer() {
-      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
+      this.updateAward(winner, type, desc, highest);
     },
-
     theDreamer() {
       // Player with the highest score
+      let type = 'The Dreamer';
+      let desc = 'The Highest Score';
+
       let highest = 0;
       let winner = '';
 
@@ -126,10 +150,13 @@ export default {
           winner = el.name;
         }
       });
-      return winner;
+      this.updateAward(winner, type, desc, highest);
     },
     theClockwork() {
       // Most holes ON Par
+      let type = 'The Clockwork';
+      let desc = 'Most Shots On Par';
+
       let score = [];
       let winner = '';
 
@@ -147,10 +174,13 @@ export default {
           winner = el.name;
         }
       });
-      return `${winner} (${score.length})`;
+      this.updateAward(winner, type, desc, score.length);
     },
     theUnlucky() {
       // Highest over Par (min 7)
+      let type = 'The Unlucky';
+      let desc = 'Highest Over Par';
+
       let min = 7;
       let winningScores = [];
       let winner = '';
@@ -158,7 +188,6 @@ export default {
       this.playersInfo.forEach(el => {
         let score = el.holeScore;
         let playerPar = [];
-        console.log(el.name);
         for (let i = 0; i < score.length; i++) {
           if (score.reverse()[i] - this.coursePar.reverse()[i] >= min) {
             console.log(score[i]);
@@ -170,10 +199,13 @@ export default {
           winner = el.name;
         }
       });
-      return `${winner} (${winningScores.length})`;
+      this.updateAward(winner, type, desc, winningScores.length);
     },
     playerOfTheDay() {
       // Player with the lowest score
+      let type = 'Player Of The Day';
+      let desc = 'Lowest Score';
+
       let lowestScore = 500000000000;
       let winner = '';
 
@@ -183,7 +215,13 @@ export default {
           winner = el.name;
         }
       });
-      return winner;
+      this.updateAward(winner, type, desc, lowestScore);
+    }
+  },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
+    getHighestTotalPlayer() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     }
   }
 };
