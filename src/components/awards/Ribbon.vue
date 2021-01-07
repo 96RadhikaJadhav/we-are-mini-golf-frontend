@@ -9,7 +9,7 @@
           `text-white text-3xl font-kalam absolute transform ${award.deg} mb-2`
         "
       >
-        {{ winner }}
+        {{ award.name }}
       </p>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['winner', 'award']
+  props: ['award']
 };
 </script>
 

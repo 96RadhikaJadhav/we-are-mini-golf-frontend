@@ -9,7 +9,7 @@
       >
         <p class="text-005d63 text-2xl mb-4">THE AWARD OF</p>
         <div class="flex flex-col items-center relative">
-          <Certificate :award="sniper"></Certificate>
+          <Certificate :award="award"></Certificate>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
           GOES TO...
         </p>
 
-        <Ribbon :award="dreamer" :winner="winner"></Ribbon>
+        <Ribbon :award="award"></Ribbon>
       </div>
       <base-button
         :to="{ name: 'FinalRanking' }"
@@ -45,33 +45,11 @@ export default {
   components: { BaseButton, Ribbon, Certificate },
   data() {
     return {
-      winner: 'Dan',
-      awardSelector: 'sniper',
-
-      sniper: {
-        name: 'The Sniper',
-        deg: '-rotate-6',
-        img: require('../assets/ribbons/green-ribbon.png')
-      },
-      dreamer: {
-        name: 'The Dreamer',
-        deg: '-rotate-6',
-        img: require('../assets/ribbons/orange-ribbon.png')
-      },
-      clockwork: {
-        name: 'The Clockwork',
-        deg: '-rotate-6',
-        img: require('../assets/ribbons/yellow-ribbon.png')
-      },
-      unlucky: {
-        name: 'The Unlucky',
-        deg: '-rotate-6',
-        img: require('../assets/ribbons/green-ribbon.png')
-      },
-      player: {
-        name: 'Player Of The Day',
-        deg: 'rotate-6',
-        img: require('../assets/ribbons/yellow-ribbon.png')
+      award: {
+        name: '',
+        deg: '',
+        img: require('../assets/ribbons/green-ribbon.png'),
+        type: ''
       },
 
       playersInfo: [],
@@ -83,7 +61,8 @@ export default {
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
         let courseGrid = (this.courseGrid = JSON.parse(
-          localStorage.getItem('course-grid')
+          localStorage.getItem('course-grid'),
+          this.theSniper()
         ));
         this.coursePar = courseGrid.squareInfo
           .filter(el => el.par != null)
@@ -95,15 +74,29 @@ export default {
       .catch(e => console.log(e));
   },
   methods: {
-    ...mapActions('gameInfo', ['getGameDetails'])
-  },
-  computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
-    getHighestTotalPlayer() {
-      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
+    ...mapActions('gameInfo', ['getGameDetails']),
+
+    updateAward(winner, type) {
+      let a = this.award;
+      a.name = winner;
+      a.type = type;
+      if (a.deg === 'rotate-6') {
+        a.deg = '-rotate-6';
+      } else {
+        a.deg = 'rotate-6';
+      }
+      if (a.img === require('../assets/ribbons/green-ribbon.png')) {
+        a.img = require('../assets/ribbons/orange-ribbon.png');
+      } else if (a.img === require('../assets/ribbons/orange-ribbon.png')) {
+        a.img = require('../assets/ribbons/yellow-ribbon.png');
+      } else if (a.img === require('../assets/ribbons/yellow-ribbon.png')) {
+        a.img = require('../assets/ribbons/green-ribbon.png');
+      }
     },
+
     theSniper() {
       // Most holes in one
+      let type = 'The Sniper';
       let winner = '';
       let highest = null;
       let scores = this.playersInfo;
@@ -113,8 +106,15 @@ export default {
           winner = player.name;
         }
       });
-      return winner;
+      this.updateAward(winner, type);
+    }
+  },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
+    getHighestTotalPlayer() {
+      return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
+
     theDreamer() {
       // Player with the highest score
       let highest = 0;
