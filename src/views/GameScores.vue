@@ -1,16 +1,18 @@
 <template>
   <div
-    class="flex flex-col justify-evenly p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2"
+    class="grid grid-flow-row grid-rows-6 p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 "
   >
     <!-- HOLE AND PAR -->
     <div
-      class="text-center font-kalam text-005d63 uppercase text-2xl flex justify-center flex-col mt-6"
+      class="text-center font-kalam text-005d63 uppercase h-full text-2xl flex flex-col items-center justify-end mb-14 row-span-2"
     >
-      <p>Hole N°{{ holeNo }}</p>
-      <p>PAR {{ par }}</p>
+      <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
+      <p>PAR {{ getPar[holeNo - 1] }}</p>
     </div>
 
-    <div class="w-full px-6">
+    <div
+      class="w-full px-6 h-full flex flex-col items-center justify-center row-span-3"
+    >
       <div class="w-full flex flex-col justify-between">
         <!-- DIV FOR BASE CARD -->
         <div
@@ -53,9 +55,12 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- CONFIRM BUTTON flex-item 3 -->
+    <!-- CONFIRM BUTTON flex-item 3 -->
+    <div>
       <base-button
+        class="mb-20"
         mode="confirm"
         @clicked="updatePlayerScore"
         v-if="!showTotal"
@@ -77,9 +82,6 @@ export default {
     holeNo: {
       type: Number
     },
-    par: {
-      type: Number
-    },
     editscore: {
       type: Boolean,
       default: false
@@ -96,7 +98,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo'])
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
   },
   created() {
     this.getGameDetails()
@@ -121,7 +123,7 @@ export default {
     navigateTo() {
       this.$router.push({
         name: this.editscore ? 'GameCourse' : 'CurrentTotal',
-        params: { holeNo: this.holeNo, par: this.par }
+        params: { holeNo: this.holeNo }
       });
     },
     calculateTotal() {

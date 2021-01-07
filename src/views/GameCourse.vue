@@ -28,6 +28,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'GameCourse',
@@ -43,6 +44,7 @@ export default {
         .then(response => {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
+          this.updatePar();
         })
         .catch(e => console.log(e));
     } else {
@@ -50,6 +52,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('gameInfo', ['updatePar']),
     gotoNewHole(holeNo) {
       this.$router.push({
         name: 'NewHole',

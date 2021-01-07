@@ -4,14 +4,17 @@
     place-items-center relative"
     :class="[holeBg]"
   >
-    <p class="font-kalam holeno text-white">
-      {{ holeNo }}
-    </p>
-    <p class="font-kalam text-005d63 par">Par {{ par }}</p>
+    <div v-if="getPar.length != holeNo">
+      <p class="font-kalam holeno text-white">
+        {{ holeNo }}
+      </p>
+    </div>
+    <p class="font-kalam text-005d63 par">Par {{ getPar[holeNo - 1] }}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'NewHole',
   props: {
@@ -33,9 +36,7 @@ export default {
     };
   },
   computed: {
-    par() {
-      return this.coursePar[this.holeNo - 1];
-    },
+    ...mapGetters('gameInfo', ['getPar']),
     holeBg() {
       if (this.holeNo !== 14) {
         return 'bg-newHole';
@@ -46,12 +47,6 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
-    this.coursePar = this.courseGrid.squareInfo
-      .filter(el => el.par != null)
-      .sort((a, b) => {
-        return a.holeNo - b.holeNo;
-      })
-      .map(el => el.par);
     this.updateHoleStatus();
   },
   methods: {

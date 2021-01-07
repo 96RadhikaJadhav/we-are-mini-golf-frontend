@@ -60,18 +60,10 @@ export default {
   created() {
     this.getGameDetails()
       .then(() => {
+        this.coursePar = this.getPar;
+        console.log(this.coursePar);
         this.playersInfo = this.getGameInfo.playersInfo;
-        let courseGrid = (this.courseGrid = JSON.parse(
-          localStorage.getItem('course-grid'),
-          this.theSniper(),
-          this.awardRotation()
-        ));
-        this.coursePar = courseGrid.squareInfo
-          .filter(el => el.par != null)
-          .sort((a, b) => {
-            return a.holeNo - b.holeNo;
-          })
-          .map(el => el.par);
+        this.theSniper(), this.awardRotation();
       })
       .catch(e => console.log(e));
   },
@@ -161,7 +153,6 @@ export default {
       // Player with the highest score
       let type = 'The Dreamer';
       let desc = 'The Highest Score';
-
       let highest = 0;
       let winner = '';
 
@@ -186,7 +177,7 @@ export default {
         let playerPar = [];
 
         for (let i = 0; i < holes.length; i++) {
-          if (holes.reverse()[i] === this.coursePar.reverse()[i]) {
+          if (holes.reverse()[i] === this.getPar.reverse()[i]) {
             playerPar.push(holes[i]);
           }
         }
@@ -205,12 +196,13 @@ export default {
       let min = 7;
       let winningScores = [];
       let winner = '';
+      let par = this.getPar;
 
       this.playersInfo.forEach(el => {
         let score = el.holeScore;
         let playerPar = [];
         for (let i = 0; i < score.length; i++) {
-          if (score.reverse()[i] - this.coursePar.reverse()[i] >= min) {
+          if (score.reverse()[i] - par.reverse()[i] >= min) {
             playerPar.push(score[i]);
           }
         }
@@ -219,14 +211,7 @@ export default {
           winner = el.name;
         }
       });
-
-      let sumScores = winningScores.reduce((a, b) => {
-        return a + b;
-      });
-      let totalPar = this.coursePar.reduce((a, b) => {
-        return a + b;
-      });
-      let total = totalPar - sumScores;
+      let total = winningScores.length;
       this.updateAward(winner, type, desc, total);
     },
     playerOfTheDay() {
@@ -247,7 +232,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     }

@@ -114,7 +114,7 @@ export default {
       .catch(e => console.log(e));
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo', 'counter']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'counter', 'getPar']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
@@ -128,7 +128,7 @@ export default {
       const lastScore = player.holeScore.length - 1;
       const quote = this.quote;
       const random = Math.floor(Math.random() * quote.holeInOne.length);
-      const par = this.$route.params.par;
+      const par = this.getPar[this.holeNo - 1];
 
       // Hole in One
       if (score[lastScore] === 1) {
