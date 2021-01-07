@@ -3,10 +3,10 @@
     <div
       class="mx-6 flex flex-col justify-center items-center relative max-w-sm"
     >
-      <img :src="award.img" :class="`transform ${award.deg}`" />
+      <img :src="award.img" :class="`transition transform ${award.deg}`" />
       <p
         :class="
-          `text-white text-3xl font-kalam absolute transform ${award.deg} mb-2`
+          `text-white text-3xl font-kalam absolute transform ${award.deg} mb-2 animate-pop`
         "
       >
         {{ award.name }}

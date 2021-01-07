@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb bg-background.gif"
+    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb background-gif"
   >
     <!-- Top 1/2 Screen -->
     <div class="h-1/2">
@@ -20,7 +20,6 @@
         <p class="text-005d63 text-2xl font-capriola mt-32 mb-8 text-center">
           GOES TO...
         </p>
-
         <Ribbon :award="award"></Ribbon>
       </div>
       <base-button
@@ -50,6 +49,7 @@ export default {
         deg: '-rotate-6',
         img: '',
         desc: '',
+        total: null,
         type: ''
       },
 
@@ -80,16 +80,26 @@ export default {
 
     awardRotation() {
       setInterval(() => {
-        if (this.award.type === 'The Sniper') {
-          return this.theDreamer();
-        } else if (this.award.type === 'The Dreamer') {
-          return this.theClockwork();
-        } else if (this.award.type === 'The Clockwork') {
-          return this.theUnlucky();
-        } else if (this.award.type === 'The Unlucky') {
-          return this.playerOfTheDay();
-        } else if (this.award.type === 'Player Of The Day') {
-          return this.theSniper();
+        switch (this.award.type) {
+          case 'The Sniper':
+            this.theDreamer();
+            break;
+          case 'The Dreamer':
+            this.theClockwork();
+            break;
+          case 'The Clockwork':
+            this.theUnlucky();
+            break;
+          case 'The Unlucky':
+            this.playerOfTheDay();
+            break;
+          case 'Player Of The Day':
+            this.theSniper();
+            break;
+
+          default:
+            this.award.type = 'The Sniper';
+            break;
         }
       }, 5000);
     },
@@ -104,20 +114,30 @@ export default {
       }
       a.type = type;
       a.name = winner;
-      a.desc = desc + ' - ' + total;
-      if (a.deg === 'rotate-6') {
-        a.deg = '-rotate-6';
-      } else {
-        a.deg = 'rotate-6';
+      a.desc = desc;
+      a.total = total;
+      switch (a.deg) {
+        case 'rotate-6':
+          a.deg = '-rotate-6';
+          break;
+        default:
+          a.deg = 'rotate-6';
+          break;
       }
-      if (a.img === require('../assets/ribbons/green-ribbon.png')) {
-        a.img = require('../assets/ribbons/orange-ribbon.png');
-      } else if (a.img === require('../assets/ribbons/orange-ribbon.png')) {
-        a.img = require('../assets/ribbons/yellow-ribbon.png');
-      } else if (a.img === require('../assets/ribbons/yellow-ribbon.png')) {
-        a.img = require('../assets/ribbons/green-ribbon.png');
-      } else if (a.img === '') {
-        a.img = require('../assets/ribbons/green-ribbon.png');
+      switch (a.img) {
+        case require('../assets/ribbons/green-ribbon.png'):
+          a.img = require('../assets/ribbons/orange-ribbon.png');
+          break;
+        case require('../assets/ribbons/orange-ribbon.png'):
+          a.img = require('../assets/ribbons/yellow-ribbon.png');
+          break;
+        case require('../assets/ribbons/yellow-ribbon.png'):
+          a.img = require('../assets/ribbons/green-ribbon.png');
+          break;
+
+        default:
+          a.img = require('../assets/ribbons/green-ribbon.png');
+          break;
       }
     },
 
@@ -131,6 +151,7 @@ export default {
       scores.forEach(player => {
         let total = player.holeScore.filter(num => num === 1).length;
         if (total > highest) {
+          highest = total;
           winner = player.name;
         }
       });
@@ -190,7 +211,6 @@ export default {
         let playerPar = [];
         for (let i = 0; i < score.length; i++) {
           if (score.reverse()[i] - this.coursePar.reverse()[i] >= min) {
-            console.log(score[i]);
             playerPar.push(score[i]);
           }
         }
@@ -199,7 +219,15 @@ export default {
           winner = el.name;
         }
       });
-      this.updateAward(winner, type, desc, winningScores.length);
+
+      let sumScores = winningScores.reduce((a, b) => {
+        return a + b;
+      });
+      let totalPar = this.coursePar.reduce((a, b) => {
+        return a + b;
+      });
+      let total = totalPar - sumScores;
+      this.updateAward(winner, type, desc, total);
     },
     playerOfTheDay() {
       // Player with the lowest score
