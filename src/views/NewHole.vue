@@ -7,7 +7,12 @@
       <p
         class="px-12 pt-8 font-capriola mt-4 mb-16 text-center text-white text-xl"
       >
-        {{ lastPlace }}, this is your last chance to catch up!
+        {{ lastPlace }},
+        {{
+          getGameInfo.playersInfo.length !== 1
+            ? 'this is your last chance to catch up!'
+            : "you're almost there!"
+        }}
       </p>
     </div>
     <div v-if="getPar.length != holeNo">
