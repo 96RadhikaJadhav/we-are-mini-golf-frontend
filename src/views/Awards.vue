@@ -61,7 +61,6 @@ export default {
     this.getGameDetails()
       .then(() => {
         this.coursePar = this.getPar;
-        console.log(this.coursePar);
         this.playersInfo = this.getGameInfo.playersInfo;
         this.theSniper(), this.awardRotation();
       })

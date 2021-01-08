@@ -56,7 +56,6 @@ export default {
           el.isHoleActive = true;
         }
       });
-      console.log(this.courseGrid.squareInfo);
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
       setTimeout(() => {
         this.$router.push({
