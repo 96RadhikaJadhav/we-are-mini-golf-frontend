@@ -100,6 +100,7 @@ export default {
   computed: {
     ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
   },
+
   created() {
     this.getGameDetails()
       .then(() => {
