@@ -34,7 +34,7 @@ export default {
         .catch(e => console.log(e));
     }
     setTimeout(() => {
-      if (!localStorage.getItem('course-grid')) {
+      if (!localStorage.getItem('course-grid') && gameId) {
         return this.$router.push({ name: 'SelectPlayers' });
       } else if (localStorage.getItem('course-grid')) {
         return this.$router.push({

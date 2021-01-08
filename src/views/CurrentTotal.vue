@@ -72,7 +72,7 @@
     <!-- Button -->
     <div class="flex-1 flex items-center h-1/4">
       <base-button
-     :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
+        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
         mode="btn confirm"
       >
         {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
@@ -160,7 +160,7 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
-    if (to.params.holeNo === 14) {
+    if (to.params.holeNo === this.getPar.length) {
       return next({ name: 'Awards' });
     }
     to.params.holeNo = to.params.holeNo + 1;

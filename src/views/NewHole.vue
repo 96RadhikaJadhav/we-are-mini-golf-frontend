@@ -59,9 +59,6 @@ export default {
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
     this.updateHoleStatus();
-    let last = this.getGameInfo.playersInfo;
-
-    console.log(last);
   },
   methods: {
     updateHoleStatus() {
