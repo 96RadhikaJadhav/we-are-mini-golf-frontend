@@ -49,6 +49,13 @@ export default {
       this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
     }
   },
+  mounted() {
+    window.scroll({
+      top: 1500,
+      left: 0,
+      behavior: 'smooth'
+    });
+  },
   methods: {
     gotoNewHole(holeNo) {
       this.$router.push({
