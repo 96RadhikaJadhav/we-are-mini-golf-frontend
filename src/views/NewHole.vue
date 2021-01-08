@@ -4,14 +4,17 @@
     place-items-center relative"
     :class="[holeBg]"
   >
-    <p class="font-kalam holeno text-white">
-      {{ holeNo }}
-    </p>
-    <p class="font-kalam text-005d63 par">Par 4</p>
+    <div v-if="getPar.length != holeNo">
+      <p class="font-kalam holeno text-white">
+        {{ holeNo }}
+      </p>
+    </div>
+    <p class="font-kalam text-005d63 par">Par {{ getPar[holeNo - 1] }}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'NewHole',
   props: {
@@ -28,10 +31,12 @@ export default {
     return {
       name: 'NewHoleIntro',
       hole: false,
-      courseGrid: {}
+      courseGrid: {},
+      coursePar: null
     };
   },
   computed: {
+    ...mapGetters('gameInfo', ['getPar']),
     holeBg() {
       if (this.holeNo !== 14) {
         return 'bg-newHole';
@@ -51,12 +56,17 @@ export default {
           el.isHoleActive = true;
         }
       });
-      console.log(this.courseGrid.squareInfo);
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
-      this.$router.push({
-        name: 'GameScores',
-        params: { holeNo: this.holeNo, editscore: this.editscore }
-      });
+      setTimeout(() => {
+        this.$router.push({
+          name: 'GameScores',
+          params: {
+            holeNo: this.holeNo,
+            editscore: this.editscore,
+            par: this.par
+          }
+        });
+      }, 3000);
     }
   }
 };

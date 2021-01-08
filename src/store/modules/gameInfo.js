@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const state = {
   gameInfo: {},
-  counter: 0
+  counter: 0,
+  coursePar: []
 };
 
 const getters = {
@@ -11,6 +12,9 @@ const getters = {
   },
   counter: state => {
     return state.counter;
+  },
+  getPar: state => {
+    return state.coursePar;
   }
 };
 
@@ -45,6 +49,18 @@ const actions = {
         .catch(e => reject(e));
     });
   },
+
+  updatePar({ commit }) {
+    let course = JSON.parse(localStorage.getItem('course-grid'));
+    let coursePar = course.squareInfo
+      .filter(el => el.holeNo != null)
+      .sort((a, b) => {
+        return a.holeNo - b.holeNo;
+      })
+      .map(el => el.par);
+    commit('updatePar', coursePar);
+  },
+  // COUNTER USED FOR LOOPING THROUGH PLAYERS FOR OUTPUTTING QUOTES
   increaseCounter: ({ commit }) => {
     if (state.counter < state.gameInfo.playersInfo.length - 1) {
       commit('increaseCounter');
@@ -55,6 +71,9 @@ const actions = {
 };
 
 const mutations = {
+  updatePar(state, payload) {
+    state.coursePar = payload;
+  },
   updateGameInfo(state, payload) {
     state.gameInfo = payload;
   },
