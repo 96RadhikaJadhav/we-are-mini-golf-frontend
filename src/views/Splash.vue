@@ -34,7 +34,14 @@ export default {
         .catch(e => console.log(e));
     }
     setTimeout(() => {
-      return this.$router.push({ name: 'SelectPlayers' });
+      if (!localStorage.getItem('course-grid')) {
+        return this.$router.push({ name: 'SelectPlayers' });
+      } else if (localStorage.getItem('course-grid')) {
+        return this.$router.push({
+          name: 'GameCourse',
+          params: { startNewGame: true }
+        });
+      }
     }, 2000);
   }
 };

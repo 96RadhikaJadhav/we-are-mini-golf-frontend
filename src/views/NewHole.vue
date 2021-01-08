@@ -1,9 +1,15 @@
 <template>
   <div
-    class="md:w-1/2 bg-no-repeat bg-cover bg-center grid grid-rows-2 justify-items-center 
-    place-items-center relative"
+    class="md:w-1/2 bg-no-repeat bg-cover bg-center grid grid-rows-3 relative"
     :class="[holeBg]"
   >
+    <div v-if="holeNo === getPar.length">
+      <p
+        class="px-12 pt-8 font-capriola mt-4 mb-16 text-center text-white text-xl"
+      >
+        {{ lastPlace }}, this is your last chance to catch up!
+      </p>
+    </div>
     <div v-if="getPar.length != holeNo">
       <p class="font-kalam holeno text-white">
         {{ holeNo }}
@@ -15,6 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { orderBy } from 'lodash';
 export default {
   name: 'NewHole',
   props: {
@@ -36,18 +43,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('gameInfo', ['getPar']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     holeBg() {
-      if (this.holeNo !== 14) {
+      if (this.holeNo !== this.getPar.length) {
         return 'bg-newHole';
       } else {
         return 'bg-lastHole';
       }
+    },
+    lastPlace() {
+      return orderBy(this.getGameInfo.playersInfo, ['totalScore'], ['desc'])[0]
+        .name;
     }
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
     this.updateHoleStatus();
+    let last = this.getGameInfo.playersInfo;
+
+    console.log(last);
   },
   methods: {
     updateHoleStatus() {

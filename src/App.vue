@@ -2,7 +2,9 @@
   <div id="app" class="antialiased h-screen">
     <div></div>
     <transition name="fade" mode="out-in">
-      <component :is="isTimeout" @clear="clearTimeout"></component>
+      <Timeout v-if="isTimeout"
+        >Looks like you've been away for a while...</Timeout
+      >
     </transition>
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
@@ -18,19 +20,19 @@ export default {
   components: { Timeout },
   data() {
     return {
-      isTimeout: ''
+      isTimeout: false
     };
   },
   provide() {
     return {
-      timeout: this.clearTimeout
+      Timeout: this.clearTimeout
     };
   },
   methods: {
     clearTimeout() {
-      this.isTimeout = '';
+      this.isTimeout = false;
       setTimeout(() => {
-        this.isTimeout = Timeout;
+        this.isTimeout = true;
       }, 600000); // 10 minutes
     }
   }

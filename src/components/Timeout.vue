@@ -2,7 +2,7 @@
   <div class="z-50">
     <ModalLayout @close="next('close')">
       <h1 class="uppercase text-aeb49a text-xl text-center font-kalam px-5">
-        Looks like you've been away for a while...
+        <slot></slot>
       </h1>
 
       <div class="w-4/5 mx-auto">

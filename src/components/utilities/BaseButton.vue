@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  inject: ['timeout'],
+  inject: ['Timeout'],
   props: {
     mode: {
       type: String
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     clicked() {
-      this.timeout();
+      this.Timeout();
       this.$emit('clicked');
     }
   },
