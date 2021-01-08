@@ -61,7 +61,7 @@
     <div>
       <base-button
         class="mb-20"
-        mode="confirm"
+        mode="btn confirm"
         @clicked="updatePlayerScore"
         v-if="!showTotal"
       >
