@@ -1,8 +1,5 @@
 <template>
   <div class="md:w-1/3 md:mx-auto">
-    <NewGame v-if="startNewGame" @clear="startNewGame = false"
-      >Welcome back!</NewGame
-    >
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
       <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
         <img
@@ -34,14 +31,12 @@
 <script>
 import axios from 'axios';
 import { mapActions } from 'vuex';
-import NewGame from '@/components/Timeout.vue';
 
 export default {
   name: 'GameCourse',
   data() {
     return {
-      courseGrid: {},
-      startNewGame: false
+      courseGrid: {}
     };
   },
   created() {
@@ -57,10 +52,8 @@ export default {
     } else {
       this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
       this.updatePar();
-      this.startNewGame = this.$route.params.startNewGame;
     }
   },
-  components: { NewGame },
   methods: {
     ...mapActions('gameInfo', ['updatePar']),
     gotoNewHole(holeNo) {
