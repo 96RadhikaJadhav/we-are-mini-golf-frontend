@@ -12,7 +12,9 @@
           :alt="square.id"
         />
         <img
-          v-else-if="!square.isHoleActive || square.holeNo === 14"
+          v-else-if="
+            !square.isHoleActive || square.holeNo === square.holeNo.length
+          "
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"

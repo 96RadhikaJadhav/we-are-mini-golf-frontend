@@ -75,44 +75,44 @@
       v-if="!componentId"
       class="h-full w-11/12 flex flex-col justify-between mx-auto mt-10"
     >
-      <!-- Top 1/4 of Section B 
+      <!-- Top 1/4 of Section B -->
       <div class="h-1/4 flex flex-col justify-around w-full mx-auto max-w-sm">
-         PRIMARY STATS 
+        <!-- PRIMARY STATS -->
         <div class="flex justify-around px-10">
-           Team Av 
+          <!-- Team Av -->
           <result-circle type="primary">
             <template v-slot:title>Team Average</template>
-            <template v-slot:result>59</template>
+            <template v-slot:result>{{ teamAverage }}</template>
           </result-circle>
 
-           Hole in 1 
+          <!-- Hole in 1 -->
           <result-circle type="primary">
             <template v-slot:title>Holes In 1</template>
-            <template v-slot:result>3</template>
+            <template v-slot:result>{{ holesInOne }}</template>
           </result-circle>
         </div>
 
-         SECONDARY STATS 
+        <!-- SECONDARY STATS -->
         <div class="flex items-center justify-around px-4 mb-4">
-           Under Par 
+          <!-- Under Par -->
           <result-circle type="secondary">
             <template v-slot:title>Under Par</template>
-            <template v-slot:result>26%</template>
+            <template v-slot:result>{{ underParPercentage }}</template>
           </result-circle>
 
-           Par 
+          <!-- Par -->
           <result-circle type="secondary">
             <template v-slot:title>Par</template>
-            <template v-slot:result>27%</template>
+            <template v-slot:result>{{ onParPercentage }}</template>
           </result-circle>
 
-           Over Par
+          <!-- Over Par -->
           <result-circle type="secondary">
             <template v-slot:title>Over Par</template>
-            <template v-slot:result>47%</template>
+            <template v-slot:result>{{ overParPercentage }}</template>
           </result-circle>
         </div>
-      </div>-->
+      </div>
 
       <!-- RESULTS CARD -->
       <div class="card w-full md:max-w-1/2 mx-auto">
@@ -120,12 +120,11 @@
           class="w-full grid grid-flow-col auto-cols-fr text-005d63 font-kalam pt-6 text-center"
         >
           <!-- Holes -->
-          <div>
+          <div class="mt-16">
+            <div class="mt-2"></div>
             <!--=========================================== placeholder below - can see the 0 index in holes display - needs fixing ===================================-->
-            <p class="text-white mb-5">0</p>
-
-            <p v-for="(p, i) in par" :key="i" class="circle-hole">
-              {{ i }}
+            <p v-for="(p, i) in par" :key="i" class="circle-hole mb-1">
+              {{ i + 1 }}
             </p>
           </div>
 
@@ -139,8 +138,9 @@
               v-for="(score, index) in res.holeScore"
               :key="index"
               class="border-r border-f5e3c8 pb-1"
+              :class="resultColor(score, index)"
             >
-              {{ resultColor(score, index) }}
+              {{ score }}
             </p>
           </div>
 
@@ -149,11 +149,17 @@
             <p class="transform -rotate-45 mb-4 text-ff8e67 font-capriola">
               PAR
             </p>
-
+            <p class="circle-par mx-auto">
+              {{
+                par.reduce((a, b) => {
+                  return a + b;
+                })
+              }}
+            </p>
             <p
               v-for="(p, index) in par"
               :key="index"
-              class="circle-par-blue first-child:circle-par"
+              class="circle-par-blue mt-1"
             >
               {{ p }}
             </p>
@@ -206,9 +212,12 @@ export default {
   data() {
     return {
       componentId: '',
-      courseHoles: 14,
       playersInfo: [],
-      par: [50, 4, 3, 6, 2, 3, 2, 4, 4, 5, 3, 2, 3]
+      par: [],
+      underPar: 0,
+      onPar: 0,
+      overPar: 0,
+      totalShots: 0
     };
   },
   created() {
@@ -218,6 +227,8 @@ export default {
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
+        this.par = this.getPar;
+        this.parCalc();
       })
       .catch(e => console.log(e));
   },
@@ -239,28 +250,83 @@ export default {
           console.log(err);
         });
     },
+    parCalc() {
+      this.totalShots = this.playersInfo.length * this.par.length; // 42 shots total
+      let underPar = [];
+      let onPar = [];
+      let overPar = [];
+      this.playersInfo.forEach(el => {
+        let i = 0;
+        el.holeScore.forEach(el => {
+          if (el < this.par[i]) {
+            underPar.push(el);
+            i++;
+            return;
+          } else if (el === this.par[i]) {
+            onPar.push(el);
+            i++;
+            return;
+          } else if (el > this.par[i]) {
+            overPar.push(el);
+            i++;
+            return;
+          }
+        });
+        this.underPar = underPar;
+        this.onPar = onPar;
+        this.overPar = overPar;
+      });
+    },
+
     resultColor(score, i) {
-      if (score <= this.par[i] && score !== 1) {
-        // ADD CLASS COLOUR OF GREEN
-        return score;
+      if (score <= this.par[i] && score > 1) {
+        return 'green';
+      } else if (score === 1) {
+        return 'red';
       } else {
-        // ADD CLASS COLOR OF RED
-        if (score === 1) {
-          return score;
-          // NO CHANGE
-        } else {
-          return score;
-        }
+        return;
       }
     }
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     getWinner() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
+    },
+    teamAverage() {
+      let playerTotal = [];
+      this.playersInfo.forEach(el => {
+        if (el.totalScore) {
+          playerTotal.push(el.totalScore);
+        }
+      });
+      playerTotal = playerTotal.reduce((a, b) => {
+        return a + b;
+      });
+      return (playerTotal / this.playersInfo.length).toFixed(1);
+    },
+    holesInOne() {
+      let playerTotal = [];
+      this.playersInfo.forEach(el => {
+        el.holeScore.forEach(el => {
+          if (el === 1) {
+            playerTotal.push(el);
+          }
+        });
+      });
+      return playerTotal.length;
+    },
+    underParPercentage() {
+      return ((this.underPar.length / this.totalShots) * 100).toFixed() + '%';
+    },
+    onParPercentage() {
+      return ((this.onPar.length / this.totalShots) * 100).toFixed() + '%';
+    },
+    overParPercentage() {
+      return ((this.overPar.length / this.totalShots) * 100).toFixed() + '%';
     }
   }
 };
@@ -269,6 +335,9 @@ export default {
 <style scoped>
 .red {
   color: red;
+}
+.green {
+  color: rgb(70, 206, 70);
 }
 .circle {
   @apply h-8 w-8 rounded-full text-center pt-1 font-kalam text-xl text-white;
