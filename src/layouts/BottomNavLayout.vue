@@ -11,7 +11,7 @@
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
         v-if="isDrawerOpen"
       >
-        <RulesScreen />
+        <RulesScreen @close-drawer="isDrawerOpen = false" />
       </div>
     </transition>
   </div>
@@ -35,6 +35,9 @@ export default {
 <style scoped>
 .slide-in-enter-active {
   animation: slide-in-bottom 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86) both;
+}
+.slide-in-leave-active {
+  animation: slide-in-bottom 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86) reverse;
 }
 
 @keyframes slide-in-bottom {

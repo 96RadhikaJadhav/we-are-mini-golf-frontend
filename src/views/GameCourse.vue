@@ -54,6 +54,11 @@ export default {
       this.updatePar();
     }
   },
+  mounted() {
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 500);
+  },
   methods: {
     ...mapActions('gameInfo', ['updatePar']),
     gotoNewHole(holeNo) {
