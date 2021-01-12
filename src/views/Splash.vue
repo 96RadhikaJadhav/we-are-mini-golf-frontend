@@ -71,9 +71,6 @@ export default {
       if (localStorage.getItem('game-details')) {
         localStorage.removeItem('game-details');
       }
-      if (localStorage.getItem('loglevel:webpack-dev-server')) {
-        localStorage.removeItem('loglevel:webpack-dev-server');
-      }
       if (localStorage.getItem('course-grid')) {
         localStorage.removeItem('course-grid');
       }
