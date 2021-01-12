@@ -50,11 +50,13 @@ export default {
     }
   },
   mounted() {
-    window.scroll({
-      top: 1500,
-      left: 0,
-      behavior: 'smooth'
-    });
+    setTimeout(() => {
+      window.scroll({
+        top: 1500,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 500);
   },
   methods: {
     gotoNewHole(holeNo) {
