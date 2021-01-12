@@ -51,11 +51,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      window.scroll({
-        top: 1500,
-        left: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }, 500);
   },
   methods: {
