@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import './styles/tailwind.css';
 import './registerServiceWorker';
+import VueGtm from 'vue-gtm';
 import router from './router';
 import store from './store';
 
@@ -12,3 +13,14 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
+Vue.use(VueGtm, {
+  id: ['GTM-59PVXGQ'],
+  defer: false,
+  enabled: true, // Ex: enabled: !!GDPR_Cookie (optional)
+  debug: process.env.CONTEXT !== 'production', // Whether or not display console logs debugs (optional)
+  loadScript: true,
+  vueRouter: router,
+  ignoredViews: ['PanelRedirector']
+  // trackOnNextTick: false
+});
