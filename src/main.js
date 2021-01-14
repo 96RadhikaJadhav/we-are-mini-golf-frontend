@@ -3,6 +3,7 @@ import App from './App.vue';
 import './styles/tailwind.css';
 import './registerServiceWorker';
 import VueGtm from 'vue-gtm';
+import VueMeta from 'vue-meta'
 import router from './router';
 import store from './store';
 
@@ -23,4 +24,9 @@ Vue.use(VueGtm, {
   vueRouter: router,
   ignoredViews: ['PanelRedirector']
   // trackOnNextTick: false
+});
+
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
 });
