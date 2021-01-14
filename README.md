@@ -1,4 +1,4 @@
-# golf-app
+# We-Are-Mini-Golf
 
 ## Project setup
 ```
