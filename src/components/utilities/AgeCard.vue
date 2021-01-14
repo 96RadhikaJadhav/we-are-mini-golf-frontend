@@ -1,15 +1,18 @@
 <template>
-  <div class="flex items-center p-4 w-full">
+  <div class="inline-flex justify-between py-4">
     <input
       type="text"
-      class="focus:outline-none text-005D63 font-kalam text-xl"
+      class="focus:outline-none w-1/2 text-005D63 font-kalam text-xl mr-1"
       :value="value"
       :placeholder="placeholder"
+      @input="$emit('input-value')"
     />
+
+    <!-- AGE INPUT -->
     <select
       name="age"
       id="age"
-      class="text-3b9d11 border py-1 px-3 border-f5e3c8 rounded-full focus:outline-none relative"
+      class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative"
       required
     >
       <option value="" disabled selected hidden>AGE</option>
@@ -33,8 +36,4 @@ export default {
 };
 </script>
 
-<style scoped>
-option {
-  font-size: 0.75rem;
-}
-</style>
+<style></style>

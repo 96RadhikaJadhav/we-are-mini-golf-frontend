@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { vuexfireMutations } from 'vuexfire';
-import common from './modules/common';
+import gameInfo from './modules/gameInfo';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  mutations: vuexfireMutations,
-  modules: { common }
+  modules: { gameInfo }
 });

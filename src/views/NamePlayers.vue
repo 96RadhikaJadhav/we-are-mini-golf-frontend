@@ -1,50 +1,93 @@
 <template>
-  <div
-    class="h-screen w-full flex flex-col items-center justify-between p-6 bg-players-bg bg-cover bg-center"
+  <form
+    @submit.prevent="startGame"
+    class="grid grid-flow-row items-center bg-players bg-cover bg-center bg-no-repeat md:w-1/2"
   >
-    <div class="h-16"></div>
-
-    <!-- Input Field -->
-    <div class="">
-      <p class="uppercase text-aeb49a text-xl text-center">
+    <div class="self-end space-y-4 px-8">
+      <p class="uppercase text-aeb49a font-semibold text-xl text-center">
         Today's <br />dream team
       </p>
-      <base-card class="my-10">
-        <input-name
-          v-for="input in inputs"
-          :key="input"
-          :placeholder="`Player ${input}`"
-        >
-        </input-name>
-      </base-card>
-    </div>
 
+      <!-- Card -->
+      <div
+        class="bg-white shadow-md mx-6 rounded-3xl md:w-full md:mx-auto xl:w-1/2"
+        v-if="inputs"
+      >
+        <div v-for="(player, index) in playersInfo" :key="index">
+          <div class="flex justify-between py-4 px-4">
+            <InputText
+              :placeholder="`Player ${index + 1}`"
+              v-model="player.name"
+            />
+            <InputSelect v-model="player.age" />
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Start and Back Buttons -->
-    <div class="flex flex-col justify-between h-32">
-      <base-button mode="confirm" to="">
+
+    <div class="flex flex-col space-y-4">
+      <base-button mode="btn confirm" type="submit">
         Start the game!
       </base-button>
 
-      <base-button mode="back" to="SelectPlayers">
+      <base-button mode="back" to="/select-players">
         Change number of players
       </base-button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
-import InputName from '../components/InputName';
+import InputText from '../components/InputText';
+import InputSelect from '../components/InputSelect';
+import BaseButton from '../components/utilities/BaseButton';
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
+  name: 'NamePlayers',
+  components: { InputText, BaseButton, InputSelect },
   data() {
     return {
-      name: 'NamePlayers',
-      inputs: 5
+      inputs: 0,
+      playersInfo: []
     };
   },
-  components: {
-    InputName
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo'])
+  },
+  created() {
+    this.getGameDetails()
+      .then(() => {
+        this.inputs = this.getGameInfo.noOfPlayers;
+      })
+      .catch(e => console.log(e));
+  },
+  methods: {
+    ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
+    startGame() {
+      this.updateGameDetails({ playersInfo: this.playersInfo })
+        .then(this.$router.push({ name: 'GameCourse' }))
+        .catch(e => console.log(e));
+    }
+  },
+  watch: {
+    inputs: {
+      deep: true,
+      handler() {
+        for (var i = 1; i <= this.inputs; i++) {
+          this.playersInfo.push({
+            name: '',
+            age: '',
+            score: 0
+          });
+        }
+      }
+    }
+  },
+  beforeDestroy() {
+    this.inputs = 0;
+    this.playersInfo = [];
   }
 };
 </script>
-
-<style></style>

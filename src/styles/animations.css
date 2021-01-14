@@ -5,5 +5,33 @@
 
 .fade-leave-active,
 .fade-enter-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Slide Animation */
+.slide-enter {
+  transform: translateY(100%);
+}
+.slide-enter-active {
+  animation: slide-in 0.7s forwards;
+}
+.slide-leave-active {
+  animation: slide-out 0.7s forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }

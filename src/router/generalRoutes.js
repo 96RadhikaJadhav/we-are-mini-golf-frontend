@@ -28,7 +28,63 @@ export const generalRoutes = [
     name: 'GameCourse',
     component: () => import('@/views/GameCourse.vue'),
     meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/game-scores',
+    name: 'GameScores',
+    props: true,
+    component: () => import('@/views/GameScores.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/current-total',
+    name: 'CurrentTotal',
+    props: true,
+    component: () => import('@/views/CurrentTotal.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/hole/:holeNo',
+    name: 'NewHole',
+    props: true,
+    component: () => import('@/views/NewHole.vue'),
+    meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }
+  },
+  {
+    path: '/awards',
+    name: 'Awards',
+    component: () => import('@/views/Awards.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
+  },
+  {
+    path: '/current-totals',
+    name: 'CurrentTotals',
+    component: () => import('@/views/CurrentTotal.vue'),
+    meta: {
+      layout: () => import('@/layouts/BottomNavLayout.vue')
+    }
+  },
+  {
+    path: '/final-ranking',
+    name: 'FinalRanking',
+    component: () => import('@/views/FinalRanking.vue'),
+    meta: {
+      // layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
+  },
+  {
+    path: '/rules',
+    name: 'RulesScreen',
+    component: () => import('@/components/rules/RulesScreen.vue')
   }
 ];
