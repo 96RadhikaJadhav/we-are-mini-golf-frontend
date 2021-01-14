@@ -57,10 +57,9 @@ export default {
     ...mapGetters('gameInfo', ['getGameInfo'])
   },
   created() {
+    this.inputs = this.$route.params.noOfPlayers;
     this.getGameDetails()
-      .then(() => {
-        this.inputs = this.getGameInfo.noOfPlayers;
-      })
+      .then(() => {})
       .catch(e => console.log(e));
   },
   methods: {
