@@ -176,7 +176,7 @@ export default {
         let playerPar = [];
 
         for (let i = 0; i < holes.length; i++) {
-          if (holes.reverse()[i] === this.getPar.reverse()[i]) {
+          if (holes[i] === this.getPar[i]) {
             playerPar.push(holes[i]);
           }
         }
@@ -201,7 +201,7 @@ export default {
         let score = el.holeScore;
         let playerPar = [];
         for (let i = 0; i < score.length; i++) {
-          if (score.reverse()[i] - par.reverse()[i] >= min) {
+          if (score[i] - par[i] >= min) {
             playerPar.push(score[i]);
           }
         }

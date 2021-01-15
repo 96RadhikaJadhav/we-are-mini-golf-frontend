@@ -105,9 +105,6 @@ export default {
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
-        this.playersInfo.forEach(el => {
-          el.score = null;
-        });
       })
       .catch(e => console.log(e));
   },
@@ -128,14 +125,11 @@ export default {
       });
     },
     calculateTotal() {
-      this.playersInfo.forEach(val => {
-        if (val.holeScore === null) {
-          val.holeScore = [];
-        }
-        let score = val.score;
-        val.holeScore.push(score);
-        val.totalScore = score + val.totalScore;
-        delete val.score;
+      this.playersInfo.forEach(el => {
+        let score = el.score;
+        el.holeScore.splice(this.holeNo - 1, 1, score);
+        el.totalScore = score + el.totalScore;
+        delete el.score;
       });
     }
   }
