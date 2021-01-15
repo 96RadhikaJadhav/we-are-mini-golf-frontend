@@ -10,18 +10,22 @@
         <p class="uppercase text-aeb49a text-3xl text-center font-kalam py-20">
           Welcome Back!
         </p>
-        <BaseButton
-          class="btn confirm w-full"
-          tag="button"
-          @clicked="resumeGame"
-          >Resume Game</BaseButton
-        >
-        <BaseButton
-          class="btn confirm mt-4 w-full"
-          tag="button"
-          @clicked="newGame"
-          >Start A New Game</BaseButton
-        >
+        <div v-if="checkExistingGame">
+          <BaseButton
+            class="btn confirm w-full"
+            tag="button"
+            @clicked="resumeGame"
+          >
+            Resume Game
+          </BaseButton>
+          <BaseButton
+            class="btn confirm mt-4 w-full"
+            tag="button"
+            @clicked="newGame"
+          >
+            Start A New Game
+          </BaseButton>
+        </div>
       </div>
     </transition>
   </div>
@@ -40,6 +44,11 @@ export default {
     };
   },
   components: { BaseButton },
+  computed: {
+    checkExistingGame() {
+      return localStorage.getItem('course-grid') ? true : false;
+    }
+  },
   created() {
     let gameId = '';
     if (localStorage.getItem('course-grid')) {
