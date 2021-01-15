@@ -58,8 +58,8 @@ export default {
   },
   created() {
     this.getGameDetails()
-      .then(() => {
-        this.inputs = this.getGameInfo.noOfPlayers;
+      .then(response => {
+        this.inputs = response.noOfPlayers;
       })
       .catch(e => console.log(e));
   },

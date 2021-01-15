@@ -42,7 +42,6 @@ const actions = {
           payload
         )
         .then(response => {
-          console.log(response.data);
           commit('updateGameInfo', response.data);
           resolve(response.data);
         })
