@@ -10,6 +10,7 @@
       <div
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
         v-if="isDrawerOpen"
+        v-click-outside="onClickOutside"
       >
         <RulesScreen @close-drawer="isDrawerOpen = false" />
       </div>
@@ -20,14 +21,23 @@
 <script>
 import NavMenu from '@/components/NavMenu';
 import RulesScreen from '@/components/rules/RulesScreen.vue';
+import vClickOutside from 'v-click-outside';
 
 export default {
   name: 'BottomNavLayout',
   components: { NavMenu, RulesScreen },
+  directives: {
+    clickOutside: vClickOutside.directive
+  },
   data() {
     return {
       isDrawerOpen: false
     };
+  },
+  methods: {
+    onClickOutside() {
+      this.isDrawerOpen = false;
+    }
   }
 };
 </script>
