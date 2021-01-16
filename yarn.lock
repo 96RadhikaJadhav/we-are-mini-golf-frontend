@@ -8477,6 +8477,11 @@ uuid@^8.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
+v-click-outside@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-3.1.2.tgz#1dbaa14bf09a21bd16f23a38f03bfa3988f71281"
+  integrity sha512-gMdRqfRE6m6XU6SiFi3dyBlFB2MWogiXpof8Aa3LQysrl9pzTndqp/iEaAphLoadaQUFnQ0ec6fLLaxr7LiY6A==
+
 v8-compile-cache@^2.0.3:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.2.0.tgz#9471efa3ef9128d2f7c6a7ca39c4dd6b5055b132"
@@ -8526,10 +8531,10 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.0.1"
     lodash "^4.17.15"
 
-vue-gtm@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vue-gtm/-/vue-gtm-3.2.0.tgz#f726704ec3728e0aa23f79aa2c8e9766e545beca"
-  integrity sha512-6qsJAVNXi0ZxwrZ1Va7ZEvx8mSWs1NkdZ3Ym24ndBx7D8d4HWHfyE4ZeG8EPAT9ktHhY+zyEcLdup1tZuxlVXA==
+vue-gtm@3.0.0-vue2:
+  version "3.0.0-vue2"
+  resolved "https://registry.yarnpkg.com/vue-gtm/-/vue-gtm-3.0.0-vue2.tgz#cbda283eb4f4d0e22e06b8fc686ce0e1965d17d7"
+  integrity sha512-/KEcSnH6N0qgljmwCsefd2BzDciGMccQv3QFqpahRRlnzmfj3trtEGfTZppUVBlrqii666Yy1KnfI7IXdAa28w==
   dependencies:
     url-search-params-polyfill "^8.1.0"
 
