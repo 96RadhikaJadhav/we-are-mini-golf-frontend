@@ -179,13 +179,18 @@
       </div>
 
       <!-- REVIEW US Button Abs -->
-      <base-button
-        mode="btn confirm"
-        class="sticky bottom-10"
-        @clicked="componentId = 'ReviewModal'"
-      >
-        Review Us
-      </base-button>
+      <div class="flex justify-between sticky bottom-10">
+        <base-button
+          mode="btn confirm"
+          class=""
+          @clicked="componentId = 'ReviewModal'"
+        >
+          Review Us
+        </base-button>
+        <base-button mode="btn confirm" @clicked="newGame">
+          New Game
+        </base-button>
+      </div>
     </div>
   </div>
 </template>
@@ -251,22 +256,25 @@ export default {
         });
     },
     parCalc() {
-      this.totalShots = this.playersInfo.length * this.par.length; // 42 shots total
+      let totalShots = 0;
       let underPar = [];
       let onPar = [];
       let overPar = [];
       this.playersInfo.forEach(el => {
         let i = 0;
         el.holeScore.forEach(el => {
-          if (el < this.par[i]) {
+          if (el > 0) {
+            totalShots += 1;
+          }
+          if (el < this.par[i] && el > 0) {
             underPar.push(el);
             i++;
             return;
-          } else if (el === this.par[i]) {
+          } else if (el === this.par[i] && el > 0) {
             onPar.push(el);
             i++;
             return;
-          } else if (el > this.par[i]) {
+          } else if (el > this.par[i] && el > 0) {
             overPar.push(el);
             i++;
             return;
@@ -275,6 +283,7 @@ export default {
         this.underPar = underPar;
         this.onPar = onPar;
         this.overPar = overPar;
+        this.totalShots = totalShots;
       });
     },
 
@@ -293,6 +302,15 @@ export default {
       } else {
         return '-';
       }
+    },
+    newGame() {
+      if (localStorage.getItem('game-details')) {
+        localStorage.removeItem('game-details');
+      }
+      if (localStorage.getItem('course-grid')) {
+        localStorage.removeItem('course-grid');
+      }
+      this.$router.push({ name: 'Splash' });
     }
   },
   computed: {
