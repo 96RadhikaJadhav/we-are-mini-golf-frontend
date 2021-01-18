@@ -12,14 +12,14 @@
         </p>
         <div v-if="checkExistingGame">
           <BaseButton
-            class="btn confirm w-full"
+            class="btn primary-orange w-full"
             tag="button"
             @clicked="resumeGame"
           >
             Resume Game
           </BaseButton>
           <BaseButton
-            class="btn confirm mt-4 w-full"
+            class="btn primary-orange mt-4 w-full"
             tag="button"
             @clicked="newGame"
           >

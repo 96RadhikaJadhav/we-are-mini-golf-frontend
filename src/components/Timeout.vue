@@ -7,7 +7,7 @@
 
       <div class="w-4/5 mx-auto">
         <div @click="next('close')">
-          <BaseButton mode="btn resume" to="" class="m-5 w-full">
+          <BaseButton mode="btn primary-blue" to="" class="m-5 w-full">
             Resume Game
           </BaseButton>
         </div>
@@ -16,7 +16,7 @@
           <BaseButton
             type="router"
             :to="{ name: 'Splash' }"
-            mode="btn restart"
+            mode="btn secondary-blue"
             class="m-5 w-full"
           >
             Start a new game
