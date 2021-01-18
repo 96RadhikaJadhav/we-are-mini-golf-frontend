@@ -75,7 +75,6 @@ export default {
       });
     },
     createPlayerScores() {
-      console.log(this.getGameInfo.playersInfo);
       let courseHoles = [];
       let holes = this.courseGrid.numberOfHoles;
       let players = this.getGameInfo.playersInfo;

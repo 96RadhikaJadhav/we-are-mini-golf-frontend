@@ -140,7 +140,7 @@
               class="border-r border-f5e3c8 pb-1"
               :class="resultColor(score, index)"
             >
-              {{ score }}
+              {{ scoreUpdate(score) }}
             </p>
           </div>
 
@@ -283,8 +283,15 @@ export default {
         return 'green';
       } else if (score === 1) {
         return 'red';
-      } else {
+      } else if (score == 0) {
         return;
+      }
+    },
+    scoreUpdate(score) {
+      if (score !== 0) {
+        return score;
+      } else {
+        return '-';
       }
     }
   },
@@ -338,6 +345,9 @@ export default {
 }
 .green {
   color: rgb(70, 206, 70);
+}
+.white {
+  color: white;
 }
 .circle {
   @apply h-8 w-8 rounded-full text-center pt-1 font-kalam text-xl text-white;
