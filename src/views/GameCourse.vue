@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'GameCourse',
@@ -47,6 +47,7 @@ export default {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
+          this.createPlayerScores();
         })
         .catch(e => console.log(e));
     } else {
@@ -72,7 +73,21 @@ export default {
         name: 'NewHole',
         params: { holeNo: holeNo, editscore: true }
       });
+    },
+    createPlayerScores() {
+      let courseHoles = [];
+      let holes = this.courseGrid.numberOfHoles;
+      let players = this.getGameInfo.playersInfo;
+      for (let i = 0; i < holes; i++) {
+        courseHoles.push(0);
+      }
+      players.forEach(el => {
+        el.holeScore = courseHoles;
+      });
     }
+  },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo'])
   }
 };
 </script>

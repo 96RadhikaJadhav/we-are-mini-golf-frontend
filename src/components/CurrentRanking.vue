@@ -12,7 +12,7 @@
       <div
         class="flex items-center justify-center h-8 w-8 border border-005d63 rounded-full text-005d63 mr-2"
       >
-        <p class="mt-1">{{ player.holeScore[player.holeScore.length - 1] }}</p>
+        <p class="mt-1">{{ player.holeScore[holeNo - 1] }}</p>
       </div>
     </div>
     <div class="col-span-1">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['player', 'index'],
+  props: ['player', 'index', 'holeNo'],
   methods: {
     rank(i) {
       if (i === 2) {

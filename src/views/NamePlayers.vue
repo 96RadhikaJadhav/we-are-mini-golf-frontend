@@ -79,7 +79,8 @@ export default {
           this.playersInfo.push({
             name: '',
             age: '',
-            score: 0
+            score: 0,
+            holeScore: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           });
         }
       }

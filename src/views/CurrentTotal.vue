@@ -22,7 +22,7 @@
         </p>
         <div class="flex">
           <div
-            v-if="getHighestTotalPlayer.totalScore"
+            v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
             class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
           >
             <p class="mt-1">
@@ -64,6 +64,7 @@
             :key="player.id"
             :player="player"
             :index="index"
+            :holeNo="holeNo"
           >
           </current-ranking>
         </div>
@@ -124,34 +125,29 @@ export default {
   },
   methods: {
     quoteGen(player, i) {
-      const score = player.holeScore;
-      const lastScore = player.holeScore.length - 1;
+      const lastScore = player.holeScore[this.holeNo - 1];
       const quote = this.quote;
       const random = Math.floor(Math.random() * quote.holeInOne.length);
       const par = this.getPar[this.holeNo - 1];
 
       // Hole in One
-      if (score[lastScore] === 1) {
+      if (lastScore === 1) {
         const newQuote = quote.holeInOne[random];
         return `${player.name}${newQuote}`;
-      } else if (
-        score[lastScore] > 1 &&
-        score[lastScore] < par &&
-        i === this.counter
-      ) {
+      } else if (lastScore > 1 && lastScore < par && i === this.counter) {
         const newQuote = quote.parBestUnder[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] === par && i === this.counter) {
+      } else if (lastScore === par && i === this.counter) {
         const newQuote = quote.parExact[random];
         return `${player.name}${newQuote}`;
       } else if (
-        score[lastScore] >= par + 1 &&
-        score[lastScore] <= par + 2 &&
+        lastScore >= par + 1 &&
+        lastScore <= par + 2 &&
         i === this.counter
       ) {
         const newQuote = quote.parOverByOne[random];
         return `${player.name}${newQuote}`;
-      } else if (score[lastScore] >= par + 3 && i === this.counter) {
+      } else if (lastScore >= par + 3 && i === this.counter) {
         const newQuote = quote.parOverByThree[random];
         return `${player.name}${newQuote}`;
       } else return;
