@@ -2,13 +2,16 @@
   <div
     class="grid grid-flow-row grid-rows-4 items-center bg-total bg-no-repeat bg-cover bg-center h-screen md:w-1/2 px-4"
   >
-    <!-- Top of page quote -->
-    <div class="p-6 font-capriola mt-4 mb-16 text-center text-white">
-      <p v-for="(player, index) in playersInfo" :key="player.id">
-        {{ quoteGen(player, index) }}
-      </p>
-    </div>
+    <QuotesDisplay
+      :playersInfo="playersInfo"
+      :holeNo="holeNo"
+      :getPar="getPar"
+      class="animate-drop transition-all"
+      :class="{ show: isDisplayed }"
+      @click="isDisplayed = !isDisplayed"
+    ></QuotesDisplay>
 
+    <div></div>
     <!-- 1st Place -->
     <div class="flex flex-col items-center h-full">
       <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
@@ -85,13 +88,13 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
+import QuotesDisplay from '@/components/QuotesDisplay';
 import { orderBy } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
-import quote from '@/quotes.js';
 
 export default {
   name: 'CurrentTotal',
-  components: { BaseButton, CurrentRanking },
+  components: { BaseButton, CurrentRanking, QuotesDisplay },
   props: {
     holeNo: {
       type: Number
@@ -103,7 +106,7 @@ export default {
   data() {
     return {
       playersInfo: [],
-      quote
+      isDisplayed: false
     };
   },
   created() {
@@ -115,7 +118,7 @@ export default {
       .catch(e => console.log(e));
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo', 'counter', 'getPar']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
@@ -124,35 +127,6 @@ export default {
     }
   },
   methods: {
-    quoteGen(player, i) {
-      const lastScore = player.holeScore[this.holeNo - 1];
-      const quote = this.quote;
-      const random = Math.floor(Math.random() * quote.holeInOne.length);
-      const par = this.getPar[this.holeNo - 1];
-
-      // Hole in One
-      if (lastScore === 1) {
-        const newQuote = quote.holeInOne[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore > 1 && lastScore < par && i === this.counter) {
-        const newQuote = quote.parBestUnder[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore === par && i === this.counter) {
-        const newQuote = quote.parExact[random];
-        return `${player.name}${newQuote}`;
-      } else if (
-        lastScore >= par + 1 &&
-        lastScore <= par + 2 &&
-        i === this.counter
-      ) {
-        const newQuote = quote.parOverByOne[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore >= par + 3 && i === this.counter) {
-        const newQuote = quote.parOverByThree[random];
-        return `${player.name}${newQuote}`;
-      } else return;
-    },
-
     ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
@@ -165,4 +139,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.show {
+  top: 0;
+}
+</style>
