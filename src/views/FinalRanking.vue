@@ -57,7 +57,7 @@
           <div class="mb-2">
             <base-button
               type="button"
-              class="btn confirm mb-4"
+              class="btn primary-orange mb-4"
               @clicked="componentId = 'ReviewModal'"
             >
               REVIEW US
@@ -181,13 +181,13 @@
       <!-- REVIEW US Button Abs -->
       <div class="flex justify-between sticky bottom-10">
         <base-button
-          mode="btn confirm"
+          mode="btn primary-orange"
           class=""
           @clicked="componentId = 'ReviewModal'"
         >
           Review Us
         </base-button>
-        <base-button mode="btn confirm" @clicked="newGame">
+        <base-button mode="btn primary-orange" @clicked="newGame">
           New Game
         </base-button>
       </div>

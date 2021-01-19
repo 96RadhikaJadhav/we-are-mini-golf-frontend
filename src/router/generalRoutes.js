@@ -86,5 +86,13 @@ export const generalRoutes = [
     path: '/rules',
     name: 'RulesScreen',
     component: () => import('@/components/rules/RulesScreen.vue')
+  },
+  {
+    path: '/last-chance',
+    name: 'LastHoleWarning',
+    component: () => import('@/views/LastHoleWarning.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
   }
 ];

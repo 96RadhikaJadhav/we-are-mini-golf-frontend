@@ -74,7 +74,7 @@
     <div class="flex-1 flex items-center h-1/4">
       <base-button
         :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
-        mode="btn confirm"
+        mode="btn primary-orange"
       >
         {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
       </base-button>
@@ -103,7 +103,8 @@ export default {
   data() {
     return {
       playersInfo: [],
-      quote
+      quote,
+      holesPlayed: 0
     };
   },
   created() {
@@ -111,6 +112,7 @@ export default {
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
         this.increaseCounter();
+        this.calculateHolesPlayed();
       })
       .catch(e => console.log(e));
   },
@@ -124,6 +126,13 @@ export default {
     }
   },
   methods: {
+    calculateHolesPlayed() {
+      this.playersInfo[0].holeScore.forEach(el => {
+        if (el !== 0) {
+          this.holesPlayed += 1;
+        }
+      });
+    },
     quoteGen(player, i) {
       const lastScore = player.holeScore[this.holeNo - 1];
       const quote = this.quote;
@@ -156,11 +165,20 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
-    if (to.params.holeNo === this.getPar.length) {
+    if (
+      to.params.holeNo === this.getPar.length &&
+      this.getPar.length === this.holesPlayed
+    ) {
       return next({ name: 'Awards' });
+    } else if (
+      to.params.holeNo === this.getPar.length &&
+      this.getPar.length !== this.holesPlayed
+    ) {
+      return next({ name: 'LastHoleWarning' });
+    } else {
+      to.params.holeNo = to.params.holeNo + 1;
+      next();
     }
-    to.params.holeNo = to.params.holeNo + 1;
-    next();
   }
 };
 </script>

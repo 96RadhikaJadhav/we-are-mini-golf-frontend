@@ -43,16 +43,16 @@ export default {
 .btn {
   @apply py-2 px-8 uppercase rounded-full shadow-lg;
 }
-.confirm {
+.primary-orange {
   @apply bg-ff6350;
 }
 .back {
   @apply p-1;
 }
-.resume {
+.primary-blue {
   @apply bg-005d63 px-1;
 }
-.restart {
+.secondary-blue {
   @apply border border-005d63 text-005d63 px-1;
 }
 </style>
