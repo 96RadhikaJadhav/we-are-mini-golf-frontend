@@ -3,25 +3,23 @@
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
       <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
         <img
-          v-if="!square.active"
-          :src="square.inactive.url"
-          class="w-full h-full object-fill"
-          :alt="square.id"
-        />
-        <img
-          v-else-if="
-            !square.isHoleActive || square.holeNo === square.holeNo.length
-          "
+          v-if="(square.active && !square.isHoleActive) || square.isLastHole"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"
           @click="gotoNewHole(square.holeNo, index)"
         />
         <img
-          v-else
+          v-else-if="square.isHoleActive"
           :src="square.active.url"
           class="w-full h-full object-fill"
           @click="editHoleDetails(square.holeNo)"
+        />
+        <img
+          v-else
+          :src="square.inactive.url"
+          class="w-full h-full object-fill"
+          :alt="square.id"
         />
       </div>
     </div>
