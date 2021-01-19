@@ -7,7 +7,6 @@
       <div class="flex items-center">
         <star-rating
           v-model="reviewerRating"
-          :increment="0.5"
           :show-rating="false"
           :star-size="40"
         />
