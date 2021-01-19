@@ -73,7 +73,7 @@
     <!-- Button -->
     <div class="flex-1 flex items-center h-1/4">
       <base-button
-        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
+        :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
         mode="btn primary-orange"
       >
         {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}

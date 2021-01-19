@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-1/2 bg-no-repeat bg-cover bg-center grid grid-rows-3 relative"
+    class="md:w-1/2 bg-no-repeat bg-cover bg-center flex flex-col"
     :class="[holeBg]"
   >
     <div v-if="holeNo === getPar.length">
@@ -15,12 +15,18 @@
         }}
       </p>
     </div>
-    <div v-if="getPar.length != holeNo">
-      <p class="font-kalam holeno text-white">
+    <div v-if="getPar.length != holeNo" class="flex-1">
+      <p class="font-kalam text-white holeno">
         {{ holeNo }}
       </p>
     </div>
-    <p class="font-kalam text-005d63 par">Par {{ getPar[holeNo - 1] }}</p>
+    <div class="relative">
+      <img
+        src="https://res.cloudinary.com/doblhgoan/image/upload/v1610893812/we-are-mini-golf/05_-_Par_transition_screen_-_transparent_bg_-_cropped_tolhso.png"
+        style="width:90%;"
+      />
+      <p class="par font-kalam text-005d63">Par {{ getPar[holeNo - 1] }}</p>
+    </div>
   </div>
 </template>
 
@@ -91,15 +97,17 @@ export default {
 <style scoped>
 .holeno {
   position: absolute;
-  top: 28%;
-  left: 52.5%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-size: 2em;
 }
 
 .par {
   position: absolute;
-  bottom: 22%;
-  left: 40%;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
   font-size: 2em;
 }
 </style>
