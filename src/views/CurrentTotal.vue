@@ -12,7 +12,6 @@
       ></QuotesDisplay>
     </transition>
 
-    <div>{{ isDisplayed }}</div>
     <!-- 1st Place -->
     <div class="flex flex-col items-center h-full">
       <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
