@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute popout left-0 w-full p-4">
+  <div class="w-full p-4">
     <!-- Top of page quote -->
     <BaseCard class="pb-10">
       <p

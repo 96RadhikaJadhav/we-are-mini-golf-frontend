@@ -39,19 +39,6 @@ module.exports = {
       }),
       container: {
         center: true
-      },
-      keyframes: {
-        drop: {
-          '0%': { top: '0%' },
-          '25%': { top: '25%' },
-          '28%': { top: '22%' },
-          '80%': { top: '22%' },
-          '83%': { top: '25%' },
-          '100%': { top: '-95%' }
-        }
-      },
-      animation: {
-        drop: 'drop 4s ease-in-out backwards'
       }
     },
 

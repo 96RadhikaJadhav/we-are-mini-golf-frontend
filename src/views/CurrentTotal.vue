@@ -1,17 +1,18 @@
 <template>
   <div
     class="grid grid-flow-row grid-rows-4 items-center bg-total bg-no-repeat bg-cover bg-center h-screen md:w-1/2 px-4"
+    @click="isDisplayed = !isDisplayed"
   >
-    <QuotesDisplay
-      :playersInfo="playersInfo"
-      :holeNo="holeNo"
-      :getPar="getPar"
-      class="animate-drop transition-all"
-      :class="{ show: isDisplayed }"
-      @click="isDisplayed = !isDisplayed"
-    ></QuotesDisplay>
+    <transition name="drop">
+      <QuotesDisplay
+        :playersInfo="playersInfo"
+        :holeNo="holeNo"
+        :getPar="getPar"
+        :class="{ show: isDisplayed }"
+      ></QuotesDisplay>
+    </transition>
 
-    <div></div>
+    <div>{{ isDisplayed }}</div>
     <!-- 1st Place -->
     <div class="flex flex-col items-center h-full">
       <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
@@ -141,6 +142,21 @@ export default {
 
 <style scoped>
 .show {
-  top: 0;
+}
+.drop-enter-active {
+  animation: drop-down 2s ease-out both;
+}
+.drop-leave-active {
+  animation: drop-down 2s ease-out reverse;
+}
+
+@keyframes drop-down {
+  0% {
+    transform: translateY(-1000px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
