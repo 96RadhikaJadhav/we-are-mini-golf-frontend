@@ -1,5 +1,5 @@
 <template>
-  <ModalLayout @close="$emit('close')" :invalid="invalid">
+  <ModalLayout :closingButton="true" @close="$emit('close')" :invalid="invalid">
     <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
       <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
 

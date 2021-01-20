@@ -1,5 +1,5 @@
 <template>
-  <ModalLayout @close="$emit('close')">
+  <ModalLayout :closingButton="true" @close="$emit('close')">
     <img
       src="https://res.cloudinary.com/doblhgoan/image/upload/v1610957518/we-are-mini-golf/09-Final-ranking-review-popup-thanks_mym1sb.png"
       class="absolute top-96"
