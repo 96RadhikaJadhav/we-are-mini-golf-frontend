@@ -85,7 +85,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo'])
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.params.holeNo === this.getPar.length) {
+      return next({ name: 'LastHoleWarning' });
+    } else {
+      next();
+    }
   }
 };
 </script>

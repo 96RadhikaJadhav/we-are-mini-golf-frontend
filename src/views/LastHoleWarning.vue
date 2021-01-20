@@ -59,6 +59,8 @@ export default {
           unfinishedHole.push(index + 1);
         }
       });
+      unfinishedHole.splice(-1, 1);
+      unfinishedHole.splice(-1, 0, 'and');
       return unfinishedHole.join(', ');
     }
   }
