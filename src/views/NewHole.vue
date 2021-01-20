@@ -20,7 +20,7 @@
         {{ holeNo }}
       </p>
     </div>
-    <div class="relative">
+    <div class="relative" v-if="getPar.length !== holeNo">
       <img
         src="https://res.cloudinary.com/doblhgoan/image/upload/v1610893812/we-are-mini-golf/05_-_Par_transition_screen_-_transparent_bg_-_cropped_tolhso.png"
         style="width:90%;"
