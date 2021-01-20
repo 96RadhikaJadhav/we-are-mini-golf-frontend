@@ -49,12 +49,13 @@ export default {
         noOfPlayers: this.noOfPlayers
       };
       this.updateGameDetails(payload)
-        .then(
+        .then(() => {
           this.$router.push({
             name: 'NamePlayers',
             params: { noOfPlayers: this.noOfPlayers }
-          })
-        )
+          });
+        })
+
         .catch(e => console.log(e));
     }
   }

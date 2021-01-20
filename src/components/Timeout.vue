@@ -1,37 +1,42 @@
 <template>
   <div class="z-50">
-    <ModalLayout @close="next('close')">
-      <h1 class="uppercase text-aeb49a text-xl text-center font-kalam px-5">
-        <slot></slot>
-      </h1>
+    <ModalLayout @close="next('close')" :closingButton="false">
+      <div class="py-6">
+        <h1 class="uppercase text-aeb49a text-xl text-center font-kalam px-5">
+          <slot></slot>
+        </h1>
 
-      <div class="w-4/5 mx-auto">
-        <div @click="next('close')">
-          <BaseButton mode="btn primary-blue" to="" class="m-5 w-full">
-            Resume Game
-          </BaseButton>
+        <div class="w-4/5 mx-auto">
+          <div @click="next('close')">
+            <BaseButton mode="btn primary-blue" to="" class="m-5 w-full">
+              Resume Game
+            </BaseButton>
+          </div>
+
+          <div @click="next('restart')">
+            <BaseButton
+              type="router"
+              :to="{ name: 'Splash' }"
+              mode="btn secondary-blue"
+              class="m-5 w-full"
+            >
+              Start a new game
+            </BaseButton>
+          </div>
         </div>
 
-        <div @click="next('restart')">
+        <div @click="next('review')">
           <BaseButton
             type="router"
-            :to="{ name: 'Splash' }"
-            mode="btn secondary-blue"
-            class="m-5 w-full"
+            :to="{
+              name: 'FinalRanking',
+              params: { componentId: 'ReviewModal' }
+            }"
+            class="text-005d63 text-center font-capriola pt-2"
           >
-            Start a new game
+            Review us
           </BaseButton>
         </div>
-      </div>
-
-      <div @click="next('review')">
-        <BaseButton
-          type="router"
-          :to="{ name: 'FinalRanking', params: { componentId: 'ReviewModal' } }"
-          class="text-005d63 text-center font-capriola mb-12 pt-2"
-        >
-          Review us
-        </BaseButton>
       </div>
     </ModalLayout>
   </div>

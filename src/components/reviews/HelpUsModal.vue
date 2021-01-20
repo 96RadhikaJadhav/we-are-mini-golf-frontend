@@ -1,5 +1,5 @@
 <template>
-  <ModalLayout @close="$emit('close')">
+  <ModalLayout :closingButton="true" @close="$emit('close')">
     <p class="uppercase text-aeb49a text-2xl mb-10 text-center">
       We love that <br />
       you loved it!
@@ -11,23 +11,23 @@
 
     <!-- LOGOS -->
     <div class="flex items-center justify-evenly mb-10">
-      <router-link to="">
+      <a :href="googleUrl">
         <div class="h-20 w-20">
           <img src="@/assets/image-1.png" alt="" />
           <!-- cannot find google maps icon with white bg for here -->
         </div>
-      </router-link>
+      </a>
 
-      <router-link to="">
+      <a :href="tripAdvisorUrl">
         <div class="h-20 w-20">
           <img src="@/assets/image-2@2x.png" />
         </div>
-      </router-link>
+      </a>
 
-      <router-link to="">
+      <a :href="yelpUrl">
         <div class="h-2- w-20">
           <img src="@/assets/image-3@2x.png" class="h-20 w-20" /></div
-      ></router-link>
+      ></a>
     </div>
 
     <!-- Orange bottom of Card -->
@@ -43,7 +43,21 @@
 <script>
 import ModalLayout from '@/layouts/ModalLayout';
 export default {
-  components: { ModalLayout }
+  data() {
+    return {
+      googleUrl: '',
+      tripAdvisorUrl: '',
+      yelpUrl: ''
+    };
+  },
+  components: { ModalLayout },
+  created() {
+    let grid = JSON.parse(localStorage.getItem('course-grid'));
+    let url = grid.socialInfo;
+    this.googleUrl = url.google;
+    this.tripAdvisorUrl = url.tripAdvisor;
+    this.yelpUrl = url.yelp;
+  }
 };
 </script>
 
