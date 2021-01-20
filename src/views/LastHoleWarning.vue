@@ -21,7 +21,9 @@
           class="mb-4"
           >Tackle it now</BaseButton
         >
-        <BaseButton :to="{ name: 'Awards' }" mode="btn secondary-blue"
+        <BaseButton
+          :to="{ name: 'NewHole', params: { holeNo: this.getPar.length } }"
+          mode="btn secondary-blue"
           >Finish anyway</BaseButton
         >
       </div>
@@ -51,7 +53,7 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails'])
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     unfinishedHoles() {
       let unfinishedHole = [];
       this.playersInfo[0].holeScore.forEach((el, index) => {
@@ -59,6 +61,8 @@ export default {
           unfinishedHole.push(index + 1);
         }
       });
+      unfinishedHole.splice(-1, 1);
+      unfinishedHole.splice(-1, 0, 'and');
       return unfinishedHole.join(', ');
     }
   }

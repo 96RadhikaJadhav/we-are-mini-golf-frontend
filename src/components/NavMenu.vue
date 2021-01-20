@@ -10,7 +10,7 @@
       />
     </router-link>
 
-    <router-link :to="{ name: 'GameScores', params: { showTotal: true } }">
+    <router-link :to="{ name: 'CurrentTotal', params: { showTotal: true } }">
       <img
         @click="isActive = 'scores'"
         :src="

@@ -4,13 +4,14 @@
   >
     <!-- Top of page quote -->
     <div
-      v-if="playersInfo"
+      v-if="!showTotal"
       class="p-6 font-capriola mt-4 mb-16 text-center text-white"
     >
       <p v-for="(player, index) in playersInfo" :key="player.id">
         {{ quoteGen(player, index) }}
       </p>
     </div>
+    <div v-else></div>
 
     <!-- 1st Place -->
     <div class="flex flex-col items-center h-full">
@@ -25,11 +26,11 @@
         </p>
         <div class="flex">
           <div
-            v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
+            v-if="getHighestTotalPlayer"
             class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
           >
             <p class="mt-1">
-              {{ getHighestTotalPlayer.totalScore }}
+              {{ getHighestTotalPlayer.holeScore[holeNo - 1] }}
             </p>
           </div>
           <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
@@ -48,8 +49,8 @@
         <div class="col-span-4"></div>
         <div class="col-span-1">
           <p class="text-005d63">
-            Last<br />
-            hole
+            Hole<br />
+            No {{ holeNo }}
           </p>
         </div>
         <div class="col-span-1">
@@ -71,15 +72,25 @@
           >
           </current-ranking>
         </div>
+        <div v-if="!showTotal" class="grid grid-cols-6">
+          <div class="col-span-4"></div>
+          <div class="col-span-2">
+            <p class="font-kalam text-005d63">PAR {{ par }}</p>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Button -->
-    <div class="flex-1 flex items-center h-1/4">
+    <div v-if="!showTotal" class="flex-1 flex items-center h-1/4">
       <base-button
         :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
         mode="btn primary-orange"
       >
-        {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
+        {{
+          holeNo != this.getPar.length
+            ? 'on to the next hole!'
+            : 'Award ceremony'
+        }}
       </base-button>
     </div>
   </div>
@@ -101,6 +112,9 @@ export default {
     },
     par: {
       type: Number
+    },
+    showTotal: {
+      type: Boolean
     }
   },
   data() {
@@ -169,16 +183,8 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
-    if (
-      to.params.holeNo === this.getPar.length &&
-      this.getPar.length === this.holesPlayed
-    ) {
+    if (to.params.holeNo === this.getPar.length) {
       return next({ name: 'Awards' });
-    } else if (
-      to.params.holeNo === this.getPar.length &&
-      this.getPar.length !== this.holesPlayed
-    ) {
-      return next({ name: 'LastHoleWarning' });
     } else {
       to.params.holeNo = to.params.holeNo + 1;
       next();
