@@ -67,7 +67,9 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     startGame() {
       this.updateGameDetails({ playersInfo: this.playersInfo })
-        .then(this.$router.push({ name: 'GameCourse' }))
+        .then(() => {
+          this.$router.push({ name: 'GameCourse' });
+        })
         .catch(e => console.log(e));
     }
   },

@@ -116,7 +116,9 @@ export default {
       if (!this.editscore) {
         this.calculateTotal();
         this.updateGameDetails({ playersInfo: this.playersInfo })
-          .then(this.navigateTo())
+          .then(() => {
+            this.navigateTo();
+          })
           .catch(e => console.log(e));
       }
     },
