@@ -60,6 +60,11 @@ export default {
     this.getGameDetails()
       .then(response => {
         this.inputs = response.noOfPlayers;
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: "players_selected",
+          players: response.noOfPlayers
+        });
       })
       .catch(e => console.log(e));
   },
