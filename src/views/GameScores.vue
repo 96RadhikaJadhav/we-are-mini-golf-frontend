@@ -1,24 +1,22 @@
 <template>
   <div
-    class="grid grid-flow-row grid-rows-3 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 "
+    class="grid grid-rows-3 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 "
   >
     <!-- HOLE AND PAR -->
     <div
-      class="text-center font-kalam text-005d63 uppercase h-full text-xl md:text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center"
+      class="text-center font-kalam text-005d63 uppercase h-full text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center"
     >
-      <div class="mb-2 md:mb-8">
+      <div class="mb-4">
         <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
         <p>PAR {{ getPar[holeNo - 1] }}</p>
       </div>
     </div>
 
-    <div
-      class="w-full px-6 h-full flex flex-col items-center justify-center row-span-3"
-    >
+    <div class="w-full px-6 pt-6 h-full flex flex-col items-center row-span-3">
       <div class="w-full flex flex-col justify-between">
         <!-- DIV FOR BASE CARD -->
         <div
-          class="bg-white rounded-3xl items-center justify-center px-4 my-4 text-2xl"
+          class="bg-white rounded-3xl items-center justify-center px-4 text-2xl"
         >
           <div
             v-for="player in playersInfo"
@@ -57,12 +55,8 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- CONFIRM BUTTON flex-item 3 -->
-    <div>
       <base-button
-        class="mb-20"
+        class="mt-8"
         mode="btn primary-orange"
         @clicked="updatePlayerScore"
         v-if="!showTotal"
@@ -70,6 +64,9 @@
         Confirm
       </base-button>
     </div>
+
+    <!-- CONFIRM BUTTON flex-item 3 -->
+    <div></div>
   </div>
 </template>
 
