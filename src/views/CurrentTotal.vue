@@ -49,8 +49,8 @@
         <div class="col-span-4"></div>
         <div class="col-span-1">
           <p class="text-005d63">
-            Last<br />
-            hole
+            Hole<br />
+            No {{ holeNo }}
           </p>
         </div>
         <div class="col-span-1">
@@ -71,6 +71,12 @@
             :holeNo="holeNo"
           >
           </current-ranking>
+        </div>
+        <div v-if="!showTotal" class="grid grid-cols-6">
+          <div class="col-span-4"></div>
+          <div class="col-span-2">
+            <p class="font-kalam text-005d63">PAR {{ par }}</p>
+          </div>
         </div>
       </div>
     </div>

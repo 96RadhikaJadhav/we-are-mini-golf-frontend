@@ -123,7 +123,7 @@ export default {
     navigateTo() {
       this.$router.push({
         name: this.editscore ? 'GameCourse' : 'CurrentTotal',
-        params: { holeNo: this.holeNo }
+        params: { holeNo: this.holeNo, par: this.getPar[this.holeNo - 1] }
       });
     },
     calculateTotal() {
