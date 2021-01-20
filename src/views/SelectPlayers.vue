@@ -55,7 +55,6 @@ export default {
             params: { noOfPlayers: this.noOfPlayers }
           });
         })
-
         .catch(e => console.log(e));
     }
   }

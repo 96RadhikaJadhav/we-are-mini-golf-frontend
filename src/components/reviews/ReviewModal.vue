@@ -57,6 +57,12 @@ export default {
       invalid: false
     };
   },
+  created() {
+    this.$gtm.trackEvent({
+      event: 'gaEvent',
+      eventName: "review_open",
+    });
+  },
   methods: {
     submitReview() {
       if (
@@ -68,6 +74,11 @@ export default {
         return;
       } else {
         this.invalid = false;
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: "review_submit",
+          rating: this.reviewerRating
+        });
         this.$emit(
           'submit',
           this.reviewerName,
