@@ -1,5 +1,5 @@
 <template>
-  <ModalLayout @close="$emit('close')" :invalid="invalid">
+  <ModalLayout :closingButton="true" @close="$emit('close')" :invalid="invalid">
     <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
       <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
 
@@ -57,6 +57,12 @@ export default {
       invalid: false
     };
   },
+  created() {
+    this.$gtm.trackEvent({
+      event: 'gaEvent',
+      eventName: "review_open",
+    });
+  },
   methods: {
     submitReview() {
       if (
@@ -68,6 +74,11 @@ export default {
         return;
       } else {
         this.invalid = false;
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: "review_submit",
+          rating: this.reviewerRating
+        });
         this.$emit(
           'submit',
           this.reviewerName,

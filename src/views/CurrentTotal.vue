@@ -21,7 +21,7 @@
         v-if="getHighestTotalPlayer"
         class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
       >
-        <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
+        <p class="font-lg mb-2 text-2xl" v-if="playersInfo">
           {{ getHighestTotalPlayer.name }}
         </p>
         <div class="flex">
@@ -34,7 +34,7 @@
             </p>
           </div>
           <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
-            <p class="mt-1 text-xl" v-if="playersInfo.length > 0">
+            <p class="mt-1 text-xl" v-if="playersInfo">
               {{ getHighestTotalPlayer.totalScore }}
             </p>
           </div>
@@ -126,8 +126,9 @@ export default {
   },
   created() {
     this.getGameDetails()
-      .then(() => {
-        this.playersInfo = this.getGameInfo.playersInfo;
+      .then(response => {
+        console.log(response);
+        this.playersInfo = response.playersInfo;
         this.increaseCounter();
         this.calculateHolesPlayed();
       })

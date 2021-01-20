@@ -60,6 +60,11 @@ export default {
     this.getGameDetails()
       .then(response => {
         this.inputs = response.noOfPlayers;
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: "players_selected",
+          players: response.noOfPlayers
+        });
       })
       .catch(e => console.log(e));
   },
@@ -67,7 +72,9 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     startGame() {
       this.updateGameDetails({ playersInfo: this.playersInfo })
-        .then(this.$router.push({ name: 'GameCourse' }))
+        .then(() => {
+          this.$router.push({ name: 'GameCourse' });
+        })
         .catch(e => console.log(e));
     }
   },
