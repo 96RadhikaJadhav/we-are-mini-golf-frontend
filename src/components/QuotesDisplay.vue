@@ -3,11 +3,11 @@
     <!-- Top of page quote -->
     <BaseCard class="pb-10">
       <p
-        v-for="player in playersInfo"
+        v-for="(player, index) in playersInfo"
         :key="player.id"
         class="uppercase text-aeb49a text-xl text-center font-kalam p-4"
       >
-        2 on the par good
+        {{ quoteGen(player, index) }}
       </p>
     </BaseCard>
   </div>

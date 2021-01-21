@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2">
+  <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2 mb-4">
     <transition name="fade-in">
       <div
         class="w-screen h-screen absolute top-0 left-0 flex flex-col justify-center items-center overlay"
@@ -82,12 +82,16 @@
         </div>
       </div>
       <!-- Button -->
-      <div class="flex items-center h-1/4 pb-6">
+      <div v-if="!showTotal" class="flex-1 flex items-center h-1/4">
         <base-button
-          :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
-          mode="btn confirm primary-orange"
+          :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
+          mode="btn primary-orange"
         >
-          {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
+          {{
+            holeNo != this.getPar.length
+              ? 'on to the next hole!'
+              : 'Award ceremony'
+          }}
         </base-button>
       </div>
     </div>
