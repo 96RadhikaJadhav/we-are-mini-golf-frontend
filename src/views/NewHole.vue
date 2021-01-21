@@ -1,12 +1,8 @@
 <template>
-  <div
-    class="md:w-1/2 bg-no-repeat bg-cover bg-center flex flex-col"
-    :class="[holeBg]"
-  >
+  <div class="md:w-1/2 bg-no-repeat bg-cover bg-center" :class="holeBg">
+    <!-- LAST HOLE SCREEN QUOTE -->
     <div v-if="holeNo === getPar.length">
-      <p
-        class="px-12 pt-8 font-capriola mt-4 mb-16 text-center text-white text-xl"
-      >
+      <p class="px-12 pt-8 font-capriola mb-16 text-center text-white text-xl">
         {{ lastPlace }},
         {{
           getGameInfo.playersInfo.length !== 1
@@ -15,17 +11,21 @@
         }}
       </p>
     </div>
-    <div v-if="getPar.length != holeNo" class="flex-1">
-      <p class="font-kalam text-white holeno">
-        {{ holeNo }}
-      </p>
+
+    <!-- HOLE NUMBER IMG -->
+    <div v-if="holeNo !== getPar.length">
+      <img :src="require(`@/assets/newHole/holeNo/hole-${holeNo}.png`)" />
     </div>
-    <div class="relative" v-if="getPar.length !== holeNo">
+    <div v-else>
+      <img :src="require(`@/assets/newHole/holeNo/last-hole.png`)" />
+    </div>
+
+    <!-- PAR INFO IMG -->
+    <div>
       <img
-        src="https://res.cloudinary.com/doblhgoan/image/upload/v1610893812/we-are-mini-golf/05_-_Par_transition_screen_-_transparent_bg_-_cropped_tolhso.png"
-        style="width:90%;"
+        :class="{ translate: lastHole }"
+        :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
       />
-      <p class="par font-kalam text-005d63">Par {{ getPar[holeNo - 1] }}</p>
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ export default {
       hole: false,
       courseGrid: {},
       coursePar: null,
+      lastHole: false
       holeNo: 0
     };
   },
@@ -67,6 +68,9 @@ export default {
   created() {
     this.holeNo = parseInt(localStorage.getItem('current-hole'));
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    this.holeNo === this.getPar.length
+      ? (this.lastHole = true)
+      : (this.lastHole = false);
     this.updateHoleStatus();
   },
   methods: {
@@ -107,5 +111,8 @@ export default {
   top: 70%;
   transform: translate(-50%, -50%);
   font-size: 2em;
+}
+.translate {
+  transform: translateY(-1.75rem);
 }
 </style>
