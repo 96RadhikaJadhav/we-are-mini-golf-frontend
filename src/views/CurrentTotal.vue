@@ -9,7 +9,7 @@
     </transition>
     <div
       :class="[
-        'quote-container-hidden md:w-1/2',
+        'quote-container-hidden w-full md:w-1/2',
         isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
       ]"
     >
