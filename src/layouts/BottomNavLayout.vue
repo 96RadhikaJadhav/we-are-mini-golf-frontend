@@ -1,9 +1,9 @@
 <template>
-  <div class="h-full w-full">
+  <div class="h-full w-full flex flex-col">
     <transition name="fade" mode="out-in">
-      <router-view class="mx-auto box-border min-h-screen" />
+      <router-view class="flex-1 box-border" />
     </transition>
-    <div class="fixed left-0 right-0 bottom-0">
+    <div class="fixed bottom-0 left-0 right-0">
       <NavMenu @display-rules="isDrawerOpen = !isDrawerOpen" />
     </div>
     <transition name="slide-in">

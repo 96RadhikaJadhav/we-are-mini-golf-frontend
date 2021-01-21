@@ -1,86 +1,95 @@
 <template>
-  <div
-    class="grid grid-flow-row grid-rows-4 items-center bg-total bg-no-repeat bg-cover bg-center h-screen md:w-1/2 px-4"
-    @click="isDisplayed = !isDisplayed"
-  >
-    <transition name="drop">
+  <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2">
+    <div class="grid-container items-center h-full">
+      <!-- 1st Place -->
+      <div class="flex flex-col justify-end items-center h-full">
+        <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
+
+        <div
+          v-if="getHighestTotalPlayer"
+          class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
+        >
+          <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
+            {{ getHighestTotalPlayer.name }}
+          </p>
+          <div class="flex">
+            <div
+              v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
+              class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
+            >
+              <p class="mt-1">
+                {{ getHighestTotalPlayer.totalScore }}
+              </p>
+            </div>
+            <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
+              <p class="mt-1 text-xl" v-if="playersInfo.length > 0">
+                {{ getHighestTotalPlayer.totalScore }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of 1st Place -->
+
+      <!-- Ranking Table -->
+      <div class="px-8" v-if="playersInfo.length > 1">
+        <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
+          <div class="col-span-4"></div>
+          <div class="col-span-1">
+            <p class="text-005d63">
+              Last<br />
+              hole
+            </p>
+          </div>
+          <div class="col-span-1">
+            <p class="text-ff8e67">
+              Total<br />
+              score
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-between h-full">
+          <div>
+            <current-ranking
+              v-for="(player, index) in otherPlayerRankings"
+              :key="player.id"
+              :player="player"
+              :index="index"
+              :holeNo="holeNo"
+            >
+            </current-ranking>
+          </div>
+        </div>
+      </div>
+      <!-- Button -->
+      <div class="flex items-center h-1/4 pb-6">
+        <base-button
+          :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
+          mode="btn confirm"
+        >
+          {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
+        </base-button>
+      </div>
+    </div>
+    <transition name="fade-in">
+      <div
+        class="w-screen h-screen absolute top-0 flex flex-col justify-center items-center overlay mx-auto"
+        v-if="isDisplayed"
+        @click="isDisplayed = false"
+      />
+    </transition>
+    <div
+      :class="[
+        'quote-container-hidden',
+        isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
+      ]"
+    >
       <QuotesDisplay
         :playersInfo="playersInfo"
         :holeNo="holeNo"
         :getPar="getPar"
-        :class="{ show: isDisplayed }"
-      ></QuotesDisplay>
-    </transition>
-
-    <!-- 1st Place -->
-    <div class="flex flex-col items-center h-full">
-      <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
-
-      <div
-        v-if="getHighestTotalPlayer"
-        class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
-      >
-        <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
-          {{ getHighestTotalPlayer.name }}
-        </p>
-        <div class="flex">
-          <div
-            v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
-            class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
-          >
-            <p class="mt-1">
-              {{ getHighestTotalPlayer.totalScore }}
-            </p>
-          </div>
-          <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
-            <p class="mt-1 text-xl" v-if="playersInfo.length > 0">
-              {{ getHighestTotalPlayer.totalScore }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End of 1st Place -->
-
-    <!-- Ranking Table -->
-    <div class="px-8" v-if="playersInfo.length > 1">
-      <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
-        <div class="col-span-4"></div>
-        <div class="col-span-1">
-          <p class="text-005d63">
-            Last<br />
-            hole
-          </p>
-        </div>
-        <div class="col-span-1">
-          <p class="text-ff8e67">
-            Total<br />
-            score
-          </p>
-        </div>
-      </div>
-
-      <div class="flex flex-col justify-between h-full">
-        <div>
-          <current-ranking
-            v-for="(player, index) in otherPlayerRankings"
-            :key="player.id"
-            :player="player"
-            :index="index"
-            :holeNo="holeNo"
-          >
-          </current-ranking>
-        </div>
-      </div>
-    </div>
-    <!-- Button -->
-    <div class="flex-1 flex items-center h-1/4">
-      <base-button
-        :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
-        mode="btn confirm"
-      >
-        {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
-      </base-button>
+      />
     </div>
   </div>
 </template>
@@ -117,6 +126,11 @@ export default {
       })
       .catch(e => console.log(e));
   },
+  mounted() {
+    setTimeout(() => {
+      this.isDisplayed = true;
+    }, 1500);
+  },
   computed: {
     ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     getHighestTotalPlayer() {
@@ -140,21 +154,72 @@ export default {
 </script>
 
 <style scoped>
-.show {
-}
-.drop-enter-active {
-  animation: drop-down 2s ease-out both;
-}
-.drop-leave-active {
-  animation: drop-down 2s ease-out reverse;
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
-@keyframes drop-down {
+.overlay {
+  background-color: rgba(174, 180, 154, 0.6);
+}
+
+.quote-container-hidden {
+  position: absolute;
+  top: -25%;
+  @apply mx-auto;
+}
+
+.top-center {
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.fade-in-enter-active {
+  animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.fade-in-leave-active {
+  animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) reverse;
+}
+
+.slide-bottom {
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-top {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-bottom {
   0% {
-    transform: translateY(-1000px);
+    transform: translateY(0);
   }
   100% {
-    transform: translateY(0);
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  100% {
+    top: -25%;
+    transform: translateY(25%);
+  }
+}
+
+@keyframes fade-in-fwd {
+  0% {
+    transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
     opacity: 1;
   }
 }
