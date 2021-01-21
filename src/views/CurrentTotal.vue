@@ -186,7 +186,6 @@ export default {
     if (to.params.holeNo === this.getPar.length) {
       return next({ name: 'Awards' });
     } else {
-      to.params.holeNo = to.params.holeNo + 1;
       next();
     }
   }

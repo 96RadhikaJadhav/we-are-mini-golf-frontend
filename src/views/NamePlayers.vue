@@ -14,7 +14,7 @@
         v-if="inputs"
       >
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="flex justify-between py-4 px-4">
+          <div class="flex justify-between py-3 px-4">
             <InputText
               :placeholder="`Player ${index + 1}`"
               v-model="player.name"
@@ -62,7 +62,7 @@ export default {
         this.inputs = response.noOfPlayers;
         this.$gtm.trackEvent({
           event: 'gaEvent',
-          eventName: "players_selected",
+          eventName: 'players_selected',
           players: response.noOfPlayers
         });
       })

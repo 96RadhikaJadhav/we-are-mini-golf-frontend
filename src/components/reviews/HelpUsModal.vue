@@ -26,8 +26,9 @@
 
       <a v-if="yelpUrl" :href="yelpUrl" target="_blank">
         <div class="w-20 ">
-          <img src="@/assets/image-3@2x.png" class="h-20 w-20" /></div
-      ></a>
+          <img src="@/assets/image-3@2x.png" class="h-20 w-20" />
+        </div>
+      </a>
     </div>
 
     <!-- Orange bottom of Card -->
