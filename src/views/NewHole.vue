@@ -23,6 +23,7 @@
     <!-- PAR INFO IMG -->
     <div>
       <img
+        :class="{ translate: lastHole }"
         :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
       />
     </div>
@@ -49,7 +50,8 @@ export default {
       name: 'NewHoleIntro',
       hole: false,
       courseGrid: {},
-      coursePar: null
+      coursePar: null,
+      lastHole: false
     };
   },
   computed: {
@@ -68,6 +70,9 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    this.holeNo === this.getPar.length
+      ? (this.lastHole = true)
+      : (this.lastHole = false);
     this.updateHoleStatus();
   },
   methods: {
@@ -108,5 +113,8 @@ export default {
   top: 70%;
   transform: translate(-50%, -50%);
   font-size: 2em;
+}
+.translate {
+  transform: translateY(-1.75rem);
 }
 </style>
