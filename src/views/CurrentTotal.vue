@@ -1,5 +1,24 @@
 <template>
   <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2">
+    <transition name="fade-in">
+      <div
+        class="w-screen h-screen absolute top-0 left-0 flex flex-col justify-center items-center overlay"
+        v-if="isDisplayed"
+        @click="isDisplayed = false"
+      />
+    </transition>
+    <div
+      :class="[
+        'quote-container-hidden md:w-1/2',
+        isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
+      ]"
+    >
+      <QuotesDisplay
+        :playersInfo="playersInfo"
+        :holeNo="holeNo"
+        :getPar="getPar"
+      />
+    </div>
     <div class="grid-container items-center h-full">
       <!-- 1st Place -->
       <div class="flex flex-col justify-end items-center h-full">
@@ -71,25 +90,6 @@
           {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
         </base-button>
       </div>
-    </div>
-    <transition name="fade-in">
-      <div
-        class="w-screen h-screen absolute top-0 flex flex-col justify-center items-center overlay mx-auto"
-        v-if="isDisplayed"
-        @click="isDisplayed = false"
-      />
-    </transition>
-    <div
-      :class="[
-        'quote-container-hidden',
-        isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
-      ]"
-    >
-      <QuotesDisplay
-        :playersInfo="playersInfo"
-        :holeNo="holeNo"
-        :getPar="getPar"
-      />
     </div>
   </div>
 </template>
