@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="md:w-1/2 bg-no-repeat bg-cover bg-center flex flex-col"
-    :class="[holeBg]"
-  >
+  <div class="md:w-1/2 bg-no-repeat bg-cover bg-center bg-lastHole">
     <div v-if="holeNo === getPar.length">
       <p
         class="px-12 pt-8 font-capriola mt-4 mb-16 text-center text-white text-xl"
@@ -15,7 +12,19 @@
         }}
       </p>
     </div>
-    <div v-if="getPar.length != holeNo" class="flex-1">
+    <div v-if="holeNo !== getPar.length">
+      <img :src="require(`@/assets/newHole/holeNo/hole-${holeNo}.png`)" />
+    </div>
+    <div v-else>
+      <img :src="require(`@/assets/newHole/holeNo/last-hole.png`)" />
+    </div>
+    <div></div>
+    <div class="">
+      <img
+        :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
+      />
+    </div>
+    <!-- <div v-if="getPar.length != holeNo" class="flex-1">
       <p class="font-kalam text-white holeno">
         {{ holeNo }}
       </p>
@@ -26,7 +35,7 @@
         style="width:90%;"
       />
       <p class="par font-kalam text-005d63">Par {{ getPar[holeNo - 1] }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -79,16 +88,16 @@ export default {
         }
       });
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
-      setTimeout(() => {
-        this.$router.push({
-          name: 'GameScores',
-          params: {
-            holeNo: this.holeNo,
-            editscore: this.editscore,
-            par: this.par
-          }
-        });
-      }, 3000);
+      // setTimeout(() => {
+      //   this.$router.push({
+      //     name: 'GameScores',
+      //     params: {
+      //       holeNo: this.holeNo,
+      //       editscore: this.editscore,
+      //       par: this.par
+      //     }
+      //   });
+      // }, 3000);
     }
   }
 };
