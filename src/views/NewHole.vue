@@ -47,7 +47,7 @@ export default {
       hole: false,
       courseGrid: {},
       coursePar: null,
-      lastHole: false
+      lastHole: false,
       holeNo: 0
     };
   },

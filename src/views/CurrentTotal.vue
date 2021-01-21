@@ -1,97 +1,99 @@
 <template>
-  <div
-    class="grid grid-flow-row grid-rows-4 items-center bg-total bg-no-repeat bg-cover bg-center h-screen md:w-1/2 px-4"
-  >
-    <!-- Top of page quote -->
-    <div
-      v-if="!showTotal"
-      class="p-6 font-capriola mt-4 mb-16 text-center text-white"
-    >
-      <p v-for="(player, index) in playersInfo" :key="player.id">
-        {{ quoteGen(player, index) }}
-      </p>
-    </div>
-    <div v-else></div>
-
-    <!-- 1st Place -->
-    <div class="flex flex-col items-center h-full">
-      <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
-
+  <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2 mb-4">
+    <transition name="fade-in">
       <div
-        v-if="getHighestTotalPlayer"
-        class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
-      >
-        <p class="font-lg mb-2 text-2xl" v-if="playersInfo">
-          {{ getHighestTotalPlayer.name }}
-        </p>
-        <div class="flex">
-          <div
-            v-if="getHighestTotalPlayer"
-            class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
-          >
-            <p class="mt-1">
-              {{ getHighestTotalPlayer.holeScore[holeNo - 1] }}
-            </p>
-          </div>
-          <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
-            <p class="mt-1 text-xl" v-if="playersInfo">
-              {{ getHighestTotalPlayer.totalScore }}
-            </p>
-          </div>
-        </div>
-      </div>
+        class="w-screen h-screen absolute top-0 left-0 flex flex-col justify-center items-center overlay"
+        v-if="isDisplayed"
+        @click="isDisplayed = false"
+      />
+    </transition>
+    <div
+      :class="[
+        'quote-container-hidden w-full md:w-1/2',
+        isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
+      ]"
+    >
+      <QuotesDisplay
+        :playersInfo="playersInfo"
+        :holeNo="holeNo"
+        :getPar="getPar"
+      />
     </div>
-    <!-- End of 1st Place -->
+    <div class="grid-container items-center h-full">
+      <!-- 1st Place -->
+      <div class="flex flex-col justify-end items-center h-full">
+        <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
 
-    <!-- Ranking Table -->
-    <div class="px-8" v-if="playersInfo.length > 1">
-      <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
-        <div class="col-span-4"></div>
-        <div class="col-span-1">
-          <p class="text-005d63">
-            Hole<br />
-            No {{ holeNo }}
+        <div
+          v-if="getHighestTotalPlayer"
+          class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
+        >
+          <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
+            {{ getHighestTotalPlayer.name }}
           </p>
-        </div>
-        <div class="col-span-1">
-          <p class="text-ff8e67">
-            Total<br />
-            score
-          </p>
+          <div class="flex">
+            <div
+              v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
+              class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
+            >
+              <p class="mt-1">
+                {{ getHighestTotalPlayer.totalScore }}
+              </p>
+            </div>
+            <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
+              <p class="mt-1 text-xl" v-if="playersInfo.length > 0">
+                {{ getHighestTotalPlayer.totalScore }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- End of 1st Place -->
 
-      <div class="flex flex-col justify-between h-full">
-        <div>
-          <current-ranking
-            v-for="(player, index) in otherPlayerRankings"
-            :key="player.id"
-            :player="player"
-            :index="index"
-            :holeNo="holeNo"
-          >
-          </current-ranking>
-        </div>
-        <div v-if="!showTotal" class="grid grid-cols-6">
+      <!-- Ranking Table -->
+      <div class="px-8" v-if="playersInfo.length > 1">
+        <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
           <div class="col-span-4"></div>
-          <div class="col-span-2">
-            <p class="font-kalam text-005d63">PAR {{ par }}</p>
+          <div class="col-span-1">
+            <p class="text-005d63">
+              Last<br />
+              hole
+            </p>
+          </div>
+          <div class="col-span-1">
+            <p class="text-ff8e67">
+              Total<br />
+              score
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-between h-full">
+          <div>
+            <current-ranking
+              v-for="(player, index) in otherPlayerRankings"
+              :key="player.id"
+              :player="player"
+              :index="index"
+              :holeNo="holeNo"
+            >
+            </current-ranking>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Button -->
-    <div v-if="!showTotal" class="flex-1 flex items-center h-1/4">
-      <base-button
-        :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
-        mode="btn primary-orange"
-      >
-        {{
-          holeNo != this.getPar.length
-            ? 'on to the next hole!'
-            : 'Award ceremony'
-        }}
-      </base-button>
+      <!-- Button -->
+      <div v-if="!showTotal" class="flex-1 flex items-center h-1/4">
+        <base-button
+          :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
+          mode="btn primary-orange"
+        >
+          {{
+            holeNo != this.getPar.length
+              ? 'on to the next hole!'
+              : 'Award ceremony'
+          }}
+        </base-button>
+      </div>
     </div>
   </div>
 </template>
@@ -99,43 +101,42 @@
 <script>
 import BaseButton from '@/components/utilities/BaseButton';
 import CurrentRanking from '@/components/CurrentRanking';
+import QuotesDisplay from '@/components/QuotesDisplay';
 import { orderBy } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
-import quote from '@/quotes.js';
 
 export default {
   name: 'CurrentTotal',
-  components: { BaseButton, CurrentRanking },
+  components: { BaseButton, CurrentRanking, QuotesDisplay },
   props: {
     holeNo: {
       type: Number
     },
     par: {
       type: Number
-    },
-    showTotal: {
-      type: Boolean
     }
   },
   data() {
     return {
       playersInfo: [],
-      quote,
-      holesPlayed: 0
+      isDisplayed: false
     };
   },
   created() {
     this.getGameDetails()
-      .then(response => {
-        console.log(response);
-        this.playersInfo = response.playersInfo;
+      .then(() => {
+        this.playersInfo = this.getGameInfo.playersInfo;
         this.increaseCounter();
-        this.calculateHolesPlayed();
       })
       .catch(e => console.log(e));
   },
+  mounted() {
+    setTimeout(() => {
+      this.isDisplayed = true;
+    }, 1500);
+  },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo', 'counter', 'getPar']),
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     },
@@ -144,52 +145,86 @@ export default {
     }
   },
   methods: {
-    calculateHolesPlayed() {
-      this.playersInfo[0].holeScore.forEach(el => {
-        if (el !== 0) {
-          this.holesPlayed += 1;
-        }
-      });
-    },
-    quoteGen(player, i) {
-      const lastScore = player.holeScore[this.holeNo - 1];
-      const quote = this.quote;
-      const random = Math.floor(Math.random() * quote.holeInOne.length);
-      const par = this.getPar[this.holeNo - 1];
-
-      // Hole in One
-      if (lastScore === 1) {
-        const newQuote = quote.holeInOne[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore > 1 && lastScore < par && i === this.counter) {
-        const newQuote = quote.parBestUnder[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore === par && i === this.counter) {
-        const newQuote = quote.parExact[random];
-        return `${player.name}${newQuote}`;
-      } else if (
-        lastScore >= par + 1 &&
-        lastScore <= par + 2 &&
-        i === this.counter
-      ) {
-        const newQuote = quote.parOverByOne[random];
-        return `${player.name}${newQuote}`;
-      } else if (lastScore >= par + 3 && i === this.counter) {
-        const newQuote = quote.parOverByThree[random];
-        return `${player.name}${newQuote}`;
-      } else return;
-    },
-
     ...mapActions('gameInfo', ['getGameDetails', 'increaseCounter'])
   },
   beforeRouteLeave(to, from, next) {
     if (to.params.holeNo === this.getPar.length) {
       return next({ name: 'Awards' });
-    } else {
-      next();
     }
+    to.params.holeNo = to.params.holeNo + 1;
+    next();
   }
 };
 </script>
 
-<style></style>
+<style scoped>
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.overlay {
+  background-color: rgba(174, 180, 154, 0.6);
+}
+
+.quote-container-hidden {
+  position: absolute;
+  top: -25%;
+  @apply mx-auto;
+}
+
+.top-center {
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.fade-in-enter-active {
+  animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.fade-in-leave-active {
+  animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) reverse;
+}
+
+.slide-bottom {
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-top {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-bottom {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  100% {
+    top: -25%;
+    transform: translateY(25%);
+  }
+}
+
+@keyframes fade-in-fwd {
+  0% {
+    transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+</style>
