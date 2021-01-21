@@ -28,3 +28,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+select,
+option {
+  -webkit-appearance: none;
+  color: #78d03a;
+}
+</style>

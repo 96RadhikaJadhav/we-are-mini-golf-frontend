@@ -60,7 +60,7 @@ export default {
   created() {
     this.$gtm.trackEvent({
       event: 'gaEvent',
-      eventName: "review_open",
+      eventName: 'review_open'
     });
   },
   methods: {
@@ -76,7 +76,7 @@ export default {
         this.invalid = false;
         this.$gtm.trackEvent({
           event: 'gaEvent',
-          eventName: "review_submit",
+          eventName: 'review_submit',
           rating: this.reviewerRating
         });
         this.$emit(

@@ -13,8 +13,8 @@
         <vue-slider
           v-model="noOfPlayers"
           dotSize="25"
-          min="1"
-          max="6"
+          :min="1"
+          :max="6"
           tooltip="always"
         ></vue-slider>
       </div>

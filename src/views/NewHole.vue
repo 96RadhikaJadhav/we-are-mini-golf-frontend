@@ -36,13 +36,9 @@ import { orderBy } from 'lodash';
 export default {
   name: 'NewHole',
   props: {
-    holeNo: {
-      type: Number,
+    mode: {
+      type: String,
       required: true
-    },
-    editscore: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -52,6 +48,7 @@ export default {
       courseGrid: {},
       coursePar: null,
       lastHole: false
+      holeNo: 0
     };
   },
   computed: {
@@ -69,6 +66,7 @@ export default {
     }
   },
   created() {
+    this.holeNo = parseInt(localStorage.getItem('current-hole'));
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
     this.holeNo === this.getPar.length
       ? (this.lastHole = true)
@@ -87,8 +85,8 @@ export default {
         this.$router.push({
           name: 'GameScores',
           params: {
+            mode: this.mode,
             holeNo: this.holeNo,
-            editscore: this.editscore,
             par: this.par
           }
         });

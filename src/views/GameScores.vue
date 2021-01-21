@@ -34,14 +34,14 @@
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model.number="player.score"
-              v-if="!editscore && !showTotal"
+              v-if="mode === 'new' && !showTotal"
             />
             <input
               type="number"
               inputmode="numeric"
               class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
               v-model.number="player.holeScore[holeNo - 1]"
-              v-else-if="editscore && !showTotal"
+              v-else-if="mode === 'edit' && !showTotal"
               maxlength="2"
             />
             <input
@@ -79,11 +79,12 @@ export default {
   components: { BaseButton },
   props: {
     holeNo: {
-      type: Number
+      type: Number,
+      required: true
     },
-    editscore: {
-      type: Boolean,
-      default: false
+    mode: {
+      type: String,
+      required: true
     },
     showTotal: {
       type: Boolean,
@@ -92,14 +93,18 @@ export default {
   },
   data() {
     return {
-      name: 'GameScore',
       playersInfo: []
     };
   },
   computed: {
     ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
   },
-
+  mounted() {
+    let self = this;
+    window.onpopstate = function() {
+      self.$router.push({ name: 'GameCourse' });
+    };
+  },
   created() {
     this.getGameDetails()
       .then(() => {
@@ -110,7 +115,7 @@ export default {
   methods: {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     updatePlayerScore() {
-      this.editscore === true ? this.updateTotalScore() : this.calculateTotal();
+      this.mode === 'edit' ? this.updateTotalScore() : this.calculateTotal();
       this.updateGameDetails({ playersInfo: this.playersInfo })
         .then(() => {
           this.navigateTo();
@@ -119,7 +124,7 @@ export default {
     },
     navigateTo() {
       this.$router.push({
-        name: this.editscore ? 'GameCourse' : 'CurrentTotal',
+        name: this.mode === 'edit' ? 'GameCourse' : 'CurrentTotal',
         params: { holeNo: this.holeNo, par: this.getPar[this.holeNo - 1] }
       });
     },
