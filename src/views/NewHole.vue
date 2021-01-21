@@ -1,9 +1,7 @@
 <template>
   <div class="md:w-1/2 bg-no-repeat bg-cover bg-center" :class="holeBg">
     <div v-if="holeNo === getPar.length">
-      <p
-        class="px-12 pt-8 font-capriola mt-4 mb-16 text-center text-white text-xl"
-      >
+      <p class="px-12 pt-8 font-capriola mb-16 text-center text-white text-xl">
         {{ lastPlace }},
         {{
           getGameInfo.playersInfo.length !== 1
@@ -19,7 +17,7 @@
       <img :src="require(`@/assets/newHole/holeNo/last-hole.png`)" />
     </div>
     <div></div>
-    <div class="">
+    <div class="transform -translate-y-6">
       <img
         :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
       />
@@ -88,16 +86,16 @@ export default {
         }
       });
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
-      setTimeout(() => {
-        this.$router.push({
-          name: 'GameScores',
-          params: {
-            holeNo: this.holeNo,
-            editscore: this.editscore,
-            par: this.par
-          }
-        });
-      }, 3000);
+      // setTimeout(() => {
+      //   this.$router.push({
+      //     name: 'GameScores',
+      //     params: {
+      //       holeNo: this.holeNo,
+      //       editscore: this.editscore,
+      //       par: this.par
+      //     }
+      //   });
+      // }, 3000);
     }
   }
 };
