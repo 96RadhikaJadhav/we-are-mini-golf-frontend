@@ -27,7 +27,7 @@ module.exports = {
         total:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607328310/we-are-mini-golf/WAMG_Background_-_Screen_7_2x_xwkyif.png")',
         newHole:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607324938/we-are-mini-golf/WAMG_Background_-_Screen_5_par_2x_dlevlu.png")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610772493/we-are-mini-golf/small_WAMG_Background_Screen_5_par_11c2504974.png")',
         awards:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607328465/we-are-mini-golf/08_-_Reward_animation_-_green_banner_2x_wenrge.png")',
         rankings:
@@ -35,7 +35,11 @@ module.exports = {
         lastHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607328466/we-are-mini-golf/WAMG_Background_-_Screen_6_last_hole_par_2x_abjdkq.png")',
         scoreHandBox:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610794826/we-are-mini-golf/06_-_Enter_scores_screen_-_transparent_bg_-_cropped_rjtuzq.png")'
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610794826/we-are-mini-golf/06_-_Enter_scores_screen_-_transparent_bg_-_cropped_rjtuzq.png")',
+        wait:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610951415/we-are-mini-golf/07_unfinished_holes_screen.png")',
+        newHoleBox:
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610893812/we-are-mini-golf/05_-_Par_transition_screen_-_transparent_bg_-_cropped_tolhso.png")'
       }),
       container: {
         center: true

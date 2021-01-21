@@ -3,25 +3,23 @@
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
       <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
         <img
-          v-if="!square.active"
-          :src="square.inactive.url"
-          class="w-full h-full object-fill"
-          :alt="square.id"
-        />
-        <img
-          v-else-if="
-            !square.isHoleActive || square.holeNo === square.holeNo.length
-          "
+          v-if="(square.active && !square.isHoleActive) || square.isLastHole"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"
           @click="gotoNewHole(square.holeNo, index)"
         />
         <img
-          v-else
+          v-else-if="square.isHoleActive"
           :src="square.active.url"
           class="w-full h-full object-fill"
           @click="editHoleDetails(square.holeNo)"
+        />
+        <img
+          v-else
+          :src="square.inactive.url"
+          class="w-full h-full object-fill"
+          :alt="square.id"
         />
       </div>
     </div>
@@ -65,13 +63,13 @@ export default {
     gotoNewHole(holeNo) {
       this.$router.push({
         name: 'NewHole',
-        params: { holeNo: holeNo }
+        params: { holeNo: holeNo, mode: 'new' }
       });
     },
     editHoleDetails(holeNo) {
       this.$router.push({
         name: 'NewHole',
-        params: { holeNo: holeNo, editscore: true }
+        params: { holeNo: holeNo, mode: 'edit' }
       });
     },
     createPlayerScores() {
@@ -87,7 +85,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo'])
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
+  },
+  beforeRouteLeave(to, from, next) {
+    localStorage.setItem('current-hole', to.params.holeNo);
+    if (to.params.holeNo === this.getPar.length) {
+      return next({ name: 'LastHoleWarning' });
+    } else {
+      next();
+    }
   }
 };
 </script>

@@ -32,9 +32,15 @@ export const generalRoutes = [
     }
   },
   {
-    path: '/game-scores',
+    path: '/:mode/:holeNo',
     name: 'GameScores',
-    props: true,
+    props: route => {
+      const holeNo = Number.parseInt(route.params.holeNo);
+      if (Number.isNaN(holeNo)) {
+        return 0;
+      }
+      return { holeNo, mode: route.params.mode };
+    },
     component: () => import('@/views/GameScores.vue'),
     meta: {
       layout: () => import('@/layouts/BottomNavLayout.vue')
@@ -86,5 +92,13 @@ export const generalRoutes = [
     path: '/rules',
     name: 'RulesScreen',
     component: () => import('@/components/rules/RulesScreen.vue')
+  },
+  {
+    path: '/last-chance',
+    name: 'LastHoleWarning',
+    component: () => import('@/views/LastHoleWarning.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
   }
 ];

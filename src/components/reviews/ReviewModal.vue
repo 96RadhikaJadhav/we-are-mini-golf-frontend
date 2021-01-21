@@ -1,5 +1,5 @@
 <template>
-  <ModalLayout @close="$emit('close')" :invalid="invalid">
+  <ModalLayout :closingButton="true" @close="$emit('close')" :invalid="invalid">
     <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
       <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
 
@@ -7,7 +7,6 @@
       <div class="flex items-center">
         <star-rating
           v-model="reviewerRating"
-          :increment="0.5"
           :show-rating="false"
           :star-size="40"
         />
@@ -35,7 +34,7 @@
       <base-button
         @clicked="submitReview"
         type="button"
-        class="btn confirm absolute -bottom-5"
+        class="btn primary-orange absolute -bottom-5"
       >
         Tell the world
       </base-button>
@@ -58,6 +57,12 @@ export default {
       invalid: false
     };
   },
+  created() {
+    this.$gtm.trackEvent({
+      event: 'gaEvent',
+      eventName: 'review_open'
+    });
+  },
   methods: {
     submitReview() {
       if (
@@ -69,6 +74,12 @@ export default {
         return;
       } else {
         this.invalid = false;
+        this.$copyText(this.reviewerMessage);
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: 'review_submit',
+          rating: this.reviewerRating
+        });
         this.$emit(
           'submit',
           this.reviewerName,

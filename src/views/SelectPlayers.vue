@@ -9,16 +9,16 @@
     </div>
     <div class="space-y-10 h-full mx-auto">
       <p class="text-005d63 text-2xl font-semibold">How many players?</p>
-      <p class="text-center text-lg font-capriola">{{ noOfPlayers }}</p>
       <div>
-        <InputRange
+        <vue-slider
+          v-model="noOfPlayers"
+          dotSize="25"
           :min="1"
           :max="6"
-          :value="noOfPlayers"
-          @changed="selectedPlayers"
-        />
+          tooltip="always"
+        ></vue-slider>
       </div>
-      <base-button mode="btn confirm" @clicked="selectNumOfPlayers">
+      <base-button mode="btn primary-orange" @clicked="selectNumOfPlayers">
         Confirm
       </base-button>
     </div>
@@ -27,12 +27,13 @@
 
 <script>
 import { mapActions } from 'vuex';
-import InputRange from '@/components/InputRange.vue';
 import BaseButton from '../components/utilities/BaseButton';
+import VueSlider from 'vue-slider-component';
+import '@/styles/slider-theme.scss';
 
 export default {
   name: 'SelectPlayers',
-  components: { InputRange, BaseButton },
+  components: { BaseButton, VueSlider },
   data() {
     return {
       noOfPlayers: 1
@@ -48,12 +49,12 @@ export default {
         noOfPlayers: this.noOfPlayers
       };
       this.updateGameDetails(payload)
-        .then(
+        .then(() => {
           this.$router.push({
             name: 'NamePlayers',
             params: { noOfPlayers: this.noOfPlayers }
-          })
-        )
+          });
+        })
         .catch(e => console.log(e));
     }
   }
