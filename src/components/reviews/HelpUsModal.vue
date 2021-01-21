@@ -11,21 +11,21 @@
 
     <!-- LOGOS -->
     <div class="flex items-center justify-evenly mb-10">
-      <a :href="googleUrl">
-        <div class="h-20 w-20">
+      <a v-if="googleUrl" :href="googleUrl" target="_blank">
+        <div class="w-14">
           <img src="@/assets/image-1.png" alt="" />
           <!-- cannot find google maps icon with white bg for here -->
         </div>
       </a>
 
-      <a :href="tripAdvisorUrl">
-        <div class="h-20 w-20">
+      <a v-if="tripAdvisorUrl" :href="tripAdvisorUrl" target="_blank">
+        <div class="w-20">
           <img src="@/assets/image-2@2x.png" />
         </div>
       </a>
 
-      <a :href="yelpUrl">
-        <div class="h-2- w-20">
+      <a v-if="yelpUrl" :href="yelpUrl" target="_blank">
+        <div class="w-20 ">
           <img src="@/assets/image-3@2x.png" class="h-20 w-20" /></div
       ></a>
     </div>

@@ -7,6 +7,7 @@ import VueMeta from 'vue-meta';
 import vClickOutside from 'v-click-outside';
 import router from './router';
 import store from './store';
+import VueClipboard from 'vue-clipboard2';
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,8 @@ Vue.use(VueMeta, {
   // optional pluginOptions
   refreshOnceOnNavigation: true
 });
+
+Vue.use(VueClipboard);
 
 Vue.use(VueGtm, {
   id: ['GTM-59PVXGQ'],
