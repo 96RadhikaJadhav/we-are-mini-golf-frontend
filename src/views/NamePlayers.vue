@@ -62,7 +62,7 @@ export default {
         this.inputs = response.noOfPlayers;
         this.$gtm.trackEvent({
           event: 'gaEvent',
-          eventName: "players_selected",
+          eventName: 'players_selected',
           players: response.noOfPlayers
         });
       })

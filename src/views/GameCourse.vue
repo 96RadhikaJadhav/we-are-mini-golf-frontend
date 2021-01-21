@@ -63,13 +63,13 @@ export default {
     gotoNewHole(holeNo) {
       this.$router.push({
         name: 'NewHole',
-        params: { holeNo: holeNo }
+        params: { holeNo: holeNo, mode: 'new' }
       });
     },
     editHoleDetails(holeNo) {
       this.$router.push({
         name: 'NewHole',
-        params: { holeNo: holeNo, editscore: true }
+        params: { holeNo: holeNo, mode: 'edit' }
       });
     },
     createPlayerScores() {
@@ -88,6 +88,7 @@ export default {
     ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
   },
   beforeRouteLeave(to, from, next) {
+    localStorage.setItem('current-hole', to.params.holeNo);
     if (to.params.holeNo === this.getPar.length) {
       return next({ name: 'LastHoleWarning' });
     } else {
