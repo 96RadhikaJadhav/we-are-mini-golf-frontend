@@ -1,5 +1,6 @@
 <template>
   <div class="md:w-1/2 bg-no-repeat bg-cover bg-center" :class="holeBg">
+    <!-- LAST HOLE SCREEN QUOTE -->
     <div v-if="holeNo === getPar.length">
       <p class="px-12 pt-8 font-capriola mb-16 text-center text-white text-xl">
         {{ lastPlace }},
@@ -10,30 +11,21 @@
         }}
       </p>
     </div>
+
+    <!-- HOLE NUMBER IMG -->
     <div v-if="holeNo !== getPar.length">
       <img :src="require(`@/assets/newHole/holeNo/hole-${holeNo}.png`)" />
     </div>
     <div v-else>
       <img :src="require(`@/assets/newHole/holeNo/last-hole.png`)" />
     </div>
-    <div></div>
-    <div class="transform -translate-y-6">
+
+    <!-- PAR INFO IMG -->
+    <div>
       <img
         :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
       />
     </div>
-    <!-- <div v-if="getPar.length != holeNo" class="flex-1">
-      <p class="font-kalam text-white holeno">
-        {{ holeNo }}
-      </p>
-    </div>
-    <div class="relative" v-if="getPar.length !== holeNo">
-      <img
-        src="https://res.cloudinary.com/doblhgoan/image/upload/v1610893812/we-are-mini-golf/05_-_Par_transition_screen_-_transparent_bg_-_cropped_tolhso.png"
-        style="width:90%;"
-      />
-      <p class="par font-kalam text-005d63">Par {{ getPar[holeNo - 1] }}</p>
-    </div> -->
   </div>
 </template>
 
@@ -86,16 +78,16 @@ export default {
         }
       });
       localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
-      // setTimeout(() => {
-      //   this.$router.push({
-      //     name: 'GameScores',
-      //     params: {
-      //       holeNo: this.holeNo,
-      //       editscore: this.editscore,
-      //       par: this.par
-      //     }
-      //   });
-      // }, 3000);
+      setTimeout(() => {
+        this.$router.push({
+          name: 'GameScores',
+          params: {
+            holeNo: this.holeNo,
+            editscore: this.editscore,
+            par: this.par
+          }
+        });
+      }, 3000);
     }
   }
 };
