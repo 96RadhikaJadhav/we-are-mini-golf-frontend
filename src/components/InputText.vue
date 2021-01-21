@@ -24,3 +24,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+input[type='text'] {
+  -webkit-appearance: none;
+}
+</style>
