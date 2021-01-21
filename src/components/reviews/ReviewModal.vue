@@ -74,6 +74,7 @@ export default {
         return;
       } else {
         this.invalid = false;
+        this.$copyText(this.reviewerMessage);
         this.$gtm.trackEvent({
           event: 'gaEvent',
           eventName: 'review_submit',
