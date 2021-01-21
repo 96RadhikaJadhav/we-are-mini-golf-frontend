@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full flex flex-col">
     <transition name="fade" mode="out-in">
-      <router-view class="flex-1 box-border" />
+      <router-view class="flex-1 md:mx-auto box-border" />
     </transition>
     <div class="fixed bottom-0 left-0 right-0">
       <NavMenu @display-rules="isDrawerOpen = !isDrawerOpen" />

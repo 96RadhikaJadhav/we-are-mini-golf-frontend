@@ -66,7 +66,7 @@
       <div class="flex items-center h-1/4 pb-6">
         <base-button
           :to="{ name: 'NewHole', params: { holeNo: holeNo } }"
-          mode="btn confirm"
+          mode="btn confirm primary-orange"
         >
           {{ holeNo != 14 ? 'on to the next hole!' : 'Award ceremony' }}
         </base-button>
