@@ -1,10 +1,9 @@
 <template>
-  <div
-    class="grid grid-rows-3 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 "
-  >
+  <div class="grid bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 pb-20">
     <!-- HOLE AND PAR -->
+    <!-- Hand Sign Image -->
     <div
-      class="text-center font-kalam text-005d63 uppercase h-full text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center h-60 max-h-60"
     >
       <div class="mb-4">
         <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
@@ -12,49 +11,49 @@
       </div>
     </div>
 
-    <div class="w-full px-6 pt-6 h-full flex flex-col items-center row-span-3">
-      <div class="w-full flex flex-col justify-between">
-        <!-- DIV FOR BASE CARD -->
+    <div class="w-full mx-auto px-6">
+      <!-- DIV FOR BASE CARD -->
+      <div class="bg-white rounded-3xl p-4 text-2xl">
         <div
-          class="bg-white rounded-3xl items-center justify-center px-4 text-2xl"
+          v-for="player in playersInfo"
+          :key="player.name"
+          class="flex justify-between items-center my-4 px-4"
         >
-          <div
-            v-for="player in playersInfo"
-            :key="player.name"
-            class="flex justify-between items-center my-4 px-4"
-          >
-            <!-- PLAYER NAMES -->
-            <p class="text-005D63 font-kalam text-005d63">
-              {{ player.name }}
-            </p>
-            <!-- SCORE INPUT -->
-            <input
-              type="number"
-              placeholder="0"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model.number="player.score"
-              v-if="mode === 'new' && !showTotal"
-            />
-            <input
-              type="number"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model.number="player.holeScore[holeNo - 1]"
-              v-else-if="mode === 'edit' && !showTotal"
-              maxlength="2"
-            />
-            <input
-              type="number"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              :value="player.totalScore"
-              disabled
-              v-else
-            />
-          </div>
+          <!-- PLAYER NAMES -->
+          <p class="text-005D63 font-kalam text-005d63">
+            {{ player.name }}
+          </p>
+          <!-- SCORE INPUT -->
+          <input
+            type="number"
+            placeholder="0"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            v-model.number="player.score"
+            v-if="mode === 'new' && !showTotal"
+          />
+          <input
+            type="number"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            v-model.number="player.holeScore[holeNo - 1]"
+            v-else-if="mode === 'edit' && !showTotal"
+            maxlength="2"
+          />
+          <input
+            type="number"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            :value="player.totalScore"
+            disabled
+            v-else
+          />
         </div>
       </div>
+    </div>
+
+    <!-- CONFIRM BUTTON flex-item 3 -->
+    <div class="">
       <base-button
         class="mt-8"
         mode="btn primary-orange"
@@ -64,9 +63,6 @@
         Confirm
       </base-button>
     </div>
-
-    <!-- CONFIRM BUTTON flex-item 3 -->
-    <div></div>
   </div>
 </template>
 
