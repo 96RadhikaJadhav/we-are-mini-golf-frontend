@@ -86,6 +86,7 @@ export default {
           this.playersInfo.push({
             name: '',
             age: '',
+            holeScore: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // will be changed to dynamic initliaztion soon
             score: 0
           });
         }

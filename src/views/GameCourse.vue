@@ -45,7 +45,7 @@ export default {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
-          this.createPlayerScores();
+          // this.createPlayerScores();
         })
         .catch(e => console.log(e));
     } else {
