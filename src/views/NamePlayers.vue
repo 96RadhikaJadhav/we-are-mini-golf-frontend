@@ -26,13 +26,13 @@
     </div>
     <!-- Start and Back Buttons -->
 
-    <div class="flex flex-col space-y-4">
-      <base-button mode="btn primary-orange" type="submit">
+    <div class="flex flex-col space-y-4 mx-auto">
+      <base-button mode="btn primary-orange" type="submit" class="w-full">
         Start the game!
       </base-button>
 
-      <base-button mode="back" to="/select-players">
-        Change number of players
+      <base-button mode="btn primary-beige" to="/select-players">
+        Change Nº of players
       </base-button>
     </div>
   </form>
@@ -86,8 +86,7 @@ export default {
           this.playersInfo.push({
             name: '',
             age: '',
-            score: 0,
-            holeScore: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            score: 0
           });
         }
       }

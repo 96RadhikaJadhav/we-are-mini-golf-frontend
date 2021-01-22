@@ -55,4 +55,7 @@ export default {
 .secondary-blue {
   @apply border border-005d63 text-005d63 px-1;
 }
+.primary-beige {
+  @apply bg-fff6eb text-005d63;
+}
 </style>
