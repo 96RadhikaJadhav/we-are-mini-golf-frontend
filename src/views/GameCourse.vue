@@ -1,19 +1,19 @@
 <template>
   <div class="md:w-1/3 md:mx-auto">
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
-      <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
+      <div v-for="square in courseGrid.squareInfo" :key="square.id">
         <img
           v-if="(square.active && !square.isHoleActive) || square.isLastHole"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"
-          @click="gotoNewHole(square.holeNo, index)"
+          @click="gotoHole(square.holeNo, 'new')"
         />
         <img
           v-else-if="square.isHoleActive"
           :src="square.active.url"
           class="w-full h-full object-fill"
-          @click="editHoleDetails(square.holeNo)"
+          @click="gotoHole(square.holeNo, 'edit')"
         />
         <img
           v-else
@@ -45,7 +45,7 @@ export default {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
-          this.createPlayerScores();
+          // this.createPlayerScores();
         })
         .catch(e => console.log(e));
     } else {
@@ -60,16 +60,10 @@ export default {
   },
   methods: {
     ...mapActions('gameInfo', ['updatePar']),
-    gotoNewHole(holeNo) {
+    gotoHole(holeNo, mode) {
       this.$router.push({
-        name: 'NewHole',
-        params: { holeNo: holeNo, mode: 'new' }
-      });
-    },
-    editHoleDetails(holeNo) {
-      this.$router.push({
-        name: 'NewHole',
-        params: { holeNo: holeNo, mode: 'edit' }
+        name: this.getPar.length === holeNo ? 'LastHoleWarning' : 'NewHole',
+        params: { holeNo: holeNo, mode: mode }
       });
     },
     createPlayerScores() {
@@ -89,11 +83,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     localStorage.setItem('current-hole', to.params.holeNo);
-    if (to.params.holeNo === this.getPar.length) {
-      return next({ name: 'LastHoleWarning' });
-    } else {
-      next();
-    }
+    next();
   }
 };
 </script>

@@ -30,14 +30,14 @@
             inputmode="numeric"
             class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
             v-model.number="player.score"
-            v-if="mode === 'new' && !showTotal"
+            v-if="mode === 'new'"
           />
           <input
             type="number"
             inputmode="numeric"
             class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
             v-model.number="player.holeScore[holeNo - 1]"
-            v-else-if="mode === 'edit' && !showTotal"
+            v-else-if="mode === 'edit'"
             maxlength="2"
           />
           <input
@@ -58,7 +58,6 @@
         class="mt-8"
         mode="btn primary-orange"
         @clicked="updatePlayerScore"
-        v-if="!showTotal"
       >
         Confirm
       </base-button>

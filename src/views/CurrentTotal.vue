@@ -82,7 +82,7 @@
         </div>
       </div>
       <!-- Button -->
-      <div v-if="!showTotal" class="flex-1 flex items-center h-1/4">
+      <div class="flex-1 flex items-center h-1/4">
         <base-button
           :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
           mode="btn primary-orange"
