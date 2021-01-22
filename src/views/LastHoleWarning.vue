@@ -7,7 +7,7 @@
       <p class="uppercase  font-kalam text-3xl">
         Hold On!
       </p>
-      <div v-if="playersInfo" class="font-capriola mt-4">
+      <div v-if="playersInfo.length" class="font-capriola mt-4">
         <p>
           It seems you haven't played holes No
           <span class="text-ff6350"> {{ unfinishedHoles }}</span>
@@ -19,13 +19,15 @@
           :to="{ name: 'GameCourse' }"
           mode="btn primary-blue"
           class="mb-4"
-          >Tackle it now</BaseButton
         >
+          Tackle it now
+        </BaseButton>
         <BaseButton
           :to="{ name: 'NewHole', params: { holeNo: this.getPar.length } }"
           mode="btn secondary-blue"
-          >Finish anyway</BaseButton
         >
+          Finish anyway
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -44,8 +46,8 @@ export default {
   components: { BaseButton },
   created() {
     this.getGameDetails()
-      .then(() => {
-        this.playersInfo = this.getGameInfo.playersInfo;
+      .then(response => {
+        this.playersInfo = response.playersInfo;
       })
       .catch(e => console.log(e));
   },
@@ -53,7 +55,7 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails'])
   },
   computed: {
-    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
+    ...mapGetters('gameInfo', ['getPar']),
     unfinishedHoles() {
       let unfinishedHole = [];
       this.playersInfo[0].holeScore.forEach((el, index) => {
