@@ -15,6 +15,9 @@
         <RulesScreen @close-drawer="isDrawerOpen = false" />
       </div>
     </transition>
+    <transition name="fade">
+      <Timeout v-if="isTimeout" @clear="clearTimeout"></Timeout>
+    </transition>
   </div>
 </template>
 
@@ -22,21 +25,32 @@
 import NavMenu from '@/components/NavMenu';
 import RulesScreen from '@/components/rules/RulesScreen.vue';
 import vClickOutside from 'v-click-outside';
+import Timeout from '@/components/Timeout.vue';
 
 export default {
   name: 'BottomNavLayout',
-  components: { NavMenu, RulesScreen },
+  components: { NavMenu, RulesScreen, Timeout },
   directives: {
     clickOutside: vClickOutside.directive
   },
   data() {
     return {
-      isDrawerOpen: false
+      isDrawerOpen: false,
+      isTimeout: false
     };
+  },
+  created() {
+    this.clearTimeout();
   },
   methods: {
     onClickOutside() {
       this.isDrawerOpen = false;
+    },
+    clearTimeout() {
+      this.isTimeout = false;
+      setTimeout(() => {
+        this.isTimeout = true;
+      }, 600000); // 10 minutes
     }
   }
 };

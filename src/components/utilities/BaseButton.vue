@@ -3,7 +3,7 @@
     :is="type"
     class="font-capriola text-white text-center focus:outline-none mx-auto block"
     :class="mode"
-    @click="clicked"
+    @click="$emit('clicked')"
     :to="to"
   >
     <slot></slot>
@@ -12,7 +12,6 @@
 
 <script>
 export default {
-  inject: ['Timeout'],
   props: {
     mode: {
       type: String
@@ -21,12 +20,7 @@ export default {
       type: [String, Object]
     }
   },
-  methods: {
-    clicked() {
-      this.Timeout();
-      this.$emit('clicked');
-    }
-  },
+
   computed: {
     type() {
       if (this.to) {
