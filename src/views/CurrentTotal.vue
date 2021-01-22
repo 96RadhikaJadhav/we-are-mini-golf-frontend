@@ -37,7 +37,7 @@
               class="flex items-center justify-center h-8 w-8 border border-white rounded-full text-white mr-2"
             >
               <p class="mt-1">
-                {{ getHighestTotalPlayer.totalScore }}
+                {{ getHighestTotalPlayer.holeScore[holeNo - 1] }}
               </p>
             </div>
             <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">

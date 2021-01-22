@@ -82,6 +82,7 @@ export default {
       players.forEach(el => {
         el.holeScore = courseHoles;
       });
+      console.log(courseHoles);
     }
   },
   computed: {
