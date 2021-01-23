@@ -23,7 +23,10 @@
           Tackle it now
         </BaseButton>
         <BaseButton
-          :to="{ name: 'NewHole', params: { holeNo: this.getPar.length } }"
+          :to="{
+            name: 'NewHole',
+            params: { holeNo: this.getPar.length, mode: 'new' }
+          }"
           mode="btn secondary-blue"
         >
           Finish anyway
@@ -57,12 +60,7 @@ export default {
   computed: {
     ...mapGetters('gameInfo', ['getPar']),
     unfinishedHoles() {
-      let unfinishedHole = [];
-      this.playersInfo[0].holeScore.forEach((el, index) => {
-        if (el === 0) {
-          unfinishedHole.push(index + 1);
-        }
-      });
+      let unfinishedHole = this.$route.params.unfinishedHoles;
       unfinishedHole.splice(-1, 1);
       unfinishedHole.splice(-1, 0, 'and');
       return unfinishedHole.join(', ');
