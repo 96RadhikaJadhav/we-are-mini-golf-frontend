@@ -68,7 +68,7 @@ export default {
       });
       unfinishedHoles.splice(-1, 1);
       unfinishedHoles.splice(-1, 0, 'and');
-      return unfinishedHoles.join(', ');
+      return unfinishedHoles.join(' ');
     }
   }
 };
