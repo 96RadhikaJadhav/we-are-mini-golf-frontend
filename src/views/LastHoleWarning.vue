@@ -10,7 +10,7 @@
       <div v-if="playersInfo.length" class="font-capriola mt-4">
         <p>
           It seems you haven't played
-          {{ unfinishedHoles.length > 2 ? 'holes No' : 'hole No' }}
+          {{ unfinishedHoles.length > 2 ? 'holes:' : 'hole:' }}
           <span class="text-ff6350"> {{ unfinishedHoles }}</span>
         </p>
         <p class="mt-2">What do you want to do about it?</p>
