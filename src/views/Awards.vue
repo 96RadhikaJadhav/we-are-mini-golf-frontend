@@ -7,20 +7,36 @@
       <div
         class="text-center mt-32 font-capriola flex flex-col justify-between items-center relative"
       >
-        <p class="text-005d63 text-2xl mb-4">THE AWARD OF</p>
-        <div class="flex flex-col items-center relative">
-          <Certificate :award="award"></Certificate>
-        </div>
+        <transition name="bounce">
+          <p v-if="animation.bounceOne" class="text-005d63 text-2xl mb-4">
+            THE AWARD OF
+          </p>
+        </transition>
+        <transition name="bounce">
+          <div
+            v-if="animation.bounceTwo"
+            class="flex flex-col items-center relative"
+          >
+            <Certificate :award="award"></Certificate>
+          </div>
+        </transition>
       </div>
     </div>
 
     <!-- Bottom 1/2 Screen -->
     <div class="h-1/2 flex flex-col justify-between">
       <div>
-        <p class="text-005d63 text-2xl font-capriola mt-32 mb-8 text-center">
-          GOES TO...
-        </p>
-        <Ribbon :award="award"></Ribbon>
+        <transition name="bounce">
+          <p
+            v-if="animation.bounceThree"
+            class="text-005d63 text-2xl font-capriola mt-32 mb-8 text-center"
+          >
+            GOES TO...
+          </p>
+        </transition>
+        <transition name="bounce">
+          <Ribbon v-if="animation.bounceFour" :award="award"></Ribbon>
+        </transition>
       </div>
       <base-button
         :to="{ name: 'FinalRanking' }"
@@ -52,9 +68,14 @@ export default {
         total: null,
         type: ''
       },
-
       playersInfo: [],
-      coursePar: []
+      coursePar: [],
+      animation: {
+        bounceOne: false,
+        bounceTwo: false,
+        bounceThree: false,
+        bounceFour: false
+      }
     };
   },
   created() {
@@ -68,7 +89,6 @@ export default {
   },
   methods: {
     ...mapActions('gameInfo', ['getGameDetails']),
-
     awardRotation() {
       setInterval(() => {
         switch (this.award.type) {
@@ -92,10 +112,13 @@ export default {
             this.award.type = 'The Sniper';
             break;
         }
-      }, 5000);
+      }, 6500);
     },
-
     updateAward(winner, type, desc, total) {
+      this.animation.bounceOne = false;
+      this.animation.bounceTwo = false;
+      this.animation.bounceThree = false;
+      this.animation.bounceFour = false;
       let a = this.award;
       if (total === null) {
         total = '0';
@@ -130,6 +153,22 @@ export default {
           a.img = require('../assets/ribbons/green-ribbon.png');
           break;
       }
+      this.showAwards();
+    },
+
+    showAwards() {
+      setTimeout(() => {
+        this.animation.bounceOne = true;
+      }, 700);
+      setTimeout(() => {
+        this.animation.bounceTwo = true;
+      }, 1400);
+      setTimeout(() => {
+        this.animation.bounceThree = true;
+      }, 2100);
+      setTimeout(() => {
+        this.animation.bounceFour = true;
+      }, 3500);
     },
 
     theSniper() {
@@ -242,5 +281,35 @@ export default {
 <style scoped>
 .background-gif {
   background-image: url('../assets/Confettis-gif.gif');
+}
+.bounce-transition {
+  display: inline-block; /* otherwise scale animation won't work */
+}
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-out 0.5s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes bounce-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
