@@ -9,7 +9,8 @@
       </p>
       <div v-if="playersInfo.length" class="font-capriola mt-4">
         <p>
-          It seems you haven't played holes No
+          It seems you haven't played
+          {{ unfinishedHoles.length > 2 ? 'holes No' : 'hole No' }}
           <span class="text-ff6350"> {{ unfinishedHoles }}</span>
         </p>
         <p class="mt-2">What do you want to do about it?</p>
@@ -66,9 +67,15 @@ export default {
           unfinishedHoles.push(index + 1);
         }
       });
-      unfinishedHoles.splice(-1, 1);
-      unfinishedHoles.splice(-1, 0, 'and');
-      return unfinishedHoles.join(' ');
+      if (unfinishedHoles.length > 2) {
+        unfinishedHoles.splice(-1, 1);
+        unfinishedHoles.splice(-1, 0, 'and');
+        return unfinishedHoles.join(' ');
+      } else {
+        unfinishedHoles.splice(-1, 1);
+        unfinishedHoles.splice(-1, 0);
+        return unfinishedHoles.join(' ');
+      }
     }
   }
 };
