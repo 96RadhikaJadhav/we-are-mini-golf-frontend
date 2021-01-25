@@ -6,8 +6,34 @@
         <router-view />
       </component>
     </transition>
+    <transition name="fade">
+      <Timeout v-if="isTimeout" @clear="clearTimeout"></Timeout>
+    </transition>
   </div>
 </template>
+
+<script>
+import Timeout from '@/components/Timeout.vue';
+export default {
+  data() {
+    return {
+      isTimeout: false
+    };
+  },
+  components: { Timeout },
+  created() {
+    this.clearTimeout();
+  },
+  methods: {
+    clearTimeout() {
+      this.isTimeout = false;
+      setTimeout(() => {
+        this.isTimeout = true;
+      }, 600000); // 10 minutes
+    }
+  }
+};
+</script>
 
 <style>
 html,
