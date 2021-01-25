@@ -1,51 +1,43 @@
 <template>
   <div
-    class="flex flex-col items-center justify-between w-full h-1/2 bg-fff6eb background-gif"
+    class="flex flex-col items-center justify-between w-full bg-fff6eb background-gif h-screen"
   >
-    <!-- Top 1/2 Screen -->
-    <div class="h-1/2">
-      <div
-        class="text-center mt-32 font-capriola flex flex-col justify-between items-center relative"
-      >
-        <transition name="bounce">
-          <p v-if="animation.bounceOne" class="text-005d63 text-2xl mb-4">
-            THE AWARD OF
-          </p>
-        </transition>
-        <transition name="bounce">
-          <div
-            v-if="animation.bounceTwo"
-            class="flex flex-col items-center relative"
-          >
-            <Certificate :award="award"></Certificate>
-          </div>
-        </transition>
-      </div>
-    </div>
+    <div
+      class="text-center mt-20 font-capriola flex flex-col justify-between items-center relative"
+    >
+      <transition name="bounce">
+        <p v-if="animation.bounceOne" class="text-005d63 text-2xl mb-4">
+          THE AWARD OF
+        </p>
+      </transition>
+      <transition name="bounce">
+        <div
+          v-if="animation.bounceTwo"
+          class="flex flex-col items-center relative"
+        >
+          <Certificate :award="award"></Certificate>
+        </div>
+      </transition>
 
-    <!-- Bottom 1/2 Screen -->
-    <div class="h-1/2 flex flex-col justify-between">
-      <div>
-        <transition name="bounce">
-          <p
-            v-if="animation.bounceThree"
-            class="text-005d63 text-2xl font-capriola mt-32 mb-8 text-center"
-          >
-            GOES TO...
-          </p>
-        </transition>
-        <transition name="bounce">
-          <Ribbon v-if="animation.bounceFour" :award="award"></Ribbon>
-        </transition>
-      </div>
-      <base-button
-        :to="{ name: 'FinalRanking' }"
-        mode="back"
-        class="text-aeb49a font-capriola mb-4"
-      >
-        Skip animation
-      </base-button>
+      <transition name="bounce">
+        <p
+          v-if="animation.bounceThree"
+          class="text-005d63 text-2xl font-capriola my-4 text-center"
+        >
+          GOES TO...
+        </p>
+      </transition>
+      <transition name="bounce">
+        <Ribbon v-if="animation.bounceFour" :award="award"></Ribbon>
+      </transition>
     </div>
+    <base-button
+      :to="{ name: 'FinalRanking' }"
+      mode="back"
+      class="text-aeb49a font-capriola mb-4"
+    >
+      Skip animation
+    </base-button>
   </div>
 </template>
 
