@@ -60,10 +60,15 @@ export default {
   computed: {
     ...mapGetters('gameInfo', ['getPar']),
     unfinishedHoles() {
-      let unfinishedHole = this.$route.params.unfinishedHoles;
-      unfinishedHole.splice(-1, 1);
-      unfinishedHole.splice(-1, 0, 'and');
-      return unfinishedHole.join(', ');
+      let unfinishedHoles = [];
+      this.playersInfo[0].holeScore.forEach((el, index) => {
+        if (el === 0) {
+          unfinishedHoles.push(index + 1);
+        }
+      });
+      unfinishedHoles.splice(-1, 1);
+      unfinishedHoles.splice(-1, 0, 'and');
+      return unfinishedHoles.join(', ');
     }
   }
 };
