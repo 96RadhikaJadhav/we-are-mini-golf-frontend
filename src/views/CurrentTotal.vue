@@ -12,7 +12,7 @@
     <div
       v-if="!showTotal && getPar.length !== holeNo"
       :class="[
-        'quote-container-hidden w-full md:w-1/2',
+        'absolute w-full md:w-1/2',
         isDisplayed ? 'slide-bottom' : 'slide-top'
       ]"
     >
@@ -203,24 +203,27 @@ export default {
   animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+/* GOING DOWN FROM TOP!!!! */
 @keyframes slide-bottom {
   0% {
-    top: -100%;
+    bottom: 100%;
+    transform: translateY(50px);
   }
   100% {
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 30%;
+    /* transform: translateY(-50%); */
   }
-}
 
+  /* GOING UP!!! */
+}
 @keyframes slide-top {
   0% {
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 30%;
+    /* transform: translateY(-50%); */
   }
   100% {
-    top: 0;
-    transform: translateY(-75%);
+    bottom: 100%;
+    transform: translateY(50px);
   }
 }
 
