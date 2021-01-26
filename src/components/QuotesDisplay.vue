@@ -1,14 +1,12 @@
 <template>
   <div class="w-full p-4">
     <!-- Top of page quote -->
-    <BaseCard class="pb-10">
-      <p
-        v-for="(player, index) in playersInfo"
-        :key="player.id"
-        class="uppercase text-aeb49a text-xl text-center font-kalam p-4"
-      >
-        {{ quoteGen(player, index) }}
-      </p>
+    <BaseCard @clicked="$emit('clicked')">
+      <div v-for="(player, index) in playersInfo" :key="player.id">
+        <p class="uppercase text-aeb49a text-xl text-center font-kalam">
+          {{ quoteGen(player, index) }}
+        </p>
+      </div>
     </BaseCard>
   </div>
 </template>
@@ -31,7 +29,7 @@ export default {
     quoteGen(player, i) {
       const lastScore = player.holeScore[this.holeNo - 1];
       const quote = this.quote;
-      const random = Math.floor(Math.random() * quote.holeInOne.length);
+      const random = Math.floor(Math.random() * 9);
       const par = this.getPar[this.holeNo - 1];
 
       // Hole in One

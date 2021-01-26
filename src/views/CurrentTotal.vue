@@ -1,22 +1,26 @@
 <template>
   <div class="bg-total bg-no-repeat bg-cover bg-center md:w-1/2 mb-4">
-    <transition name="fade-in">
+    <!-- QUOTE OVERLAY -->
+    <transition name="fade-in" v-if="!showTotal && getPar.length !== holeNo">
       <div
-        class="w-screen h-screen absolute top-0 left-0 flex flex-col justify-center items-center overlay"
+        class="absolute top-0 left-0 right-0 bottom-0 overlay"
         v-if="isDisplayed"
-        @click="isDisplayed = false"
       />
     </transition>
+
+    <!-- QUOTE BOX -->
     <div
+      v-if="!showTotal && getPar.length !== holeNo"
       :class="[
         'quote-container-hidden w-full md:w-1/2',
-        isDisplayed ? 'absolute mx-auto z-50 slide-bottom' : 'slide-top'
+        isDisplayed ? 'slide-bottom' : 'slide-top'
       ]"
     >
       <QuotesDisplay
         :playersInfo="playersInfo"
         :holeNo="holeNo"
         :getPar="getPar"
+        @clicked="isDisplayed = !isDisplayed"
       />
     </div>
     <div class="grid-container items-center h-full">
@@ -114,6 +118,9 @@ export default {
     },
     par: {
       type: Number
+    },
+    showTotal: {
+      type: Boolean
     }
   },
   data() {
@@ -198,22 +205,22 @@ export default {
 
 @keyframes slide-bottom {
   0% {
-    transform: translateY(0);
+    top: -100%;
   }
   100% {
     top: 50%;
-    transform: translate(0%, -50%);
+    transform: translateY(-50%);
   }
 }
 
 @keyframes slide-top {
   0% {
     top: 50%;
-    transform: translate(0%, -50%);
+    transform: translateY(-50%);
   }
   100% {
-    top: -25%;
-    transform: translateY(25%);
+    top: 0;
+    transform: translateY(-75%);
   }
 }
 

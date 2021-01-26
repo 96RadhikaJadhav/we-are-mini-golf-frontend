@@ -8,7 +8,6 @@ export default {
     ", don't make everyone else look ridiculous!",
     ', make it fair, play with one hand!',
     ', one word: "Bravo"',
-    ', congraaaats!',
     ', show me your happy dance!'
   ],
   parBestUnder: [
