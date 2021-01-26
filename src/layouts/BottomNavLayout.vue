@@ -34,6 +34,7 @@ export default {
       isDrawerOpen: false
     };
   },
+
   methods: {
     onClickOutside() {
       this.isDrawerOpen = false;

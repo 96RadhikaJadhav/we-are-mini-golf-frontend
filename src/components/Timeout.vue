@@ -1,5 +1,5 @@
 <template>
-  <div class="z-50">
+  <div class="z-50 absolute top-0 left-0 right-0 bottom-0">
     <ModalLayout @close="next('close')" :closingButton="false">
       <div class="py-6">
         <h1 class="uppercase text-aeb49a text-xl text-center font-kalam px-5">
