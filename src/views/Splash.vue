@@ -1,33 +1,41 @@
 <template>
   <div
-    class="w-full h-screen bg-fff6eb grid grid-flow-row grid-rows-2 place-items-center bg-splash bg-cover bg-center bg-no-repeat"
+    class="flex flex-col items-center pt-40 w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
   >
-    <div class="h-full flex items-end row-span-1">
-      <img src="../assets/logo.png" class="-mt-32" />
+    <!-- LOGO -->
+    <div>
+      <img src="../assets/logo.png" />
     </div>
-    <transition name="fade" mode="out-in">
-      <div v-if="isResumeGame" class="h-full row-span-1 w-60">
-        <p class="uppercase text-aeb49a text-3xl text-center font-kalam py-20">
-          Welcome Back!
+
+    <div
+      v-show="isResumeGame"
+      class="h-full w-full text-005d63 font-kalam text-center"
+    >
+      <div class="py-16">
+        <p class="text-3xl mb-1">
+          WELCOME BACK!
         </p>
-        <div v-if="checkExistingGame">
-          <BaseButton
-            class="btn primary-orange w-full"
-            tag="button"
-            @clicked="resumeGame"
-          >
-            Resume Game
-          </BaseButton>
-          <BaseButton
-            class="btn primary-orange mt-4 w-full"
-            tag="button"
-            @clicked="newGame"
-          >
-            Start A New Game
-          </BaseButton>
-        </div>
+        <p class="text-2xl">
+          You have an unfinished game
+        </p>
       </div>
-    </transition>
+      <div v-show="checkExistingGame" class="w-60 mx-auto">
+        <BaseButton
+          class="btn primary-orange w-full"
+          tag="button"
+          @clicked="resumeGame"
+        >
+          Resume Game
+        </BaseButton>
+        <BaseButton
+          class="btn primary-orange mt-4 w-full"
+          tag="button"
+          @clicked="newGame"
+        >
+          Start A New Game
+        </BaseButton>
+      </div>
+    </div>
   </div>
 </template>
 
