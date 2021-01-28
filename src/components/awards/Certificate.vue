@@ -6,12 +6,6 @@
         {{ award.type }}
       </p>
     </div>
-    <p class="mt-6">{{ award.desc }}</p>
-    <div
-      class="h-8 w-8 border border-005d63 bg-white rounded-full text-005d63 mt-2"
-    >
-      <p class="text-lg">{{ award.total }}</p>
-    </div>
   </div>
 </template>
 

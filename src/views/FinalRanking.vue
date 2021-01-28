@@ -43,9 +43,9 @@
               :key="index"
               class="flex justify-between mb-1 font-kalam text-2xl"
             >
-              <div class="flex">
-                <p class="mr-4 text-ea9864">{{ index + 1 }}</p>
-                <p class="text-white">{{ player.name }}</p>
+              <div class="flex font-thin">
+                <p class="mr-4 text-ea9864">{{ rank(index + 2) }}</p>
+                <p class="text-fff6eb">{{ player.name }}</p>
               </div>
               <div class="circle beige">
                 <p>12</p>
@@ -55,13 +55,6 @@
 
           <!-- REVIEW US BUTTON -->
           <div class="mb-2">
-            <base-button
-              type="button"
-              class="btn primary-orange mb-4"
-              @clicked="componentId = 'ReviewModal'"
-            >
-              REVIEW US
-            </base-button>
             <base-button class="back text-xl">
               Detailed Scores
             </base-button>
@@ -177,20 +170,18 @@
         <router-link class="link" to="">f</router-link>
         <router-link class="link pb-1" to="">@</router-link>
       </div>
-
-      <!-- REVIEW US Button Abs -->
-      <div class="flex justify-between sticky bottom-10">
-        <base-button
-          mode="btn primary-orange"
-          class=""
-          @clicked="componentId = 'ReviewModal'"
-        >
-          Review Us
-        </base-button>
-        <base-button mode="btn primary-orange" @clicked="newGame">
-          New Game
-        </base-button>
-      </div>
+    </div>
+    <!-- REVIEW US Button Abs -->
+    <div class="flex justify-around sticky bottom-14">
+      <base-button
+        mode="btn primary-orange"
+        @clicked="componentId = 'ReviewModal'"
+      >
+        Review Us
+      </base-button>
+      <base-button mode="btn primary-orange" @clicked="newGame">
+        New Game
+      </base-button>
     </div>
   </div>
 </template>
@@ -254,6 +245,19 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    rank(i) {
+      if (i === 2) {
+        return '2nd';
+      } else if (i === 3) {
+        return '3rd';
+      } else if (i === 4) {
+        return '4th';
+      } else if (i === 5) {
+        return '5th';
+      } else if (i === 6) {
+        return '6th';
+      }
     },
     parCalc() {
       let totalShots = 0;
@@ -392,6 +396,6 @@ export default {
   @apply bg-ff8e67 text-white;
 }
 .beige {
-  @apply bg-fff6eb text-005d63;
+  @apply bg-f5e3c8 text-005d63;
 }
 </style>
