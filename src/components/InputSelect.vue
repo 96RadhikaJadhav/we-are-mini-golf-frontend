@@ -31,9 +31,10 @@ export default {
 <style scoped>
 select,
 option {
-  -webkit-appearance: none;
-  color: #78d03a;
   text-align-last: center;
   font-family: 'Capriola', sans-serif;
+  -webkit-appearance: none;
+  text-align: -webkit-center;
+  color: #78d03a;
 }
 </style>
