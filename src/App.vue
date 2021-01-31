@@ -28,7 +28,7 @@ export default {
     clearTimeout() {
       this.isTimeout = false;
       setTimeout(() => {
-        this.isTimeout = true;
+        this.isTimeout = false;
       }, 600000); // 10 minutes
     }
   }
