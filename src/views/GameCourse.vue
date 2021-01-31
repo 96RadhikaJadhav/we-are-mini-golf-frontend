@@ -34,7 +34,8 @@ export default {
   name: 'GameCourse',
   data() {
     return {
-      courseGrid: {}
+      courseGrid: {},
+      playersInfo: []
     };
   },
   created() {
@@ -59,13 +60,46 @@ export default {
     }, 500);
   },
   methods: {
-    ...mapActions('gameInfo', ['updatePar']),
+    ...mapActions('gameInfo', ['updatePar', 'getGameDetails']),
+
     gotoHole(holeNo, mode) {
-      this.$router.push({
-        name: this.getPar.length === holeNo ? 'LastHoleWarning' : 'NewHole',
-        params: { holeNo: holeNo, mode: mode }
-      });
+      if (holeNo !== this.getPar.length) {
+        this.$router.push({
+          name: 'NewHole',
+          params: { holeNo: holeNo, mode: mode }
+        });
+      } else {
+        this.getGameDetails()
+          .then(response => {
+            this.playersInfo = response.playersInfo;
+            if (this.playersInfo) {
+              let unfinishedHoles = [];
+              this.playersInfo[0].holeScore.forEach((el, index) => {
+                if (el === 0) {
+                  unfinishedHoles.push(index + 1);
+                }
+              });
+              if (unfinishedHoles.length > 1) {
+                this.$router.push({
+                  name: 'LastHoleWarning',
+                  params: {
+                    holeNo: holeNo,
+                    mode: mode,
+                    unfinishedHoles: unfinishedHoles
+                  }
+                });
+              } else {
+                this.$router.push({
+                  name: 'NewHole',
+                  params: { holeNo: holeNo, mode: mode }
+                });
+              }
+            }
+          })
+          .catch(e => console.log(e));
+      }
     },
+
     createPlayerScores() {
       let courseHoles = [];
       let holes = this.courseGrid.numberOfHoles;

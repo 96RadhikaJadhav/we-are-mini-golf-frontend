@@ -9,7 +9,8 @@
       </p>
       <div v-if="playersInfo.length" class="font-capriola mt-4">
         <p>
-          It seems you haven't played holes No
+          It seems you haven't played
+          {{ unfinishedHoles.length > 2 ? 'holes:' : 'hole:' }}
           <span class="text-ff6350"> {{ unfinishedHoles }}</span>
         </p>
         <p class="mt-2">What do you want to do about it?</p>
@@ -23,7 +24,10 @@
           Tackle it now
         </BaseButton>
         <BaseButton
-          :to="{ name: 'NewHole', params: { holeNo: this.getPar.length } }"
+          :to="{
+            name: 'NewHole',
+            params: { holeNo: this.getPar.length, mode: 'new' }
+          }"
           mode="btn secondary-blue"
         >
           Finish anyway
@@ -57,15 +61,21 @@ export default {
   computed: {
     ...mapGetters('gameInfo', ['getPar']),
     unfinishedHoles() {
-      let unfinishedHole = [];
+      let unfinishedHoles = [];
       this.playersInfo[0].holeScore.forEach((el, index) => {
         if (el === 0) {
-          unfinishedHole.push(index + 1);
+          unfinishedHoles.push(index + 1);
         }
       });
-      unfinishedHole.splice(-1, 1);
-      unfinishedHole.splice(-1, 0, 'and');
-      return unfinishedHole.join(', ');
+      if (unfinishedHoles.length > 2) {
+        unfinishedHoles.splice(-1, 1);
+        unfinishedHoles.splice(-1, 0, 'and');
+        return unfinishedHoles.join(' ');
+      } else {
+        unfinishedHoles.splice(-1, 1);
+        unfinishedHoles.splice(-1, 0);
+        return unfinishedHoles.join(' ');
+      }
     }
   }
 };
