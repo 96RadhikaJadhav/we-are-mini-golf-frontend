@@ -98,7 +98,7 @@
         </div>
       </div>
       <!-- Button -->
-      <div class="flex-1 flex items-center h-1/4">
+      <div class="flex-1 flex items-center -mt-10">
         <base-button
           :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
           mode="btn primary-orange"
