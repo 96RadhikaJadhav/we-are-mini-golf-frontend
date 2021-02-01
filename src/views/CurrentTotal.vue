@@ -86,6 +86,14 @@
               :show="showTotal"
             >
             </current-ranking>
+            <div class="grid grid-cols-6">
+              <div class="col-span-4"></div>
+              <div class="col-span-2">
+                <p class="font-kalam text-005d63 text-sm" v-show="!showTotal">
+                  PAR {{ par }}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
