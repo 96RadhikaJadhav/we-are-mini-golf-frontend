@@ -20,14 +20,10 @@
 <script>
 import NavMenu from '@/components/NavMenu';
 import RulesScreen from '@/components/rules/RulesScreen.vue';
-import vClickOutside from 'v-click-outside';
 
 export default {
   name: 'BottomNavLayout',
   components: { NavMenu, RulesScreen },
-  directives: {
-    clickOutside: vClickOutside.directive
-  },
   data() {
     return {
       isDrawerOpen: false
