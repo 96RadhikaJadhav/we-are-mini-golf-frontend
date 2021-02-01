@@ -2,12 +2,14 @@
   <!-- ======== Section A: Final Ranking ======== -->
 
   <div class="h-full w-full bg-rankings bg-no-repeat bg-cover">
-    <component
-      class="z-50"
-      :is="componentId"
-      @close="componentId = ''"
-      @submit="submitReview"
-    ></component>
+    <transition name="fade" mode="out-in">
+      <component
+        class="z-50"
+        :is="componentId"
+        @close="componentId = ''"
+        @submit="submitReview"
+      ></component>
+    </transition>
 
     <div class="h-screen flex flex-col justify-between">
       <!-- Top 1/4 Header -->
@@ -49,7 +51,7 @@
                 <p class="text-fff6eb">{{ player.name }}</p>
               </div>
               <div class="circle beige">
-                <p>12</p>
+                <p>{{ player.totalScore }}</p>
               </div>
             </div>
           </div>
@@ -226,6 +228,9 @@ export default {
         this.playersInfo = this.getGameInfo.playersInfo;
         this.par = this.getPar;
         this.parCalc();
+        setTimeout(() => {
+          this.componentId = 'ReviewModal';
+        }, 2000);
       })
       .catch(e => console.log(e));
   },
