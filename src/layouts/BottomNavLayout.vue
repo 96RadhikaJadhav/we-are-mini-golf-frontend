@@ -7,7 +7,10 @@
       <NavMenu @display-rules="isDrawerOpen = !isDrawerOpen" />
     </div>
     <transition name="slide-in">
-      <div v-if="isDrawerOpen">
+      <div
+        v-if="isDrawerOpen"
+        class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
+      >
         <RulesScreen v-touch:swipe.bottom="onSlideDown" />
       </div>
     </transition>
