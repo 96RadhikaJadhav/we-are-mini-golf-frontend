@@ -7,12 +7,8 @@
       <NavMenu @display-rules="isDrawerOpen = !isDrawerOpen" />
     </div>
     <transition name="slide-in">
-      <div
-        class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
-        v-if="isDrawerOpen"
-        v-click-outside="onClickOutside"
-      >
-        <RulesScreen @close-drawer="isDrawerOpen = false" />
+      <div v-if="isDrawerOpen">
+        <RulesScreen v-touch:swipe.bottom="onSlideDown" />
       </div>
     </transition>
   </div>
@@ -36,7 +32,7 @@ export default {
   },
 
   methods: {
-    onClickOutside() {
+    onSlideDown() {
       this.isDrawerOpen = false;
     }
   }
