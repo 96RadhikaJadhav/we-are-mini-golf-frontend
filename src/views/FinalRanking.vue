@@ -3,6 +3,7 @@
 
   <div class="h-full w-full bg-rankings bg-no-repeat bg-cover">
     <component
+      class="z-50"
       :is="componentId"
       @close="componentId = ''"
       @submit="submitReview"
@@ -310,7 +311,10 @@ export default {
       if (localStorage.getItem('course-grid')) {
         localStorage.removeItem('course-grid');
       }
-      this.$router.push({ name: 'Splash' });
+      if (localStorage.getItem('current-hole')) {
+        localStorage.removeItem('current-hole');
+      }
+      window.location.reload();
     }
   },
   computed: {
