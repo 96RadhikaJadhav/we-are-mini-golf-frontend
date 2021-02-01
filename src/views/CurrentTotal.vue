@@ -28,6 +28,7 @@
       <div class="flex flex-col justify-end items-center h-full">
         <img src="@/assets/first-reef.png" class="h-auto w-24 mb-4" />
 
+        <!-- 1st Player Name -->
         <div
           v-if="getHighestTotalPlayer"
           class="flex flex-col items-center justify-evenly font-kalam h-12 w-full text-white text-xl"
@@ -35,6 +36,7 @@
           <p class="font-lg mb-2 text-2xl" v-if="playersInfo.length > 0">
             {{ getHighestTotalPlayer.name }}
           </p>
+          <!-- 1st Player Last Score -->
           <div class="flex">
             <div
               v-if="getHighestTotalPlayer.holeScore[holeNo - 1]"
@@ -44,6 +46,7 @@
                 {{ getHighestTotalPlayer.holeScore[holeNo - 1] }}
               </p>
             </div>
+            <!-- 1st Player Total Score -->
             <div class="h-8 w-8 rounded-full text-center bg-ff8e67 text-white">
               <p class="mt-1 text-xl" v-if="playersInfo.length > 0">
                 {{ getHighestTotalPlayer.totalScore }}
@@ -59,7 +62,7 @@
         <div class="grid grid-flow-col grid-cols-6 font-kalam leading-4 ml-4">
           <div class="col-span-4"></div>
           <div class="col-span-1">
-            <p class="text-005d63">
+            <p class="text-005d63" v-show="!showTotal">
               Last<br />
               hole
             </p>
@@ -80,6 +83,7 @@
               :player="player"
               :index="index"
               :holeNo="holeNo"
+              :show="showTotal"
             >
             </current-ranking>
           </div>

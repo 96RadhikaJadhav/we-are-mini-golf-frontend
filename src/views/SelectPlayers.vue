@@ -1,13 +1,10 @@
 <template>
   <div
-    class="h-full md:w-1/2 grid grid-rows-3 place-items-center bg-selection bg-no-repeat bg-cover bg-center"
+    class="h-full md:w-1/2 bg-selection bg-no-repeat bg-cover bg-center grid grid-rows-3"
   >
-    <img src="../assets/logo-principle.png" />
-    <div class="text-fff6eb text-3xl self-stretch pt-8">
-      <p class="font-kalam">Welcome to</p>
-      <p class="font-capriola">Siem Reap Mini <br />Golf!</p>
-    </div>
-    <div class="space-y-10 h-full mx-auto">
+    <div class=""></div>
+    <div class=""></div>
+    <div class="space-y-10 h-full mx-auto -mt-10">
       <p class="text-005d63 text-2xl font-semibold">How many players?</p>
       <div>
         <vue-slider

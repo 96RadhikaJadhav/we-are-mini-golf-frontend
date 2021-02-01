@@ -21,7 +21,7 @@ module.exports = {
         players:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607324529/we-are-mini-golf/03_-_Players_name_screen_2x_zcev21.png")',
         selection:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607324266/we-are-mini-golf/02_-_Select_players_screen_2x_emlwqy.png")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612149424/we-are-mini-golf/large_PLAYERS_4b89e7e130_optimized_pjrvnc.jpg")',
         scores:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1610794781/we-are-mini-golf/06_-_Enter_scores_screen_-_bg_wo_hand_seajno.png")',
         total:
