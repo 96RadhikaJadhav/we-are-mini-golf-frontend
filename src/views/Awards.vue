@@ -98,7 +98,6 @@ export default {
           this.updateAward(this.successfulAwards[counter]);
         } else {
           this.$router.push({ name: 'FinalRanking' });
-          return;
         }
       }, 7000);
     },
@@ -167,8 +166,6 @@ export default {
       if (winner) {
         let sniper = { winner: winner, type: type };
         this.successfulAwards.push(sniper);
-      } else {
-        return;
       }
     },
     theDreamer() {

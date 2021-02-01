@@ -237,7 +237,6 @@ export default {
         .then(() => {
           if (rating <= 4) {
             this.componentId = 'ThankYou';
-            return;
           } else {
             this.componentId = 'HelpUs';
           }
@@ -273,15 +272,12 @@ export default {
           if (el < this.par[i] && el > 0) {
             underPar.push(el);
             i++;
-            return;
           } else if (el === this.par[i] && el > 0) {
             onPar.push(el);
             i++;
-            return;
           } else if (el > this.par[i] && el > 0) {
             overPar.push(el);
             i++;
-            return;
           }
         });
         this.underPar = underPar;
