@@ -86,11 +86,19 @@
               :show="showTotal"
             >
             </current-ranking>
+            <div class="grid grid-cols-6">
+              <div class="col-span-4"></div>
+              <div class="col-span-2">
+                <p class="font-kalam text-005d63 text-sm" v-show="!showTotal">
+                  PAR {{ par }}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <!-- Button -->
-      <div class="flex-1 flex items-center h-1/4">
+      <div class="flex-1 flex items-center -mt-10">
         <base-button
           :to="{ name: 'GameCourse', params: { holeNo: holeNo } }"
           mode="btn primary-orange"

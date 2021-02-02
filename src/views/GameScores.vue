@@ -111,11 +111,6 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     updatePlayerScore() {
       this.mode === 'edit' ? this.updateTotalScore() : this.calculateTotal();
-      this.updateGameDetails({ playersInfo: this.playersInfo })
-        .then(() => {
-          this.navigateTo();
-        })
-        .catch(e => console.log(e));
     },
     navigateTo() {
       this.$router.push({
@@ -124,12 +119,25 @@ export default {
       });
     },
     calculateTotal() {
+      let confirm = true;
       this.playersInfo.forEach(el => {
-        let score = el.score;
-        el.holeScore.splice(this.holeNo - 1, 1, score);
-        el.totalScore = score + el.totalScore;
-        delete el.score;
+        if (!el.score) {
+          confirm = false;
+        }
       });
+      if (confirm == true) {
+        this.playersInfo.forEach(el => {
+          let score = el.score;
+          el.holeScore.splice(this.holeNo - 1, 1, score);
+          el.totalScore = score + el.totalScore;
+          delete el.score;
+        });
+        this.updateGameDetails({ playersInfo: this.playersInfo })
+          .then(() => {
+            this.navigateTo();
+          })
+          .catch(e => console.log(e));
+      }
     },
     updateTotalScore() {
       this.playersInfo.forEach(el => {
@@ -137,6 +145,11 @@ export default {
           (total, current) => total + current
         );
       });
+      this.updateGameDetails({ playersInfo: this.playersInfo })
+        .then(() => {
+          this.navigateTo();
+        })
+        .catch(e => console.log(e));
     }
   }
 };
