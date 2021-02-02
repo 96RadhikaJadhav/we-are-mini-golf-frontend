@@ -2,11 +2,14 @@
   <!-- ======== Section A: Final Ranking ======== -->
 
   <div class="h-full w-full bg-rankings bg-no-repeat bg-cover">
-    <component
-      :is="componentId"
-      @close="componentId = ''"
-      @submit="submitReview"
-    ></component>
+    <transition name="fade" mode="out-in">
+      <component
+        class="z-50"
+        :is="componentId"
+        @close="componentId = ''"
+        @submit="submitReview"
+      ></component>
+    </transition>
 
     <div class="h-screen flex flex-col justify-between">
       <!-- Top 1/4 Header -->
@@ -43,25 +46,18 @@
               :key="index"
               class="flex justify-between mb-1 font-kalam text-2xl"
             >
-              <div class="flex">
-                <p class="mr-4 text-ea9864">{{ index + 1 }}</p>
-                <p class="text-white">{{ player.name }}</p>
+              <div class="flex font-thin">
+                <p class="mr-4 text-ea9864">{{ rank(index + 2) }}</p>
+                <p class="text-fff6eb">{{ player.name }}</p>
               </div>
               <div class="circle beige">
-                <p>12</p>
+                <p>{{ player.totalScore }}</p>
               </div>
             </div>
           </div>
 
           <!-- REVIEW US BUTTON -->
           <div class="mb-2">
-            <base-button
-              type="button"
-              class="btn confirm mb-4"
-              @clicked="componentId = 'ReviewModal'"
-            >
-              REVIEW US
-            </base-button>
             <base-button class="back text-xl">
               Detailed Scores
             </base-button>
@@ -140,7 +136,7 @@
               class="border-r border-f5e3c8 pb-1"
               :class="resultColor(score, index)"
             >
-              {{ score }}
+              {{ scoreUpdate(score) }}
             </p>
           </div>
 
@@ -177,14 +173,17 @@
         <router-link class="link" to="">f</router-link>
         <router-link class="link pb-1" to="">@</router-link>
       </div>
-
-      <!-- REVIEW US Button Abs -->
+    </div>
+    <!-- REVIEW US Button Abs -->
+    <div class="flex justify-around sticky bottom-14">
       <base-button
-        mode="btn confirm"
-        class="sticky bottom-10"
+        mode="btn primary-orange"
         @clicked="componentId = 'ReviewModal'"
       >
         Review Us
+      </base-button>
+      <base-button mode="btn primary-orange" @clicked="newGame">
+        New Game
       </base-button>
     </div>
   </div>
@@ -229,6 +228,9 @@ export default {
         this.playersInfo = this.getGameInfo.playersInfo;
         this.par = this.getPar;
         this.parCalc();
+        setTimeout(() => {
+          this.componentId = 'ReviewModal';
+        }, 2000);
       })
       .catch(e => console.log(e));
   },
@@ -241,7 +243,6 @@ export default {
         .then(() => {
           if (rating <= 4) {
             this.componentId = 'ThankYou';
-            return;
           } else {
             this.componentId = 'HelpUs';
           }
@@ -250,31 +251,45 @@ export default {
           console.log(err);
         });
     },
+    rank(i) {
+      if (i === 2) {
+        return '2nd';
+      } else if (i === 3) {
+        return '3rd';
+      } else if (i === 4) {
+        return '4th';
+      } else if (i === 5) {
+        return '5th';
+      } else if (i === 6) {
+        return '6th';
+      }
+    },
     parCalc() {
-      this.totalShots = this.playersInfo.length * this.par.length; // 42 shots total
+      let totalShots = 0;
       let underPar = [];
       let onPar = [];
       let overPar = [];
       this.playersInfo.forEach(el => {
         let i = 0;
         el.holeScore.forEach(el => {
-          if (el < this.par[i]) {
+          if (el > 0) {
+            totalShots += 1;
+          }
+          if (el < this.par[i] && el > 0) {
             underPar.push(el);
             i++;
-            return;
-          } else if (el === this.par[i]) {
+          } else if (el === this.par[i] && el > 0) {
             onPar.push(el);
             i++;
-            return;
-          } else if (el > this.par[i]) {
+          } else if (el > this.par[i] && el > 0) {
             overPar.push(el);
             i++;
-            return;
           }
         });
         this.underPar = underPar;
         this.onPar = onPar;
         this.overPar = overPar;
+        this.totalShots = totalShots;
       });
     },
 
@@ -283,9 +298,28 @@ export default {
         return 'green';
       } else if (score === 1) {
         return 'red';
-      } else {
+      } else if (score == 0) {
         return;
       }
+    },
+    scoreUpdate(score) {
+      if (score !== 0) {
+        return score;
+      } else {
+        return '-';
+      }
+    },
+    newGame() {
+      if (localStorage.getItem('game-details')) {
+        localStorage.removeItem('game-details');
+      }
+      if (localStorage.getItem('course-grid')) {
+        localStorage.removeItem('course-grid');
+      }
+      if (localStorage.getItem('current-hole')) {
+        localStorage.removeItem('current-hole');
+      }
+      window.location.reload();
     }
   },
   computed: {
@@ -339,6 +373,9 @@ export default {
 .green {
   color: rgb(70, 206, 70);
 }
+.white {
+  color: white;
+}
 .circle {
   @apply h-8 w-8 rounded-full text-center pt-1 font-kalam text-xl text-white;
 }
@@ -364,6 +401,6 @@ export default {
   @apply bg-ff8e67 text-white;
 }
 .beige {
-  @apply bg-fff6eb text-005d63;
+  @apply bg-f5e3c8 text-005d63;
 }
 </style>

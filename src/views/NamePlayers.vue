@@ -14,7 +14,7 @@
         v-if="inputs"
       >
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="flex justify-between py-4 px-4">
+          <div class="flex justify-between py-3 px-4">
             <InputText
               :placeholder="`Player ${index + 1}`"
               v-model="player.name"
@@ -26,13 +26,13 @@
     </div>
     <!-- Start and Back Buttons -->
 
-    <div class="flex flex-col space-y-4">
-      <base-button mode="btn confirm" type="submit">
+    <div class="flex flex-col space-y-4 mx-auto">
+      <base-button mode="btn primary-orange" type="submit" class="w-full">
         Start the game!
       </base-button>
 
-      <base-button mode="back" to="/select-players">
-        Change number of players
+      <base-button mode="btn primary-beige" to="/select-players">
+        Change Nº of players
       </base-button>
     </div>
   </form>
@@ -58,8 +58,13 @@ export default {
   },
   created() {
     this.getGameDetails()
-      .then(() => {
-        this.inputs = this.getGameInfo.noOfPlayers;
+      .then(response => {
+        this.inputs = response.noOfPlayers;
+        this.$gtm.trackEvent({
+          event: 'gaEvent',
+          eventName: 'players_selected',
+          players: response.noOfPlayers
+        });
       })
       .catch(e => console.log(e));
   },
@@ -67,7 +72,9 @@ export default {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     startGame() {
       this.updateGameDetails({ playersInfo: this.playersInfo })
-        .then(this.$router.push({ name: 'GameCourse' }))
+        .then(() => {
+          this.$router.push({ name: 'GameCourse' });
+        })
         .catch(e => console.log(e));
     }
   },
@@ -79,6 +86,7 @@ export default {
           this.playersInfo.push({
             name: '',
             age: '',
+            holeScore: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // will be changed to dynamic initliaztion soon
             score: 0
           });
         }

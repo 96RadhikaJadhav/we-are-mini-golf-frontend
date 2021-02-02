@@ -2,14 +2,12 @@
   <div id="app" class="antialiased h-screen">
     <div></div>
     <transition name="fade" mode="out-in">
-      <Timeout v-if="isTimeout"
-        >Looks like you've been away for a while...</Timeout
-      >
-    </transition>
-    <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
       </component>
+    </transition>
+    <transition name="fade">
+      <Timeout v-if="isTimeout" @clear="clearTimeout"></Timeout>
     </transition>
   </div>
 </template>
@@ -17,22 +15,20 @@
 <script>
 import Timeout from '@/components/Timeout.vue';
 export default {
-  components: { Timeout },
   data() {
     return {
       isTimeout: false
     };
   },
-  provide() {
-    return {
-      Timeout: this.clearTimeout
-    };
+  components: { Timeout },
+  created() {
+    this.clearTimeout();
   },
   methods: {
     clearTimeout() {
       this.isTimeout = false;
       setTimeout(() => {
-        this.isTimeout = true;
+        this.isTimeout = false;
       }, 600000); // 10 minutes
     }
   }

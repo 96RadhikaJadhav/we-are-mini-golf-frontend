@@ -1,8 +1,12 @@
 <template>
-  <ModalLayout @close="$emit('close')">
+  <ModalLayout :closingButton="true" @close="$emit('close')">
+    <img
+      src="https://res.cloudinary.com/doblhgoan/image/upload/v1610957518/we-are-mini-golf/09-Final-ranking-review-popup-thanks_mym1sb.png"
+      class="absolute top-96"
+    />
     <!-- Thank You Texts -->
     <div
-      class="flex flex-col items-center justify-center text-2xl text-center leading-relaxed font-capriola"
+      class="flex flex-col items-center justify-center text-2xl text-center leading-relaxed font-capriola pb-10"
     >
       <p class="uppercase mb-6 text-aeb49a font-capriola">
         thank you for <br />your feedback!
@@ -14,8 +18,6 @@
       <p class="lead">&</p>
       <router-link to="">weareminigolf.com</router-link>
       <p class="lead mb-10">wish you a great day!</p>
-
-      <img src="@/assets/logo.png" alt="logo" class="mb-20" />
     </div>
   </ModalLayout>
 </template>

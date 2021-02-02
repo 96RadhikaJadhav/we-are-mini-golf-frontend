@@ -1,69 +1,63 @@
 <template>
-  <div
-    class="grid grid-flow-row grid-rows-6 p-4 items-center bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 "
-  >
+  <div class="grid bg-scores bg-no-repeat bg-cover bg-center md:w-1/2 pb-20">
     <!-- HOLE AND PAR -->
+    <!-- Hand Sign Image -->
     <div
-      class="text-center font-kalam text-005d63 uppercase h-full text-2xl flex flex-col items-center justify-end mb-14 row-span-2"
+      class="text-center font-kalam text-005d63 uppercase text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center h-60 max-h-60"
     >
-      <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
-      <p>PAR {{ getPar[holeNo - 1] }}</p>
+      <div class="mb-4">
+        <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
+        <p>PAR {{ getPar[holeNo - 1] }}</p>
+      </div>
     </div>
 
-    <div
-      class="w-full px-6 h-full flex flex-col items-center justify-center row-span-3"
-    >
-      <div class="w-full flex flex-col justify-between">
-        <!-- DIV FOR BASE CARD -->
+    <div class="w-full mx-auto px-6">
+      <!-- DIV FOR BASE CARD -->
+      <div class="bg-white rounded-3xl p-4 text-2xl">
         <div
-          class="bg-white rounded-3xl items-center justify-center px-4 my-4 text-2xl"
+          v-for="player in playersInfo"
+          :key="player.name"
+          class="flex justify-between items-center my-4 px-4"
         >
-          <div
-            v-for="player in playersInfo"
-            :key="player.name"
-            class="flex justify-between items-center my-4 px-4"
-          >
-            <!-- PLAYER NAMES -->
-            <p class="text-005D63 font-kalam text-005d63">
-              {{ player.name }}
-            </p>
-            <!-- SCORE INPUT -->
-            <input
-              type="number"
-              placeholder="0"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model.number="player.score"
-              v-if="!editscore && !showTotal"
-            />
-            <input
-              type="number"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              v-model.number="player.holeScore[holeNo - 1]"
-              v-else-if="editscore && !showTotal"
-              maxlength="2"
-            />
-            <input
-              type="number"
-              inputmode="numeric"
-              class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
-              :value="player.totalScore"
-              disabled
-              v-else
-            />
-          </div>
+          <!-- PLAYER NAMES -->
+          <p class="text-005D63 font-kalam text-005d63">
+            {{ player.name }}
+          </p>
+          <!-- SCORE INPUT -->
+          <input
+            type="number"
+            placeholder="0"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            v-model.number="player.score"
+            v-if="mode === 'new'"
+          />
+          <input
+            type="number"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            v-model.number="player.holeScore[holeNo - 1]"
+            v-else-if="mode === 'edit'"
+            maxlength="2"
+          />
+          <input
+            type="number"
+            inputmode="numeric"
+            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            :value="player.totalScore"
+            disabled
+            v-else
+          />
         </div>
       </div>
     </div>
 
     <!-- CONFIRM BUTTON flex-item 3 -->
-    <div>
+    <div class="">
       <base-button
-        class="mb-20"
-        mode="btn confirm"
+        class="mt-8"
+        mode="btn primary-orange"
         @clicked="updatePlayerScore"
-        v-if="!showTotal"
       >
         Confirm
       </base-button>
@@ -80,11 +74,12 @@ export default {
   components: { BaseButton },
   props: {
     holeNo: {
-      type: Number
+      type: Number,
+      required: true
     },
-    editscore: {
-      type: Boolean,
-      default: false
+    mode: {
+      type: String,
+      required: true
     },
     showTotal: {
       type: Boolean,
@@ -93,50 +88,68 @@ export default {
   },
   data() {
     return {
-      name: 'GameScore',
       playersInfo: []
     };
   },
   computed: {
     ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
   },
-
+  mounted() {
+    let self = this;
+    window.onpopstate = function() {
+      self.$router.push({ name: 'GameCourse' });
+    };
+  },
   created() {
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
-        this.playersInfo.forEach(el => {
-          el.score = null;
-        });
       })
       .catch(e => console.log(e));
   },
   methods: {
     ...mapActions('gameInfo', ['getGameDetails', 'updateGameDetails']),
     updatePlayerScore() {
-      if (!this.editscore) {
-        this.calculateTotal();
-        this.updateGameDetails({ playersInfo: this.playersInfo })
-          .then(this.navigateTo())
-          .catch(e => console.log(e));
-      }
+      this.mode === 'edit' ? this.updateTotalScore() : this.calculateTotal();
     },
     navigateTo() {
       this.$router.push({
-        name: this.editscore ? 'GameCourse' : 'CurrentTotal',
-        params: { holeNo: this.holeNo }
+        name: this.mode === 'edit' ? 'GameCourse' : 'CurrentTotal',
+        params: { holeNo: this.holeNo, par: this.getPar[this.holeNo - 1] }
       });
     },
     calculateTotal() {
-      this.playersInfo.forEach(val => {
-        if (val.holeScore === null) {
-          val.holeScore = [];
+      let confirm = true;
+      this.playersInfo.forEach(el => {
+        if (!el.score) {
+          confirm = false;
         }
-        let score = val.score;
-        val.holeScore.push(score);
-        val.totalScore = score + val.totalScore;
-        delete val.score;
       });
+      if (confirm == true) {
+        this.playersInfo.forEach(el => {
+          let score = el.score;
+          el.holeScore.splice(this.holeNo - 1, 1, score);
+          el.totalScore = score + el.totalScore;
+          delete el.score;
+        });
+        this.updateGameDetails({ playersInfo: this.playersInfo })
+          .then(() => {
+            this.navigateTo();
+          })
+          .catch(e => console.log(e));
+      }
+    },
+    updateTotalScore() {
+      this.playersInfo.forEach(el => {
+        el.totalScore = el.holeScore.reduce(
+          (total, current) => total + current
+        );
+      });
+      this.updateGameDetails({ playersInfo: this.playersInfo })
+        .then(() => {
+          this.navigateTo();
+        })
+        .catch(e => console.log(e));
     }
   }
 };

@@ -5,9 +5,9 @@
     <ErrorMessage v-if="invalid" />
 
     <!-- Main Card -->
-    <div class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm">
+    <div class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm p-6">
       <!-- Closing Button -->
-      <div class="flex justify-end p-6">
+      <div v-if="closingButton" class="flex justify-end pb-6">
         <button
           class="text-aeb49a focus:outline-none cursor-pointer"
           @click="$emit('close')"
@@ -17,7 +17,7 @@
       </div>
 
       <!-- Content -->
-      <div class="px-6">
+      <div>
         <slot></slot>
       </div>
 
@@ -34,7 +34,7 @@
 import ErrorMessage from '@/components/reviews/ErrorMessage';
 export default {
   components: { ErrorMessage },
-  props: ['invalid'],
+  props: ['invalid', 'closingButton'],
   data() {
     return {
       name: 'ModalLayout'

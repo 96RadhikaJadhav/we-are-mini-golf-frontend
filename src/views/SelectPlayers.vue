@@ -1,24 +1,21 @@
 <template>
   <div
-    class="h-full md:w-1/2 grid grid-rows-3 place-items-center bg-selection bg-no-repeat bg-cover bg-center"
+    class="h-full md:w-1/2 bg-selection bg-no-repeat bg-cover bg-center grid grid-rows-3"
   >
-    <img src="../assets/logo-principle.png" />
-    <div class="text-fff6eb text-3xl self-stretch pt-8">
-      <p class="font-kalam">Welcome to</p>
-      <p class="font-capriola">Siem Reap Mini <br />Golf!</p>
-    </div>
-    <div class="space-y-10 h-full mx-auto">
+    <div class=""></div>
+    <div class=""></div>
+    <div class="space-y-10 h-full mx-auto -mt-10">
       <p class="text-005d63 text-2xl font-semibold">How many players?</p>
-      <p class="text-center text-lg font-capriola">{{ noOfPlayers }}</p>
       <div>
-        <InputRange
+        <vue-slider
+          v-model="noOfPlayers"
+          dotSize="25"
           :min="1"
           :max="6"
-          :value="noOfPlayers"
-          @changed="selectedPlayers"
-        />
+          tooltip="always"
+        ></vue-slider>
       </div>
-      <base-button mode="btn confirm" @clicked="selectNumOfPlayers">
+      <base-button mode="btn primary-orange" @clicked="selectNumOfPlayers">
         Confirm
       </base-button>
     </div>
@@ -27,12 +24,13 @@
 
 <script>
 import { mapActions } from 'vuex';
-import InputRange from '@/components/InputRange.vue';
 import BaseButton from '../components/utilities/BaseButton';
+import VueSlider from 'vue-slider-component';
+import '@/styles/slider-theme.scss';
 
 export default {
   name: 'SelectPlayers',
-  components: { InputRange, BaseButton },
+  components: { BaseButton, VueSlider },
   data() {
     return {
       noOfPlayers: 1
@@ -48,7 +46,12 @@ export default {
         noOfPlayers: this.noOfPlayers
       };
       this.updateGameDetails(payload)
-        .then(this.$router.push({ name: 'NamePlayers' }))
+        .then(() => {
+          this.$router.push({
+            name: 'NamePlayers',
+            params: { noOfPlayers: this.noOfPlayers }
+          });
+        })
         .catch(e => console.log(e));
     }
   }

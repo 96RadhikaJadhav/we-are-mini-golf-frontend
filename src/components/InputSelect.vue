@@ -1,6 +1,6 @@
 <template>
   <select
-    class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative pl-3 font-capriola text-3B9D11"
+    class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative px-2 font-capriola text-3B9D11"
     :class="{ error: isInvalid }"
     :value="value"
     required
@@ -28,3 +28,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+select,
+option {
+  text-align-last: center;
+  font-family: 'Capriola', sans-serif;
+  -webkit-appearance: none;
+  text-align: -webkit-center;
+  color: #78d03a;
+}
+</style>

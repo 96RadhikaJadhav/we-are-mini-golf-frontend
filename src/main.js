@@ -3,17 +3,24 @@ import App from './App.vue';
 import './styles/tailwind.css';
 import './registerServiceWorker';
 import VueGtm from 'vue-gtm';
-import VueMeta from 'vue-meta'
+import VueMeta from 'vue-meta';
+import vClickOutside from 'v-click-outside';
 import router from './router';
 import store from './store';
+import VueClipboard from 'vue-clipboard2';
+import Vue2TouchEvents from 'vue2-touch-events';
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+Vue.use(vClickOutside);
+
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+});
+
+Vue.use(VueClipboard);
+Vue.use(Vue2TouchEvents);
 
 Vue.use(VueGtm, {
   id: ['GTM-59PVXGQ'],
@@ -26,7 +33,8 @@ Vue.use(VueGtm, {
   // trackOnNextTick: false
 });
 
-Vue.use(VueMeta, {
-  // optional pluginOptions
-  refreshOnceOnNavigation: true
-});
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app');

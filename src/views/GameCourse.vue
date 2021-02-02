@@ -1,27 +1,25 @@
 <template>
   <div class="md:w-1/3 md:mx-auto">
     <div class="grid grid-cols-3 gap-0" v-if="courseGrid">
-      <div v-for="(square, index) in courseGrid.squareInfo" :key="square.id">
+      <div v-for="square in courseGrid.squareInfo" :key="square.id">
         <img
-          v-if="!square.active"
+          v-if="(square.active && !square.isHoleActive) || square.isLastHole"
           :src="square.inactive.url"
           class="w-full h-full object-fill"
           :alt="square.id"
+          @click="gotoHole(square.holeNo, 'new')"
         />
         <img
-          v-else-if="
-            !square.isHoleActive || square.holeNo === square.holeNo.length
-          "
-          :src="square.inactive.url"
+          v-else-if="square.isHoleActive"
+          :src="square.active.url"
           class="w-full h-full object-fill"
-          :alt="square.id"
-          @click="gotoNewHole(square.holeNo, index)"
+          @click="gotoHole(square.holeNo, 'edit')"
         />
         <img
           v-else
-          :src="square.active.url"
+          :src="square.inactive.url"
           class="w-full h-full object-fill"
-          @click="editHoleDetails(square.holeNo)"
+          :alt="square.id"
         />
       </div>
     </div>
@@ -30,13 +28,14 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'GameCourse',
   data() {
     return {
-      courseGrid: {}
+      courseGrid: {},
+      playersInfo: []
     };
   },
   created() {
@@ -47,6 +46,7 @@ export default {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
+          // this.createPlayerScores();
         })
         .catch(e => console.log(e));
     } else {
@@ -60,19 +60,64 @@ export default {
     }, 500);
   },
   methods: {
-    ...mapActions('gameInfo', ['updatePar']),
-    gotoNewHole(holeNo) {
-      this.$router.push({
-        name: 'NewHole',
-        params: { holeNo: holeNo }
-      });
+    ...mapActions('gameInfo', ['updatePar', 'getGameDetails']),
+
+    gotoHole(holeNo, mode) {
+      if (holeNo !== this.getPar.length) {
+        this.$router.push({
+          name: 'NewHole',
+          params: { holeNo: holeNo, mode: mode }
+        });
+      } else {
+        this.getGameDetails()
+          .then(response => {
+            this.playersInfo = response.playersInfo;
+            if (this.playersInfo) {
+              let unfinishedHoles = [];
+              this.playersInfo[0].holeScore.forEach((el, index) => {
+                if (el === 0) {
+                  unfinishedHoles.push(index + 1);
+                }
+              });
+              if (unfinishedHoles.length > 1) {
+                this.$router.push({
+                  name: 'LastHoleWarning',
+                  params: {
+                    holeNo: holeNo,
+                    mode: mode,
+                    unfinishedHoles: unfinishedHoles
+                  }
+                });
+              } else {
+                this.$router.push({
+                  name: 'NewHole',
+                  params: { holeNo: holeNo, mode: mode }
+                });
+              }
+            }
+          })
+          .catch(e => console.log(e));
+      }
     },
-    editHoleDetails(holeNo) {
-      this.$router.push({
-        name: 'NewHole',
-        params: { holeNo: holeNo, editscore: true }
+
+    createPlayerScores() {
+      let courseHoles = [];
+      let holes = this.courseGrid.numberOfHoles;
+      let players = this.getGameInfo.playersInfo;
+      for (let i = 0; i < holes; i++) {
+        courseHoles.push(0);
+      }
+      players.forEach(el => {
+        el.holeScore = courseHoles;
       });
     }
+  },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo', 'getPar'])
+  },
+  beforeRouteLeave(to, from, next) {
+    localStorage.setItem('current-hole', to.params.holeNo);
+    next();
   }
 };
 </script>

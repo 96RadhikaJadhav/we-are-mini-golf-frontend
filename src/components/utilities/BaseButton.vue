@@ -3,7 +3,7 @@
     :is="type"
     class="font-capriola text-white text-center focus:outline-none mx-auto block"
     :class="mode"
-    @click="clicked"
+    @click="$emit('clicked')"
     :to="to"
   >
     <slot></slot>
@@ -12,7 +12,6 @@
 
 <script>
 export default {
-  inject: ['Timeout'],
   props: {
     mode: {
       type: String
@@ -21,12 +20,7 @@ export default {
       type: [String, Object]
     }
   },
-  methods: {
-    clicked() {
-      this.Timeout();
-      this.$emit('clicked');
-    }
-  },
+
   computed: {
     type() {
       if (this.to) {
@@ -43,16 +37,19 @@ export default {
 .btn {
   @apply py-2 px-8 uppercase rounded-full shadow-lg;
 }
-.confirm {
+.primary-orange {
   @apply bg-ff6350;
 }
 .back {
   @apply p-1;
 }
-.resume {
+.primary-blue {
   @apply bg-005d63 px-1;
 }
-.restart {
+.secondary-blue {
   @apply border border-005d63 text-005d63 px-1;
+}
+.primary-beige {
+  @apply bg-fff6eb text-005d63;
 }
 </style>
