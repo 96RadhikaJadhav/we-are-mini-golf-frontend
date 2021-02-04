@@ -1,6 +1,6 @@
 <template>
   <select
-    class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative px-2 font-capriola text-3B9D11"
+    class="text-3b9d11 border border-f5e3c8 rounded-full focus:outline-none relative px-2 font-capriola text-3B9D11 bg-white"
     :class="{ error: isInvalid }"
     :value="value"
     required
