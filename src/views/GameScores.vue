@@ -88,7 +88,8 @@ export default {
   },
   data() {
     return {
-      playersInfo: []
+      playersInfo: [],
+      courseGrid: {}
     };
   },
   computed: {
@@ -101,6 +102,8 @@ export default {
     };
   },
   created() {
+    this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+    console.log(this.courseGrid);
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
@@ -132,6 +135,7 @@ export default {
           el.totalScore = score + el.totalScore;
           delete el.score;
         });
+        this.updateHoleStatus();
         this.updateGameDetails({ playersInfo: this.playersInfo })
           .then(() => {
             this.navigateTo();
@@ -150,6 +154,14 @@ export default {
           this.navigateTo();
         })
         .catch(e => console.log(e));
+    },
+    updateHoleStatus() {
+      this.courseGrid.squareInfo.forEach(el => {
+        if (el.holeNo === this.holeNo) {
+          el.isHoleActive = true;
+        }
+      });
+      localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
     }
   }
 };

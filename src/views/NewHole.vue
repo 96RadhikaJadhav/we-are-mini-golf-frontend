@@ -71,16 +71,10 @@ export default {
     this.holeNo === this.getPar.length
       ? (this.lastHole = true)
       : (this.lastHole = false);
-    this.updateHoleStatus();
+    this.nextPage();
   },
   methods: {
-    updateHoleStatus() {
-      this.courseGrid.squareInfo.forEach(el => {
-        if (el.holeNo === this.holeNo) {
-          el.isHoleActive = true;
-        }
-      });
-      localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
+    nextPage() {
       setTimeout(() => {
         this.$router.push({
           name: 'GameScores',

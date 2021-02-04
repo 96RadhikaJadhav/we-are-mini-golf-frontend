@@ -2,11 +2,11 @@
   <div
     class="flex justify-around items-center h-16 w-full p-2 bg-fff6eb shadow-6dp"
   >
-    <router-link to="game-course">
+    <router-link :to="{ name: 'GameCourse' }">
       <img
         @click="isActive = 'map'"
-        :src="isActive === 'map' ? images.mapActive : images.mapInactive"
         class="h-8 w-8"
+        :src="isActive === 'map' ? images.mapActive : images.mapInactive"
       />
     </router-link>
 
