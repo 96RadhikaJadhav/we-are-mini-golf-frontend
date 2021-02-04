@@ -17,7 +17,7 @@ module.exports = {
       },
       backgroundImage: () => ({
         splash:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607323879/we-are-mini-golf/01_-_Home_screen_2x_os2ukt.png")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612421110/we-are-mini-golf/01_-_Home_screen_2x_opt_ehto3q.png")',
         players:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607324529/we-are-mini-golf/03_-_Players_name_screen_2x_zcev21.png")',
         selection:
