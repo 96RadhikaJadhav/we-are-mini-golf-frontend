@@ -8,6 +8,15 @@ export const generalRoutes = [
     }
   },
   {
+    path: '/course/:slug',
+    name: 'Splash',
+    component: () => import('@/views/Splash.vue'),
+    params: true,
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
+  },
+  {
     path: '/select-players',
     name: 'SelectPlayers',
     component: () => import('@/views/SelectPlayers.vue'),
