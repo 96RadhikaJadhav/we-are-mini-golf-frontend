@@ -20,7 +20,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   let gameDetails = localStorage.getItem('game-details');
-  if ((gameDetails === null || gameDetails === undefined) && to.path !== '/') {
+  if (
+    gameDetails === null &&
+    to.path !== '/' &&
+    !{}.hasOwnProperty.call(to.params, 'slug')
+  ) {
     return next({ name: 'Splash' });
   }
   next();

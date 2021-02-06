@@ -1,9 +1,10 @@
 [[redirects]]
+  from = "/Angkor-Wat-Putt"
+  to = "/course/1"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/"
   status = 200
-
-[[redirects]]
-  from = "/course/Angkor-Wat-Putt/"
-  to = "/course/1/"
-  status = 300
