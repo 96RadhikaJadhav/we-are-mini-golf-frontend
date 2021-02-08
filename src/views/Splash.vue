@@ -48,7 +48,8 @@ export default {
   name: 'Splash',
   props: {
     slug: {
-      type: String
+      type: String,
+      default: null
     }
   },
   data() {
