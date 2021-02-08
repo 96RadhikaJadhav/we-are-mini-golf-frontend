@@ -46,6 +46,12 @@ export default {
           this.courseGrid = response.data;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
+          setTimeout(() => {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: 'smooth'
+            });
+          }, 1000);
           // this.createPlayerScores();
         })
         .catch(e => console.log(e));

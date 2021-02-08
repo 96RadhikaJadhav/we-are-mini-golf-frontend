@@ -1,11 +1,10 @@
 <template>
   <div
-    class="flex flex-col items-center pt-40 w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
+    class="flex flex-col items-center w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
   >
-    <!-- LOGO -->
-    <div>
-      <img src="../assets/logo.png" />
-    </div>
+    <!-- Spacer for logo and welcome back screen -->
+
+    <div v-show="isResumeGame" class="h-full" />
 
     <div
       v-show="isResumeGame"
@@ -64,6 +63,7 @@ export default {
     }
   },
   created() {
+    // Create New Game
     let gameId = '';
     if (localStorage.getItem('course-grid')) {
       this.isResumeGame = true;

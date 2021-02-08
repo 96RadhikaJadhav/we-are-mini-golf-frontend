@@ -32,9 +32,10 @@ export default {
 select,
 option {
   text-align-last: center;
+  text-align: -webkit-center;
+  text-align-last: -webkit-center;
   font-family: 'Capriola', sans-serif;
   -webkit-appearance: none;
-  text-align: -webkit-center;
   color: #78d03a;
 }
 </style>
