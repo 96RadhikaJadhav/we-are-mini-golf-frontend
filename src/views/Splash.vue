@@ -46,6 +46,12 @@ import BaseButton from '@/components/utilities/BaseButton';
 
 export default {
   name: 'Splash',
+  props: {
+    slug: {
+      type: String,
+      default: null
+    }
+  },
   data() {
     return {
       isResumeGame: false
@@ -65,7 +71,8 @@ export default {
       gameId = uuidv4();
       axios
         .post(`${process.env.VUE_APP_API_URL}/game-informations`, {
-          gameID: gameId
+          gameID: gameId,
+          course: this.slug
         })
         .then(response => {
           localStorage.setItem(
