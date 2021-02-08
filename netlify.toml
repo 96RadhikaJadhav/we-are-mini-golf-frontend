@@ -1,3 +1,9 @@
+[context.staging.environment]
+  VUE_APP_API_URL="https://staging-we-are-mini-golf.herokuapp.com"
+
+[context.master.environment]
+  VUE_APP_API_URL="https://production-we-are-mini-golf.herokuapp.com"
+
 [[redirects]]
   from = "/Angkor-Wat-Putt"
   to = "/course/1"
