@@ -103,7 +103,6 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
-    console.log(this.courseGrid);
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
