@@ -27,6 +27,10 @@
           :ruleData="ruleData"
           @clicked="findRule"
         ></rule-card>
+        <rule-card
+          :ruleData="closeRulesCard"
+          @click.native="$emit('close')"
+        ></rule-card>
       </div>
     </div>
   </div>
@@ -48,7 +52,12 @@ export default {
       componentId: '',
       RulesData,
       selectedRule: '',
-      displayRule: false
+      displayRule: false,
+      closeRulesCard: {
+        cmp: '',
+        title: 'Close Rules',
+        bg: 'rules-02.png'
+      }
     };
   },
   methods: {

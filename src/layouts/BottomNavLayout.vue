@@ -11,7 +11,10 @@
         v-if="isDrawerOpen"
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
       >
-        <RulesScreen v-touch:swipe.bottom="onSlideDown" />
+        <RulesScreen
+          v-touch:swipe.bottom="onSlideDown"
+          @close="isDrawerOpen = false"
+        />
       </div>
     </transition>
   </div>
