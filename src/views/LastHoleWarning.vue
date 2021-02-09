@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-wait bg-center bg-cover bg-no-repeat bg-fff6eb grid grid-rows-2 px-16 h-screen"
+    class="bg-unfinishedHoles bg-center bg-cover bg-no-repeat bg-fff6eb grid grid-rows-2 px-16 h-screen"
   >
     <div class="h-full"></div>
     <div class="h-full text-center text-005d63">

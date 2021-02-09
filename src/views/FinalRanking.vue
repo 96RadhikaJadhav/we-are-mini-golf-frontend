@@ -22,7 +22,10 @@
       <!-- Reef 1/4 -->
       <div class="h-1/4 flex flex-col items-center">
         <div class="h-32 w-32">
-          <img src="@/assets/first-reef.png" class="h-auto w-full" />
+          <img
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1612522853/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_ntzft5.png"
+            class="h-auto w-full"
+          />
           <!-- logo looks rough -->
         </div>
         <div class="flex items-center" v-if="playersInfo.length > 0">
@@ -227,6 +230,8 @@ export default {
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
+        this.getGameInfo.isGameOver = true;
+        console.log(this.getGameInfo);
         this.par = this.getPar;
         this.parCalc();
         setTimeout(() => {

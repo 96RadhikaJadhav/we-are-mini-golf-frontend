@@ -1,8 +1,11 @@
 <template>
-  <div class="md:w-1/2 bg-no-repeat bg-cover bg-center" :class="holeBg">
+  <div
+    class="md:w-1/2 bg-no-repeat bg-cover bg-center"
+    :class="selectBackground"
+  >
     <!-- LAST HOLE SCREEN QUOTE -->
-    <div v-if="holeNo === getPar.length">
-      <p class="px-12 pt-8 font-capriola mb-16 text-center text-white text-xl">
+    <div v-if="holeNo === courseGrid.numberOfHoles">
+      <p class="px-12 pt-12 font-capriola mb-16 text-center text-white text-xl">
         {{ lastPlace }},
         {{
           getGameInfo.playersInfo.length !== 1
@@ -13,19 +16,15 @@
     </div>
 
     <!-- HOLE NUMBER IMG -->
-    <div v-if="holeNo !== getPar.length">
-      <img :src="require(`@/assets/newHole/holeNo/hole-${holeNo}.png`)" />
+    <div v-if="holeNo !== courseGrid.numberOfHoles">
+      <img :src="holeNumberImage" />
     </div>
-    <div v-else>
-      <img :src="require(`@/assets/newHole/holeNo/last-hole.png`)" />
-    </div>
+    <!-- Last Hole -->
+    <div v-else class="h-64" />
 
     <!-- PAR INFO IMG -->
     <div>
-      <img
-        :class="{ translate: lastHole }"
-        :src="require(`@/assets/newHole/par/par-${getPar[holeNo - 1]}.png`)"
-      />
+      <img :class="{ translate: lastHole }" :src="holeParImage" />
     </div>
   </div>
 </template>
@@ -48,32 +47,25 @@ export default {
       courseGrid: {},
       coursePar: null,
       lastHole: false,
-      holeNo: 0
+      holeNo: 0,
+      holeInfo: {}
     };
-  },
-  computed: {
-    ...mapGetters('gameInfo', ['getGameInfo', 'getPar']),
-    holeBg() {
-      if (this.holeNo !== this.getPar.length) {
-        return 'bg-newHole';
-      } else {
-        return 'bg-lastHole';
-      }
-    },
-    lastPlace() {
-      return orderBy(this.getGameInfo.playersInfo, ['totalScore'], ['desc'])[0]
-        .name;
-    }
   },
   created() {
     this.holeNo = parseInt(localStorage.getItem('current-hole'));
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
-    this.holeNo === this.getPar.length
+    this.findHoleInfo();
+    this.holeNo === this.courseGrid.numberOfHoles
       ? (this.lastHole = true)
       : (this.lastHole = false);
     this.nextPage();
   },
   methods: {
+    findHoleInfo() {
+      this.holeInfo = this.courseGrid.squareInfo.find(
+        el => el.holeNo === this.holeNo
+      );
+    },
     nextPage() {
       setTimeout(() => {
         this.$router.push({
@@ -85,6 +77,26 @@ export default {
           }
         });
       }, 3000);
+    }
+  },
+  computed: {
+    ...mapGetters('gameInfo', ['getGameInfo']),
+    selectBackground() {
+      if (this.holeNo !== this.courseGrid.numberOfHoles) {
+        return 'bg-newHole';
+      } else {
+        return 'bg-lastHole';
+      }
+    },
+    lastPlace() {
+      return orderBy(this.getGameInfo.playersInfo, ['totalScore'], ['desc'])[0]
+        .name;
+    },
+    holeNumberImage() {
+      return this.holeInfo.transitionScreenHole.url;
+    },
+    holeParImage() {
+      return this.holeInfo.transitionScreenPar.url;
     }
   }
 };
@@ -107,6 +119,6 @@ export default {
   font-size: 2em;
 }
 .translate {
-  transform: translateY(-1.75rem);
+  transform: translateY(2.25rem);
 }
 </style>
