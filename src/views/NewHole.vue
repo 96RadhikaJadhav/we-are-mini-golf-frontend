@@ -65,7 +65,6 @@ export default {
       this.holeInfo = this.courseGrid.squareInfo.find(
         el => el.holeNo === this.holeNo
       );
-      console.log(this.holeInfo);
     },
     nextPage() {
       setTimeout(() => {
