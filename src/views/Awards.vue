@@ -83,7 +83,6 @@ export default {
         this.theClockwork();
         this.theUnlucky();
         this.playerOfTheDay();
-        console.log(this.successfulAwards);
         this.awardRotation();
       })
       .catch(e => console.log(e));
