@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <div
-      class="absolute bottom-0 h-auto w-full rounded-t-3xl shadow-md text-white font-kalam p-6 bg-green-600 z-10 max-w-sm"
+      class="absolute bottom-0 h-auto w-full rounded-t-3xl shadow-md text-white font-kalam p-6 bg-3B9D11 z-10 max-w-sm"
     >
       <div class="flex items-center justify-end mb-2">
         <button @click="$emit('close')" class="focus:outline-none">X</button>

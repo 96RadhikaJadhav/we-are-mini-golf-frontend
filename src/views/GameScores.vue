@@ -3,14 +3,20 @@
     <!-- HOLE AND PAR -->
     <!-- Hand Sign Image -->
     <div
-      class="text-center font-kalam text-005d63 uppercase text-2xl flex flex-col items-center justify-end bg-scoreHandBox bg-contain bg-no-repeat bg-center h-60 max-h-60"
+      class="bg-scoreHandBox bg-contain bg-no-repeat bg-center flex flex-col items-center justify-end h-64 pb-4"
     >
-      <div class="mb-4">
-        <p>Hole {{ holeNo }}/{{ getPar.length }}</p>
+      <div class="text-center font-kalam text-005d63 uppercase text-2xl -mt-32">
+        <p>
+          {{
+            courseGrid.numberOfHoles !== holeNo
+              ? `Hole ${holeNo}/${getPar.length}
+          `
+              : 'LAST HOLE!'
+          }}
+        </p>
         <p>PAR {{ getPar[holeNo - 1] }}</p>
       </div>
     </div>
-
     <div class="w-full mx-auto px-6">
       <!-- DIV FOR BASE CARD -->
       <div class="bg-white rounded-3xl p-4 text-2xl">
@@ -103,7 +109,6 @@ export default {
   },
   created() {
     this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
-    console.log(this.courseGrid);
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;

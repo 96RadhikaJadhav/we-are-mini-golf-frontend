@@ -22,7 +22,10 @@
       <!-- Reef 1/4 -->
       <div class="h-1/4 flex flex-col items-center">
         <div class="h-32 w-32">
-          <img src="@/assets/first-reef.png" class="h-auto w-full" />
+          <img
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
+            class="h-auto w-full"
+          />
           <!-- logo looks rough -->
         </div>
         <div class="flex items-center" v-if="playersInfo.length > 0">
@@ -141,16 +144,12 @@
           </div>
 
           <!-- PAR -->
-          <div>
+          <div v-if="par">
             <p class="transform -rotate-45 mb-4 text-ff8e67 font-capriola">
               PAR
             </p>
             <p class="circle-par mx-auto">
-              {{
-                par.reduce((a, b) => {
-                  return a + b;
-                })
-              }}
+              {{ totalPar }}
             </p>
             <p
               v-for="(p, index) in par"
@@ -198,6 +197,7 @@ import ThankYou from '@/components/reviews/ThankYouModal';
 
 import { orderBy } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
+import axios from 'axios';
 
 export default {
   name: 'FinalRanking',
@@ -226,6 +226,7 @@ export default {
     this.getGameDetails()
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
+        this.getGameInfo.isGameOver = true;
         this.par = this.getPar;
         this.parCalc();
         setTimeout(() => {
@@ -310,16 +311,31 @@ export default {
       }
     },
     newGame() {
-      if (localStorage.getItem('game-details')) {
-        localStorage.removeItem('game-details');
-      }
-      if (localStorage.getItem('course-grid')) {
-        localStorage.removeItem('course-grid');
-      }
-      if (localStorage.getItem('current-hole')) {
-        localStorage.removeItem('current-hole');
-      }
-      window.location.reload();
+      let gameID = JSON.parse(localStorage.getItem('game-details')).id;
+      let payload = {
+        courseData: localStorage.getItem('course-grid'),
+        isGameOver: true
+      };
+      axios
+        .put(
+          `${process.env.VUE_APP_API_URL}/game-informations/${gameID}`,
+          payload
+        )
+        .then(() => {
+          if (localStorage.getItem('game-details')) {
+            localStorage.removeItem('game-details');
+          }
+          if (localStorage.getItem('course-grid')) {
+            localStorage.removeItem('course-grid');
+          }
+          if (localStorage.getItem('current-hole')) {
+            localStorage.removeItem('current-hole');
+          }
+          window.location.reload();
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   },
   computed: {
@@ -330,6 +346,11 @@ export default {
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     },
+    totalPar() {
+      return this.par.reduce((a, b) => {
+        return a + b;
+      });
+    },
     teamAverage() {
       let playerTotal = [];
       this.playersInfo.forEach(el => {
@@ -337,10 +358,10 @@ export default {
           playerTotal.push(el.totalScore);
         }
       });
-      playerTotal = playerTotal.reduce((a, b) => {
+      let totals = playerTotal.reduce((a, b) => {
         return a + b;
       });
-      return (playerTotal / this.playersInfo.length).toFixed(1);
+      return (totals / this.playersInfo.length).toFixed(1);
     },
     holesInOne() {
       let playerTotal = [];

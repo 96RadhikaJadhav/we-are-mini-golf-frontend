@@ -35,7 +35,7 @@
       </transition>
     </div>
     <base-button
-      :to="{ name: 'FinalRanking' }"
+      @click.native="skipAnimation"
       mode="back"
       class="text-aeb49a font-capriola mb-4"
     >
@@ -69,7 +69,8 @@ export default {
         enterTwo: false,
         enterThree: false,
         enterFour: false
-      }
+      },
+      handler: null
     };
   },
   created() {
@@ -88,15 +89,20 @@ export default {
   },
   methods: {
     ...mapActions('gameInfo', ['getGameDetails']),
-
+    skipAnimation() {
+      clearInterval(this.handler);
+      this.$router.push({ name: 'FinalRanking' });
+    },
     awardRotation() {
-      let counter = 0;
-      this.updateAward(this.successfulAwards[counter]);
-      setInterval(() => {
-        if (counter < this.successfulAwards.length - 1) {
-          counter++;
+      let counter = 1;
+      this.updateAward(this.successfulAwards[0]);
+      this.handler = setInterval(() => {
+        if (counter < this.successfulAwards.length) {
           this.updateAward(this.successfulAwards[counter]);
+          counter++;
         } else {
+          counter = 0;
+          clearInterval(this.handler);
           this.$router.push({ name: 'FinalRanking' });
         }
       }, 7000);
@@ -262,6 +268,9 @@ export default {
     getHighestTotalPlayer() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec'])[0];
     }
+  },
+  beforeDestory() {
+    clearInterval(this.handler);
   }
 };
 </script>
