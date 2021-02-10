@@ -23,7 +23,7 @@
       <div class="h-1/4 flex flex-col items-center">
         <div class="h-32 w-32">
           <img
-            src="https://res.cloudinary.com/doblhgoan/image/upload/v1612522853/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_ntzft5.png"
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
             class="h-auto w-full"
           />
           <!-- logo looks rough -->
@@ -144,16 +144,12 @@
           </div>
 
           <!-- PAR -->
-          <div>
+          <div v-if="par">
             <p class="transform -rotate-45 mb-4 text-ff8e67 font-capriola">
               PAR
             </p>
             <p class="circle-par mx-auto">
-              {{
-                par.reduce((a, b) => {
-                  return a + b;
-                })
-              }}
+              {{ totalPar }}
             </p>
             <p
               v-for="(p, index) in par"
@@ -231,7 +227,6 @@ export default {
       .then(() => {
         this.playersInfo = this.getGameInfo.playersInfo;
         this.getGameInfo.isGameOver = true;
-        console.log(this.getGameInfo);
         this.par = this.getPar;
         this.parCalc();
         setTimeout(() => {
@@ -351,6 +346,11 @@ export default {
     otherPlayerRankings() {
       return orderBy(this.playersInfo, ['totalScore'], ['asec']).slice(1);
     },
+    totalPar() {
+      return this.par.reduce((a, b) => {
+        return a + b;
+      });
+    },
     teamAverage() {
       let playerTotal = [];
       this.playersInfo.forEach(el => {
@@ -358,10 +358,10 @@ export default {
           playerTotal.push(el.totalScore);
         }
       });
-      playerTotal = playerTotal.reduce((a, b) => {
+      let totals = playerTotal.reduce((a, b) => {
         return a + b;
       });
-      return (playerTotal / this.playersInfo.length).toFixed(1);
+      return (totals / this.playersInfo.length).toFixed(1);
     },
     holesInOne() {
       let playerTotal = [];

@@ -27,7 +27,7 @@
       <!-- 1st Place -->
       <div class="flex flex-col justify-end items-center h-full">
         <img
-          src="https://res.cloudinary.com/doblhgoan/image/upload/v1612779688/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels.png_bacsi1.png"
+          src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
           class="h-auto w-24 mb-4"
         />
 
