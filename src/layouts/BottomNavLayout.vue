@@ -10,6 +10,7 @@
       <div
         v-if="isDrawerOpen"
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
+        mode="ruleCard"
       >
         <RulesScreen
           v-touch:swipe.bottom="onSlideDown"

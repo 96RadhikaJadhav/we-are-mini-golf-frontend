@@ -26,10 +26,13 @@
           :key="index"
           :ruleData="ruleData"
           @clicked="findRule"
+          mode="ruleCard"
         ></rule-card>
+
         <rule-card
           :ruleData="closeRulesCard"
           @click.native="$emit('close')"
+          mode="closeBtn"
         ></rule-card>
       </div>
     </div>
@@ -54,9 +57,7 @@ export default {
       selectedRule: '',
       displayRule: false,
       closeRulesCard: {
-        cmp: '',
-        title: 'Close Rules',
-        bg: 'rules-02.png'
+        title: 'Close Rules'
       }
     };
   },
