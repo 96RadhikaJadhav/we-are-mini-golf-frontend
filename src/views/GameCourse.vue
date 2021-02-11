@@ -40,10 +40,11 @@ export default {
   },
   created() {
     if (!localStorage.getItem('course-grid')) {
+      let slug = JSON.parse(localStorage.getItem('game-details')).slug;
       axios
-        .get(`${process.env.VUE_APP_API_URL}/courses/1`)
+        .get(`${process.env.VUE_APP_API_URL}/courses?slug=${slug}`)
         .then(response => {
-          this.courseGrid = response.data;
+          this.courseGrid = response.data[0];
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
           setTimeout(() => {

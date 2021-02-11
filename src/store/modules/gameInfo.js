@@ -52,7 +52,7 @@ const actions = {
   updatePar({ commit }) {
     let course = JSON.parse(localStorage.getItem('course-grid'));
     let coursePar = course.squareInfo
-      .filter(el => el.holeNo != null)
+      .filter(el => el.holeNo !== null)
       .sort((a, b) => {
         return a.holeNo - b.holeNo;
       })
