@@ -5,12 +5,6 @@
   VUE_APP_API_URL="https://production-we-are-mini-golf.herokuapp.com"
 
 [[redirects]]
-  from = "/Angkor-Wat-Putt"
-  to = "/course/1"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/*"
   to = "/"
   status = 200
