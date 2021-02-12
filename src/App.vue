@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style>
+* {
+  -webkit-overflow-scrolling: touch;
+}
 html,
 body {
   height: 100vh;

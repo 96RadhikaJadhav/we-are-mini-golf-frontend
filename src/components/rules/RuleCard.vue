@@ -1,20 +1,36 @@
 <template>
   <button
-    class="flex flex-col justify-center h-24 w-full text-white rounded-xl uppercase flex-wrap text-lg text-left leading-snug font-capriola shadow-md focus:outline-none relative"
+    class="flex flex-col justify-center w-full rounded-xl uppercase flex-wrap text-lg leading-snug font-capriola focus:outline-none relative"
+    :class="mode"
     @click="$emit('clicked', ruleData.cmp)"
   >
-    <p class="absolute pl-3">{{ ruleData.title }}</p>
+    <div class="absolute" v-if="mode === 'ruleCard'">
+      <p class="pl-3">{{ ruleData.title }}</p>
+    </div>
+    <div class="absolute" v-else>
+      <img src="@/assets/x_icon.png" class="w-8 mx-auto py-1" />
+      <p>{{ ruleData.title }}</p>
+    </div>
     <img
+      v-if="ruleData.bg"
       :src="require(`@/assets/rules/${ruleData.bg}`)"
-      class="w-full h-full rounded-lg"
+      class="rounded-lg"
     />
   </button>
 </template>
 
 <script>
 export default {
-  props: ['ruleData']
+  props: ['ruleData', 'mode']
 };
 </script>
 
-<style></style>
+<style>
+.ruleCard {
+  @apply text-white shadow-md text-left;
+}
+.closeBtn {
+  color: #ff7d4f;
+  align-items: center;
+}
+</style>
