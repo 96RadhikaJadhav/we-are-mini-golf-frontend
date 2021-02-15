@@ -1,6 +1,7 @@
 <template>
   <div
-    class="h-full md:w-1/2 bg-selection bg-no-repeat bg-cover bg-center grid grid-rows-3"
+    class="h-full md:w-1/2 bg-no-repeat bg-cover bg-center grid grid-rows-3"
+    :style="`background-image: url(${bg});`"
   >
     <div class=""></div>
     <div class=""></div>
@@ -33,8 +34,14 @@ export default {
   components: { BaseButton, VueSlider },
   data() {
     return {
-      noOfPlayers: 1
+      noOfPlayers: 1,
+      bg: ''
     };
+  },
+  mounted() {
+    this.bg = JSON.parse(
+      localStorage.getItem('game-details')
+    ).playerSelectBG.url;
   },
   methods: {
     ...mapActions('gameInfo', ['updateGameDetails']),
