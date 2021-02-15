@@ -104,9 +104,11 @@ export default {
     newGameDelay() {
       setTimeout(() => {
         if (!localStorage.getItem('course-grid')) {
-          return this.$router.push({ name: 'SelectPlayers' });
+          return this.$router.push({
+            name: this.slug ? 'SelectPlayers' : 'SelectCourse'
+          });
         }
-      }, 2000);
+      }, 1000);
     }
   }
 };
