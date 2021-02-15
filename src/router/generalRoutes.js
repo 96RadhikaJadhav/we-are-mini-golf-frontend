@@ -9,9 +9,16 @@ export const generalRoutes = [
   },
   {
     path: '/course/:slug',
-    name: 'SelectCourse',
     props: true,
     component: () => import('@/views/Splash.vue'),
+    meta: {
+      layout: () => import('@/layouts/FullScreenLayout.vue')
+    }
+  },
+  {
+    path: '/select-course',
+    name: 'SelectCourse',
+    component: () => import('@/views/SelectCourse.vue'),
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')
     }

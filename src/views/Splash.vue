@@ -71,15 +71,15 @@ export default {
       gameId = uuidv4();
       axios
         .post(`${process.env.VUE_APP_API_URL}/game-informations`, {
-          gameID: gameId,
-          course: this.slug
+          gameID: gameId
         })
         .then(response => {
           localStorage.setItem(
             'game-details',
             JSON.stringify({
               id: response.data.id,
-              gameID: response.data.gameID
+              gameID: response.data.gameID,
+              slug: this.slug
             })
           );
           this.newGameDelay();
@@ -104,9 +104,11 @@ export default {
     newGameDelay() {
       setTimeout(() => {
         if (!localStorage.getItem('course-grid')) {
-          return this.$router.push({ name: 'SelectPlayers' });
+          return this.$router.push({
+            name: this.slug ? 'SelectPlayers' : 'SelectCourse'
+          });
         }
-      }, 2000);
+      }, 1000);
     }
   }
 };

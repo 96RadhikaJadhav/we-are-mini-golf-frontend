@@ -10,7 +10,7 @@
         {{
           getGameInfo.playersInfo.length !== 1
             ? 'this is your last chance to catch up!'
-            : "you're almost there!"
+            : 'almost there!'
         }}
       </p>
     </div>
@@ -23,7 +23,11 @@
     <div v-else class="h-64" />
 
     <!-- PAR INFO IMG -->
-    <div>
+    <div
+      :class="
+        getGameInfo.playersInfo.length !== 1 && lastHole ? '-mt-7' : 'mt-0'
+      "
+    >
       <img :class="{ translate: lastHole }" :src="holeParImage" />
     </div>
   </div>

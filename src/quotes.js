@@ -21,13 +21,13 @@ export default {
     ", it's like this hole was made for you!",
     ", I'm sure you play in secret!",
     ', impressive',
-    ', would have won playing with one hand'
+    ' would have won playing with one hand'
   ],
   parExact: [
     ', that was good, but can you do great?',
     ', on PAR, good!',
     ", I'm sure you can get under PAR!",
-    ", good shot! I'm sure you can to even better!",
+    ", good shot! I'm sure you can do even better!",
     ', hitting the PAR is always good!',
     ", you're on the average, let's beat that!",
     ', next hole target is under PAR!',

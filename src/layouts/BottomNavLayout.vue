@@ -23,7 +23,6 @@
 <script>
 import NavMenu from '@/components/NavMenu';
 import RulesScreen from '@/components/rules/RulesScreen.vue';
-
 export default {
   name: 'BottomNavLayout',
   components: { NavMenu, RulesScreen },
@@ -32,7 +31,6 @@ export default {
       isDrawerOpen: false
     };
   },
-
   methods: {
     onSlideDown() {
       this.isDrawerOpen = false;
@@ -48,7 +46,6 @@ export default {
 .slide-in-leave-active {
   animation: slide-in-bottom 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86) reverse;
 }
-
 @keyframes slide-in-bottom {
   0% {
     transform: translateY(1000px);

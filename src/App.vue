@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="antialiased h-screen">
-    <div></div>
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
@@ -36,6 +35,9 @@ export default {
 </script>
 
 <style>
+* {
+  -webkit-overflow-scrolling: touch;
+}
 html,
 body {
   height: 100vh;
