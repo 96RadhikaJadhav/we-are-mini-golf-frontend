@@ -73,7 +73,7 @@ export default {
     startGame() {
       this.updateGameDetails({ playersInfo: this.playersInfo })
         .then(() => {
-          this.$router.push({ name: 'SelectCourse' });
+          this.$router.push({ name: 'GameCourse' });
         })
         .catch(e => console.log(e));
     }
