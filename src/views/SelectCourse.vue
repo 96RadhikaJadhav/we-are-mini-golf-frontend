@@ -123,7 +123,8 @@ export default {
             JSON.stringify({
               id: response.data.id,
               gameID: response.data.gameID,
-              slug: response.data.course.slug
+              slug: response.data.course.slug,
+              playerSelectBG: this.selectedCourse.playerSelectBackground
             })
           );
           this.$router.push({ name: 'SelectPlayers' });
