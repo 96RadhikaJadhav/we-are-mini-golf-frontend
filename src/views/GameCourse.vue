@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -40,11 +39,9 @@ export default {
   },
   created() {
     if (!localStorage.getItem('course-grid')) {
-      let slug = JSON.parse(localStorage.getItem('game-details')).slug;
-      axios
-        .get(`${process.env.VUE_APP_API_URL}/courses?slug=${slug}`)
+      this.getCourseDetails()
         .then(response => {
-          this.courseGrid = response.data[0];
+          this.courseGrid = response;
           localStorage.setItem('course-grid', JSON.stringify(this.courseGrid));
           this.updatePar();
           setTimeout(() => {
@@ -68,7 +65,7 @@ export default {
   },
   methods: {
     ...mapActions('gameInfo', ['updatePar', 'getGameDetails']),
-
+    ...mapActions('course', ['getCourseDetails']),
     gotoHole(holeNo, mode) {
       if (holeNo !== this.getPar.length) {
         this.$router.push({

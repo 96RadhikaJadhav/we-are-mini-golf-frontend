@@ -39,12 +39,15 @@ export default {
     };
   },
   mounted() {
-    this.bg = JSON.parse(
-      localStorage.getItem('game-details')
-    ).playerSelectBG.url;
+    this.getCourseDetails()
+      .then(response => {
+        this.bg = response.playerSelectBackground.url;
+      })
+      .catch(e => console.log(e));
   },
   methods: {
     ...mapActions('gameInfo', ['updateGameDetails']),
+    ...mapActions('course', ['getCourseDetails']),
     selectedPlayers(value) {
       this.noOfPlayers = value;
     },
