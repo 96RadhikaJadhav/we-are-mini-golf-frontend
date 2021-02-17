@@ -5,7 +5,9 @@
     <ErrorMessage v-if="invalid" />
 
     <!-- Main Card -->
-    <div class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm p-6">
+    <div
+      class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm p-6 z-10"
+    >
       <!-- Closing Button -->
       <div v-if="closingButton" class="flex justify-end pb-6">
         <button
