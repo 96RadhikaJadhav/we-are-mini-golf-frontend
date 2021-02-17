@@ -11,15 +11,15 @@
       v-show="isResumeGame"
       class="h-full w-full text-005d63 font-kalam text-center"
     >
-      <div class="py-16">
+      <div class="mt-4">
         <p class="text-3xl mb-1">
           WELCOME BACK!
         </p>
-        <p class="text-2xl">
+        <p class="text-xl mb-16">
           You have an unfinished game
         </p>
       </div>
-      <div v-show="checkExistingGame" class="w-60 mx-auto">
+      <div v-show="checkExistingGame" class=" w-56 mx-auto">
         <BaseButton
           class="btn primary-orange w-full"
           tag="button"
@@ -28,7 +28,7 @@
           Resume Game
         </BaseButton>
         <BaseButton
-          class="btn primary-orange mt-4 w-full"
+          class="btn primary-orange mt-5 w-full"
           tag="button"
           @clicked="newGame"
         >
