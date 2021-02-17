@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-around items-center h-16 w-full p-2 bg-fff6eb shadow-6dp"
+    class="flex justify-around items-center h-12 w-full p-2 bg-fff6eb shadow-6dp"
   >
     <router-link :to="{ name: 'GameCourse' }">
       <img

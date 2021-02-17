@@ -10,11 +10,11 @@
 
       <!-- Card -->
       <div
-        class="bg-white shadow-md mx-6 rounded-3xl md:w-full md:mx-auto xl:w-1/2 p-4"
+        class="bg-white shadow-md mx-2 rounded-3xl md:w-full md:mx-auto xl:w-1/2 px-5 py-3"
         v-if="inputs"
       >
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="flex justify-between mb-3">
+          <div class="flex justify-between my-2.5">
             <InputText
               :placeholder="`Player ${index + 1}`"
               v-model="player.name"
