@@ -23,7 +23,7 @@ module.exports = {
         scores:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612523315/we-are-mini-golf-prod/Last%20Optimized%20assets/06-Enter-scores-screen-bg-only_der41k.jpg")',
         total:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607328310/we-are-mini-golf/WAMG_Background_-_Screen_7_2x_xwkyif.png")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612522854/we-are-mini-golf-prod/Last%20Optimized%20assets/07-Current-ranking-screen_vdotyy.jpg")',
         newHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1613001512/we-are-mini-golf/We_are_mini_golf_score_card_transition_screen_yiwo83.jpg")',
         awards:
