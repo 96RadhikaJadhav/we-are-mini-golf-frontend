@@ -8,7 +8,7 @@
     </div>
     <!-- Player Name -->
     <div class="col-span-3">
-      <p class="text-2xl text-005d63">{{ player.name }}</p>
+      <p class="text-2xl font-light text-005d63">{{ player.name }}</p>
     </div>
     <!-- Player Last Hole -->
     <div class="col-span-1">
