@@ -1,11 +1,12 @@
 <template>
   <div
-    class="flex flex-col items-center w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
+    class="grid grid-rows-2 w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
   >
     <!-- Spacer for logo and welcome back screen -->
 
-    <div v-show="isResumeGame" class="h-full" />
+    <div class="h-full" />
 
+    <!-- BUTTONS FOR RESUME GAME -->
     <div
       v-show="isResumeGame"
       class="h-full w-full text-005d63 font-kalam text-center"
@@ -35,6 +36,17 @@
         </BaseButton>
       </div>
     </div>
+
+    <!-- SPINNER ON LOADING -->
+    <div v-if="isDisplaySpinner && !isResumeGame">
+      <Spinner />
+      <p class="font-kalam text-005d63 text-center mt-10 w-3/4 mx-auto">
+        We’re preparing your game. <br />
+        This may take a moment. <br />
+        Please keep this page open and take a few seconds to work your putting.
+        <br />We’ll be ready soon!
+      </p>
+    </div>
   </div>
 </template>
 
@@ -42,6 +54,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import BaseButton from '@/components/utilities/BaseButton';
+import Spinner from '@/components/Spinner.vue';
 
 export default {
   name: 'Splash',
@@ -53,10 +66,11 @@ export default {
   },
   data() {
     return {
-      isResumeGame: false
+      isResumeGame: false,
+      isDisplaySpinner: true
     };
   },
-  components: { BaseButton },
+  components: { BaseButton, Spinner },
   computed: {
     checkExistingGame() {
       return localStorage.getItem('course-grid') ? true : false;
