@@ -14,7 +14,7 @@
     <div class="h-screen flex flex-col pt-14">
       <!-- Reef 1/4 -->
       <div class="flex flex-col items-center">
-        <div class="w-52">
+        <div class="w-40">
           <img
             src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
             class="h-auto w-full"
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Player Ranking Table | Lower 1/2 -->
-      <div class="h-full w-3/5 max-w-sm mx-auto mt-10">
+      <div class="h-full w-4/6 max-w-sm mx-auto mt-10">
         <div class="h-full flex flex-col justify-between">
           <div class="mb-6">
             <div
