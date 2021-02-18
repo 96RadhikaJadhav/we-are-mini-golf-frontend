@@ -11,7 +11,8 @@ module.exports = {
       },
       spacing: {
         routerCourse: '6.7rem',
-        '125': '125px'
+        '125': '125px',
+        '500': '500px'
       },
       backgroundImage: () => ({
         splash:

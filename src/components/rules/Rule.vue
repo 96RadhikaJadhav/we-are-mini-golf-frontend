@@ -1,13 +1,17 @@
 <template>
   <transition name="slide">
+    <!-- Green background card -->
     <div
-      class="w-full rounded-t-3xl shadow-md text-white font-kalam p-6 z-10 max-w-sm bg-rules bg-cover"
+      class="w-full rounded-t-3xl shadow-md text-white font-kalam z-10 p-6 max-w-sm bg-rules bg-cover max-h-500 overflow-scroll"
     >
-      <div class="flex items-center justify-end mb-2">
-        <button @click="$emit('close')" class="focus:outline-none">X</button>
+      <!-- Closing X -->
+      <div class="text-xl flex items-center justify-end mb-2">
+        <button @click="$emit('close')" class="focus:outline-none">
+          &#10005;
+        </button>
       </div>
-
-      <div class=" flex flex-col px-4">
+      <!-- Rules text -->
+      <div class="flex flex-col px-4">
         <p class="title">{{ rule.title }}</p>
         <p
           v-for="(text, index) in rule.content"
