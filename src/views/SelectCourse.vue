@@ -110,26 +110,33 @@ export default {
     };
   },
   methods: {
+    isEmptyObject(value) {
+      return (
+        value && Object.keys(value).length === 0 && value.constructor === Object
+      );
+    },
     selectCourse() {
-      const gameId = JSON.parse(localStorage.getItem('game-details')).id;
-      axios
-        .put(`${process.env.VUE_APP_API_URL}/game-informations/${gameId}`, {
-          course: this.selectedCourse.id
-        })
-        .then(response => {
-          localStorage.removeItem('game-details');
-          localStorage.setItem(
-            'game-details',
-            JSON.stringify({
-              id: response.data.id,
-              gameID: response.data.gameID,
-              slug: response.data.course.slug,
-              playerSelectBG: this.selectedCourse.playerSelectBackground
-            })
-          );
-          this.$router.push({ name: 'SelectPlayers' });
-        })
-        .catch(e => console.log(e));
+      if (!this.isEmptyObject(this.selectedCourse)) {
+        const gameId = JSON.parse(localStorage.getItem('game-details')).id;
+        axios
+          .put(`${process.env.VUE_APP_API_URL}/game-informations/${gameId}`, {
+            course: this.selectedCourse.id
+          })
+          .then(response => {
+            localStorage.removeItem('game-details');
+            localStorage.setItem(
+              'game-details',
+              JSON.stringify({
+                id: response.data.id,
+                gameID: response.data.gameID,
+                slug: response.data.course.slug,
+                playerSelectBG: this.selectedCourse.playerSelectBackground
+              })
+            );
+            this.$router.push({ name: 'SelectPlayers' });
+          })
+          .catch(e => console.log(e));
+      }
     }
   }
 };

@@ -41,10 +41,10 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import BaseButton from '@/components/utilities/BaseButton';
 
 export default {
   name: 'Splash',
+  components: { BaseButton: () => import('@/components/utilities/BaseButton') },
   props: {
     slug: {
       type: String,
@@ -56,16 +56,16 @@ export default {
       isResumeGame: false
     };
   },
-  components: { BaseButton },
   computed: {
     checkExistingGame() {
-      return localStorage.getItem('course-grid') ? true : false;
+      const gameDetails = localStorage.getItem('game-details');
+      return gameDetails && JSON.parse(gameDetails).isGameOver === false;
     }
   },
   created() {
     // Create New Game
     let gameId = '';
-    if (localStorage.getItem('course-grid')) {
+    if (this.checkExistingGame) {
       this.isResumeGame = true;
     } else {
       gameId = uuidv4();
@@ -79,7 +79,8 @@ export default {
             JSON.stringify({
               id: response.data.id,
               gameID: response.data.gameID,
-              slug: this.slug
+              slug: this.slug,
+              isGameOver: response.data.isGameOver
             })
           );
           this.newGameDelay();
@@ -103,11 +104,9 @@ export default {
     },
     newGameDelay() {
       setTimeout(() => {
-        if (!localStorage.getItem('course-grid')) {
-          return this.$router.push({
-            name: this.slug ? 'SelectPlayers' : 'SelectCourse'
-          });
-        }
+        return this.$router.push({
+          name: this.slug ? 'SelectPlayers' : 'SelectCourse'
+        });
       }, 1000);
     }
   }
