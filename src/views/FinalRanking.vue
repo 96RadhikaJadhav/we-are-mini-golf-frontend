@@ -11,19 +11,16 @@
       ></component>
     </transition>
 
-    <div class="h-screen flex flex-col justify-between">
-      <!-- Top 1/4 Header -->
-      <div></div>
-
+    <div class="h-screen flex flex-col pt-14">
       <!-- Reef 1/4 -->
-      <div class="h-1/4 flex flex-col items-center">
+      <div class="flex flex-col items-center">
         <div class="w-52">
           <img
             src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
             class="h-auto w-full"
           />
         </div>
-        <div class="flex items-center mt-8" v-if="playersInfo.length > 0">
+        <div class="flex items-center mt-7" v-if="playersInfo.length > 0">
           <p class="text-2xl text-white font-kalam mr-4">
             {{ getWinner.name }}
           </p>
@@ -36,13 +33,13 @@
       </div>
 
       <!-- Player Ranking Table | Lower 1/2 -->
-      <div class="h-1/2 w-3/5 max-w-sm mx-auto mt-14">
+      <div class="h-full w-3/5 max-w-sm mx-auto mt-10">
         <div class="h-full flex flex-col justify-between">
           <div class="mb-6">
             <div
               v-for="(player, index) in otherPlayerRankings"
               :key="index"
-              class="flex justify-between mb-1 font-kalam text-2xl"
+              class="flex justify-between mb-2 font-kalam text-2xl"
             >
               <div class="flex font-thin">
                 <p class="mr-4 text-ea9864">
