@@ -21,7 +21,7 @@
       </div>
       <div v-show="checkExistingGame" class=" w-56 mx-auto">
         <BaseButton
-          class="btn primary-orange w-full"
+          class="btn primary-orange padding-sm w-full"
           tag="button"
           @clicked="resumeGame"
         >
@@ -53,8 +53,6 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import BaseButton from '@/components/utilities/BaseButton';
-import Spinner from '@/components/Spinner.vue';
 
 export default {
   name: 'Splash',
@@ -70,7 +68,10 @@ export default {
       isDisplaySpinner: true
     };
   },
-  components: { BaseButton, Spinner },
+  components: {
+    BaseButton: () => import('@/components/utilities/BaseButton'),
+    Spinner: () => import('@/components/BaseSpinner.vue')
+  },
   computed: {
     checkExistingGame() {
       return localStorage.getItem('course-grid') ? true : false;
