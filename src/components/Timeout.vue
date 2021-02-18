@@ -8,7 +8,7 @@
 
         <div class="w-4/5 mx-auto">
           <div @click="next('close')">
-            <BaseButton mode="btn primary-blue" to="" class="m-5 w-full">
+            <BaseButton mode="btn primary-blue" to="" class="mt-5 mb-4 w-full">
               Resume Game
             </BaseButton>
           </div>
@@ -18,7 +18,7 @@
               type="router"
               :to="{ name: 'Splash' }"
               mode="btn secondary-blue"
-              class="m-5 w-full"
+              class="mb-5 w-full"
             >
               Start a new game
             </BaseButton>
@@ -32,7 +32,7 @@
               name: 'FinalRanking',
               params: { componentId: 'ReviewModal' }
             }"
-            class="text-005d63 text-center font-capriola pt-2"
+            class="text-005d63 text-center font-capriola mb-3"
           >
             Review us
           </BaseButton>

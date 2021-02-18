@@ -6,7 +6,9 @@
       </component>
     </transition>
     <transition name="fade">
-      <Timeout v-if="isTimeout" @clear="clearTimeout"></Timeout>
+      <Timeout v-if="isTimeout" @clear="clearTimeout"
+        >Looks like you've been away for a while...</Timeout
+      >
     </transition>
   </div>
 </template>
@@ -27,7 +29,7 @@ export default {
     clearTimeout() {
       this.isTimeout = false;
       setTimeout(() => {
-        this.isTimeout = false;
+        this.isTimeout = true;
       }, 600000); // 10 minutes
     }
   }
