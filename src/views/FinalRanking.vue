@@ -233,7 +233,7 @@ export default {
         this.parCalc();
         setTimeout(() => {
           this.componentId = 'ReviewModal';
-        }, 2000);
+        }, 5000);
       })
       .catch(e => console.log(e));
   },

@@ -12,7 +12,7 @@
           :rounded-corners="true"
           inactive-color="#F5E3C8"
           class="mt-1 mb-2"
-          padding="1"
+          :padding="1"
         />
       </div>
 
