@@ -115,7 +115,6 @@
         >
           <!-- Holes -->
           <div class="mt-16">
-            <div class="mt-2"></div>
             <!--=========================================== placeholder below - can see the 0 index in holes display - needs fixing ===================================-->
             <p v-for="(p, i) in par" :key="i" class="circle-hole mb-1">
               {{ i + 1 }}
@@ -124,7 +123,7 @@
 
           <div v-for="(res, index) in playersInfo" :key="index">
             <!-- Player Names -->
-            <p class="transform -rotate-45 mb-4">{{ res.name }}</p>
+            <p class="transform -rotate-45 mb-2 ml-3">{{ res.name }}</p>
             <!-- Overall Scores -->
             <p class="circle-score-total">{{ res.totalScore }}</p>
             <!-- Individual Scores in columns -->
@@ -140,7 +139,7 @@
 
           <!-- PAR -->
           <div v-if="par">
-            <p class="transform -rotate-45 mb-4 text-ff8e67 font-capriola">
+            <p class="transform -rotate-45 mb-2 text-ff8e67 font-capriola">
               PAR
             </p>
             <p class="circle-par mx-auto">
@@ -161,11 +160,19 @@
       <div
         class="flex items-center justify-around mt-6 w-4/6 mx-auto mb-20 max-w-sm"
       >
-        <router-link class="text-white text-xl font-capriola" to="">
+        <router-link class="text-white text-fff6eb text-xl font-capriola" to="">
           SHARE
         </router-link>
-        <router-link class="link" to="">f</router-link>
-        <router-link class="link pb-1" to="">@</router-link>
+        <router-link class="link" to=""
+          ><img
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1613546497/we-are-mini-golf-prod/icons/Facebook_gpryvi.png"
+            alt=""
+        /></router-link>
+        <router-link class="link" to=""
+          ><img
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1613546497/we-are-mini-golf-prod/icons/Email_ywnfog.png"
+            alt=""
+        /></router-link>
       </div>
     </div>
     <!-- REVIEW US Button Abs -->
@@ -293,7 +300,7 @@ export default {
       if (score <= this.par[i] && score > 1) {
         return 'green';
       } else if (score === 1) {
-        return 'red';
+        return 'text-FF6350';
       } else if (score == 0) {
         return;
       }
@@ -411,7 +418,7 @@ export default {
   @apply bg-white rounded-3xl flex flex-col items-center justify-center p-4 my-4;
 }
 .link {
-  @apply h-10 w-10 bg-blue-900 rounded-full flex items-center justify-center text-3xl text-white opacity-40;
+  @apply h-10 w-10 flex items-center justify-center opacity-80;
 }
 .orange {
   @apply bg-ff8e67 text-white;
