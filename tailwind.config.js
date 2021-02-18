@@ -29,7 +29,7 @@ module.exports = {
         awards:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1607328465/we-are-mini-golf/08_-_Reward_animation_-_green_banner_2x_wenrge.png")',
         rankings:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612523493/we-are-mini-golf-prod/Last%20Optimized%20assets/09-Final-ranking-bg_n6tsyc.jpg")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1613621391/we-are-mini-golf-prod/Last%20Optimized%20assets/09-Final-ranking-bg_1_tkqxhx.jpg")',
         lastHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612778570/we-are-mini-golf-prod/Last%20Optimized%20assets/05-Last-par-transition-screen-bg-only_qmzzyv_v7ty99.jpg")',
         scoreHandBox:

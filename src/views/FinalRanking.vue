@@ -13,22 +13,17 @@
 
     <div class="h-screen flex flex-col justify-between">
       <!-- Top 1/4 Header -->
-      <div class="h-1/4 flex flex-col items-center justify-center">
-        <header class="text-3xl text-f5e3c8 text-center tracking-wide">
-          FINAL<br />RANKING
-        </header>
-      </div>
+      <div></div>
 
       <!-- Reef 1/4 -->
       <div class="h-1/4 flex flex-col items-center">
-        <div class="h-32 w-32">
+        <div class="w-52">
           <img
             src="https://res.cloudinary.com/doblhgoan/image/upload/v1612844173/we-are-mini-golf-prod/Last%20Optimized%20assets/07_-_Current_hole_recap_laurels_hbwfwf.png"
             class="h-auto w-full"
           />
-          <!-- logo looks rough -->
         </div>
-        <div class="flex items-center" v-if="playersInfo.length > 0">
+        <div class="flex items-center mt-8" v-if="playersInfo.length > 0">
           <p class="text-2xl text-white font-kalam mr-4">
             {{ getWinner.name }}
           </p>
@@ -50,7 +45,10 @@
               class="flex justify-between mb-1 font-kalam text-2xl"
             >
               <div class="flex font-thin">
-                <p class="mr-4 text-ea9864">{{ rank(index + 2) }}</p>
+                <p class="mr-4 text-ea9864">
+                  {{ index + 2
+                  }}<span class="text-sm align-top">{{ rank(index + 2) }}</span>
+                </p>
                 <p class="text-fff6eb">{{ player.name }}</p>
               </div>
               <div class="circle beige">
@@ -254,15 +252,15 @@ export default {
     },
     rank(i) {
       if (i === 2) {
-        return '2nd';
+        return 'nd';
       } else if (i === 3) {
-        return '3rd';
+        return 'rd';
       } else if (i === 4) {
-        return '4th';
+        return 'th';
       } else if (i === 5) {
-        return '5th';
+        return 'th';
       } else if (i === 6) {
-        return '6th';
+        return 'th';
       }
     },
     parCalc() {
