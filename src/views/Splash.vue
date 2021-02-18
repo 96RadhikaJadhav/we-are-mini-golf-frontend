@@ -21,7 +21,7 @@
       </div>
       <div v-show="checkExistingGame" class=" w-56 mx-auto">
         <BaseButton
-          class="btn primary-orange padding-sm w-full"
+          class="btn primary-orange w-full"
           tag="button"
           @clicked="resumeGame"
         >
