@@ -11,6 +11,7 @@ module.exports = {
       },
       spacing: {
         routerCourse: '6.7rem',
+        'nav-icon': '30px',
         '125': '125px',
         '500': '500px'
       },

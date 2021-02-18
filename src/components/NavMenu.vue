@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex justify-around items-center h-12 w-full p-2 bg-fff6eb shadow-6dp"
+    class="flex justify-around items-center h-11 w-full p-2 bg-fff6eb shadow-6dp"
   >
     <router-link :to="{ name: 'GameCourse' }">
       <img
         @click="isActive = 'map'"
-        class="h-8 w-8"
+        class="w-nav-icon"
         :src="isActive === 'map' ? images.mapActive : images.mapInactive"
       />
     </router-link>
@@ -16,12 +16,12 @@
         :src="
           isActive === 'scores' ? images.scoresActive : images.scoresInactive
         "
-        class="h-8 w-8"
+        class="w-nav-icon"
       />
     </router-link>
 
     <button @click="$emit('display-rules')" class="focus:outline-none">
-      <img :src="images.rulesInactive" class="h-8 w-8" />
+      <img :src="images.rulesInactive" class="w-nav-icon" />
     </button>
   </div>
 </template>
