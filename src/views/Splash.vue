@@ -1,24 +1,25 @@
 <template>
   <div
-    class="flex flex-col items-center w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
+    class="grid grid-rows-2 w-full h-screen bg-fff6eb bg-splash bg-cover bg-center bg-no-repeat"
   >
     <!-- Spacer for logo and welcome back screen -->
 
-    <div v-show="isResumeGame" class="h-full" />
+    <div class="h-full" />
 
+    <!-- BUTTONS FOR RESUME GAME -->
     <div
       v-show="isResumeGame"
       class="h-full w-full text-005d63 font-kalam text-center"
     >
-      <div class="py-16">
+      <div class="mt-4">
         <p class="text-3xl mb-1">
           WELCOME BACK!
         </p>
-        <p class="text-2xl">
+        <p class="text-xl mb-16">
           You have an unfinished game
         </p>
       </div>
-      <div v-show="checkExistingGame" class="w-60 mx-auto">
+      <div v-show="checkExistingGame" class=" w-56 mx-auto">
         <BaseButton
           class="btn primary-orange w-full"
           tag="button"
@@ -27,13 +28,24 @@
           Resume Game
         </BaseButton>
         <BaseButton
-          class="btn primary-orange mt-4 w-full"
+          class="btn primary-orange mt-5 w-full"
           tag="button"
           @clicked="newGame"
         >
           Start A New Game
         </BaseButton>
       </div>
+    </div>
+
+    <!-- SPINNER ON LOADING -->
+    <div v-if="isDisplaySpinner && !isResumeGame">
+      <Spinner />
+      <p class="font-kalam text-005d63 text-center mt-10 w-3/4 mx-auto">
+        We’re preparing your game. <br />
+        This may take a moment. <br />
+        Please keep this page open and take a few seconds to work your putting.
+        <br />We’ll be ready soon!
+      </p>
     </div>
   </div>
 </template>
@@ -44,7 +56,6 @@ import axios from 'axios';
 
 export default {
   name: 'Splash',
-  components: { BaseButton: () => import('@/components/utilities/BaseButton') },
   props: {
     slug: {
       type: String,
@@ -53,8 +64,13 @@ export default {
   },
   data() {
     return {
-      isResumeGame: false
+      isResumeGame: false,
+      isDisplaySpinner: true
     };
+  },
+  components: {
+    BaseButton: () => import('@/components/utilities/BaseButton'),
+    Spinner: () => import('@/components/BaseSpinner.vue')
   },
   computed: {
     checkExistingGame() {
