@@ -181,7 +181,7 @@
 
       <!-- Buttons -->
       <div
-        class="flex items-center justify-around mt-6 w-4/6 mx-auto mb-20 max-w-sm"
+        class="flex items-center justify-around mt-6 w-4/6 mx-auto mb-12 max-w-sm"
       >
         <router-link class="text-white text-fff6eb text-xl font-capriola" to="">
           SHARE
@@ -199,7 +199,7 @@
       </div>
     </div>
     <!-- REVIEW US Button Abs -->
-    <div class="flex justify-around sticky bottom-14">
+    <div class="flex justify-around sticky bottom-4">
       <base-button
         mode="btn primary-orange"
         @clicked="componentId = 'ReviewModal'"
