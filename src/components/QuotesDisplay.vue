@@ -1,7 +1,7 @@
 <template>
   <div class="w-full p-4">
     <!-- Top of page quote -->
-    <BaseCard @clicked="$emit('clicked')">
+    <BaseCard @clicked="$emit('clicked')" class="bg-FFF6EB">
       <div v-for="(player, index) in playersInfo" :key="player.id">
         <p class="uppercase text-aeb49a text-xl text-center font-kalam">
           {{ quoteGen(player, index) }}

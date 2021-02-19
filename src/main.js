@@ -20,7 +20,9 @@ Vue.use(VueMeta, {
 });
 
 Vue.use(VueClipboard);
-Vue.use(Vue2TouchEvents);
+Vue.use(Vue2TouchEvents, {
+  disableClick: true
+});
 
 Vue.use(VueGtm, {
   id: ['GTM-59PVXGQ'],

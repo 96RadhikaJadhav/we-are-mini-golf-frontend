@@ -6,7 +6,9 @@
     <div class=""></div>
     <div class=""></div>
     <div class="space-y-10 h-full mx-auto -mt-10">
-      <p class="text-005d63 text-2xl font-semibold">How many players?</p>
+      <p class="text-005d63 text-xl font-semibold uppercase font-capriola">
+        How many players?
+      </p>
       <div>
         <vue-slider
           v-model="noOfPlayers"

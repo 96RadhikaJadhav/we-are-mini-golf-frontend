@@ -1,38 +1,38 @@
 <template>
   <div
-    class="bg-unfinishedHoles bg-center bg-cover bg-no-repeat bg-fff6eb grid grid-rows-2 px-16 h-screen"
+    class="bg-unfinishedHoles bg-center bg-cover bg-no-repeat bg-fff6eb grid grid-rows-3 px-4 h-screen"
   >
-    <div class="h-full"></div>
-    <div class="h-full text-center text-005d63">
-      <p class="uppercase  font-kalam text-3xl">
+    <div />
+    <div class="text-center mt-10 text-005d63 place-self-center max-w-sm">
+      <p class="uppercase font-kalam text-2xl">
         Hold On!
       </p>
-      <div v-if="playersInfo.length" class="font-capriola mt-4">
+      <div v-if="playersInfo.length" class="font-capriola mt-4 text-base">
         <p>
           It seems you haven't played
-          {{ unfinishedHoles.length > 2 ? 'holes:' : 'hole:' }}
+          {{ unfinishedHoles.length > 2 ? 'holes' : 'hole' }} <br />
           <span class="text-ff6350"> {{ unfinishedHoles }}</span>
         </p>
         <p class="mt-2">What do you want to do about it?</p>
       </div>
-      <div class="w-56 mx-auto mt-10">
-        <BaseButton
-          :to="{ name: 'GameCourse' }"
-          mode="btn primary-blue"
-          class="mb-4"
-        >
-          Tackle it now
-        </BaseButton>
-        <BaseButton
-          :to="{
-            name: 'NewHole',
-            params: { holeNo: this.getPar.length, mode: 'new' }
-          }"
-          mode="btn secondary-blue"
-        >
-          Finish anyway
-        </BaseButton>
-      </div>
+    </div>
+    <div class="w-56 mx-auto place-self-center">
+      <BaseButton
+        :to="{ name: 'GameCourse' }"
+        mode="btn primary-blue"
+        class="mb-3"
+      >
+        Tackle it now
+      </BaseButton>
+      <BaseButton
+        :to="{
+          name: 'NewHole',
+          params: { holeNo: this.getPar.length, mode: 'new' }
+        }"
+        mode="btn secondary-blue"
+      >
+        Finish anyway
+      </BaseButton>
     </div>
   </div>
 </template>
