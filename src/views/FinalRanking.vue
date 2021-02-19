@@ -75,13 +75,22 @@
         <div class="flex justify-around px-10">
           <!-- Team Av -->
           <result-circle type="primary">
-            <template v-slot:title>Team Average</template>
+            <template v-slot:title>
+              <img
+                src="https://res.cloudinary.com/doblhgoan/image/upload/v1613705732/we-are-mini-golf-prod/Last%20Optimized%20assets/WAMG_Team_average_-_square_qltd2v.png"
+                class="w-24 -mb-20"
+              />
+            </template>
             <template v-slot:result>{{ teamAverage }}</template>
           </result-circle>
 
           <!-- Hole in 1 -->
           <result-circle type="primary">
-            <template v-slot:title>Holes In 1</template>
+            <template v-slot:title>
+              <img
+                src="https://res.cloudinary.com/doblhgoan/image/upload/v1613705732/we-are-mini-golf-prod/Last%20Optimized%20assets/WAMG_Holes_in_1_-_square_hlf8nh.png"
+                class="w-24 -mb-20"
+            /></template>
             <template v-slot:result>{{ holesInOne }}</template>
           </result-circle>
         </div>
@@ -90,19 +99,33 @@
         <div class="flex items-center justify-around px-4 mb-4">
           <!-- Under Par -->
           <result-circle type="secondary">
-            <template v-slot:title>Under Par</template>
+            <template v-slot:title>
+              <img
+                src="https://res.cloudinary.com/doblhgoan/image/upload/v1613705728/we-are-mini-golf-prod/Last%20Optimized%20assets/WAMG_Under_par_-_square_huodxb.png"
+                class="w-20 -mb-16"
+              />
+            </template>
             <template v-slot:result>{{ underParPercentage }}</template>
           </result-circle>
 
           <!-- Par -->
           <result-circle type="secondary">
-            <template v-slot:title>Par</template>
+            <template v-slot:title>
+              <img
+                src="https://res.cloudinary.com/doblhgoan/image/upload/v1613705728/we-are-mini-golf-prod/Last%20Optimized%20assets/WAMG_Par_-_square_xvcl55.png"
+                class="w-20 -mb-16"
+              />
+            </template>
             <template v-slot:result>{{ onParPercentage }}</template>
           </result-circle>
 
           <!-- Over Par -->
           <result-circle type="secondary">
-            <template v-slot:title>Over Par</template>
+            <template v-slot:title>
+              <img
+                src="https://res.cloudinary.com/doblhgoan/image/upload/v1613705732/we-are-mini-golf-prod/Last%20Optimized%20assets/WAMG_Over_par_-_square_zfgegc.png"
+                class="w-20 -mb-16"
+            /></template>
             <template v-slot:result>{{ overParPercentage }}</template>
           </result-circle>
         </div>

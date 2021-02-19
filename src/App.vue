@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     clearTimeout() {
+      console.log('tapped');
       this.isTimeout = false;
       setTimeout(() => {
         this.isTimeout = true;
