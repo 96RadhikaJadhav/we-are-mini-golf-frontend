@@ -1,5 +1,10 @@
 <template>
-  <div id="app" class="antialiased h-screen" v-touch:tap="clearTimeout">
+  <div
+    id="app"
+    class="antialiased h-screen"
+    :class="{ 'max-h-screen overflow-hidden': isTimeout }"
+    v-touch:tap="clearTimeout"
+  >
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
