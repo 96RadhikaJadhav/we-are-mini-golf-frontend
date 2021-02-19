@@ -14,7 +14,7 @@
       <p class="lead">
         The teams of
       </p>
-      <router-link to="">Siem Reap Mini Golf</router-link>
+      <router-link to="">{{ courseGrid.name }}</router-link>
       <p class="lead">&</p>
       <router-link to="">weareminigolf.com</router-link>
       <p class="lead mb-4">wish you a great day!</p>
@@ -25,7 +25,15 @@
 <script>
 import ModalLayout from '@/layouts/ModalLayout';
 export default {
-  components: { ModalLayout }
+  data() {
+    return {
+      courseGrid: {}
+    };
+  },
+  components: { ModalLayout },
+  created() {
+    this.courseGrid = JSON.parse(localStorage.getItem('course-grid'));
+  }
 };
 </script>
 
