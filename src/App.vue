@@ -1,27 +1,24 @@
 <template>
-  <div id="app" class="antialiased h-screen">
+  <div id="app" class="antialiased h-screen" v-touch:tap="clearTimeout">
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
       </component>
     </transition>
     <transition name="fade">
-      <Timeout v-if="isTimeout" @clear="clearTimeout"
-        >Looks like you've been away for a while...</Timeout
-      >
+      <Timeout v-if="isTimeout" @clear="clearTimeout" />
     </transition>
   </div>
 </template>
 
 <script>
-import Timeout from '@/components/Timeout.vue';
 export default {
   data() {
     return {
       isTimeout: false
     };
   },
-  components: { Timeout },
+  components: { Timeout: () => import('@/components/Timeout.vue') },
   created() {
     this.clearTimeout();
   },

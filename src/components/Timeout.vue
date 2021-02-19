@@ -3,7 +3,7 @@
     <ModalLayout @close="next('close')" :closingButton="false">
       <div class="py-6">
         <h1 class="uppercase text-aeb49a text-xl text-center font-kalam px-5">
-          <slot></slot>
+          Looks like you've been away for a while...
         </h1>
 
         <div class="w-4/5 mx-auto">
