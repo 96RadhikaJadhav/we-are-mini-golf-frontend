@@ -181,7 +181,7 @@
 
       <!-- Buttons -->
       <div
-        class="flex items-center justify-around mt-6 w-4/6 mx-auto mb-12 max-w-sm"
+        class="flex items-center justify-around mt-6 w-full mx-auto mb-12 max-w-sm"
       >
         <router-link class="text-white text-fff6eb text-xl font-capriola" to="">
           SHARE
@@ -194,6 +194,11 @@
         <router-link class="link" to=""
           ><img
             src="https://res.cloudinary.com/doblhgoan/image/upload/v1613546497/we-are-mini-golf-prod/icons/Email_ywnfog.png"
+            alt=""
+        /></router-link>
+        <router-link class="link" to=""
+          ><img
+            src="https://res.cloudinary.com/doblhgoan/image/upload/v1613713174/we-are-mini-golf-prod/icons/download_icon_tn4yx2.png"
             alt=""
         /></router-link>
       </div>
