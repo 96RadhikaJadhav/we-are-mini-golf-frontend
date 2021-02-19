@@ -1,33 +1,41 @@
 <template>
-  <div id="app" class="antialiased h-screen">
+  <div
+    id="app"
+    class="antialiased h-screen"
+    :class="{ 'max-h-screen overflow-hidden': isTimeout }"
+    v-touch:tap="restartTimer"
+  >
     <transition name="fade" mode="out-in">
       <component :is="this.$route.meta.layout || 'div'">
         <router-view />
       </component>
     </transition>
     <transition name="fade">
-      <Timeout v-if="isTimeout" @clear="clearTimeout"></Timeout>
+      <Timeout v-if="isTimeout" @clear="restartTimer" />
     </transition>
   </div>
 </template>
 
 <script>
-import Timeout from '@/components/Timeout.vue';
 export default {
   data() {
     return {
-      isTimeout: false
+      isTimeout: false,
+      timer: null
     };
   },
-  components: { Timeout },
+  components: { Timeout: () => import('@/components/Timeout.vue') },
   created() {
-    this.clearTimeout();
+    this.restartTimer();
   },
+
   methods: {
-    clearTimeout() {
+    restartTimer() {
+      console.log('timer reset');
       this.isTimeout = false;
-      setTimeout(() => {
-        this.isTimeout = false;
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.isTimeout = true;
       }, 600000); // 10 minutes
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute w-full h-full flex flex-col items-center justify-center px-6 bg-005d63 bg-opacity-80"
+    class="absolute w-full h-full flex flex-col items-center justify-center px-4 bg-005d63 bg-opacity-80"
   >
     <ErrorMessage v-if="invalid" />
 
@@ -17,12 +17,13 @@
           X
         </button>
       </div>
+    </div>
 
-      <!-- Content -->
-      <div>
-        <slot></slot>
+        <!-- Content -->
+        <div>
+          <slot></slot>
+        </div>
       </div>
-
       <div
         class="bg-ea9864 text-white font-kalam rounded-3xl text-center text-xl leading-tight"
       >

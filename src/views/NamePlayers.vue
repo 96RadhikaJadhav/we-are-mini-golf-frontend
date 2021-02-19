@@ -4,17 +4,17 @@
     class="grid grid-flow-row items-center bg-players bg-cover bg-center bg-no-repeat md:w-1/2"
   >
     <div class="self-end space-y-4 px-8">
-      <p class="uppercase text-aeb49a font-semibold text-xl text-center">
+      <p class="uppercase text-aeb49a text-xl text-center font-capriola">
         Today's <br />dream team
       </p>
 
       <!-- Card -->
       <div
-        class="bg-white shadow-md mx-6 rounded-3xl md:w-full md:mx-auto xl:w-1/2"
+        class="bg-white shadow-md mx-2 rounded-3xl md:w-full md:mx-auto xl:w-1/2 px-5 py-3"
         v-if="inputs"
       >
         <div v-for="(player, index) in playersInfo" :key="index">
-          <div class="flex justify-between py-3 px-4">
+          <div class="flex justify-between my-2.5">
             <InputText
               :placeholder="`Player ${index + 1}`"
               v-model="player.name"

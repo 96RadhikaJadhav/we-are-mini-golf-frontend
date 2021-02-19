@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
 .circle {
-  @apply rounded-full flex items-center justify-center;
+  @apply rounded-full flex items-center justify-center pt-1;
 }
 .primary {
   background: #3b9d11;

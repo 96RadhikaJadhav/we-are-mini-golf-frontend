@@ -1,14 +1,15 @@
 <template>
   <div class="my-2 font-kalam grid grid-flow-col grid-cols-6">
     <!-- 2nd, 3rd, 4th etc -->
-    <div class="col-span-1">
-      <p class="font-kalam text-ea9864 mr-4 text-xl">
-        {{ rank(index + 2) }}
+    <div class="col-span-1 place-self-end mr-4">
+      <p class="font-kalam text-ea9864 text-xl">
+        {{ index + 2
+        }}<span class="text-sm align-top">{{ rank(index + 2) }}</span>
       </p>
     </div>
     <!-- Player Name -->
     <div class="col-span-3">
-      <p class="text-2xl text-005d63">{{ player.name }}</p>
+      <p class="text-2xl font-light text-005d63">{{ player.name }}</p>
     </div>
     <!-- Player Last Hole -->
     <div class="col-span-1">
@@ -36,15 +37,15 @@ export default {
   methods: {
     rank(i) {
       if (i === 2) {
-        return '2nd';
+        return 'nd';
       } else if (i === 3) {
-        return '3rd';
+        return 'rd';
       } else if (i === 4) {
-        return '4th';
+        return 'th';
       } else if (i === 5) {
-        return '5th';
+        return 'th';
       } else if (i === 6) {
-        return '6th';
+        return 'th';
       }
     }
   }
