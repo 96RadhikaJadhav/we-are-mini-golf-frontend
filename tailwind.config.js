@@ -35,7 +35,7 @@ module.exports = {
         lastHole:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612778570/we-are-mini-golf-prod/Last%20Optimized%20assets/05-Last-par-transition-screen-bg-only_qmzzyv_v7ty99.jpg")',
         scoreHandBox:
-          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1612777735/we-are-mini-golf-prod/Last%20Optimized%20assets/06-Enter-scores-screen-hand-only_adap7v_jvfh6x_vi99qy.png")',
+          'url("https://res.cloudinary.com/doblhgoan/image/upload/v1613546657/we-are-mini-golf-prod/Last%20Optimized%20assets/06-Enter-scores-screen-hand-only_n6ha2c.png")',
         unfinishedHoles:
           'url("https://res.cloudinary.com/doblhgoan/image/upload/v1613626744/we-are-mini-golf/Last-hole-warning-screen_1_pm3nvk.jpg")',
         newHoleBox:
