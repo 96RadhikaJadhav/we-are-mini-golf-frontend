@@ -17,18 +17,16 @@
           X
         </button>
       </div>
-    </div>
 
-        <!-- Content -->
-        <div>
-          <slot></slot>
-        </div>
+      <!-- Content -->
+      <div>
+        <slot></slot>
       </div>
-      <div
-        class="bg-ea9864 text-white font-kalam rounded-3xl text-center text-xl leading-tight"
-      >
-        <slot name="message"> </slot>
-      </div>
+    </div>
+    <div
+      class="bg-ea9864 text-white font-kalam rounded-3xl text-center text-xl leading-tight"
+    >
+      <slot name="message"> </slot>
     </div>
   </div>
 </template>

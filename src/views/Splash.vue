@@ -56,7 +56,6 @@ import axios from 'axios';
 
 export default {
   name: 'Splash',
-  components: { BaseButton: () => import('@/components/utilities/BaseButton') },
   props: {
     slug: {
       type: String,
