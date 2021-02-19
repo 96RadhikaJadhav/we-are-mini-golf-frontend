@@ -1,7 +1,10 @@
 <template>
   <!-- ======== Section A: Final Ranking ======== -->
 
-  <div class="h-full w-full bg-rankings bg-no-repeat bg-cover">
+  <div
+    class="h-full w-full bg-rankings bg-no-repeat bg-cover"
+    :class="{ 'max-h-screen overflow-hidden': componentId }"
+  >
     <transition name="fade" mode="out-in">
       <component
         class="z-50"
