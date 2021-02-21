@@ -27,12 +27,6 @@
           @clicked="findRule"
           mode="ruleCard"
         ></rule-card>
-
-        <rule-card
-          :ruleData="closeRulesCard"
-          @click.native="$emit('close')"
-          mode="closeBtn"
-        ></rule-card>
       </div>
     </div>
   </div>
@@ -54,10 +48,7 @@ export default {
       componentId: '',
       RulesData,
       selectedRule: '',
-      displayRule: false,
-      closeRulesCard: {
-        title: 'Close Rules'
-      }
+      displayRule: false
     };
   },
   methods: {
