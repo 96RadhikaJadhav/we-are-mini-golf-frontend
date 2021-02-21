@@ -8,6 +8,7 @@
     </div>
     <transition name="slide-in">
       <div
+        v-click-outside="onClickOutside"
         v-if="isDrawerOpen"
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
       >
@@ -23,9 +24,14 @@
 <script>
 import NavMenu from '@/components/NavMenu';
 import RulesScreen from '@/components/rules/RulesScreen.vue';
+import vClickOutside from 'v-click-outside';
+
 export default {
   name: 'BottomNavLayout',
   components: { NavMenu, RulesScreen },
+  directives: {
+    clickOutside: vClickOutside.directive
+  },
   data() {
     return {
       isDrawerOpen: false
@@ -33,6 +39,9 @@ export default {
   },
   methods: {
     onSlideDown() {
+      this.isDrawerOpen = false;
+    },
+    onClickOutside() {
       this.isDrawerOpen = false;
     }
   }
