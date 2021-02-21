@@ -230,7 +230,6 @@ import ThankYou from '@/components/reviews/ThankYouModal';
 
 import { orderBy } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
-import axios from 'axios';
 
 export default {
   name: 'FinalRanking',
@@ -344,31 +343,18 @@ export default {
       }
     },
     newGame() {
-      let gameID = JSON.parse(localStorage.getItem('game-details')).id;
-      let payload = {
-        courseData: localStorage.getItem('course-grid'),
-        isGameOver: true
-      };
-      axios
-        .put(
-          `${process.env.VUE_APP_API_URL}/game-informations/${gameID}`,
-          payload
-        )
-        .then(() => {
-          if (localStorage.getItem('game-details')) {
-            localStorage.removeItem('game-details');
-          }
-          if (localStorage.getItem('course-grid')) {
-            localStorage.removeItem('course-grid');
-          }
-          if (localStorage.getItem('current-hole')) {
-            localStorage.removeItem('current-hole');
-          }
-          window.location.reload();
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      const slug = JSON.parse(localStorage.getItem('game-details')).slug;
+
+      if (localStorage.getItem('game-details')) {
+        localStorage.removeItem('game-details');
+      }
+      if (localStorage.getItem('course-grid')) {
+        localStorage.removeItem('course-grid');
+      }
+      if (localStorage.getItem('current-hole')) {
+        localStorage.removeItem('current-hole');
+      }
+      this.$router.push({ name: 'Splash', params: { slug: slug } });
     }
   },
   computed: {
