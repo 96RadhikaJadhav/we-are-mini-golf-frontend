@@ -2,7 +2,7 @@
   <div
     class="flex justify-around items-center h-11 w-full p-2 bg-fff6eb shadow-6dp"
   >
-    <router-link :to="{ name: '' }">
+    <router-link :to="{ name: 'GameCourse' }">
       <component
         @click="isActive = 'map'"
         class="w-nav-icon"
@@ -10,7 +10,7 @@
       />
     </router-link>
 
-    <router-link :to="{ name: '', params: { showTotal: true } }">
+    <router-link :to="{ name: 'CurrentTotal', params: { showTotal: true } }">
       <component
         @click="isActive = 'scores'"
         :is="isActive === 'scores' ? 'ScoresActive' : 'ScoreInActive'"
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      isActive: ''
+      isActive: 'map'
     };
   }
 };
