@@ -69,12 +69,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-/* VueSlider */
-.vue-slider-rail {
-  background-color: #F5E3C8;
-}
-
-</style>
