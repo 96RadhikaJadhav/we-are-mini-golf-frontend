@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute w-full h-full flex flex-col items-center justify-center px-4 bg-005d63 bg-opacity-80"
+    class="absolute w-full h-full flex flex-col items-center justify-center px-4 bg-63a0a3"
   >
     <ErrorMessage v-if="invalid" />
 
