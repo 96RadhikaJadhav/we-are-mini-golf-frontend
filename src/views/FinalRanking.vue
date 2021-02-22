@@ -46,8 +46,8 @@
             >
               <div class="flex font-thin">
                 <p class="mr-4 text-ea9864">
-                  {{ index + 2
-                  }}<span class="text-sm align-top">{{ rank(index + 2) }}</span>
+                  {{ index + 2 }}
+                  <span class="text-sm align-top">{{ rank(index + 2) }}</span>
                 </p>
                 <p class="text-fff6eb">{{ player.name }}</p>
               </div>
@@ -164,7 +164,7 @@
           </div>
 
           <!-- PAR -->
-          <div v-if="par">
+          <div v-if="par.length > 0">
             <p class="transform -rotate-45 mb-2 text-ff8e67 font-capriola">
               PAR
             </p>
@@ -289,11 +289,7 @@ export default {
         return 'nd';
       } else if (i === 3) {
         return 'rd';
-      } else if (i === 4) {
-        return 'th';
-      } else if (i === 5) {
-        return 'th';
-      } else if (i === 6) {
+      } else if (i > 3 && i <= 6) {
         return 'th';
       }
     },
