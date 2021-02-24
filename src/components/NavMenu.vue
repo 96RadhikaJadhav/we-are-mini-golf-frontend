@@ -10,9 +10,12 @@
       />
     </router-link>
 
-    <router-link :to="{ name: 'CurrentTotal', params: { showTotal: true } }">
+    <router-link to="">
       <component
-        @click="isActive = 'scores'"
+        @click="
+          isActive = 'scores';
+          $emit('open-score');
+        "
         :is="isActive === 'scores' ? 'ScoresActive' : 'ScoreInActive'"
         class="w-nav-icon"
       />
