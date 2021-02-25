@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full flex flex-col">
+  <div class="h-full w-full flex flex-col max-h-screen">
     <transition name="fade" mode="out-in">
       <router-view class="flex-1 md:mx-auto box-border" />
     </transition>
@@ -23,7 +23,8 @@
       <div
         v-click-outside="onClickOutside"
         v-if="isBottomSheetOpen"
-        class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
+        class="sticky bottom-0 w-full shadow-2dp rounded-t-2xl"
+        style="height: 60%;"
       >
         <BaseBottomSheet>
           <template #heading>
