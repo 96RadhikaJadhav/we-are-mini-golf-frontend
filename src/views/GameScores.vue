@@ -133,7 +133,7 @@ export default {
           confirm = false;
         }
       });
-      if (confirm == true) {
+      if (confirm) {
         this.playersInfo.forEach(el => {
           let score = el.score;
           el.holeScore.splice(this.holeNo - 1, 1, score);
