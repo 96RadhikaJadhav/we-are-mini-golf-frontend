@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .btn {
-  @apply py-2 px-8 uppercase rounded-full shadow-lg;
+  @apply flex items-center justify-center py-2 px-6 uppercase rounded-full shadow-sm h-11;
 }
 .primary-orange {
   @apply bg-ff6350;

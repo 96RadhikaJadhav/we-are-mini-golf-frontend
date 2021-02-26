@@ -3,8 +3,9 @@
     <!-- QUOTE OVERLAY -->
     <transition name="fade-in" v-if="!showTotal && getPar.length !== holeNo">
       <div
-        class="absolute top-0 left-0 right-0 bottom-0 overlay"
+        class="absolute top-0 left-0 right-0 bottom-0 overlay min-h-screen"
         v-if="isDisplayed"
+        @click="isDisplayed = false"
       />
     </transition>
 

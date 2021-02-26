@@ -26,7 +26,7 @@
           class="flex justify-between items-center my-4 px-4"
         >
           <!-- PLAYER NAMES -->
-          <p class="text-005D63 font-kalam text-005d63">
+          <p class="font-kalam text-005d63 font-light">
             {{ player.name }}
           </p>
           <!-- SCORE INPUT -->
@@ -34,7 +34,7 @@
             type="number"
             placeholder="0"
             inputmode="numeric"
-            class="h-10 w-10 rounded-full border-aeb49a border text-3ac792 focus:outline-none text-center flex items-center justify-center"
+            class="h-8 w-8 rounded-full border-f2e3cb border text-3ac792 focus:outline-none text-center text-xl font-capriola pb-1"
             v-model.number="player.score"
             v-if="mode === 'new'"
           />
@@ -133,7 +133,7 @@ export default {
           confirm = false;
         }
       });
-      if (confirm == true) {
+      if (confirm) {
         this.playersInfo.forEach(el => {
           let score = el.score;
           el.holeScore.splice(this.holeNo - 1, 1, score);
@@ -182,5 +182,8 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+}
+input::placeholder {
+  color: #78d03a;
 }
 </style>

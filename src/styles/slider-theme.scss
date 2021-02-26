@@ -3,3 +3,7 @@ $dotBgColor: #ff8e67;
 $stepBgColor: #f5e3c8;
 
 @import '~vue-slider-component/lib/theme/default.scss';
+
+.vue-slider-rail {
+  background-color: $stepBgColor;
+}

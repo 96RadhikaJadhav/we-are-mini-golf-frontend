@@ -10,7 +10,9 @@ const colors = {
   '005d63': '#005D63',
   fff6eb: '#FFF6EB',
   '009A00': '#009A00',
-  '78d03a': '#78d03a'
+  '78d03a': '#78d03a',
+  f2e3cb: '#f2e3cb',
+  '63a0a3': '#63a0a3'
 };
 
 module.exports = colors;

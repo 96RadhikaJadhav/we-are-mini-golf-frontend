@@ -2,6 +2,7 @@ export const generalRoutes = [
   {
     path: '/',
     name: 'Splash',
+    props: true,
     component: () => import('@/views/Splash.vue'),
     meta: {
       layout: () => import('@/layouts/FullScreenLayout.vue')

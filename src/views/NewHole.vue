@@ -64,6 +64,9 @@ export default {
       : (this.lastHole = false);
     this.nextPage();
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods: {
     findHoleInfo() {
       this.holeInfo = this.courseGrid.squareInfo.find(

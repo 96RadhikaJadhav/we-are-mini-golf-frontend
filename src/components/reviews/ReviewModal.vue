@@ -1,32 +1,36 @@
 <template>
   <ModalLayout :closingButton="true" @close="$emit('close')" :invalid="invalid">
     <div class="flex flex-col items-center text-005d63 text-lg font-capriola">
-      <p class="mb-2">Did you enjoy it?<span class="text-ff8e67">*</span></p>
+      <p class="mb-2">Did you enjoy it?<span class="text-ff8e67"> *</span></p>
 
       <!-- Stars for development -->
       <div class="flex items-center">
         <star-rating
           v-model="reviewerRating"
           :show-rating="false"
-          :star-size="40"
+          :star-size="25"
+          :rounded-corners="true"
+          inactive-color="#F5E3C8"
+          class="mt-1 mb-2"
+          :padding="1"
         />
       </div>
 
-      <p class="p-2">Tell me everything!<span class="text-ff8e67">*</span></p>
+      <p class="p-2">Tell me everything!<span class="text-ff8e67"> *</span></p>
       <textarea
-        rows="7"
+        rows="5"
         minlength="10"
-        class="card focus:outline-none w-full mb-12 border-transparent border-2"
+        class="card focus:outline-none w-full mb-6 border-transparent border-2 rounded-3xl shadow-md p-4"
         :class="{ warning: invalid }"
         v-model="reviewerMessage"
       ></textarea>
 
       <p class="mb-2">
-        What's your pretty name<span class="text-ff8e67">*</span>
+        What's your pretty name?<span class="text-ff8e67"> *</span>
       </p>
       <input
         type="text"
-        class="card w-3/4 focus:outline-none text-center mb-8 border-transparent border-2"
+        class="card w-3/4 focus:outline-none text-center mb-12 border-transparent border-2 rounded-3xl shadow-md"
         :class="{ warning: invalid }"
         v-model="reviewerName"
       />
@@ -34,9 +38,10 @@
       <base-button
         @clicked="submitReview"
         type="button"
+        font-thickness="light"
         class="btn primary-orange absolute -bottom-5"
       >
-        Tell the world
+        Tell the world!
       </base-button>
     </div>
   </ModalLayout>
