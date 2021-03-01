@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col max-h-screen">
-    <transition name="slide-in">
+    <transition name="fade" mode="out-in">
       <router-view class="flex-1 md:mx-auto box-border" />
     </transition>
     <div class="fixed bottom-0 left-0 right-0 z-50">
