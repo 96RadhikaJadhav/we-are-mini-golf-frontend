@@ -13,7 +13,7 @@
     <router-link to="">
       <component
         @click="
-          isActive = 'scores';
+          isActive !== 'scores' ? (isActive = 'scores') : (isActive = '');
           $emit('open-score');
         "
         :is="isActive === 'scores' ? 'ScoresActive' : 'ScoreInActive'"
