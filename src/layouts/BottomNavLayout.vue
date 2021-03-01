@@ -18,17 +18,18 @@
         v-if="isRulesOpen"
         class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl"
       >
-        <RulesScreen v-touch:swipe.bottom="onSlideDown" />
+        <RulesScreen v-touch:swipe.bottom="" />
       </div>
     </transition>
+
+    <!-- SCORES COMPONENT -->
     <transition name="slide-in" mode="out-in">
       <div
         v-click-outside="onClickOutside"
         v-if="isScoreOpen"
-        class="sticky bottom-0 w-full shadow-2dp rounded-t-2xl"
+        class="fixed bottom-0 w-full shadow-2dp rounded-t-2xl overflow-scroll"
         style="height: 60%;"
       >
-        <!-- SCORES COMPONENT -->
         <BaseBottomSheet>
           <template #heading>
             Current Ranking
