@@ -7,28 +7,31 @@
     ></rule>
 
     <!-- Card -->
-    <div
-      class="absolute bottom-0 bg-fff6eb w-full rounded-t-3xl shadow-lg flex flex-col items-center px-6 pt-6 pb-10 max-w-sm max-h-screen overflow-scroll"
-    >
+    <BaseBottomSheet>
       <!-- Line -->
       <div class="h-1 w-16 rounded-lg bg-aeb49a mb-7"></div>
       <!-- Text -->
-      <div class=" text-aeb49a uppercase font-capriola mb-10 text-center">
-        <p class="text-2xl">mini golf rules</p>
-        <p class="font-kalam mt-2">aka the peace keeper</p>
-      </div>
 
-      <!-- Rules Card Table -->
-      <div class="grid grid-cols-2 gap-3 w-full pb-4">
-        <rule-card
-          v-for="(ruleData, index) in RulesData"
-          :key="index"
-          :ruleData="ruleData"
-          @clicked="findRule"
-          mode="ruleCard"
-        ></rule-card>
-      </div>
-    </div>
+      <template #heading>
+        <div class=" text-aeb49a uppercase font-capriola text-center">
+          <p class="text-2xl">mini golf rules</p>
+          <p class="font-kalam mt-2">aka the peace keeper</p>
+        </div>
+      </template>
+
+      <template #content>
+        <!-- Rules Card Table -->
+        <div class="grid grid-cols-2 gap-3 w-full pb-4">
+          <rule-card
+            v-for="(ruleData, index) in RulesData"
+            :key="index"
+            :ruleData="ruleData"
+            @clicked="findRule"
+            mode="ruleCard"
+          ></rule-card>
+        </div>
+      </template>
+    </BaseBottomSheet>
   </div>
 </template>
 
@@ -36,11 +39,13 @@
 import RuleCard from './RuleCard';
 import RulesData from '@/rules.js';
 import Rule from './Rule';
+import BaseBottomSheet from '../BaseBottomSheet';
 
 export default {
   components: {
     RuleCard,
-    Rule
+    Rule,
+    BaseBottomSheet
   },
   data() {
     return {
