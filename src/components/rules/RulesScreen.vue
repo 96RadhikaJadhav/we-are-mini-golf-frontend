@@ -1,10 +1,13 @@
 <template>
   <div class="relative w-full flex justify-center">
-    <rule
-      v-if="displayRule"
-      @close="displayRule = false"
-      :rule="selectedRule"
-    ></rule>
+    <transition name="slide">
+      <rule
+        v-if="displayRule"
+        @close="displayRule = false"
+        :rule="selectedRule"
+        class="absolute bottom-0 overflow-scroll"
+      ></rule>
+    </transition>
 
     <!-- Card -->
     <BaseBottomSheet>
