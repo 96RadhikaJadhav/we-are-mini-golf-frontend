@@ -179,9 +179,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 input::placeholder {
   color: #78d03a;
