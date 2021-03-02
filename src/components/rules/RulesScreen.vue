@@ -5,21 +5,14 @@
         v-if="displayRule"
         @close="displayRule = false"
         :rule="selectedRule"
-        class="absolute bottom-0 overflow-scroll"
+        class="fixed bottom-0 overflow-scroll"
       ></rule>
     </transition>
 
-    <!-- Card -->
     <BaseBottomSheet>
-      <!-- Line -->
-      <div class="h-1 w-16 rounded-lg bg-aeb49a mb-7"></div>
-      <!-- Text -->
-
       <template #heading>
-        <div class=" text-aeb49a uppercase font-capriola text-center">
-          <p class="text-2xl">mini golf rules</p>
-          <p class="font-kalam mt-2">aka the peace keeper</p>
-        </div>
+        <p>mini golf rules</p>
+        <p class="font-kalam mt-2">aka the peace keeper</p>
       </template>
 
       <template #content>
