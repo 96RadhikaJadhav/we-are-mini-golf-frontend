@@ -43,7 +43,8 @@
       <p class="font-kalam text-005d63 text-center mt-10 w-3/4 mx-auto">
         We’re preparing your game. <br />
         This may take a moment. <br />
-        Please keep this page open and take a few seconds to work your putting.
+        Please keep this page open and take a few seconds to work on your
+        putting.
         <br />We’ll be ready soon!
       </p>
     </div>
