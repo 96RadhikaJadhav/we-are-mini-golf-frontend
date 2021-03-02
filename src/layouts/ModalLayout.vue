@@ -1,20 +1,18 @@
 <template>
   <div
-    class="absolute w-full h-full flex flex-col items-center justify-center px-4 bg-63a0a3"
+    class="absolute w-full h-full flex flex-col items-center justify-center px-4 bg-005d63 bg-opacity-80"
   >
     <ErrorMessage v-if="invalid" />
 
     <!-- Main Card -->
-    <div
-      class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm p-6 z-10"
-    >
+    <div class="relative bg-fff6eb rounded-3xl shadow-md w-full max-w-sm px-4">
       <!-- Closing Button -->
-      <div v-if="closingButton" class="flex justify-end pb-6">
+      <div v-if="closingButton" class="flex justify-end pt-2">
         <button
-          class="text-aeb49a focus:outline-none cursor-pointer"
+          class="text-aeb49a text-2xl font-bold focus:outline-none cursor-pointer mb-1"
           @click="$emit('close')"
         >
-          X
+          &#10005;
         </button>
       </div>
 

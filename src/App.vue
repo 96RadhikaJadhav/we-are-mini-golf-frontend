@@ -31,7 +31,6 @@ export default {
 
   methods: {
     restartTimer() {
-      console.log('timer reset');
       this.isTimeout = false;
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {

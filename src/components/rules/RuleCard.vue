@@ -1,11 +1,11 @@
 <template>
   <button
-    class="flex flex-col justify-center w-full rounded-xl uppercase flex-wrap leading-snug font-capriola focus:outline-none relative "
+    class="flex flex-col justify-center w-full rounded-xl uppercase flex-wrap leading-snug font-capriola focus:outline-none relative"
     :class="mode"
     @click="$emit('clicked', ruleData.cmp)"
   >
     <div class="absolute" v-if="mode === 'ruleCard'">
-      <p class="pl-3 pr-4 break-words">{{ ruleData.title }}</p>
+      <p class="pl-3 pr-4 break-words text-sm">{{ ruleData.title }}</p>
     </div>
     <div class="absolute" v-else>
       <img src="@/assets/x_icon.png" class="w-8 mx-auto py-1" />
@@ -14,7 +14,7 @@
     <img
       v-if="ruleData.bg"
       :src="require(`@/assets/rules/${ruleData.bg}`)"
-      class="rounded-lg"
+      class="rounded-lg w-full h-16"
     />
   </button>
 </template>

@@ -34,7 +34,7 @@
             type="number"
             placeholder="0"
             inputmode="numeric"
-            class="h-8 w-8 rounded-full border-f2e3cb border text-3ac792 focus:outline-none text-center text-xl font-capriola pb-1"
+            class="h-10 w-10 rounded-full border-f2e3cb border text-3ac792 focus:outline-none text-center text-xl font-capriola"
             v-model.number="player.score"
             v-if="mode === 'new'"
           />
@@ -179,9 +179,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 input::placeholder {
   color: #78d03a;

@@ -2,26 +2,36 @@
   <div
     class="flex justify-around items-center h-11 w-full p-2 bg-fff6eb shadow-6dp"
   >
+    <!-- MAP VIEW -->
     <router-link :to="{ name: 'GameCourse' }">
       <component
-        @click="isActive = 'map'"
+        @click="
+          isActive = 'map';
+          $emit('close-drawers');
+        "
         class="w-nav-icon"
         :is="isActive === 'map' ? 'MapActive' : 'MapInActive'"
       />
     </router-link>
 
-    <router-link to="">
-      <component
-        @click="
-          isActive = 'scores';
-          $emit('open-score');
-        "
-        :is="isActive === 'scores' ? 'ScoresActive' : 'ScoreInActive'"
-        class="w-nav-icon"
-      />
-    </router-link>
+    <!-- SCORE COMPONENT -->
+    <button
+      @click="
+        isActive != 'scores' ? (isActive = 'scores') : (isActive = '');
+        $emit('open-score');
+      "
+      :is="isActive === 'scores' ? 'ScoresActive' : 'ScoreInActive'"
+      class="w-nav-icon"
+    ></button>
 
-    <button @click="$emit('display-rules')" class="focus:outline-none">
+    <!-- RULES COMPONENT -->
+    <button
+      @click="
+        isActive = '';
+        $emit('display-rules');
+      "
+      class="focus:outline-none"
+    >
       <Rules class="w-nav-icon" />
     </button>
   </div>

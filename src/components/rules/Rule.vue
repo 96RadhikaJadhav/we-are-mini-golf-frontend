@@ -11,7 +11,7 @@
         </button>
       </div>
       <!-- Rules text -->
-      <div class="flex flex-col px-4 max-h-full overflow-scroll">
+      <div class="flex flex-col px-4 max-h-full overflow-scroll pb-12">
         <p class="title">{{ rule.title }}</p>
         <p
           v-for="(text, index) in rule.content"

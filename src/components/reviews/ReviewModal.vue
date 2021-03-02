@@ -19,7 +19,6 @@
       <p class="p-2">Tell me everything!<span class="text-ff8e67"> *</span></p>
       <textarea
         rows="5"
-        minlength="10"
         class="card focus:outline-none w-full mb-6 border-transparent border-2 rounded-3xl shadow-md p-4"
         :class="{ warning: invalid }"
         v-model="reviewerMessage"
