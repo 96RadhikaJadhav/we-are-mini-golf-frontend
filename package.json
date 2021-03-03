@@ -14,6 +14,7 @@
     "lodash": "^4.17.20",
     "postcss": "7",
     "register-service-worker": "^1.7.1",
+    "smoothscroll-polyfill": "^0.4.4",
     "tailwindcss": "^2.0.1-compat",
     "uuid": "^8.3.2",
     "v-click-outside": "^3.1.2",
