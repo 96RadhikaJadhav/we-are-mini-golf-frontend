@@ -28,6 +28,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 export default {
   name: 'GameCourse',
